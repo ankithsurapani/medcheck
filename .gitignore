@@ -9,6 +9,12 @@ data/raw/profile.log
 data/medcheck.db
 *.db-journal
 
+# Phase 2a working queue — 7.9 MB, and fully derived from medcheck.db by
+# `python src/resolve/manufacturers.py --build`. The merge log next to it is the
+# audit trail and IS committed; pair_ids hash the raw strings, so decisions
+# recorded against one build are still found by the next one.
+data/resolve/candidates.json
+
 # Python
 .venv/
 __pycache__/

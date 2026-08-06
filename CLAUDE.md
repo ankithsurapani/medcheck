@@ -39,11 +39,22 @@ Searchable public database of medicines CDSCO flagged as Not of Standard Quality
 
 Design system persisted at `design-system/medcheck/MASTER.md` (Swiss Modernism 2.0 + "Patent / IP Database" palette, via the ui-ux-pro-max skill).
 
-**Phase 2a (manufacturer entity resolution) — now active.** See `implementation.md`. Ends in a human review checkpoint (0.75–0.92 fuzzy-match band) that the user has to actually sit through — plan.md's non-negotiable requires a human judgment call there, not an automated one.
+**Phase 2a (manufacturer entity resolution) — code complete, blocked on the human review checkpoint.**
+
+- `src/resolve/manufacturers.py` — normalizer, 3-key blocking, `rapidfuzz` scoring, three tiers, `--build` / `--apply` / `--cohesion`
+- `src/resolve/review_cli.py` — the 0.75–0.92 band, **205 decisions, cluster-vs-cluster**
+- `src/resolve/spotcheck_cli.py` — stratified sample of the >0.92 tier (weakest-cohesion clusters first, then random)
+- `data/resolve/manufacturer_merge_log.jsonl` — append-only audit trail, 3,229 auto-merge edges + a build summary
+- `docs/entity_resolution.md` — thresholds, blocking, collapse ratio, known limits
+- `tests/test_resolve_manufacturers.py` — 45 checks, all passing
+
+**Collapse ratio 5,100 → 1,871 (2.73 : 1)** with the review band treated as rejected — the conservative floor. 6,077 of 6,155 records now carry a `manufacturer_id`; the 78 unlinked are exactly the 7 placeholder strings, and all 51 `manufacturer_unknown_placeholder` rows stay unresolved. Jackson Laboratories collapsed 67 spellings, Unicure 62, Zee 48.
+
+> **The user still has to run `python src/resolve/review_cli.py` and `python src/resolve/spotcheck_cli.py`, then re-run `--apply`.** plan.md's non-negotiable requires a human judgment call in the band; it was not auto-approved, and `docs/entity_resolution.md` §9 stays marked "not yet run" until it happens.
 
 Open / needs a planner decision:
 - **Search index is 297 KB brotli.** Lazy-loaded on idle/focus so the page is usable first, but it's the biggest cost on a slow connection. Phase 3b options: server-side search, or a two-tier prefix index.
-- **Manufacturer pages are per raw string, so there are 5,107 of them** — Zee Laboratories alone has 5 pages. Every page says so explicitly. Phase 2a collapses these; re-pointing `web/` at the result is the ticket right after this one (folds into Phase 3b).
+- **Manufacturer pages are per raw string, so there are 5,107 of them** — Zee Laboratories alone has **48** pages (the earlier "5" was a partial count). Every page says so explicitly. Phase 2a has now collapsed these in the database (5,100 → 1,871); re-pointing `web/` at the result is the ticket right after this one (folds into Phase 3b).
 - **`alert_section` is unreliable.** The portal and the PDFs disagree on central-vs-state for 27 of 184 Jun-2025 records. Phase 4's "central vs state lab detection patterns" analysis needs this caveat.
 - **State coverage is 58%.** PIN-prefix → state mapping would lift it a lot; belongs with Phase 2a's address parsing.
 - Phase 1b (pre-2019 PDF backfill) not started, per ticket boundary.
@@ -68,7 +79,7 @@ Open / needs a planner decision:
 ```
 medcheck/
 ├── data/{pdfs,raw,gold,medcheck.db}
-├── src/{fetch.py, ingest/cdsco_json.py, normalize.py, parse/{base,router,layout_a,layout_b,ocr}.py (Phase 1b, deferred), resolve/{manufacturers,drugs}.py, validate.py, db.py}
+├── src/{fetch.py, ingest/cdsco_json.py, normalize.py, parse/{base,router,layout_a,layout_b,ocr}.py (Phase 1b, deferred), resolve/{manufacturers.py, review_cli.py, spotcheck_cli.py, drugs.py (Phase 2b, deferred)}, validate.py, db.py}
 ├── api/          # FastAPI
 ├── web/          # Next.js
 ├── analysis/     # notebooks + writeup
@@ -114,6 +125,14 @@ medcheck/
 - 2026-08-06 — **Phase 2 splits into 2a (manufacturers, now) / 2b (drug names, deferred)** — same a/b pattern as Phase 1 and 3. Manufacturer resolution is what's actually blocking things (5,107 unmerged pages); drug names aren't blocking anything yet. See `plan.md` §4 Phase 2.
 - 2026-08-06 — Phase 2a's human review queue is a CLI/offline step, not a web UI — Phase 3a's architecture is fully static with no backend to host one.
 - 2026-08-06 — Phase 2a is scoped data-only: produces `manufacturers` + `manufacturer_id` backfill, but does not touch `web/` to collapse the 5,107 pages. That regeneration is the next ticket, kept separate on purpose.
+- 2026-08-06 — **Phase 2a scoring: the name carries the score, the address only adjusts it** — `token_sort_ratio(names)` minus 0.09 (states differ) / 0.05 (PINs differ) / 0.04 (address similarity < 0.40), plus 0.03 (PIN shared). An earlier draft weighted address at 28% and pushed **353** cluster pairs to review, most of them one company's two plants (Unicure has a Noida plant and a Roorkee plant). A reviewer asked that question 353 times stops reading it — queue length is what causes rubber-stamping. Address-as-adjustment asks it once and cuts the queue to 205.
+- 2026-08-06 — `token_sort_ratio`, not `token_set_ratio`: the set variant scores "Sun Pharma" against "Sun Pharma Laboratories" as a perfect match, which is a merge nobody authorized.
+- 2026-08-06 — **Industry words are folded, not stripped**, deviating from the ticket's "strip `Pharmaceuticals`/`Pharma`". Stripping reduces "Zee Laboratories" to `zee` — four characters, high-scoring against unrelated firms. Folding to `zee lab` matches all 48 Zee spellings and nothing else. Generic tokens *are* dropped, but only for the blocking key, where a block named `pharma` would hold a third of the corpus.
+- 2026-08-06 — **Blocking is first-token + 4-char-prefix + sorted-tokens, and state is a score signal rather than a block**, deviating from the ticket's "first token + state". State is derivable for only 58% of records and CDSCO gets it wrong outright on at least one (a Paonta Sahib, H.P. address labelled Punjab); blocking on it would have refused to consider that record at all. 38,095 candidate pairs out of a possible 13.0M.
+- 2026-08-06 — **The review queue is cluster-vs-cluster, not string-vs-string.** Auto merges are applied first, so 1,183 of the 2,716 band pairs turn out to already be connected by a stronger path, and the remaining 1,533 collapse into 205 distinct company-pair questions.
+- 2026-08-06 — **`--apply` treats an undecided review pair as rejected** and refuses to run without `--allow-pending`. Running the pipeline before the human review can therefore only under-merge, never over-merge.
+- 2026-08-06 — The merge log records the **3,229 spanning edges**, not all 21,219 auto pairs. A redundant edge inside an already-joined cluster changes no outcome, and the spanning set alone reconstructs or undoes the clustering exactly. `data/resolve/candidates.json` (7.9 MB, the full scored list) is gitignored — derived, and regenerable from the DB.
+- 2026-08-06 — Placeholders keep `manufacturer_id` **NULL**, deliberately breaking the ticket's "nothing ends up without an id". 78 records across 7 non-company strings; giving a counterfeit's unknown maker a company entity with 51 flagged batches is the §1.1 misattribution the rule exists to prevent.
 
 ## Key learnings / gotchas
 
@@ -155,3 +174,10 @@ medcheck/
 - **`manufacturer_raw` is a full postal address, not a name**, so it is the single messiest field to display — up to 328 characters. Needs `overflow-wrap: anywhere` everywhere it appears or it forces horizontal scroll at 375px.
 - **51 records have "Under Investigation" as the manufacturer**, which would otherwise render as a company page with 51 flagged batches. It gets its own explicit "This is not a company" notice.
 - **The longest single failure reason is 994 characters** of narrative text — the design has to accommodate a paragraph, not a label, in the "CDSCO's exact wording" block.
+- **Phase 1a's `manufacturer_unknown_placeholder` flag misses 27 records.** Its regex covers "under investigation / not known / unknown / n.a." only. `Not Mentioned` (11), `Not applicable` + `Not Applicable` (9), `Spurious` (5), `NIL,NIL NIL` and `NM` are all non-company placeholders carrying no flag. The resolver keeps the wider list; Phase 1a's flag was left alone as out of scope.
+- **A company's name is 30% of `manufacturer_raw` and the split point is not punctuated.** "Gidsha Pharmaceuticals Plot No. 611 612, Mega GIDC…" has no comma between name and address. Cutting at the first comma *or* the first of ~40 address keywords *or* the first numeric token handles it; cutting on the comma alone leaves address text in the name and splits one company across several entities.
+- **Certification boilerplate is inside the name field, inconsistently.** "Pharma Impex Laboratories Pvt. Ltd. (ISO 9001 : 2015 & WHO GMP Certified)" one month, plain the next; "Navkar Lifesciences WHO-GMP Certified Company" likewise. Left in, it splits one company in two.
+- **Address keywords cut the name early and that is harmless but confusing** — "Bajaj Healthcare Ltd. R.S. No. 1818" cuts at `No`, leaving a stray "R.S." on the name. Dropping trailing single-character tokens fixes it. No name in the corpus ends in a bare letter.
+- **The same company writes the same name against two addresses when it has two plants.** Unicure India Ltd (Noida, U.P. and Roorkee, Uttarakhand) is the clearest case: identical normalized name, different state, different PIN, address similarity near zero. 26 of the 205 review-band questions are this shape. Any scheme that weights address heavily will refuse to merge a multi-plant company.
+- **Tricky pairs the reviewer has to actually think about** are one character apart: `Navkar Lifesciences` / `Navkar Lifescienses`, `Scott-Edil Pharmacia` / `Scott - Edil Pharmecia`, `Mascot Health Series` / `Mascot Health Services`, `Cosmas Pharma` / `Cosmas Pharmacls`. Some are CDSCO typos; `Deep Pharma` vs `Deepin Pharmaceuticals` (both Gujarat, different addresses, score 0.75) are genuinely different firms.
+- **Union-find is transitive; similarity is not.** A~B and B~C merge A with C even when A and C would never have matched. `--cohesion` reports the weakest internal name match per cluster and the spot-check tool samples those first — a uniform sample is mostly obvious merges and would miss exactly the failure it is looking for.

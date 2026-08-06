@@ -1,0 +1,269 @@
+# Manufacturer entity resolution — Phase 2a
+
+How 5,107 distinct `manufacturer_raw` spellings were collapsed onto company
+entities, what the thresholds are, and what a human actually looked at.
+
+Code: `src/resolve/manufacturers.py`, `src/resolve/review_cli.py`,
+`src/resolve/spotcheck_cli.py`. Tests: `tests/test_resolve_manufacturers.py`.
+Audit trail: `data/resolve/manufacturer_merge_log.jsonl` (append-only).
+
+---
+
+## 1. The problem
+
+`manufacturer_raw` is a company name **and** a full postal address in one cell,
+re-typed by CDSCO every month. 6,155 records carry 5,107 distinct spellings. Most
+appear exactly once; Zee Laboratories appears **48 different ways**:
+
+```
+M/s. Zee Laboratories Ltd., Behind 47, Industrial Area, Paonta Sahib-173025
+ZEE LABORATORIES LTD.,Behind47, Industrial Area, Paonta Sahib- 173025
+Zee Laboratories Ltd.Behind 47, Industrial Area, Paonta Sahib-173025
+M/s. Zee Laboratories Limited, Behind 47, Industrial Area, Poanta Sahib-173025 (Punjab)
+M/s. Zee Laboratories Ltd., Paonta Sahib
+```
+
+The differences are punctuation, spacing, casing, legal-suffix spelling, a
+transposed PIN (`173025` / `173205`), a misspelt town (`Poanta`), a wrong state
+(Punjab, for a Himachal Pradesh address), and one entry with no address at all.
+
+Phase 3a shipped with `manufacturer_id` null on every record, so each of those
+spellings became its own manufacturer page. This phase fixes the data.
+
+## 2. Pipeline
+
+```
+python src/resolve/manufacturers.py --build     # score pairs, write the queues
+python src/resolve/review_cli.py                # human decides the 0.75-0.92 band
+python src/resolve/spotcheck_cli.py             # human samples the >0.92 tier
+python src/resolve/manufacturers.py --apply     # write manufacturers + backfill ids
+python src/resolve/manufacturers.py --cohesion  # weakest-link report per cluster
+```
+
+`--apply` treats any review-band pair with no recorded human decision as
+**rejected**, and refuses to run at all unless `--allow-pending` is passed. Running
+the pipeline early can therefore only under-merge, never over-merge.
+
+## 3. Placeholders — excluded before anything else
+
+Seven raw strings covering 78 records are not companies:
+
+| string | records |
+|---|---|
+| `Under Investigation` | 51 |
+| `Not Mentioned` | 11 |
+| `Not applicable` | 8 |
+| `Spurious` | 5 |
+| `NIL,NIL NIL` | 1 |
+| `NM` | 1 |
+| `Not Applicable` | 1 |
+
+They are excluded from clustering and keep `manufacturer_id` **NULL**. This is the
+one place the ticket's "nothing ends up without an id" rule is deliberately not
+applied: giving a counterfeit's unknown maker a company entity carrying 51 flagged
+batches would be exactly the misattribution §1.1 forbids.
+
+Phase 1a's `manufacturer_unknown_placeholder` flag only covers `Under
+Investigation` (51 records) — its regex matches "under investigation / not known /
+unknown / n.a." and nothing else. The other 27 records were found here. Phase 1a's
+flag was left alone rather than widened, since that is Phase 1a's scope; the
+resolver carries the wider list and `tests/test_resolve_manufacturers.py` asserts
+both that the placeholders match and that real firms brushing against those words
+(`Nilkanth Pharmaceuticals`, `NM Pharma Industries`) do not.
+
+## 4. Normalizing
+
+**Split name from address.** Cut at whichever comes first: the first comma, the
+first address keyword (`plot`, `khasra`, `village`, `behind`, `industrial`, `no`,
+`sector`, … 40 of them), or the first numeric token. Certification boilerplate is
+stripped before the cut — `(ISO 9001 : 2015 & WHO GMP Certified)` and
+`WHO-GMP Certified Company` are not part of a company's name, and CDSCO includes
+them one month and not the next.
+
+**Normalize the name.** Strip `M/s.`, lowercase, de-punctuate, drop legal tokens
+(`pvt`, `ltd`, `limited`, `llp`, `co`, `company`, …), drop a trailing `India`, drop
+trailing single characters (splitter debris from addresses like
+`Bajaj Healthcare Ltd. R.S. No. 1818`, cut at `No`).
+
+**Fold industry synonyms rather than delete them.** `Laboratories` / `Labs` /
+`Lab` → `lab`; `Pharmaceuticals` / `Pharma` / `Pharmacia` → `pharma`;
+`Life Sciences` / `Lifesciences` → `lifescience`; and similarly for `industries`,
+`healthcare`, `biotech`, `formulation`, `remedies`, `drugs`, `products`,
+`chemicals`, `science`. The ticket asks for these to be *stripped*; folding them is
+a deliberate deviation. Stripping reduces "Zee Laboratories" to `zee` — four
+characters, short enough to score highly against an unrelated firm. Folding keeps
+`zee lab`, which still matches every Zee spelling and matches nothing else. The
+generic tokens *are* dropped, but only to build the blocking key (§5), where a
+block called `pharma` would hold a third of the corpus.
+
+## 5. Blocking
+
+Three keys per entity, not one:
+
+| key | catches |
+|---|---|
+| first token of the generic-stripped name | the common case |
+| its first 4 characters | typos in the first token (`Navkar` / `Navkar`, `Pharmecia` / `Pharmacia`) |
+| the name's tokens, sorted | reordered names |
+
+Blocks larger than 400 entities are skipped as degenerate — a 4-character prefix
+shared by unrelated firms is not a company, and the other two keys already cover
+anything real inside it.
+
+**The ticket asks for "first token + state" and this uses state as a score signal
+instead.** State is derivable for only 58% of records, and CDSCO gets it wrong
+outright on at least one (a Paonta Sahib, H.P. address labelled Punjab). Blocking
+on it would have refused to consider that Zee record at all. State earns its keep
+as a penalty in §6, where a disagreement pushes a pair toward a human rather than
+away from a match.
+
+Result: **38,095 candidate pairs** out of a possible 13.0 million — the O(n²) the
+ticket was worried about, avoided by a factor of 340.
+
+## 6. Scoring
+
+```
+score = token_sort_ratio(normalized names)
+        - 0.09  if both states known and they differ
+        - 0.05  if both PINs present and none shared
+        + 0.03  if a PIN is shared
+        - 0.04  if both addresses present and token_set_ratio < 0.40
+```
+
+Clamped to [0, 1]. The name carries the score; the address only adjusts it, and
+only far enough to move a pair into the review band.
+
+That ordering is the central judgment call here. A company with two plants writes
+**the same name against two addresses** — Unicure India Ltd has one plant in Noida
+and one in Roorkee, in different states with different PINs. Weighting the address
+heavily (an earlier draft used 28%) refused to merge those and pushed **353**
+cluster pairs to review, most of them "same name, other plant". A reviewer asked
+that question 353 times stops reading it. Address-as-adjustment puts the same
+Unicure question in the band exactly once, which is where it belongs, and cuts the
+queue to 205.
+
+`token_sort_ratio` rather than `token_set_ratio`: the set variant scores
+`Sun Pharma` against `Sun Pharma Laboratories` as a perfect match, which is a
+merge nobody authorized.
+
+### Tiers (plan.md §4 Phase 2a)
+
+| score | tier | what happens |
+|---|---|---|
+| > 0.92 | auto | merged, logged, sampled for spot-check |
+| 0.75 – 0.92 | review | a human answers, one question per company pair |
+| < 0.75 | no match | nothing |
+
+## 7. The review queue is cluster-vs-cluster
+
+Auto merges are applied **first**, then the review band is expressed as pairs of
+*clusters* rather than pairs of strings. Of 2,716 raw pairs in the band, 1,183 turn
+out to connect two spellings that a stronger path already merged — there is nothing
+left to decide. The remaining 1,533 collapse into **205 distinct cluster pairs**.
+
+So the reviewer is asked "are these two companies the same?" 205 times instead of
+2,716 times, sees every spelling and batch count on both sides at once, and is not
+asked the same question forty times for forty spellings. Rubber-stamping is the
+failure mode the ticket names, and queue length is what causes it.
+
+## 8. Results
+
+Numbers below are from the build of 2026-08-06 (`--build`, then `--apply`).
+
+| | |
+|---|---|
+| distinct `manufacturer_raw` | 5,107 |
+| placeholder strings excluded | 7 (78 records) |
+| entities clustered | 5,100 |
+| candidate pairs scored | 38,095 |
+| pairs scoring ≥ 0.70 | 24,550 |
+| auto tier (> 0.92) | 21,219 pairs, of which **3,229 actually joined two clusters** |
+| review band (0.75–0.92) | 2,716 pairs → 1,183 already implied → **205 cluster-pair decisions** |
+| clusters after auto-merge | **1,871** |
+
+**Collapse ratio: 5,100 → 1,871 canonical manufacturers (2.73 : 1)** before the
+review band is applied.
+
+Largest clusters:
+
+| canonical name | spellings | flagged batches |
+|---|---|---|
+| Jackson Laboratories Pvt. Ltd | 67 | 88 |
+| Unicure India Ltd | 62 | 77 |
+| Zee Laboratories Ltd | 48 | 66 |
+| Martin & Brown Bio-Sciences Pvt. Ltd | 40 | 62 |
+| Apple Formulations Pvt. Ltd | 37 | 51 |
+
+Verified after `--apply`:
+
+- 6,077 of 6,155 records carry a `manufacturer_id`; the 78 unlinked are exactly
+  the placeholder records listed in §3, and all 51 Phase 1a
+  `manufacturer_unknown_placeholder` rows are still unresolved.
+- No `manufacturer_id` points at a missing row, and `SUM(total_flags)` over
+  `manufacturers` equals the linked record count exactly.
+- All 48 Zee spellings landed in one cluster.
+
+### Canonical name and address
+
+`canonical_name` is the most-recorded spelling of the *name* portion; ties break
+toward mixed case over ALL CAPS and then toward the longer string. `address_raw`
+is the full raw string of the most-recorded spelling. Every spelling in the
+cluster — including the ones that lost — is preserved verbatim in `known_aliases`,
+so a merge never destroys published text (§1.1). `state` is the majority of the
+non-null derived states in the cluster, `first_seen_month` the earliest
+`alert_month`, `total_flags` the record count.
+
+A company with two plants therefore resolves to **one** entity with one
+representative address. That matches the §3.2 schema, which has a single
+`address_raw`, and matches what Phase 4's "repeat manufacturers" analysis needs.
+The per-plant detail is not lost — it is all in `known_aliases`.
+
+## 9. Human review — status
+
+> **Not yet run.** `--apply` has been run with `--allow-pending`, so the 205
+> undecided cluster pairs are currently treated as *rejected* and the numbers in
+> §8 are the conservative, no-human-merges floor. Approving pairs can only lower
+> the cluster count; it cannot raise it.
+>
+> To finish:
+> ```
+> python src/resolve/review_cli.py       # 205 decisions
+> python src/resolve/spotcheck_cli.py    # 40-cluster sample of the auto tier
+> python src/resolve/manufacturers.py --apply
+> ```
+> This section gets the approve/reject split and the spot-check error rate once
+> that has happened. Until then no claim is made about either.
+
+What the band actually contains, for whoever sits down with it:
+
+- **26 pairs where the normalized names are identical** and only the address
+  disagrees — mostly one company with two plants (Unicure Noida vs Roorkee), and
+  25 of them carry a `state_differs` signal.
+- **Single-character name differences**: `Navkar Lifesciences` /
+  `Navkar Lifescienses`, `Scott-Edil Pharmacia` / `Scott - Edil Pharmecia`,
+  `Mascot Health Series` / `Mascot Health Services`. These are CDSCO typos in one
+  direction and genuinely distinct firms in the other, and telling them apart is
+  the judgment the band exists for.
+- **True near-misses that must not merge**: `Deep Pharma` and
+  `Deepin Pharmaceuticals` are different companies in Gujarat with different
+  addresses, and score 0.75.
+
+## 10. Known limits
+
+- **Transitivity.** Clustering is union-find, so A~B and B~C merge A with C even
+  when A and C would never have matched directly. `--cohesion` reports the weakest
+  internal name match per cluster, and `spotcheck_cli.py` puts those clusters at
+  the front of its sample rather than sampling uniformly. The weakest merged
+  cluster currently sits at 0.89 internal name similarity — Mascot Health
+  **Series** vs Mascot Health **Services**, 38 spellings, 43 flagged batches. That
+  one is at the top of the spot-check sample for a reason.
+- **The merge log records the spanning edges, not all 21,219 auto pairs.** An edge
+  inside an already-joined cluster changes no outcome, and the 3,229 spanning
+  edges alone reconstruct or undo the clustering exactly. The full scored list is
+  in `data/resolve/candidates.json` (gitignored — 7.9 MB, and regenerable).
+- **A wrong merge is reversible but not automatic.** A `wrong` spot-check verdict
+  is a logged finding, not an un-merge; acting on it means adjusting a threshold
+  or adding a rejection and re-running `--apply`.
+- **`web/` is untouched**, per the ticket boundary. The site still renders 5,107
+  manufacturer pages against `manufacturer_raw`. Regenerating it against these
+  entities is the next ticket.
