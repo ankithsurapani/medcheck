@@ -22,9 +22,9 @@ export default function HomePage() {
           <Stat label="Flagged batches" value={s.recordCount.toLocaleString('en-IN')} />
           <Stat label="Monthly alerts" value={String(s.monthCount)} />
           <Stat
-            label="Manufacturer entries"
+            label="Manufacturers"
             value={s.manufacturerCount.toLocaleString('en-IN')}
-            note="unmerged spellings"
+            note={`from ${s.rawSpellingCount.toLocaleString('en-IN')} published spellings`}
           />
           <Stat label="Marked disputed" value={String(s.disputedCount)} />
         </dl>

@@ -5,6 +5,7 @@ import { CategoryList } from '@/components/CategoryBadge';
 import {
   BatchNotProductNotice,
   DisputedNotice,
+  NotACompanyNotice,
   SafetyNotice,
   UncertaintyNotice,
 } from '@/components/Notices';
@@ -114,6 +115,7 @@ function RecordView({ r }: { r: MedRecord }) {
           harm. Then §5.5 if the batch is disputed, then §1.3. */}
       <SafetyNotice />
       {disputed ? <DisputedNotice firmWording={firmWording} /> : null}
+      {r.manufacturerSlug ? null : <NotACompanyNotice text={r.manufacturer} />}
       <BatchNotProductNotice />
 
       <section aria-labelledby="finding-heading">
@@ -184,12 +186,34 @@ function RecordView({ r }: { r: MedRecord }) {
           <div className="py-3 sm:grid sm:grid-cols-[11rem_1fr] sm:gap-4">
             <dt className="text-sm text-muted-foreground">Manufacturer</dt>
             <dd className="mt-0.5 text-[0.9375rem] sm:mt-0">
-              <Link
-                href={`/manufacturer/${r.manufacturerSlug}/`}
-                className="cursor-pointer text-accent underline underline-offset-2 break-anywhere"
-              >
-                {r.manufacturer || COPY.unknownField}
-              </Link>
+              {/* No link when manufacturerSlug is null: the text is a placeholder
+                  CDSCO prints when the real maker is unknown, and there is
+                  deliberately no company page behind it (plan.md §1.1). The
+                  notice below replaces the link rather than leaving a dead one. */}
+              {r.manufacturerSlug ? (
+                <Link
+                  href={`/manufacturer/${r.manufacturerSlug}/`}
+                  className="cursor-pointer text-accent underline underline-offset-2 break-anywhere"
+                >
+                  {r.manufacturer || COPY.unknownField}
+                </Link>
+              ) : (
+                <span className="text-foreground break-anywhere">
+                  {r.manufacturer || COPY.unknownField}
+                </span>
+              )}
+              {r.manufacturerSlug && r.manufacturerCanonical !== r.manufacturer ? (
+                <span className="mt-0.5 block text-xs text-muted-foreground break-anywhere">
+                  Grouped under{' '}
+                  <Link
+                    href={`/manufacturer/${r.manufacturerSlug}/`}
+                    className="cursor-pointer text-accent underline underline-offset-2"
+                  >
+                    {r.manufacturerCanonical}
+                  </Link>
+                  , which combines the different spellings CDSCO has published.
+                </span>
+              ) : null}
               <span className="mt-0.5 block text-xs text-muted-foreground">
                 As printed on the packaging and published by CDSCO.
                 {disputed ? ' The company named says this batch is not theirs — see above.' : ''}

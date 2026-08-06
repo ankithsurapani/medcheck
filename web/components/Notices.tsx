@@ -128,6 +128,41 @@ export function DisputedNotice({ firmWording }: { firmWording?: string | null })
   );
 }
 
+/**
+ * Shown on a record whose manufacturer field is a placeholder rather than a
+ * company — 78 records, mostly suspected counterfeits where CDSCO records the
+ * maker as "Under Investigation".
+ *
+ * Phase 3a gave these a manufacturer page carrying the notice. Since Phase 2a
+ * they have no page at all — resolving a placeholder into a company entity would
+ * be the §1.1 misattribution the whole exercise exists to prevent — so the notice
+ * moved onto the record itself, where the link used to go.
+ */
+export function NotACompanyNotice({ text }: { text: string }) {
+  return (
+    <aside
+      role="note"
+      aria-labelledby="not-a-company-heading"
+      className="rounded-lg border border-border bg-card p-4"
+    >
+      <div className="flex gap-3">
+        <IconInfo className="mt-0.5 h-5 w-5 shrink-0 text-secondary" />
+        <div>
+          <h2
+            id="not-a-company-heading"
+            className="font-display text-[0.9375rem] font-semibold text-foreground"
+          >
+            {COPY.notACompany.heading}
+          </h2>
+          <p className="mt-1 text-sm leading-relaxed text-muted-foreground break-anywhere">
+            {COPY.notACompany.body.replace('{text}', text || COPY.unknownField)}
+          </p>
+        </div>
+      </div>
+    </aside>
+  );
+}
+
 /** plan.md §1.4 — uncertainty is displayed, not hidden. */
 export function UncertaintyNotice({ notes }: { notes: string[] }) {
   if (notes.length === 0) return null;

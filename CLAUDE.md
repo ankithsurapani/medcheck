@@ -29,13 +29,20 @@ Searchable public database of medicines CDSCO flagged as Not of Standard Quality
 
 **`failure_category` vocabulary extended twice (2026-08-06)** — §3.3 went from 11 to 21 buckets: `ph`, `water_content`, `uniformity_of_weight`, `bacterial_endotoxins`, `uniformity_of_dispersion`, then `loss_on_drying`, `density`, `extractable_volume`, `clarity_of_solution`, `dimensions`. `other` fell **657 → 363 → 269 records (10.7% → 4.4%)**. Guarded by `tests/test_categorise.py` (59 cases).
 
-**Phase 3a (search site) — complete.** Static Next.js 15 + Tailwind v4 app in `web/`, built against a static JSON export. **11,268 static pages** build clean (6,155 record pages + 5,107 manufacturer pages + 6 fixed). No API, no server, no tracking.
+**Phase 3a (search site) — complete.** Static Next.js 15 + Tailwind v4 app in `web/`, built against a static JSON export. No API, no server, no tracking.
 
-- `scripts/export_static.py` → `web/public/data/search-index.json` (client, 1.6 MB raw / **297 KB brotli**) + `web/data/{records,manufacturers}.json` (build-time only, never shipped)
+**Phase 3b (partial: re-point `web/` at resolved entities) — complete.** **8,017 static pages** build clean, down from 11,268 (6,155 record pages + **1,856 manufacturer pages** + 6 fixed).
+
+- `scripts/export_static.py` groups by `manufacturer_id` / the `manufacturers` table, not `manufacturer_raw`. Client index **297 KB → 255 KB brotli** (5,107 per-spelling slugs became 1,856 canonical ones)
+- Manufacturer slug scheme: `<canonical-name-slug>-m<manufacturers.id>` — Phase 3a's per-raw-string hash slug is gone
+- Every manufacturer page lists **all** raw spellings that collapsed into it, in a `<details>` (open at ≤5, collapsed above — Jackson has 67)
+- The 78 placeholder records get **no manufacturer page**; the record page renders `NotACompanyNotice` where the link would be
+- Manufacturer search matches raw spelling **or** canonical name, and every spelling routes to one page
+- Verified after rebuild: **0 dead links** across 6,155 record + 1,856 manufacturer pages; exactly 78 record pages have no manufacturer link. Zee 48 spellings/66 batches, Jackson 67/88, Unicure 62/77 — all single pages, all aliases rendered
+- `npm run test:search` — **29 assertions** (was 17), all passing
 - Search: MiniSearch fuzzy for drug names, exact for batch, substring for manufacturer
 - `web/lib/{copy,failure-categories}.ts` hold every user-facing string — all 21 categories have plain-language explanations
 - Verified: `label_claim_disputed` record renders the §5.5 notice with the firm's verbatim wording; missing-`state` record renders "Not published" + reason, never blank; non-disputed records do *not* show the dispute notice
-- `npm run test:search` — 17 assertions against the real index, all passing
 
 Design system persisted at `design-system/medcheck/MASTER.md` (Swiss Modernism 2.0 + "Patent / IP Database" palette, via the ui-ux-pro-max skill).
 
@@ -52,8 +59,9 @@ Design system persisted at `design-system/medcheck/MASTER.md` (Swiss Modernism 2
 
 Open / needs a planner decision:
 - **190 review-band pairs are still undecided**, by the user's choice — legitimate, not a bug. Re-running `review_cli.py` later and re-applying with `--allow-pending` will only ever tighten the collapse further, never wrongly merge. No urgency, but worth remembering it's there.
-- **Manufacturer pages are still per raw string in `web/`** — 5,107 of them — because Phase 2a only touched the database. Re-pointing `web/` at the now-resolved `manufacturer_id`/`manufacturers` table is the next ticket, active now (partial Phase 3b — not the Hindi/live-API parts of 3b, just the entity re-pointing).
-- **Search index is 297 KB brotli.** Lazy-loaded on idle/focus so the page is usable first, but it's the biggest cost on a slow connection. A later Phase 3b option: server-side search, or a two-tier prefix index.
+- **Manufacturer slugs carry a positional id** (`-m<manufacturers.id>`), and `--apply` renumbers 1..N in canonical-name order. Finishing the 190 pending review pairs will therefore change most manufacturer URLs. Fine now (nothing is public); if the site ever ships, the slug needs a content-derived id first.
+- **Search index is 255 KB brotli** (down from 297 KB). Lazy-loaded on idle/focus so the page is usable first, but still the biggest cost on a slow connection. A later Phase 3b option: server-side search, or a two-tier prefix index.
+- Rest of Phase 3b (Hindi/i18n, live FastAPI) still deferred.
 - **`alert_section` is unreliable.** The portal and the PDFs disagree on central-vs-state for 27 of 184 Jun-2025 records. Phase 4's "central vs state lab detection patterns" analysis needs this caveat.
 - **State coverage is 58%.** PIN-prefix → state mapping would lift it a lot; belongs with Phase 2a's address parsing.
 - Phase 1b (pre-2019 PDF backfill) not started, per ticket boundary.
@@ -82,7 +90,7 @@ medcheck/
 ├── api/          # FastAPI
 ├── web/          # Next.js
 ├── analysis/     # notebooks + writeup
-├── docs/{pdf_inventory.md, parser_accuracy.md, methodology.md}
+├── docs/{pdf_inventory.md, parser_accuracy.md, methodology.md, entity_resolution.md}
 └── README.md
 ```
 
@@ -134,6 +142,10 @@ medcheck/
 - 2026-08-06 — Placeholders keep `manufacturer_id` **NULL**, deliberately breaking the ticket's "nothing ends up without an id". 78 records across 7 non-company strings; giving a counterfeit's unknown maker a company entity with 51 flagged batches is the §1.1 misattribution the rule exists to prevent.
 - 2026-08-06 — Human review stopped at **15 of 205** pairs by user choice, applied with `--allow-pending` (190 pending → treated as not-merged). This is accepted as a legitimate stopping point, not a shortcut: the asymmetry the rule protects against (false merge = reputational harm) doesn't apply to "haven't decided yet" — only to auto-approving without looking. Review can resume anytime; `--apply --allow-pending` is safe to re-run after.
 - 2026-08-06 — Web regeneration against resolved entities is its own ticket, not folded into Phase 2a — keeps entity resolution as pure data engineering, frontend work separate. Scoped as partial Phase 3b (entity re-pointing only; Hindi and live API remain deferred).
+- 2026-08-06 — **Manufacturer slug is `<canonical-name-slug>-m<manufacturers.id>`**, replacing Phase 3a's `<slug>-<sha1 of the full raw string>`. The hash existed to stop two spellings colliding onto one page before a human had decided they were the same company; Phase 2a made that decision, so the id carries it. Cost: the id is positional (`--apply` renumbers 1..N by canonical name), so finishing the 190 pending pairs will change most manufacturer URLs. Accepted — nothing is public, and a content hash would lose the direct URL → `manufacturers` row traceability.
+- 2026-08-06 — **The Phase 3a "this page matches one exact spelling" disclaimer is replaced, not deleted.** New copy says the merge happened *and* that it is unfinished: pairs nobody was confident about were left apart, so one company may still have several pages. Wording commits to the direction of error out loud — "we would rather show you two pages for one company than put one company's failures on another company's page."
+- 2026-08-06 — **Placeholder records get no manufacturer page at all**, where Phase 3a gave them one carrying a "this is not a company" notice. The notice moved onto the record page, replacing the link. A page would imply an entity; there isn't one.
+- 2026-08-06 — Manufacturer **search** matches the raw spelling **or** the canonical name (and MiniSearch indexes both), so a query typed as the merged company name reaches batches published under spellings that don't literally contain it. Displayed text stays the raw spelling — §1.1, the site mirrors what CDSCO published and never substitutes its own merged name for it.
 
 ## Key learnings / gotchas
 
@@ -182,3 +194,8 @@ medcheck/
 - **The same company writes the same name against two addresses when it has two plants.** Unicure India Ltd (Noida, U.P. and Roorkee, Uttarakhand) is the clearest case: identical normalized name, different state, different PIN, address similarity near zero. 26 of the 205 review-band questions are this shape. Any scheme that weights address heavily will refuse to merge a multi-plant company.
 - **Tricky pairs the reviewer has to actually think about** are one character apart: `Navkar Lifesciences` / `Navkar Lifescienses`, `Scott-Edil Pharmacia` / `Scott - Edil Pharmecia`, `Mascot Health Series` / `Mascot Health Services`, `Cosmas Pharma` / `Cosmas Pharmacls`. Some are CDSCO typos; `Deep Pharma` vs `Deepin Pharmaceuticals` (both Gujarat, different addresses, score 0.75) are genuinely different firms.
 - **Union-find is transitive; similarity is not.** A~B and B~C merge A with C even when A and C would never have matched. `--cohesion` reports the weakest internal name match per cluster and the spot-check tool samples those first — a uniform sample is mostly obvious merges and would miss exactly the failure it is looking for.
+- **Resolving manufacturers made the client index smaller, not bigger.** Phase 3a shipped 5,107 per-raw-string slugs (~68 chars each); replacing them with 1,856 canonical slugs plus a 5,107-int lookup cut the payload **297 KB → 255 KB brotli**. The raw-spelling table stays at full length — display must keep mirroring CDSCO's text — so all the saving came from the slug array.
+- **A resolved manufacturer page has to render up to 67 alias strings of up to 328 characters each.** Left inline they push the batch list off the screen entirely, so the alias list is a `<details>` — open at ≤5 aliases, collapsed above. It is collapsed, never truncated or elided: the alias list is the only place a reader can audit the merge, so eliding it would defeat the point.
+- **`manufacturer_raw` and `canonical_name` are different lengths of thing**, and the manufacturer page needed re-laying-out because of it. Phase 3a's `<h1>` was a 328-char name-plus-address blob; it is now a ~25-char company name, with the address demoted to a subtitle line. Same data, completely different visual weight.
+- **Removing the placeholder manufacturer page moved a notice, it didn't delete one.** Phase 3a's "This is not a company" copy lived on `/manufacturer/under-investigation-<hash>/`. With no such page, the notice had to move to the 78 record pages themselves — otherwise the change would have silently dropped the one thing those records most needed to say.
+- **Grep-counting rendered HTML lies about repeated elements.** Next's output is one long line, so `grep -c '<li class=...>'` returned 1 for a list of 48. Counting needs a real parse (or `findall` over the extracted block) — the first spot-check looked like a bug in the alias list when the list was fine.

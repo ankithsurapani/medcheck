@@ -182,7 +182,8 @@ Numbers below are from the build of 2026-08-06 (`--build`, then `--apply`).
 | clusters after auto-merge | **1,871** |
 
 **Collapse ratio: 5,100 → 1,871 canonical manufacturers (2.73 : 1)** before the
-review band is applied.
+review band is applied. With the 15 human approvals recorded so far (§9), the
+applied figure is **1,856 (2.75 : 1)** — the numbers the site is built against.
 
 Largest clusters:
 
@@ -220,19 +221,36 @@ The per-plant detail is not lost — it is all in `known_aliases`.
 
 ## 9. Human review — status
 
-> **Not yet run.** `--apply` has been run with `--allow-pending`, so the 205
-> undecided cluster pairs are currently treated as *rejected* and the numbers in
-> §8 are the conservative, no-human-merges floor. Approving pairs can only lower
-> the cluster count; it cannot raise it.
->
-> To finish:
-> ```
-> python src/resolve/review_cli.py       # 205 decisions
-> python src/resolve/spotcheck_cli.py    # 40-cluster sample of the auto tier
-> python src/resolve/manufacturers.py --apply
-> ```
-> This section gets the approve/reject split and the spot-check error rate once
-> that has happened. Until then no claim is made about either.
+**Partly done, and that is a legitimate resting state.**
+
+| | |
+|---|---|
+| review-band pairs decided | **15 of 205** — 15 approved, 0 rejected |
+| score range of the decided pairs | 0.910 – 0.919 (the top of the band) |
+| review-band pairs still undecided | **190**, treated as *rejected* |
+| auto-tier clusters spot-checked | **5**, all verdict `correct` |
+| spot-check sample | weakest-cohesion first: internal name similarity 0.88–0.889, cluster sizes 4–38 |
+
+**Applied result: 1,871 → 1,856 manufacturers, collapse ratio 2.73 → 2.75 : 1.**
+
+The 190 undecided pairs are still treated as *not merged*, which is the
+conservative direction: finishing the review can only lower the manufacturer
+count further, never split one apart. `--apply` was run with `--allow-pending` to
+record that state deliberately rather than blocking on a queue nobody is obliged
+to finish in one sitting.
+
+No wrong merge was found in the auto tier. Five clusters is a small sample and
+the write-up does not claim an error *rate* from it — what it supports is that
+the five riskiest clusters by the transitivity metric, including the 38-spelling
+`Mascot Health Series` / `Mascot Health Services` group, were checked by a person
+and held up.
+
+To resume:
+```
+python src/resolve/review_cli.py       # picks up at pair 16 of 205
+python src/resolve/spotcheck_cli.py    # skips the 5 already checked
+python src/resolve/manufacturers.py --apply
+```
 
 What the band actually contains, for whoever sits down with it:
 
@@ -264,6 +282,8 @@ What the band actually contains, for whoever sits down with it:
 - **A wrong merge is reversible but not automatic.** A `wrong` spot-check verdict
   is a logged finding, not an un-merge; acting on it means adjusting a threshold
   or adding a rejection and re-running `--apply`.
-- **`web/` is untouched**, per the ticket boundary. The site still renders 5,107
-  manufacturer pages against `manufacturer_raw`. Regenerating it against these
-  entities is the next ticket.
+- **`web/` now builds against these entities** (the follow-up ticket, done):
+  1,856 manufacturer pages instead of 5,107, each listing the raw spellings that
+  collapsed into it. Slugs are `<canonical-name>-m<manufacturers.id>`, and the id
+  is positional — re-running `--apply` after more of the review band is decided
+  renumbers it and changes those URLs.

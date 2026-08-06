@@ -29,10 +29,33 @@ check('drug typo "Pantoprazol"', search('Pantoprazol','drug',hits,ms).total, n=>
 check('drug typo "Amoxycilin"', search('Amoxycilin','drug',hits,ms).total, n=>n>5);
 check('drug prefix "Dexameth"', search('Dexameth','drug',hits,ms).total, n=>n>3);
 
-// manufacturer: substring on raw
+// manufacturer: substring on the raw spelling OR the resolved company name
 check('mfr "Zee Laboratories" substring', search('Zee Laboratories','manufacturer',hits,ms).total, n=>n>5);
 check('mfr address fragment "Paonta Sahib"', search('Paonta Sahib','manufacturer',hits,ms).total, n=>n>3);
 check('mfr nonsense', search('qqqqqqq','manufacturer',hits,ms).total, 0);
+
+// Entity resolution: every spelling of one company routes to ONE page. This is
+// the whole point of the ticket -- before Phase 2a these 48 spellings produced 48
+// separate manufacturer pages.
+const zee = search('Zee Laboratories','manufacturer',hits,ms).results;
+const zeeSlugs = new Set(zee.map(h=>h.manufacturerSlug));
+check('Zee: all spellings share one slug', zeeSlugs.size, 1);
+check('Zee: canonical name is set', zee.every(h=>h.manufacturerCanonical.length>0), true);
+check('Zee: raw spellings still differ (mirror, not merged text)',
+  new Set(zee.map(h=>h.manufacturer)).size, n=>n>1);
+
+// A query typed as the canonical name finds batches published under other
+// spellings -- e.g. ALL-CAPS or "M/s." variants that don't contain it literally.
+const canonHits = search('Zee Laboratories Ltd','manufacturer',hits,ms).results;
+check('canonical-name query reaches non-matching raw spellings',
+  canonHits.some(h=>!h.manufacturer.toLowerCase().includes('zee laboratories ltd')), true);
+
+// Placeholders have no company page. A slug here would be a link to a page that
+// deliberately does not exist (plan.md §1.1).
+const placeholder = hits.filter(h=>/^\s*(under investigation|not mentioned|not applicable|spurious|nm|nil)/i.test(h.manufacturer));
+check('placeholder records exist', placeholder.length, n=>n>=51);
+check('placeholder records have NO manufacturer slug', placeholder.every(h=>h.manufacturerSlug===''), true);
+check('placeholder records have NO canonical name', placeholder.every(h=>h.manufacturerCanonical===''), true);
 
 // all mode merges
 check('all "SIF2736A" finds the batch', search('SIF2736A','all',hits,ms).total, n=>n>=1);
@@ -41,8 +64,18 @@ check('empty query', search('   ','all',hits,ms).total, 0);
 // disputed flag + slug integrity
 const disputed = hits.filter(h=>h.disputed);
 check('disputed records present', disputed.length, 43);
-check('every hit has a manufacturer slug', hits.every(h=>h.manufacturerSlug.length>0), true);
+check('every resolved hit has a manufacturer slug',
+  hits.filter(h=>h.manufacturerCanonical).every(h=>h.manufacturerSlug.length>0), true);
+check('slug is present iff canonical name is',
+  hits.every(h=>Boolean(h.manufacturerSlug)===Boolean(h.manufacturerCanonical)), true);
 check('every hit has an id', hits.every(h=>h.id.length>0), true);
+
+// Index shape: the canonical table is per company, the raw table per spelling.
+check('canonSlugs matches canonNames length', payload.canonSlugs.length, payload.canonNames.length);
+check('canonical table is smaller than the raw table',
+  payload.canonNames.length, n=>n>0 && n<payload.manufacturers.length);
+check('mfrCanon covers every raw spelling', payload.mfrCanon.length, payload.manufacturers.length);
+check('canonical slugs are unique', new Set(payload.canonSlugs).size, payload.canonSlugs.length);
 
 console.log(`\n${fails === 0 ? 'ALL PASS' : fails + ' FAILURES'}`);
 process.exit(fails ? 1 : 0);

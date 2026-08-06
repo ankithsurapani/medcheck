@@ -78,12 +78,15 @@ export default function AboutPage() {
           </li>
           <li>
             <strong className="font-semibold text-foreground">
-              Manufacturer names are not merged.
+              Manufacturer names are only partly merged.
             </strong>{' '}
-            The same company appears under several spellings — different punctuation, suffixes or
-            address formatting each get their own page. We have deliberately not merged them
-            automatically: wrongly combining two companies would attribute one firm’s failures to
-            another. That work needs human review and has not been done yet.
+            CDSCO re-types the manufacturer name and address every month, so one company appears
+            under many spellings. We have grouped them into companies, and every manufacturer page
+            lists the exact spellings that went into it so you can check. Pairs we were not
+            confident about were reviewed by a person, and where that review has not happened yet
+            the spellings were left apart rather than combined — so a company may still have more
+            than one page. That is the deliberate direction to be wrong in: wrongly combining two
+            companies would attribute one firm’s failures to another.
           </li>
           <li>
             <strong className="font-semibold text-foreground">

@@ -44,10 +44,29 @@ export const COPY = {
   samplingCaveat:
     'CDSCO does not test medicines at random, so counts here describe the samples the regulator chose to test — they are not a failure rate for the market.',
 
+  /**
+   * Phase 2a merged spellings onto companies, so the Phase 3a "one spelling only"
+   * disclaimer is no longer true. What replaces it says the same honest thing at
+   * lower volume: the merge is real, it is checked, and it is not finished.
+   */
   manufacturerPage: {
-    rawNameNotice: 'This page matches one exact spelling',
-    rawNameBody:
-      'MedCheck has not yet merged different spellings of the same company. A manufacturer that appears with a comma, a suffix or an address written differently will have its own separate page. Records here are only those published under this exact text.',
+    mergedNotice: 'Different spellings of this company have been combined',
+    mergedBody:
+      'CDSCO re-types the manufacturer name and address every month, so one company appears under many spellings. We have grouped the spellings below into this one company. Every spelling is listed so you can check the grouping yourself.',
+    partialNotice:
+      'This grouping is not finished. Pairs we were not confident about were left apart rather than merged, so a company may still have more than one page here. We would rather show you two pages for one company than put one company’s failures on another company’s page.',
+    aliasHeading: (n: number) =>
+      n === 1 ? 'The 1 spelling CDSCO published' : `The ${n} spellings CDSCO published`,
+    aliasBody:
+      'These are the exact manufacturer entries, reproduced as published — punctuation, addresses and all.',
+    addressHeading: 'Address, as published',
+  },
+
+  /** Shown on a record whose manufacturer field is a placeholder, not a company. */
+  notACompany: {
+    heading: 'CDSCO did not name a manufacturer for this batch',
+    body:
+      'The manufacturer field on this record reads “{text}”. That is not a company — it is what the regulator publishes when the real maker of a batch is not known, which is usual for a suspected counterfeit. There is no manufacturer page for it, because there is no company to attribute it to.',
   },
 
   unknownField: 'Not published',

@@ -36,7 +36,7 @@ const MODES: { key: SearchMode; label: string; placeholder: string; hint: string
     key: 'manufacturer',
     label: 'Manufacturer',
     placeholder: 'e.g. Zee Laboratories',
-    hint: 'Matches the manufacturer text exactly as CDSCO published it, including the address.',
+    hint: 'Matches the manufacturer text as CDSCO published it, address included, and the company name we grouped it under.',
   },
 ];
 

@@ -19,12 +19,11 @@ export async function generateMetadata(
   const { slug } = await params;
   const m = getManufacturer(slug);
   if (!m) return { title: 'Manufacturer not found' };
-  const name = m.name.split(',')[0];
   return {
-    title: `${name} — flagged batches`,
-    description: `CDSCO records published under the manufacturer text “${name}”. ${m.count} flagged ${
-      m.count === 1 ? 'batch' : 'batches'
-    }.`,
+    title: `${m.name} — flagged batches`,
+    description: `CDSCO records for ${m.name}, combined across ${m.aliases.length} published ${
+      m.aliases.length === 1 ? 'spelling' : 'spellings'
+    }. ${m.count} flagged ${m.count === 1 ? 'batch' : 'batches'}.`,
   };
 }
 
@@ -37,7 +36,7 @@ export default async function ManufacturerPage({ params }: { params: Promise<{ s
   const months = records.map((r) => r.alertMonth).filter(Boolean) as string[];
   const earliest = months.length ? months[months.length - 1] : null;
   const latest = months.length ? months[0] : null;
-  const isPlaceholder = /^\s*(under investigation|not known|unknown)\s*$/i.test(m.name);
+  const aliasCount = m.aliases.length;
 
   return (
     <div className="space-y-6">
@@ -49,7 +48,7 @@ export default async function ManufacturerPage({ params }: { params: Promise<{ s
       </nav>
 
       <header>
-        <p className="text-sm text-muted-foreground">Manufacturer, as published by CDSCO</p>
+        <p className="text-sm text-muted-foreground">Manufacturer</p>
         <h1 className="mt-1 font-display text-xl font-bold leading-snug tracking-tight text-foreground break-anywhere sm:text-2xl">
           {m.name}
         </h1>
@@ -60,34 +59,73 @@ export default async function ManufacturerPage({ params }: { params: Promise<{ s
               ? ` · ${formatMonth(latest)}`
               : ` · ${formatMonth(earliest)} to ${formatMonth(latest)}`
             : null}
+          {m.state ? ` · ${m.state}` : null}
         </p>
+        {m.addressRaw ? (
+          <p className="mt-2 text-sm leading-relaxed text-muted-foreground break-anywhere">
+            <span className="text-foreground">{COPY.manufacturerPage.addressHeading}:</span>{' '}
+            {m.addressRaw}
+          </p>
+        ) : null}
       </header>
 
-      {/* Phase 2 (entity resolution) has not run. Saying so plainly is required:
-          presenting this as "the company's record" would overstate it, and
-          silently merging near-identical names would risk attributing one
-          company's failures to another (plan.md §5.3). */}
-      {isPlaceholder ? (
-        <aside role="note" className="rounded-lg border-2 border-notice-border bg-notice-soft p-4">
-          <h2 className="font-display text-[0.9375rem] font-bold text-notice">
-            This is not a company
-          </h2>
-          <p className="mt-1.5 text-sm leading-relaxed text-foreground">
-            CDSCO published “{m.name}” in the manufacturer field for these batches, because the real
-            manufacturer is not known. These are grouped only so the records are reachable — they
-            are not the work of one company.
-          </p>
-        </aside>
-      ) : (
-        <aside role="note" className="rounded-lg border border-accent-border bg-accent-soft p-4">
-          <h2 className="font-display text-[0.9375rem] font-semibold text-foreground">
-            {COPY.manufacturerPage.rawNameNotice}
-          </h2>
-          <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
-            {COPY.manufacturerPage.rawNameBody}
-          </p>
-        </aside>
-      )}
+      {/* Phase 2a merged spellings onto companies with a human deciding the
+          ambiguous band, so the Phase 3a "one spelling only" disclaimer is gone.
+          What replaces it is smaller but still honest: the merge is real, it is
+          checked, and it is not finished — pairs nobody was confident about were
+          left apart, so a company can still have more than one page. Overstating
+          the merge would risk exactly the misattribution plan.md §5.3 warns
+          about. */}
+      <aside role="note" className="rounded-lg border border-accent-border bg-accent-soft p-4">
+        {aliasCount > 1 ? (
+          <>
+            <h2 className="font-display text-[0.9375rem] font-semibold text-foreground">
+              {COPY.manufacturerPage.mergedNotice}
+            </h2>
+            <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+              {COPY.manufacturerPage.mergedBody}
+            </p>
+          </>
+        ) : null}
+        <p
+          className={[
+            'text-sm leading-relaxed text-muted-foreground',
+            aliasCount > 1 ? 'mt-2' : '',
+          ].join(' ')}
+        >
+          {COPY.manufacturerPage.partialNotice}
+        </p>
+      </aside>
+
+      <section aria-labelledby="aliases-heading">
+        <h2
+          id="aliases-heading"
+          className="font-display text-lg font-bold text-foreground"
+        >
+          {COPY.manufacturerPage.aliasHeading(aliasCount)}
+        </h2>
+        <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+          {COPY.manufacturerPage.aliasBody}
+        </p>
+        {/* Jackson Laboratories has 67 of these, each up to 328 characters. Open
+            by default up to a handful; past that it would push the batch list off
+            the screen, so it collapses — but it is never truncated or elided. */}
+        <details className="mt-3 rounded-lg border border-border bg-card" open={aliasCount <= 5}>
+          <summary className="cursor-pointer px-4 py-3 text-sm font-medium text-foreground marker:text-muted-foreground">
+            {aliasCount === 1 ? 'Show the entry' : `Show all ${aliasCount} spellings`}
+          </summary>
+          <ul className="border-t border-border px-4 py-3 text-sm">
+            {m.aliases.map((a) => (
+              <li
+                key={a}
+                className="border-b border-border py-2 leading-relaxed text-muted-foreground break-anywhere last:border-b-0"
+              >
+                {a}
+              </li>
+            ))}
+          </ul>
+        </details>
+      </section>
 
       <SafetyNotice />
 

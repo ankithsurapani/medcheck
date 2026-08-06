@@ -6,7 +6,12 @@
  *
  *   drug         fuzzy / typo-tolerant  -> MiniSearch, prefix + fuzzy
  *   batch        exact                  -> normalised equality, no fuzz
- *   manufacturer substring              -> plain substring on manufacturer_raw
+ *   manufacturer substring              -> raw spelling OR resolved company name
+ *
+ * Manufacturer search matches the raw text CDSCO published *and* the canonical
+ * name Phase 2a resolved it to, so "Zee Laboratories Ltd" finds batches published
+ * as "ZEE LABORATORIES" or "M/s.Zee Laboratories Ltd." — and every one of them
+ * links to the same company page instead of 48 near-identical ones.
  *
  * Batch deliberately does NOT fuzzy-match. plan.md §5.4: batch numbers are not
  * unique across manufacturers and are often short strings like "2451". A fuzzy
@@ -20,8 +25,12 @@
 import MiniSearch from 'minisearch';
 
 export interface IndexPayload {
+  /** Raw `manufacturer_raw` spellings, deduped — what CDSCO actually published. */
   manufacturers: string[];
-  manufacturerSlugs: string[];
+  /** Per raw spelling: index into canonNames/canonSlugs, or -1 if unresolved. */
+  mfrCanon: number[];
+  canonNames: string[];
+  canonSlugs: string[];
   id: string[];
   drug: (string | null)[];
   batch: (string | null)[];
@@ -36,7 +45,10 @@ export interface SearchHit {
   id: string;
   drug: string;
   batch: string;
+  /** As CDSCO published it, for display — never the merged name (plan.md §1.1). */
   manufacturer: string;
+  /** The resolved company this spelling belongs to; '' for a placeholder. */
+  manufacturerCanonical: string;
   manufacturerSlug: string;
   month: string;
   categories: string[];
@@ -50,12 +62,16 @@ export function hydrate(payload: IndexPayload): SearchHit[] {
   const out: SearchHit[] = new Array(payload.id.length);
   for (let i = 0; i < payload.id.length; i++) {
     const m = payload.mfr[i];
+    // -1 means the raw text is a placeholder ("Under Investigation") with no
+    // resolved company behind it, so there is no page to route to.
+    const c = payload.mfrCanon[m] ?? -1;
     out[i] = {
       id: payload.id[i],
       drug: payload.drug[i] ?? '',
       batch: payload.batch[i] ?? '',
       manufacturer: payload.manufacturers[m] ?? '',
-      manufacturerSlug: payload.manufacturerSlugs[m] ?? '',
+      manufacturerCanonical: c >= 0 ? payload.canonNames[c] ?? '' : '',
+      manufacturerSlug: c >= 0 ? payload.canonSlugs[c] ?? '' : '',
       month: payload.month[i] ?? '',
       categories: payload.categories[i] ?? [],
       section: payload.section[i] ?? '',
@@ -67,7 +83,7 @@ export function hydrate(payload: IndexPayload): SearchHit[] {
 
 export function buildMiniSearch(hits: SearchHit[]): MiniSearch<SearchHit> {
   const ms = new MiniSearch<SearchHit>({
-    fields: ['drug', 'manufacturer'],
+    fields: ['drug', 'manufacturer', 'manufacturerCanonical'],
     storeFields: ['id'],
     idField: 'id',
     searchOptions: {
@@ -83,6 +99,14 @@ export function buildMiniSearch(hits: SearchHit[]): MiniSearch<SearchHit> {
 /** Batch numbers vary in punctuation between sources: "1-3098" vs "1 3098". */
 function normaliseBatch(s: string): string {
   return s.toLowerCase().replace(/[^a-z0-9]/g, '');
+}
+
+/** Raw spelling or resolved company name — either is a legitimate way to ask. */
+function matchesManufacturer(h: SearchHit, lowerQuery: string): boolean {
+  return (
+    h.manufacturer.toLowerCase().includes(lowerQuery) ||
+    h.manufacturerCanonical.toLowerCase().includes(lowerQuery)
+  );
 }
 
 export function search(
@@ -102,7 +126,7 @@ export function search(
     matched = nq ? hits.filter((h) => normaliseBatch(h.batch) === nq) : [];
   } else if (mode === 'manufacturer') {
     const nq = q.toLowerCase();
-    matched = hits.filter((h) => h.manufacturer.toLowerCase().includes(nq));
+    matched = hits.filter((h) => matchesManufacturer(h, nq));
   } else if (mode === 'drug') {
     matched = fuzzyDrug(q, hits, ms);
   } else {
@@ -127,7 +151,7 @@ export function search(
     }
     const lq = q.toLowerCase();
     for (const h of hits) {
-      if (!seen.has(h.id) && h.manufacturer.toLowerCase().includes(lq)) {
+      if (!seen.has(h.id) && matchesManufacturer(h, lq)) {
         seen.add(h.id);
         matched.push(h);
       }

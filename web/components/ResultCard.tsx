@@ -8,7 +8,8 @@ export interface ResultCardData {
   drug: string;
   batch: string;
   manufacturer: string;
-  manufacturerSlug: string;
+  /** null when the manufacturer text is a placeholder — there is no page to link. */
+  manufacturerSlug: string | null;
   month: string;
   categories: string[];
   section: string;
