@@ -6,9 +6,10 @@ CDSCO tests medicines pulled from real pharmacy shelves every month and publishe
 
 **Status:** 6,155 records across 90 alert months (Jan-2019 → Jun-2026), search site live, dataset published, analysis written up. Manufacturer identity resolution is intentionally partial (1,856 of ~5,107 raw spellings collapsed so far) — every merged page says so.
 
-- **Search the data:** _(live URL added here at deploy time)_
-- **Download the dataset:** `analysis/dataset/medcheck_nsq_records.csv` (CC0) — see `analysis/dataset/README.md`
-- **Read the findings:** `analysis/FINDINGS.md` — methodology, limitations, every number reproducible
+- **Search the data:** https://web-navy-three-91.vercel.app/
+- **Download the dataset:** [`analysis/dataset/medcheck_nsq_records.csv`](analysis/dataset/medcheck_nsq_records.csv) (CC0) — see `analysis/dataset/README.md`
+- **Read the findings:** [`analysis/FINDINGS.md`](analysis/FINDINGS.md) — methodology, limitations, every number reproducible
+- **Source:** [github.com/ankithsurapani/medcheck](https://github.com/ankithsurapani/medcheck)
 
 See `plan.md` for the full spec, `CLAUDE.md` for current project state and decision history, `docs/pdf_inventory.md` for what the source data looks like, `docs/methodology.md` for how records are identified and scored, `docs/entity_resolution.md` for the manufacturer-matching approach, and `docs/parser_accuracy.md` for the accuracy evidence.
 

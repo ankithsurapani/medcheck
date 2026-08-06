@@ -72,10 +72,19 @@ Design system persisted at `design-system/medcheck/MASTER.md` (Swiss Modernism 2
 - **58.1% state coverage**; Himachal Pradesh is 35.2% of records *with* a state but only **20.4% of all** records.
 - **19.4% name an anti-infective** by INN stem. Over-representation is **not answerable** — no denominator.
 
+**MedCheck is live.** GitHub: https://github.com/ankithsurapani/medcheck (public). Site: https://web-navy-three-91.vercel.app/ (Vercel, static export, free tier).
+
+- Repo was previously local-only, no remote. Created public via `gh repo create`, pushed all history — clean secrets scan first (no `.env`/keys tracked).
+- Deploy hit two real blockers, both fixed before going live, not worked around: (1) Vercel's file-count cap (8,017 pages = 16k+ files) — solved with `vercel --archive=tgz`; (2) Vercel refused the build outright over a **critical (CVSS 10) Next.js RCE** in the pinned `15.5.4` (`GHSA-9qr9-h5gf-34mp`, react flight protocol). Bumped to `15.5.22` (latest 15.5.x patch, no major-version risk), re-ran `test:search` (29/29 still pass), rebuilt, redeployed clean.
+- 3 remaining `npm audit` findings (`postcss`/`sharp`, high severity) are build-tooling only — `images.unoptimized: true` means `sharp` isn't exercised, and nothing processes untrusted CSS/images. Fixing them needs Next.js 16 (breaking), deliberately not forced through mid-deploy — logged as a follow-up, not silently ignored.
+- The per-deployment Vercel URL (e.g. `web-powrksadx-...`) redirects to Vercel SSO — that's normal per-deploy protection, not a public-access problem. The **stable production alias** (`web-navy-three-91.vercel.app`) is the real public URL and was verified 200 OK on `/`, a record page, a manufacturer page, and the search index asset.
+- README.md updated — was stuck describing "Phase 1a complete," now points at the live site, dataset, and findings.
+
 Open / needs a planner decision:
+- **190 review-band pairs are still undecided, and manufacturer slugs are positional** — finishing the review will now change **live, public** manufacturer URLs (previously "fine, nothing is public yet"; that's no longer true). Worth a content-derived slug before doing much more review, or accepting occasional link churn.
+- **The 3 remaining build-tooling vulnerabilities** (`postcss`/`sharp`) need a Next.js 16 major-version upgrade to clear — real work, not urgent (build-time only, no untrusted input processed), but shouldn't sit forever on a public repo.
+- **Vercel project is named `web`** (generic) — the URL slug `web-navy-three-91` doesn't say "MedCheck." A custom domain or project rename is cosmetic, not urgent.
 - **`alert_section` is worse than previously recorded.** Not 27/184 in one month — **13 of 239 labs are filed under BOTH `central_lab` and `state_lab`, across 3,537 records (57.5%)**, with **≥459 records provably mislabelled**. RDTL Guwahati: 571 of 773 records filed as *state* lab despite being a central facility. Phase 4 reports the unreliability instead of the central-vs-state comparison, which is not currently supportable. Fixing it needs an external list of which labs are central — a possible future ticket.
-- **190 review-band pairs are still undecided**, by the user's choice — legitimate, not a bug. Re-running `review_cli.py` later and re-applying with `--allow-pending` will only ever tighten the collapse further, never wrongly merge. No urgency, but worth remembering it's there.
-- **Manufacturer slugs carry a positional id** (`-m<manufacturers.id>`), and `--apply` renumbers 1..N in canonical-name order. Finishing the 190 pending review pairs will therefore change most manufacturer URLs. Fine now (nothing is public); if the site ever ships, the slug needs a content-derived id first.
 - **Search index is 255 KB brotli** (down from 297 KB). Lazy-loaded on idle/focus so the page is usable first, but still the biggest cost on a slow connection. A later Phase 3b option: server-side search, or a two-tier prefix index.
 - Rest of Phase 3b (Hindi/i18n, live FastAPI) still deferred.
 - **`alert_section` is unreliable.** The portal and the PDFs disagree on central-vs-state for 27 of 184 Jun-2025 records. Phase 4's "central vs state lab detection patterns" analysis needs this caveat.
