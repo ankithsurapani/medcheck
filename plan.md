@@ -189,22 +189,28 @@ Phase 0 found that CDSCO now publishes NSQ data as structured JSON (`docs/pdf_in
 
 ### Phase 3 — Search site (Week 4–6)
 
-Boring and fast beats clever and slow.
+Boring and fast beats clever and slow. Entity resolution (Phase 2) hasn't run yet, so this splits into a data-ready MVP now and a follow-up once identity/i18n work lands.
 
+**Phase 3a — Static-data search site (do this first)**
 - [ ] Search by drug name (fuzzy, tolerant of misspelling)
 - [ ] Search by batch number (exact)
-- [ ] Search by manufacturer
+- [ ] Search by manufacturer — matches on `manufacturer_raw` text; not merged/canonical yet (Phase 2 hasn't run), so near-duplicate names show as separate results. Say so, don't hide it.
 - [ ] Result card: drug, batch, manufacturer, month, failure reason in plain language, source link (PDF or CDSCO portal record), mandatory safety copy
 - [ ] "No results" page that clearly says: not found means not flagged in our data, not that it's verified safe
-- [ ] Manufacturer page: all flagged batches, chronological
-- [ ] Mobile-first. Most Indian users will be on a phone.
-- [ ] Hindi translation of all interface copy and failure-reason explanations. Add more languages later.
+- [ ] Manufacturer page: all flagged batches under that exact `manufacturer_raw` string, chronological
+- [ ] Mobile-first. Most Indian users will be on a phone — keep the initial payload light (see below).
 - [ ] No login. No signup. No friction.
+- [ ] Data source: a static pre-built JSON export from `data/medcheck.db` (this is the same fallback-index artifact from §2's API fallback row — build it once, use it for both). No live FastAPI needed for this ticket; avoids standing up paid hosting before there's demand.
 
-**Plain-language failure explanations** — write these by hand, one per category:
+**Plain-language failure explanations** — write these by hand, one per category (21 total, see §3.3):
 > **Dissolution failure** — The tablet did not break down properly in lab testing. This can mean the body absorbs less of the medicine than intended.
 
 Keep them factual and non-alarming.
+
+**Phase 3b — deferred**
+- [ ] Hindi translation of all interface copy and failure-reason explanations. Ship English first; structure copy so i18n slots in later.
+- [ ] Swap the static export for a live FastAPI once Phase 5's public API is needed, or once data needs to update without a redeploy
+- [ ] Re-point manufacturer pages/search at resolved entities once Phase 2 lands
 
 ---
 

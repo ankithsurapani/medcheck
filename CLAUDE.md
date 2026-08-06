@@ -29,10 +29,13 @@ Searchable public database of medicines CDSCO flagged as Not of Standard Quality
 
 **`failure_category` vocabulary extended twice (2026-08-06)** — §3.3 went from 11 to 21 buckets: `ph`, `water_content`, `uniformity_of_weight`, `bacterial_endotoxins`, `uniformity_of_dispersion`, then `loss_on_drying`, `density`, `extractable_volume`, `clarity_of_solution`, `dimensions`. `other` fell **657 → 363 → 269 records (10.7% → 4.4%)**. Guarded by `tests/test_categorise.py` (59 cases).
 
+**Phase 3a (search site) — now active.** Jumping ahead of Phase 2 (entity resolution) on user instruction — see `implementation.md`.
+
 Open / needs a planner decision:
 - **`alert_section` is unreliable.** The portal and the PDFs disagree on central-vs-state for 27 of 184 Jun-2025 records. Phase 4's "central vs state lab detection patterns" analysis needs this caveat.
 - **State coverage is 58%.** PIN-prefix → state mapping would lift it a lot; belongs with Phase 2's address parsing.
 - Phase 1b (pre-2019 PDF backfill) not started, per ticket boundary.
+- Phase 2 (entity resolution) not started — Phase 3a's manufacturer search/pages run on raw text, not merged identity, until it does.
 
 ## Tech stack
 
@@ -83,6 +86,9 @@ medcheck/
 - 2026-08-06 — `label_claim_disputed` is null (not 0) for all NSQ records: the NSQ endpoint has no dispute field, so null means "not published", not "not disputed". Only the spurious endpoint carries `str_firm_reply`/`str_nsq_remarks`, and both are appended verbatim to `failure_reason_raw` so the published wording travels with the boolean (§1.1).
 - 2026-08-06 — Cross-validation is a throwaway script in `data/raw/crossvalidate.py`, not `src/`, matching the Phase 0 precedent for discovery-only tooling.
 - 2026-08-06 — `nsq_records` schema changed: `source_pdf_url` → `source_url` + new `source_type` ("pdf"|"portal_json"), since records can now come from a JSON portal query, not just a PDF. `failure_category` changed from a single value to a JSON array, since `NSQ Result` is multi-valued at the source. Non-negotiable §1.1 wording updated to match ("link to its source" instead of "link to the source PDF").
+- 2026-08-06 — **Jumping to Phase 3 (UI) ahead of Phase 2** on user instruction. Split into 3a (now: static-data MVP) / 3b (deferred: Hindi, live API, resolved-entity manufacturer pages) — same a/b pattern as Phase 1. See `plan.md` §4 Phase 3.
+- 2026-08-06 — Phase 3a serves the UI from a static JSON export of `medcheck.db`, not a live FastAPI. This is the same artifact already planned as the API fallback (§2) — building it now does double duty and avoids standing up Railway/Fly.io hosting before there's demand.
+- 2026-08-06 — Manufacturer search/pages in 3a match on exact `manufacturer_raw` text, not a resolved entity — near-duplicate company names will show as separate results until Phase 2 runs. The UI must say this, not hide it (§1.1 mirror-not-accuser: don't imply a merge that hasn't happened).
 
 ## Key learnings / gotchas
 
