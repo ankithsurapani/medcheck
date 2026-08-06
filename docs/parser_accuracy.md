@@ -135,6 +135,38 @@ only reclassifies free text that was previously sitting in `other`.
 
 ---
 
+## Run 3 — 2026-08-06 — second vocabulary extension
+
+Ingestion unchanged again; five more §3.3 buckets plus typo absorption into
+existing ones. Same 6,155 records, same 90 months, re-normalized from the same
+cache.
+
+| | Run 1 | Run 2 | Run 3 |
+|---|---|---|---|
+| Records in `other` | 657 (10.7%) | 363 (5.9%) | **269 (4.4%)** |
+| `failure_category_unmapped` flags | 657 | 364 | **270** |
+
+New buckets: `clarity_of_solution` 93, `density` 43, `extractable_volume` 31,
+`dimensions` 26, `loss_on_drying` 24.
+
+Typos absorbed into existing buckets: `Sterillity` → `sterility` (+5 records),
+`Related Susbtances` → `related_substances` (+3), `TEST FOR DISSOLUTI ON` →
+`dissolution` (+2).
+
+**False-positive check** — every record newly assigned to each of the five new
+buckets was sampled. All matches were correct, including non-obvious ones:
+`"Threads per stated Length and Wt. per Unit Area"` (absorbent gauze) correctly
+reads as `dimensions`, and `"Specific Gravity, Acidity, Limit of non Volatile
+residue and Assay of Isopropyl Alcohol"` correctly yields `density` + `assay`.
+
+`tests/test_categorise.py` grew from 38 to **59 cases, all passing**, including
+explicit assertions that `"Not applicable"`, `"NSQ"`, `"Does not conform to
+I.P."` and `"Not of Standard Quality"` stay in `other`.
+
+No record count, month coverage, or cross-validation figure changed.
+
+---
+
 ## Not yet measured
 
 - **Pre-2019 records.** Not loaded — Phase 1b.

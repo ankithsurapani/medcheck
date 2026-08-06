@@ -139,47 +139,70 @@ Mapping is keyword-based against plan.md §3.3's controlled vocabulary, and the
 verbatim text is always kept in `failure_reason_raw`.
 
 **Unmatched text becomes `["other"]` plus a `failure_category_unmapped` flag. It
-is never forced into the nearest bucket.** On the current corpus that is **364 of
-6,155 records (5.9%)**.
+is never forced into the nearest bucket.** On the current corpus that is **270 of
+6,155 records (4.4%)**.
 
-### Vocabulary extension — 2026-08-06
+### Vocabulary extensions — 2026-08-06
 
-§3.3 originally had eleven buckets and left 657 records (10.7%) in `other`. Five
-buckets were added for test failures that occur constantly in CDSCO's data and
-had nowhere to go:
+§3.3 originally had eleven buckets and left 657 records (10.7%) in `other`. It
+was extended twice, in both cases from measured frequencies in the loaded corpus
+rather than from a guess at what CDSCO might publish.
 
-| New bucket | Records |
-|---|---|
-| `ph` | 260 |
-| `uniformity_of_weight` | 114 |
-| `bacterial_endotoxins` | 106 |
-| `water_content` | 94 |
-| `uniformity_of_dispersion` | 46 |
+| Bucket | Added | Records |
+|---|---|---|
+| `ph` | first pass | 260 |
+| `uniformity_of_weight` | first pass | 114 |
+| `bacterial_endotoxins` | first pass | 106 |
+| `water_content` | first pass | 94 |
+| `clarity_of_solution` | second pass | 93 |
+| `uniformity_of_dispersion` | first pass | 46 |
+| `density` | second pass | 43 |
+| `extractable_volume` | second pass | 31 |
+| `dimensions` | second pass | 26 |
+| `loss_on_drying` | second pass | 24 |
 
-`other` fell from 657 to 363 as a result — a 45% reduction, with 620 records
-gaining a real category.
+`other` fell **657 → 363 → 269**, a 59% reduction overall.
 
-Two boundaries were drawn deliberately rather than by convenience:
+The second pass also absorbed CDSCO's own typos and line-break artifacts into
+the existing buckets — `Sterillity` → `sterility`, `Related Susbtances` →
+`related_substances`, `TEST FOR DISSOLUTI ON` → `dissolution`. The intended test
+is not in doubt in any of those, so leaving them in `other` was understating
+real findings.
+
+Boundaries drawn deliberately rather than by convenience:
 
 - **`bacterial_endotoxins` is not folded into `microbial_contamination`.**
   Endotoxins persist after the organisms that produced them are gone, so a batch
   can fail endotoxin testing while passing sterility. Reporting one as the other
   would misstate the regulator's finding.
-- **`water_content` excludes "Loss on Drying" and "Water-soluble substances".**
-  LOD measures total volatiles, not water specifically; water-soluble substances
-  is a solubility/impurity test. Both still fall to `other`.
+- **`loss_on_drying` is not folded into `water_content`.** LOD measures every
+  volatile that evaporates; water determination measures water. Different tests,
+  different limits.
+- **`density` merges specific gravity, relative density and weight per ml** —
+  three monograph names for one mass-per-unit-volume measurement.
+- **`clarity_of_solution` is separate from `description_labelling`.** Clarity and
+  colour describe a reconstituted solution; description covers the dosage form
+  and its labelling. CDSCO lists them as distinct tests and often cites both.
+- **"Water-soluble substances" stays in `other`** — a solubility/impurity test,
+  not a moisture limit.
 
-Additionally, the `assay` pattern uses negative lookbehinds so that
-*"water content"* and *"moisture content"* are read as `water_content` alone
-rather than also matching `assay`'s bare `content` keyword.
+The `assay` pattern uses negative lookbehinds so *"water content"* and
+*"moisture content"* are read as `water_content` alone rather than also matching
+`assay`'s bare `content` keyword; `water_content` likewise excludes
+*"weight per ml"*.
 
 ### Still unmapped
 
-The remaining 364 are dominated by tests that genuinely have no bucket:
-Loss on Drying, weight per ml, specific gravity, length, appearance of solution,
-extractable volume, and a long tail of narrative one-offs. They stay in `other`
-with the specific term recorded in the flag, so a future extension can again be
-made on evidence.
+The remaining 269 are a genuine long tail — no group exceeds three records:
+matter insoluble in alcohol, fineness, hardness, net/average weight, free
+salicylic acid, total fatty matter, acid value, and 155 narrative one-off
+descriptions. Adding buckets at that frequency would be over-fitting to the
+current corpus.
+
+About 20 of them name **no test at all** — `"Not applicable"`, `"NSQ"`,
+`"Does not conform to I.P."`, `"Not of Standard Quality"`. Those must stay in
+`other` permanently: assigning a category would invent a finding the regulator
+never reported (§1.4).
 
 ---
 

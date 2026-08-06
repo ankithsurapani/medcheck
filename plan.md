@@ -112,9 +112,14 @@ Map messy free text into these buckets. Keep the raw text always.
 - `identification` — wrong or absent active ingredient
 - `description_labelling`
 - `ph` — outside the specified pH range
-- `water_content` — moisture outside limits (Karl Fischer / water determination). Does **not** include Loss on Drying, which measures total volatiles and is a different test
+- `water_content` — moisture outside limits (Karl Fischer / water determination)
+- `loss_on_drying` — total volatile content outside limits. Separate from `water_content`: LOD measures everything that evaporates, not water specifically
 - `uniformity_of_weight` — individual units vary too much in weight
 - `uniformity_of_dispersion` — dispersible tablets fail to disperse uniformly
+- `density` — specific gravity, relative density, or weight per ml. One bucket because all three measure mass per unit volume; the source text records whichever the monograph specifies
+- `extractable_volume` — deliverable/extractable volume or uniformity of volume, mainly injectables
+- `clarity_of_solution` — appearance, clarity or colour of a reconstituted solution. Separate from `description_labelling`, which is about the dosage form and its labelling
+- `dimensions` — physical measurements such as length or diameter, mainly devices
 - `spurious` — declared fake
 - `other` — always allowed, never force a match
 

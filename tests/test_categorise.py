@@ -44,15 +44,39 @@ CASES: list[tuple[str, set[str]]] = [
     ("BET", {"bacterial_endotoxins"}),
     ("Bacterial Endotoxins test", {"bacterial_endotoxins"}),
 
+    # --- buckets added 2026-08-06 (second extension) ---
+    # Separate from water_content: LOD measures all volatiles, not water.
+    ("Loss on Drying", {"loss_on_drying"}),
+    ("LOSS ON DRYING", {"loss_on_drying"}),
+    ("Test Loss On Drying", {"loss_on_drying"}),
+    # Three names for a mass-per-unit-volume measurement.
+    ("Weight per ml", {"density"}),
+    ("Weight per ml does not comply", {"density"}),
+    ("Specific Gravity", {"density"}),
+    ("Relative Density", {"density"}),
+    ("Extractable Volume", {"extractable_volume"}),
+    ("Uniformity of Volume", {"extractable_volume"}),
+    ("Appearance of solution", {"clarity_of_solution"}),
+    ("Clarity of Solution", {"clarity_of_solution"}),
+    ("Clarity and Colour of Solution", {"clarity_of_solution"}),
+    ("Length", {"dimensions"}),
+    ("Diameter", {"dimensions"}),
+    ("Threads per stated length", {"dimensions"}),
+
+    # --- CDSCO's own typos and line-break artifacts ---
+    ("Sterillity", {"sterility"}),
+    ("Related Susbtances", {"related_substances"}),
+    ("TEST FOR DISSOLUTI ON", {"dissolution"}),
+
     # --- boundaries that must NOT map (plan.md §3.3: never force a match) ---
-    # Total volatiles, not water specifically.
-    ("Loss on Drying", {"other"}),
     # A solubility/impurity test, not a moisture limit.
     ("Water-soluble and Ether- soluble substances", {"other"}),
     ("Water soluble substances", {"other"}),
-    ("Weight per ml", {"other"}),
-    ("Specific Gravity", {"other"}),
-    ("Appearance of solution", {"other"}),
+    # These name no test at all — guessing would invent a finding.
+    ("Not applicable", {"other"}),
+    ("NSQ", {"other"}),
+    ("Does not conform to I.P.", {"other"}),
+    ("Not of Standard Quality", {"other"}),
 
     # --- multi-valued: a record can fail more than one way ---
     ("Dissolution and Assay", {"dissolution", "assay"}),
@@ -61,7 +85,12 @@ CASES: list[tuple[str, set[str]]] = [
     ("Description & Particulate Matter", {"particulate_matter", "description_labelling"}),
     ("pH, water content & Assay", {"ph", "water_content", "assay"}),
     ("Particulate Matter, Extractable Volume and Description",
-     {"particulate_matter", "description_labelling"}),
+     {"particulate_matter", "description_labelling", "extractable_volume"}),
+    ("Clarity of Solution & Particulate Matter",
+     {"clarity_of_solution", "particulate_matter"}),
+    ("Diameter, Thickness and Hardness", {"dimensions"}),
+    ("Sterility, BET, Acidity/Alkalinity, & Light Absorption",
+     {"sterility", "bacterial_endotoxins"}),
 
     # --- endotoxins must not collapse into microbial_contamination ---
     ("Bacterial endotoxins", {"bacterial_endotoxins"}),

@@ -37,14 +37,16 @@ MONTHS = {m: i for i, m in enumerate(
 # plan.md §3.3 controlled vocabulary. Patterns are matched against the lowercased
 # failure text; a reason can match several buckets, which is the point.
 #
-# Still deliberately absent: Loss on Drying, weight per ml, specific gravity,
-# extractable volume, appearance of solution. Those are real test failures with
-# no bucket in §3.3 — they fall through to "other" and are flagged with the
-# specific term, so the vocabulary gets extended on evidence rather than guesswork.
+# CDSCO's own text contains typos and line-break artifacts — "Sterillity",
+# "Related Susbtances", "TEST FOR DISSOLUTI ON". Those are absorbed by the
+# patterns below rather than left in "other", since the intended test is not in
+# doubt. What stays in "other" is text that names no test at all ("Not
+# applicable", "NSQ", "Does not conform to I.P."), where guessing would invent
+# a finding the regulator did not report.
 FAILURE_PATTERNS: list[tuple[str, str]] = [
-    ("dissolution",             r"\bdissolution\b|\bdissolutin\b"),
+    ("dissolution",             r"\bdissolutio?n\b|\bdissolutin\b|\bdissoluti\s+on\b"),
     ("disintegration",          r"\bdisintegrat"),
-    ("sterility",               r"\bsterilit|\bsterile\b|\bnon-?sterile\b"),
+    ("sterility",               r"\bsterilit|\bsterillit|\bsterile\b|\bnon-?sterile\b"),
     ("microbial_contamination", r"\bmicrobial\b|\bmicrobiolog|total aerobic|\byeast|\bmould|\bmold\b"
                                 r"|\be\.?\s?coli\b|staphylococ|pseudomonas|salmonella|\bfungal\b"),
     # Separate from microbial_contamination on purpose (plan.md §3.3): endotoxins
@@ -52,19 +54,28 @@ FAILURE_PATTERNS: list[tuple[str, str]] = [
     # the other would misstate what the regulator found.
     ("bacterial_endotoxins",    r"\bendotoxin|\bbet\b|\bpyrogen"),
     ("particulate_matter",      r"particulate"),
-    ("related_substances",      r"related substance|\bimpurit"),
+    # "Related Susbtances" is a recurring CDSCO typo; \w* absorbs it.
+    ("related_substances",      r"related\s+su\w*t\w*ces?|\bimpurit"),
     ("identification",          r"\bidentification\b|\bidentity\b"),
     ("spurious",                r"\bspurious\b|\bcounterfeit\b|\badulterat|17-?b"),
     ("description_labelling",   r"\bdescriptions?\b|\bdescriptive\b|\bmisbrand|\bmisbrand[ae]d\b"
                                 r"|\blabell?ing\b|the label is|\blabel claim is\b"
                                 r"|not (?:mentioned|declared|printed|specified) on the label"),
     ("ph",                      r"\bph\b|\bp\.h\.?\b"),
-    # "Loss on Drying" is excluded: it measures total volatiles, not water
-    # specifically, and §3.3 keeps them distinct. "Water-soluble substances" is
-    # excluded too — that is a solubility/impurity test, not a moisture limit.
-    ("water_content",           r"\bwater\b(?!\s*-?\s*soluble)|\bmoisture\b"),
+    # "Water-soluble substances" is excluded — that is a solubility/impurity
+    # test, not a moisture limit. Loss on drying has its own bucket below.
+    ("water_content",           r"\bwater\b(?!\s*-?\s*soluble)(?!\s+per\s+ml)|\bmoisture\b"),
+    ("loss_on_drying",          r"loss\s+on\s+drying|\bl\.?o\.?d\.?\b(?=\s|$)"),
     ("uniformity_of_weight",    r"uniformity of (?:filled\s+)?weight"),
     ("uniformity_of_dispersion", r"uniformity of dispersion"),
+    # Specific gravity, relative density and weight per ml are three names for a
+    # mass-per-unit-volume measurement; which one appears depends on the monograph.
+    ("density",                 r"specific\s+gravity|relative\s+density|weight\s+per\s+ml"),
+    ("extractable_volume",      r"extractable\s+volume|deliverable\s+volume"
+                                r"|uniformity\s+of\s+volume"),
+    ("clarity_of_solution",     r"clarity\b|appearance\s+of\s+solution"
+                                r"|colou?r\s+of\s+solution"),
+    ("dimensions",              r"\blength\b|\bdiameter\b"),
     # "labelled amount/claim" is an assay statement, not a labelling defect, so the
     # assay pattern owns those phrases and the labelling pattern above excludes them.
     # The lookbehinds stop "water content" / "moisture content" being read as an
