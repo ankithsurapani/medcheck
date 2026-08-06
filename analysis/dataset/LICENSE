@@ -1,0 +1,22 @@
+CC0 1.0 Universal (Public Domain Dedication)
+
+To the extent possible under law, the MedCheck project has waived all copyright and
+related or neighbouring rights to the MedCheck NSQ dataset
+(analysis/dataset/medcheck_nsq_records.csv).
+
+Full text: https://creativecommons.org/publicdomain/zero/1.0/legalcode
+
+You may copy, modify, distribute and use this dataset, including for commercial
+purposes, without asking permission and without attribution.
+
+Two notes that are NOT licence conditions, because CC0 does not permit conditions,
+but which matter more than most licence terms would:
+
+1. The underlying facts are CDSCO's published record, not MedCheck's. Anyone can
+   re-derive them from https://cdscoonline.gov.in — the waiver here covers the
+   compilation, the categorisation and the entity resolution MedCheck added.
+
+2. Please carry README.md with the data. It states that CDSCO does not test at
+   random, so no figure computed from this file is a failure rate for medicines on
+   the market. Republished without that, this dataset becomes a list of
+   accusations, which is exactly what it is not.

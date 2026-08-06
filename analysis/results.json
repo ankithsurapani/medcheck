@@ -1,0 +1,1061 @@
+{
+  "caveat": "CDSCO does not test at random. Every share below is a share of the batches the regulator chose to test and published as failing — never a failure rate for medicines on the market.",
+  "q1_volume": {
+    "total": 6155,
+    "by_year": {
+      "2019": 403,
+      "2020": 319,
+      "2021": 345,
+      "2022": 571,
+      "2023": 644,
+      "2024": 873,
+      "2025": 1927,
+      "2026": 1073
+    },
+    "by_month": {
+      "2019-01": 45,
+      "2019-02": 37,
+      "2019-03": 51,
+      "2019-04": 30,
+      "2019-05": 32,
+      "2019-06": 25,
+      "2019-07": 18,
+      "2019-08": 28,
+      "2019-09": 21,
+      "2019-10": 35,
+      "2019-11": 35,
+      "2019-12": 46,
+      "2020-01": 34,
+      "2020-02": 38,
+      "2020-03": 44,
+      "2020-04": 55,
+      "2020-05": 24,
+      "2020-06": 20,
+      "2020-07": 35,
+      "2020-08": 22,
+      "2020-09": 10,
+      "2020-10": 8,
+      "2020-11": 14,
+      "2020-12": 15,
+      "2021-01": 16,
+      "2021-02": 15,
+      "2021-03": 18,
+      "2021-04": 22,
+      "2021-05": 19,
+      "2021-06": 39,
+      "2021-07": 45,
+      "2021-08": 36,
+      "2021-09": 42,
+      "2021-10": 36,
+      "2021-11": 22,
+      "2021-12": 35,
+      "2022-01": 26,
+      "2022-02": 40,
+      "2022-03": 48,
+      "2022-04": 27,
+      "2022-05": 41,
+      "2022-06": 28,
+      "2022-07": 54,
+      "2022-08": 44,
+      "2022-09": 59,
+      "2022-10": 51,
+      "2022-11": 83,
+      "2022-12": 70,
+      "2023-01": 66,
+      "2023-02": 59,
+      "2023-03": 48,
+      "2023-04": 36,
+      "2023-05": 28,
+      "2023-06": 48,
+      "2023-07": 51,
+      "2023-08": 48,
+      "2023-09": 59,
+      "2023-10": 59,
+      "2023-11": 64,
+      "2023-12": 78,
+      "2024-01": 46,
+      "2024-02": 58,
+      "2024-03": 59,
+      "2024-04": 55,
+      "2024-05": 52,
+      "2024-06": 61,
+      "2024-07": 70,
+      "2024-08": 61,
+      "2024-09": 71,
+      "2024-10": 92,
+      "2024-11": 113,
+      "2024-12": 135,
+      "2025-01": 145,
+      "2025-02": 103,
+      "2025-03": 131,
+      "2025-04": 195,
+      "2025-05": 188,
+      "2025-06": 188,
+      "2025-07": 150,
+      "2025-08": 97,
+      "2025-09": 113,
+      "2025-10": 214,
+      "2025-11": 218,
+      "2025-12": 185,
+      "2026-01": 222,
+      "2026-02": 221,
+      "2026-03": 191,
+      "2026-04": 123,
+      "2026-05": 157,
+      "2026-06": 159
+    },
+    "month_count": 90,
+    "first_month": "2019-01",
+    "last_month": "2026-06",
+    "partial_year": "2026",
+    "partial_year_months": 6,
+    "no_alert_month": 0
+  },
+  "q2_categories": {
+    "potency_related": {
+      "records": 3947,
+      "share_of_records": 64.1
+    },
+    "contamination_related": {
+      "records": 741,
+      "share_of_records": 12.0
+    },
+    "other_naming_no_test": 20,
+    "records": 6155,
+    "categories": [
+      {
+        "category": "assay",
+        "records": 2565,
+        "share_of_records": 41.7
+      },
+      {
+        "category": "dissolution",
+        "records": 1695,
+        "share_of_records": 27.5
+      },
+      {
+        "category": "description_labelling",
+        "records": 1031,
+        "share_of_records": 16.8
+      },
+      {
+        "category": "particulate_matter",
+        "records": 378,
+        "share_of_records": 6.1
+      },
+      {
+        "category": "identification",
+        "records": 323,
+        "share_of_records": 5.2
+      },
+      {
+        "category": "sterility",
+        "records": 280,
+        "share_of_records": 4.5
+      },
+      {
+        "category": "other",
+        "records": 269,
+        "share_of_records": 4.4
+      },
+      {
+        "category": "ph",
+        "records": 260,
+        "share_of_records": 4.2
+      },
+      {
+        "category": "disintegration",
+        "records": 234,
+        "share_of_records": 3.8
+      },
+      {
+        "category": "related_substances",
+        "records": 186,
+        "share_of_records": 3.0
+      },
+      {
+        "category": "uniformity_of_weight",
+        "records": 114,
+        "share_of_records": 1.9
+      },
+      {
+        "category": "bacterial_endotoxins",
+        "records": 106,
+        "share_of_records": 1.7
+      },
+      {
+        "category": "spurious",
+        "records": 104,
+        "share_of_records": 1.7
+      },
+      {
+        "category": "water_content",
+        "records": 94,
+        "share_of_records": 1.5
+      },
+      {
+        "category": "clarity_of_solution",
+        "records": 93,
+        "share_of_records": 1.5
+      },
+      {
+        "category": "microbial_contamination",
+        "records": 82,
+        "share_of_records": 1.3
+      },
+      {
+        "category": "uniformity_of_dispersion",
+        "records": 46,
+        "share_of_records": 0.7
+      },
+      {
+        "category": "density",
+        "records": 43,
+        "share_of_records": 0.7
+      },
+      {
+        "category": "extractable_volume",
+        "records": 31,
+        "share_of_records": 0.5
+      },
+      {
+        "category": "dimensions",
+        "records": 26,
+        "share_of_records": 0.4
+      },
+      {
+        "category": "loss_on_drying",
+        "records": 24,
+        "share_of_records": 0.4
+      }
+    ],
+    "categories_per_record": {
+      "1": 4800,
+      "2": 1030,
+      "3": 232,
+      "4": 58,
+      "5": 18,
+      "6": 14,
+      "7": 2,
+      "8": 1
+    },
+    "multi_category_records": 1355,
+    "other_records": 269,
+    "other_share": 4.4
+  },
+  "q3_manufacturers": {
+    "manufacturers": 1856,
+    "flags_attributed": 6077,
+    "records_without_manufacturer": 78,
+    "resolution_is_partial": true,
+    "review_pairs_pending": 190,
+    "top": [
+      {
+        "rank": 1,
+        "name": "Jackson Laboratories Pvt. Ltd",
+        "state": "Punjab",
+        "flags": 88,
+        "spellings": 67
+      },
+      {
+        "rank": 2,
+        "name": "Unicure India Ltd",
+        "state": "Uttar Pradesh",
+        "flags": 77,
+        "spellings": 62
+      },
+      {
+        "rank": 3,
+        "name": "Zee Laboratories Ltd",
+        "state": "Himachal Pradesh",
+        "flags": 66,
+        "spellings": 48
+      },
+      {
+        "rank": 4,
+        "name": "Martin & Brown Bio-Sciences Pvt. Ltd",
+        "state": "Himachal Pradesh",
+        "flags": 62,
+        "spellings": 40
+      },
+      {
+        "rank": 5,
+        "name": "Apple Formulations Pvt. Ltd",
+        "state": "Uttarakhand",
+        "flags": 51,
+        "spellings": 37
+      },
+      {
+        "rank": 6,
+        "name": "Karnataka Antibiotics & Pharmaceuticals Ltd",
+        "state": "Karnataka",
+        "flags": 44,
+        "spellings": 36
+      },
+      {
+        "rank": 7,
+        "name": "Mascot Health Series Pvt. Ltd",
+        "state": "Uttarakhand",
+        "flags": 43,
+        "spellings": 38
+      },
+      {
+        "rank": 8,
+        "name": "Gidsha Pharmaceuticals",
+        "state": "Gujarat",
+        "flags": 42,
+        "spellings": 9
+      },
+      {
+        "rank": 9,
+        "name": "Vivek Pharmachem (India) Ltd",
+        "state": "Rajasthan",
+        "flags": 41,
+        "spellings": 34
+      },
+      {
+        "rank": 10,
+        "name": "Affy Parenterals",
+        "state": "Himachal Pradesh",
+        "flags": 36,
+        "spellings": 22
+      },
+      {
+        "rank": 11,
+        "name": "Life Max Cancer Laboratories",
+        "state": "Uttarakhand",
+        "flags": 36,
+        "spellings": 20
+      },
+      {
+        "rank": 12,
+        "name": "Hindustan Antibiotics Ltd",
+        "state": "Haryana",
+        "flags": 35,
+        "spellings": 32
+      },
+      {
+        "rank": 13,
+        "name": "Ridley Life Science Pvt. Ltd",
+        "state": "Delhi",
+        "flags": 35,
+        "spellings": 28
+      },
+      {
+        "rank": 14,
+        "name": "ANG Lifesciences India Ltd",
+        "state": "Himachal Pradesh",
+        "flags": 34,
+        "spellings": 30
+      },
+      {
+        "rank": 15,
+        "name": "Paschim Banga Pharmaceuticals",
+        "state": "West Bengal",
+        "flags": 33,
+        "spellings": 16
+      },
+      {
+        "rank": 16,
+        "name": "Digital Vision",
+        "state": "Himachal Pradesh",
+        "flags": 32,
+        "spellings": 24
+      },
+      {
+        "rank": 17,
+        "name": "Himalaya Meditek Pvt. Ltd",
+        "state": "Uttarakhand",
+        "flags": 32,
+        "spellings": 25
+      },
+      {
+        "rank": 18,
+        "name": "Nestor Pharmaceuticals Limited",
+        "state": "Haryana",
+        "flags": 32,
+        "spellings": 28
+      },
+      {
+        "rank": 19,
+        "name": "Alkem Health Science",
+        "state": "Sikkim",
+        "flags": 31,
+        "spellings": 22
+      },
+      {
+        "rank": 20,
+        "name": "Rivpra Formulation Pvt. Ltd",
+        "state": "Uttarakhand",
+        "flags": 31,
+        "spellings": 23
+      }
+    ],
+    "concentration": [
+      {
+        "manufacturers": 1,
+        "share_of_manufacturers": 0.1,
+        "flags": 88,
+        "share_of_flags": 1.4
+      },
+      {
+        "manufacturers": 5,
+        "share_of_manufacturers": 0.3,
+        "flags": 344,
+        "share_of_flags": 5.7
+      },
+      {
+        "manufacturers": 10,
+        "share_of_manufacturers": 0.5,
+        "flags": 550,
+        "share_of_flags": 9.1
+      },
+      {
+        "manufacturers": 25,
+        "share_of_manufacturers": 1.3,
+        "flags": 1017,
+        "share_of_flags": 16.7
+      },
+      {
+        "manufacturers": 50,
+        "share_of_manufacturers": 2.7,
+        "flags": 1506,
+        "share_of_flags": 24.8
+      },
+      {
+        "manufacturers": 100,
+        "share_of_manufacturers": 5.4,
+        "flags": 2197,
+        "share_of_flags": 36.2
+      },
+      {
+        "manufacturers": 250,
+        "share_of_manufacturers": 13.5,
+        "flags": 3312,
+        "share_of_flags": 54.5
+      }
+    ],
+    "single_flag_manufacturers": 982,
+    "single_flag_share": 52.9,
+    "median_flags": 1,
+    "max_flags": 88
+  },
+  "q4_labs": {
+    "sections": {
+      "missing": 1,
+      "central_lab": 3029,
+      "spurious": 46,
+      "state_lab": 3079
+    },
+    "section_shares": {
+      "missing": 0.0,
+      "central_lab": 49.2,
+      "spurious": 0.7,
+      "state_lab": 50.0
+    },
+    "distinct_labs": 239,
+    "labs_filed_under_both": 13,
+    "records_involving_such_a_lab": 3537,
+    "records_involving_such_a_lab_share": 57.5,
+    "minority_labelled_records": 459,
+    "worst": [
+      {
+        "lab": "cdl kolkata",
+        "records": 1248,
+        "by_section": {
+          "central_lab": 1246,
+          "state_lab": 2
+        },
+        "minority_records": 2,
+        "minority_share": 0.2
+      },
+      {
+        "lab": "rdtl guwahati",
+        "records": 773,
+        "by_section": {
+          "central_lab": 202,
+          "state_lab": 571
+        },
+        "minority_records": 202,
+        "minority_share": 26.1
+      },
+      {
+        "lab": "rdtl chandigarh",
+        "records": 614,
+        "by_section": {
+          "central_lab": 380,
+          "state_lab": 234
+        },
+        "minority_records": 234,
+        "minority_share": 38.1
+      },
+      {
+        "lab": "cdl, kolkata",
+        "records": 385,
+        "by_section": {
+          "central_lab": 365,
+          "spurious": 17,
+          "state_lab": 3
+        },
+        "minority_records": 3,
+        "minority_share": 0.8
+      },
+      {
+        "lab": "cdtl mumbai",
+        "records": 275,
+        "by_section": {
+          "central_lab": 271,
+          "state_lab": 4
+        },
+        "minority_records": 4,
+        "minority_share": 1.5
+      },
+      {
+        "lab": "rdtl, guwahati",
+        "records": 83,
+        "by_section": {
+          "central_lab": 81,
+          "state_lab": 2
+        },
+        "minority_records": 2,
+        "minority_share": 2.4
+      },
+      {
+        "lab": "cdtl hyderabad",
+        "records": 63,
+        "by_section": {
+          "central_lab": 62,
+          "state_lab": 1
+        },
+        "minority_records": 1,
+        "minority_share": 1.6
+      },
+      {
+        "lab": "cdtl chennai",
+        "records": 59,
+        "by_section": {
+          "central_lab": 56,
+          "state_lab": 3
+        },
+        "minority_records": 3,
+        "minority_share": 5.1
+      }
+    ],
+    "authoritative": false
+  },
+  "q5_trend": {
+    "by_year": {
+      "2019": 403,
+      "2020": 319,
+      "2021": 345,
+      "2022": 571,
+      "2023": 644,
+      "2024": 873,
+      "2025": 1927,
+      "2026": 1073
+    },
+    "complete_years": {
+      "2019": 403,
+      "2020": 319,
+      "2021": 345,
+      "2022": 571,
+      "2023": 644,
+      "2024": 873,
+      "2025": 1927
+    },
+    "partial_year": "2026",
+    "partial_year_months": 6,
+    "first_complete_year": "2019",
+    "last_complete_year": "2025",
+    "growth_over_complete_years": 4.78,
+    "portal_migration_month": "2025-08",
+    "mean_12m_before_migration": 131.0,
+    "mean_12m_after_migration": 172.7,
+    "migration_month_count": 97,
+    "peak_month": "2026-01",
+    "peak_month_count": 222,
+    "is_a_rate": false,
+    "denominator_available": false
+  },
+  "q6_states": {
+    "records": 6155,
+    "records_with_a_state": 3576,
+    "coverage": 58.1,
+    "records_without_a_state": 2579,
+    "why_missing": {
+      "state_not_derived": 2536,
+      "state_ambiguous": 43
+    },
+    "states": [
+      {
+        "state": "Himachal Pradesh",
+        "records": 1258,
+        "share_of_records_with_a_state": 35.2
+      },
+      {
+        "state": "Uttarakhand",
+        "records": 562,
+        "share_of_records_with_a_state": 15.7
+      },
+      {
+        "state": "Gujarat",
+        "records": 365,
+        "share_of_records_with_a_state": 10.2
+      },
+      {
+        "state": "Madhya Pradesh",
+        "records": 145,
+        "share_of_records_with_a_state": 4.1
+      },
+      {
+        "state": "Haryana",
+        "records": 122,
+        "share_of_records_with_a_state": 3.4
+      },
+      {
+        "state": "Sikkim",
+        "records": 116,
+        "share_of_records_with_a_state": 3.2
+      },
+      {
+        "state": "Telangana",
+        "records": 110,
+        "share_of_records_with_a_state": 3.1
+      },
+      {
+        "state": "Uttar Pradesh",
+        "records": 106,
+        "share_of_records_with_a_state": 3.0
+      },
+      {
+        "state": "Punjab",
+        "records": 104,
+        "share_of_records_with_a_state": 2.9
+      },
+      {
+        "state": "Maharashtra",
+        "records": 98,
+        "share_of_records_with_a_state": 2.7
+      },
+      {
+        "state": "Delhi",
+        "records": 98,
+        "share_of_records_with_a_state": 2.7
+      },
+      {
+        "state": "Puducherry",
+        "records": 82,
+        "share_of_records_with_a_state": 2.3
+      },
+      {
+        "state": "Kerala",
+        "records": 75,
+        "share_of_records_with_a_state": 2.1
+      },
+      {
+        "state": "Karnataka",
+        "records": 67,
+        "share_of_records_with_a_state": 1.9
+      },
+      {
+        "state": "Andhra Pradesh",
+        "records": 47,
+        "share_of_records_with_a_state": 1.3
+      },
+      {
+        "state": "Tamil Nadu",
+        "records": 40,
+        "share_of_records_with_a_state": 1.1
+      },
+      {
+        "state": "Rajasthan",
+        "records": 39,
+        "share_of_records_with_a_state": 1.1
+      },
+      {
+        "state": "West Bengal",
+        "records": 34,
+        "share_of_records_with_a_state": 1.0
+      },
+      {
+        "state": "Goa",
+        "records": 29,
+        "share_of_records_with_a_state": 0.8
+      },
+      {
+        "state": "Bihar",
+        "records": 29,
+        "share_of_records_with_a_state": 0.8
+      },
+      {
+        "state": "Assam",
+        "records": 20,
+        "share_of_records_with_a_state": 0.6
+      },
+      {
+        "state": "Odisha",
+        "records": 11,
+        "share_of_records_with_a_state": 0.3
+      },
+      {
+        "state": "Jammu and Kashmir",
+        "records": 11,
+        "share_of_records_with_a_state": 0.3
+      },
+      {
+        "state": "Chandigarh",
+        "records": 6,
+        "share_of_records_with_a_state": 0.2
+      },
+      {
+        "state": "Jharkhand",
+        "records": 1,
+        "share_of_records_with_a_state": 0.0
+      },
+      {
+        "state": "Chhattisgarh",
+        "records": 1,
+        "share_of_records_with_a_state": 0.0
+      }
+    ],
+    "top3_share_of_known": 61.1,
+    "top1_share_of_all_records": 20.4,
+    "distinct_states": 26
+  },
+  "q7_classes": {
+    "records": 6155,
+    "records_naming_an_anti_infective": 1192,
+    "share_of_records": 19.4,
+    "by_class": [
+      {
+        "class": "antibacterial",
+        "records": 916,
+        "share_of_records": 14.9
+      },
+      {
+        "class": "anthelmintic",
+        "records": 147,
+        "share_of_records": 2.4
+      },
+      {
+        "class": "antiprotozoal",
+        "records": 112,
+        "share_of_records": 1.8
+      },
+      {
+        "class": "antifungal",
+        "records": 82,
+        "share_of_records": 1.3
+      },
+      {
+        "class": "antiviral",
+        "records": 14,
+        "share_of_records": 0.2
+      }
+    ],
+    "stem_audit": [
+      {
+        "stem": "-cillin",
+        "class": "antibacterial",
+        "who_note": "penicillins",
+        "records": 234,
+        "distinct_words": 9,
+        "words": [
+          "amoxycillin",
+          "ampicillin",
+          "cloxacillin",
+          "amoxicillin",
+          "piperacillin",
+          "flucloxacillin",
+          "dicloxacillin",
+          "amoxcycillin",
+          "axoxycillin"
+        ]
+      },
+      {
+        "stem": "cef-",
+        "class": "antibacterial",
+        "who_note": "cephalosporins",
+        "records": 212,
+        "distinct_words": 45,
+        "words": [
+          "cefixime",
+          "cefpodoxime",
+          "ceftriaxone",
+          "cefuroxime",
+          "cefoperazone",
+          "cefotaxime",
+          "cefadroxil",
+          "cefepime",
+          "cefipodoxime",
+          "cefodoxime",
+          "cefpodoxim",
+          "cefixin",
+          "cefcare",
+          "cefdoxi",
+          "cefem",
+          "cefidxime",
+          "cefikam",
+          "cefxen",
+          "cefizoc",
+          "cefexi",
+          "cefonix",
+          "cefimax",
+          "cefico",
+          "cefiximetablets",
+          "ceflxime",
+          "cefo",
+          "cefpirome",
+          "cefonsa",
+          "cefporeg",
+          "cefpodoximepr",
+          "cefpodoximeproxeti",
+          "cefpodoxine",
+          "ceftal",
+          "ceftazidime",
+          "cefazid",
+          "ceftraixone",
+          "cefamed",
+          "cefritz",
+          "ceft",
+          "cefiglad",
+          "ceftriiaxone",
+          "cefurox",
+          "cefuroximeaxetil",
+          "cefydoc",
+          "cefpodoximepro"
+        ]
+      },
+      {
+        "stem": "-oxacin",
+        "class": "antibacterial",
+        "who_note": "quinolones",
+        "records": 230,
+        "distinct_words": 9,
+        "words": [
+          "ofloxacin",
+          "ciprofloxacin",
+          "norfloxacin",
+          "enrofloxacin",
+          "moxifloxacin",
+          "levofloxacin",
+          "enroxacin",
+          "nofloxacin",
+          "floxacin"
+        ]
+      },
+      {
+        "stem": "-cycline",
+        "class": "antibacterial",
+        "who_note": "tetracyclines",
+        "records": 38,
+        "distinct_words": 3,
+        "words": [
+          "doxycycline",
+          "oxytetracycline",
+          "tigecycline"
+        ]
+      },
+      {
+        "stem": "-mycin",
+        "class": "antibacterial",
+        "who_note": "Streptomyces-derived antibacterials",
+        "records": 102,
+        "distinct_words": 14,
+        "words": [
+          "azithromycin",
+          "erythromycin",
+          "neomycin",
+          "tobramycin",
+          "clindamycin",
+          "clarithromycin",
+          "gentamycin",
+          "vancomycin",
+          "streptomycin",
+          "dactinomycin",
+          "fosfomycin",
+          "soframycin",
+          "azitromycin",
+          "natamycin"
+        ]
+      },
+      {
+        "stem": "-micin",
+        "class": "antibacterial",
+        "who_note": "Micromonospora-derived antibacterials",
+        "records": 39,
+        "distinct_words": 3,
+        "words": [
+          "gentamicin",
+          "amicin",
+          "polymicin"
+        ]
+      },
+      {
+        "stem": "-kacin",
+        "class": "antibacterial",
+        "who_note": "aminoglycosides (kanamycin group)",
+        "records": 28,
+        "distinct_words": 2,
+        "words": [
+          "amikacin",
+          "omnikacin"
+        ]
+      },
+      {
+        "stem": "-penem",
+        "class": "antibacterial",
+        "who_note": "carbapenems",
+        "records": 12,
+        "distinct_words": 1,
+        "words": [
+          "meropenem"
+        ]
+      },
+      {
+        "stem": "-bactam",
+        "class": "antibacterial",
+        "who_note": "beta-lactamase inhibitors",
+        "records": 33,
+        "distinct_words": 3,
+        "words": [
+          "sulbactam",
+          "tazobactam",
+          "salbactam"
+        ]
+      },
+      {
+        "stem": "-(z)olid",
+        "class": "antibacterial",
+        "who_note": "oxazolidinones",
+        "records": 5,
+        "distinct_words": 1,
+        "words": [
+          "linezolid"
+        ]
+      },
+      {
+        "stem": "sulfa-",
+        "class": "antibacterial",
+        "who_note": "sulfonamides / co-trimoxazole",
+        "records": 17,
+        "distinct_words": 3,
+        "words": [
+          "trimoxazole",
+          "sulphamethoxazole",
+          "trimethoprim"
+        ]
+      },
+      {
+        "stem": "nitrofur-",
+        "class": "antibacterial",
+        "who_note": "nitrofuran antibacterials",
+        "records": 5,
+        "distinct_words": 1,
+        "words": [
+          "nitrofurantoin"
+        ]
+      },
+      {
+        "stem": "rifa-",
+        "class": "antibacterial",
+        "who_note": "rifamycins",
+        "records": 3,
+        "distinct_words": 1,
+        "words": [
+          "rifampicin"
+        ]
+      },
+      {
+        "stem": "(anti-TB)",
+        "class": "antibacterial",
+        "who_note": "first-line antitubercular agents",
+        "records": 7,
+        "distinct_words": 3,
+        "words": [
+          "pyrazinamide",
+          "isoniazid",
+          "ethambutol"
+        ]
+      },
+      {
+        "stem": "-phenicol",
+        "class": "antibacterial",
+        "who_note": "chloramphenicol group",
+        "records": 6,
+        "distinct_words": 1,
+        "words": [
+          "chloramphenicol"
+        ]
+      },
+      {
+        "stem": "-conazole",
+        "class": "antifungal",
+        "who_note": "systemic antifungals (miconazole group)",
+        "records": 77,
+        "distinct_words": 6,
+        "words": [
+          "itraconazole",
+          "ketoconazole",
+          "fluconazole",
+          "miconazole",
+          "luliconazole",
+          "intraconazole"
+        ]
+      },
+      {
+        "stem": "-fungin",
+        "class": "antifungal",
+        "who_note": "other antifungals",
+        "records": 4,
+        "distinct_words": 2,
+        "words": [
+          "griseofulvin",
+          "terbinafine"
+        ]
+      },
+      {
+        "stem": "-idazole",
+        "class": "antiprotozoal",
+        "who_note": "nitroimidazole antiprotozoals",
+        "records": 112,
+        "distinct_words": 3,
+        "words": [
+          "ornidazole",
+          "metronidazole",
+          "tinidazole"
+        ]
+      },
+      {
+        "stem": "-bendazole/-ectin",
+        "class": "anthelmintic",
+        "who_note": "anthelmintics",
+        "records": 147,
+        "distinct_words": 3,
+        "words": [
+          "albendazole",
+          "ivermectin",
+          "fenbendazole"
+        ]
+      },
+      {
+        "stem": "-vir",
+        "class": "antiviral",
+        "who_note": "antivirals",
+        "records": 14,
+        "distinct_words": 5,
+        "words": [
+          "aciclovir",
+          "oseltamivir",
+          "ritonavir",
+          "valaciclovir",
+          "dolutegravir"
+        ]
+      }
+    ],
+    "source": "WHO, \"The use of stems in the selection of International Nonproprietary Names (INN) for pharmaceutical substances\", 2018 — https://www.who.int/publications/i/item/WHO-EMP-RHT-TSN-2018.1",
+    "is_a_therapeutic_classification": false,
+    "over_representation_answerable": false,
+    "over_representation_blocker": "Over-representation needs a denominator — what share of the medicines CDSCO tested, or of the medicines on the Indian market, are anti-infectives. CDSCO publishes neither, and this dataset contains only the batches that failed. A share of flagged batches is not evidence that anti-infectives fail more often than anything else."
+  }
+}

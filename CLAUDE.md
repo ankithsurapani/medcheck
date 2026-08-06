@@ -57,9 +57,23 @@ Design system persisted at `design-system/medcheck/MASTER.md` (Swiss Modernism 2
 
 **Final applied state: manufacturers 1,871 → 1,856** (the 15 approvals), **collapse ratio 2.75 : 1**. `--apply` refuses to run with undecided review pairs unless given `--allow-pending`; that flag was used deliberately — the 190 still-pending pairs are treated as **not merged** (conservative, can only under-merge). 6,077 of 6,155 records carry a `manufacturer_id`; the 78 unlinked are the 7 placeholder strings (`manufacturer_unknown_placeholder`), which deliberately stay `NULL` — never resolved into a company entity.
 
-**Phase 4 (analysis) — now active.** See `implementation.md`.
+**Phase 4 (the analysis) — complete.** All seven questions computed, written up, dataset published under CC0.
+
+- `analysis/analyse.py` — one function per question (`q1_volume` … `q7_classes`), `--json` → `analysis/results.json`, `--sql q3` prints any question's query. FINDINGS.md cites the function beside every figure; no number is hand-typed
+- `analysis/drug_classes.py` — WHO INN stem matcher (2018 stem book, cited), `python analysis/drug_classes.py` prints every word each stem matched
+- `analysis/FINDINGS.md` — findings, methodology, 10-row limitations table, reproduction commands
+- `analysis/dataset/` — `medcheck_nsq_records.csv` (6,155 rows × 21 cols, 2.8 MB) + `README.md` + `LICENSE` (**CC0 1.0**)
+- `tests/test_drug_classes.py` — 41 checks, all passing
+
+**Headline numbers** (all shares are of *flagged batches*, never a failure rate — CDSCO doesn't sample randomly and publishes no denominator):
+- **6,155 batches, 90 months, 4.78× growth 2019 → 2025** (last complete year). Counts, not rates.
+- **64.1% failed assay or dissolution** (potency); only **12.0%** are contamination-type. The published quality problem is medicines that may not work, not medicines that are dangerous.
+- **13.5% of companies hold 54.5% of flags** — but **52.9% appear exactly once** and the median company has 1. Long tail with a heavy head, not a few bad actors.
+- **58.1% state coverage**; Himachal Pradesh is 35.2% of records *with* a state but only **20.4% of all** records.
+- **19.4% name an anti-infective** by INN stem. Over-representation is **not answerable** — no denominator.
 
 Open / needs a planner decision:
+- **`alert_section` is worse than previously recorded.** Not 27/184 in one month — **13 of 239 labs are filed under BOTH `central_lab` and `state_lab`, across 3,537 records (57.5%)**, with **≥459 records provably mislabelled**. RDTL Guwahati: 571 of 773 records filed as *state* lab despite being a central facility. Phase 4 reports the unreliability instead of the central-vs-state comparison, which is not currently supportable. Fixing it needs an external list of which labs are central — a possible future ticket.
 - **190 review-band pairs are still undecided**, by the user's choice — legitimate, not a bug. Re-running `review_cli.py` later and re-applying with `--allow-pending` will only ever tighten the collapse further, never wrongly merge. No urgency, but worth remembering it's there.
 - **Manufacturer slugs carry a positional id** (`-m<manufacturers.id>`), and `--apply` renumbers 1..N in canonical-name order. Finishing the 190 pending review pairs will therefore change most manufacturer URLs. Fine now (nothing is public); if the site ever ships, the slug needs a content-derived id first.
 - **Search index is 255 KB brotli** (down from 297 KB). Lazy-loaded on idle/focus so the page is usable first, but still the biggest cost on a slow connection. A later Phase 3b option: server-side search, or a two-tier prefix index.
@@ -91,7 +105,7 @@ medcheck/
 ├── src/{fetch.py, ingest/cdsco_json.py, normalize.py, parse/{base,router,layout_a,layout_b,ocr}.py (Phase 1b, deferred), resolve/{manufacturers.py, review_cli.py, spotcheck_cli.py, drugs.py (Phase 2b, deferred)}, validate.py, db.py}
 ├── api/          # FastAPI
 ├── web/          # Next.js
-├── analysis/     # notebooks + writeup
+├── analysis/{analyse.py, drug_classes.py, export_dataset.py, FINDINGS.md, results.json, dataset/{medcheck_nsq_records.csv, README.md, LICENSE}}
 ├── docs/{pdf_inventory.md, parser_accuracy.md, methodology.md, entity_resolution.md}
 └── README.md
 ```
@@ -151,6 +165,11 @@ medcheck/
 - 2026-08-06 — **The Phase 3a "this page matches one exact spelling" disclaimer is replaced, not deleted.** New copy says the merge happened *and* that it is unfinished: pairs nobody was confident about were left apart, so one company may still have several pages. Wording commits to the direction of error out loud — "we would rather show you two pages for one company than put one company's failures on another company's page."
 - 2026-08-06 — **Placeholder records get no manufacturer page at all**, where Phase 3a gave them one carrying a "this is not a company" notice. The notice moved onto the record page, replacing the link. A page would imply an entity; there isn't one.
 - 2026-08-06 — Manufacturer **search** matches the raw spelling **or** the canonical name (and MiniSearch indexes both), so a query typed as the merged company name reaches batches published under spellings that don't literally contain it. Displayed text stays the raw spelling — §1.1, the site mirrors what CDSCO published and never substitutes its own merged name for it.
+- 2026-08-06 — **Dataset licence is CC0 1.0**, not CC-BY or ODbL. Attribution and share-alike both add a step a journalist or researcher has to clear with a lawyer, and the underlying facts are CDSCO's public record anyway — MedCheck only owns the compilation. `LICENSE` carries two *requests* (cite CDSCO, carry README.md) explicitly marked as not being licence conditions, because CC0 cannot impose conditions and pretending otherwise would be misleading.
+- 2026-08-06 — **The 2.8 MB dataset CSV is committed**, breaking the repo's "derived data is gitignored" convention (`medcheck.db`, `records.json`, `candidates.json` are all ignored). A published dataset that only exists after you run the pipeline is not published. The README and LICENSE regenerate alongside it from `export_dataset.py`, so the warning always ships with the data.
+- 2026-08-06 — **The therapeutic-category question was answered narrowly and the over-representation question was refused.** WHO INN stems (2018 stem book, publicly citable) give a defensible name-level grouping — 19.4% of flagged batches name an anti-infective. Over-representation needs a denominator (what share of *tested* or *marketed* medicines are anti-infectives); CDSCO publishes neither, so `analysis/FINDINGS.md` §6 documents it as unanswerable rather than estimating. Refusing is the deliverable there, per §1.4.
+- 2026-08-06 — **No ATC classification.** The WHO ATC index is copyrighted and not redistributable, most flagged entries are branded or multi-ingredient products with no single ATC code, and a name match can't distinguish indication from chemistry. INN stems make a claim about the *name*, which is checkable; ATC would have made a clinical claim that isn't.
+- 2026-08-06 — Phase 4 reports **`alert_section`'s unreliability instead of the central-vs-state comparison** the ticket asked for. With 13 labs filed under both labels across 57.5% of records, any such comparison would mostly measure CDSCO's filing inconsistency. Documented as a finding, not skipped.
 
 ## Key learnings / gotchas
 
@@ -204,3 +223,10 @@ medcheck/
 - **`manufacturer_raw` and `canonical_name` are different lengths of thing**, and the manufacturer page needed re-laying-out because of it. Phase 3a's `<h1>` was a 328-char name-plus-address blob; it is now a ~25-char company name, with the address demoted to a subtitle line. Same data, completely different visual weight.
 - **Removing the placeholder manufacturer page moved a notice, it didn't delete one.** Phase 3a's "This is not a company" copy lived on `/manufacturer/under-investigation-<hash>/`. With no such page, the notice had to move to the 78 record pages themselves — otherwise the change would have silently dropped the one thing those records most needed to say.
 - **Grep-counting rendered HTML lies about repeated elements.** Next's output is one long line, so `grep -c '<li class=...>'` returned 1 for a list of 48. Counting needs a real parse (or `findall` over the extracted block) — the first spot-check looked like a bug in the alias list when the list was fine.
+- **The published failure profile is potency, not contamination** — 64.1% of flagged batches failed assay or dissolution, only 12.0% failed sterility/microbial/endotoxin/particulate. The intuition that a "flagged medicine" list is mostly contamination is wrong by a factor of five. Both figures are set unions, not sums: adding category counts double-counts the 1,355 records with more than one category.
+- **Manufacturer flags are far less concentrated than the top-20 table suggests.** 52.9% of resolved companies appear exactly once and the median company has a single flagged batch. The "few repeat offenders" framing survives only if you don't look past the head of the distribution.
+- **`alert_section` is unreliable at a scale only visible in aggregate.** Per-record it looks fine; grouping by `testing_lab` shows the same lab filed both ways — RDTL Guwahati 202 central / 571 state. The Phase 1a caveat (27 of 184 in one month) understated it by an order of magnitude, and nothing short of a full-corpus group-by would have shown that.
+- **2020 and 2021 are *below* 2019** (319 and 345 vs 403) — the only dip in an otherwise rising series, and it is the pandemic. A trend line drawn through it without comment would read as "Indian medicines improved in 2020".
+- **August 2025 is a local trough (97/month) between a 131/month year and a 173/month year.** That is the shape of a publishing handover, not of drug quality. Any before/after comparison spanning the portal migration is measuring CDSCO's workflow.
+- **A bare `azole` drug-name stem captures 367 proton-pump-inhibitor records** (pantoprazole, rabeprazole, omeprazole, esomeprazole) and would have turned them into "antibiotics" — the most dangerous available false positive, because the resulting finding looks entirely plausible. Bare `sulfa`/`sulpha` similarly captures every sulphate salt. Both are pinned open by negative cases in `tests/test_drug_classes.py`.
+- **WHO's `-mycin` stem marks the source organism (Streptomyces), not the activity**, so it also catches dactinomycin (a cytotoxic antineoplastic) and natamycin (an antifungal). Stems encode chemistry or origin; mapping them to therapeutic effect needs named exceptions and an admission that the mapping is imperfect.
