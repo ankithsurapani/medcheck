@@ -97,6 +97,44 @@ signal. Flagged for the planner.
 
 ---
 
+## Run 2 — 2026-08-06 — failure_category vocabulary extension
+
+Ingestion unchanged; `plan.md` §3.3 gained five buckets and `src/normalize.py`
+gained matching patterns. Same 6,155 records, same 90 months, re-normalized from
+the same cache.
+
+| | Run 1 | Run 2 |
+|---|---|---|
+| Records in `other` | 657 (10.7%) | **363 (5.9%)** |
+| `failure_category_unmapped` flags | 657 | **364** |
+
+New bucket population: `ph` 260, `uniformity_of_weight` 114,
+`bacterial_endotoxins` 106, `water_content` 94, `uniformity_of_dispersion` 46.
+
+**Pattern regression check** — `tests/test_categorise.py`, 38 real CDSCO strings
+asserted against expected buckets, including every boundary case the extension
+introduced. Run with `.venv/bin/python tests/test_categorise.py`.
+
+| Input | Expected | Result |
+|---|---|---|
+| `pH`, `?pH?`, `...requirement for PH` | `ph` | pass |
+| `Water`, `Water content`, `Test for Water` | `water_content` | pass |
+| `Water-soluble and Ether- soluble substances` | `other` | pass |
+| `Loss on Drying`, `Weight per ml` | `other` | pass |
+| `Bacterial endotoxins and Sterility` | `sterility` + `bacterial_endotoxins` | pass |
+| `pH and Assay of Heparin` | `ph` + `assay` | pass |
+| `Content`, `Assay of Vitamin D3` | `assay` | pass |
+| `Uniformity of filled weight` | `uniformity_of_weight` | pass |
+
+38/38 pass. `Water-soluble and Ether- soluble substances` was a real false
+positive found during the run — an unbounded `\bwater\b` had claimed it for
+`water_content` — and is now excluded by lookahead.
+
+No record count, month coverage, or cross-validation figure changed; this run
+only reclassifies free text that was previously sitting in `other`.
+
+---
+
 ## Not yet measured
 
 - **Pre-2019 records.** Not loaded — Phase 1b.

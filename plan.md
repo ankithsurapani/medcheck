@@ -106,10 +106,15 @@ Map messy free text into these buckets. Keep the raw text always.
 - `disintegration`
 - `sterility` — critical, injectables
 - `microbial_contamination`
+- `bacterial_endotoxins` — pyrogenic contamination, critical for injectables. Kept separate from `microbial_contamination`: endotoxins persist after the organisms that produced them are gone, so the two findings are not interchangeable
 - `particulate_matter`
 - `related_substances` — impurities
 - `identification` — wrong or absent active ingredient
 - `description_labelling`
+- `ph` — outside the specified pH range
+- `water_content` — moisture outside limits (Karl Fischer / water determination). Does **not** include Loss on Drying, which measures total volatiles and is a different test
+- `uniformity_of_weight` — individual units vary too much in weight
+- `uniformity_of_dispersion` — dispersible tablets fail to disperse uniformly
 - `spurious` — declared fake
 - `other` — always allowed, never force a match
 

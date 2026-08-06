@@ -43,3 +43,9 @@ Add `--dry-run` to `normalize.py` to see the record and flag counts without writ
 ```bash
 .venv/bin/python data/raw/crossvalidate.py    # JSON vs source PDFs for 2025-06
 ```
+
+## Tests
+
+```bash
+.venv/bin/python tests/test_categorise.py     # failure_category mapper (no pytest needed)
+```

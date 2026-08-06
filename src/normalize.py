@@ -37,17 +37,20 @@ MONTHS = {m: i for i, m in enumerate(
 # plan.md §3.3 controlled vocabulary. Patterns are matched against the lowercased
 # failure text; a reason can match several buckets, which is the point.
 #
-# Deliberately absent: bacterial endotoxins, pH, water content, uniformity of
-# weight, extractable volume. Those are real, common test failures with no bucket
-# in §3.3. Rather than force them into a neighbouring bucket, they fall through
-# to "other" and are flagged with the specific term so the vocabulary can be
-# extended by a later ticket on evidence rather than by guesswork.
+# Still deliberately absent: Loss on Drying, weight per ml, specific gravity,
+# extractable volume, appearance of solution. Those are real test failures with
+# no bucket in §3.3 — they fall through to "other" and are flagged with the
+# specific term, so the vocabulary gets extended on evidence rather than guesswork.
 FAILURE_PATTERNS: list[tuple[str, str]] = [
     ("dissolution",             r"\bdissolution\b|\bdissolutin\b"),
     ("disintegration",          r"\bdisintegrat"),
     ("sterility",               r"\bsterilit|\bsterile\b|\bnon-?sterile\b"),
     ("microbial_contamination", r"\bmicrobial\b|\bmicrobiolog|total aerobic|\byeast|\bmould|\bmold\b"
                                 r"|\be\.?\s?coli\b|staphylococ|pseudomonas|salmonella|\bfungal\b"),
+    # Separate from microbial_contamination on purpose (plan.md §3.3): endotoxins
+    # persist after the organisms that produced them are gone, so reporting one as
+    # the other would misstate what the regulator found.
+    ("bacterial_endotoxins",    r"\bendotoxin|\bbet\b|\bpyrogen"),
     ("particulate_matter",      r"particulate"),
     ("related_substances",      r"related substance|\bimpurit"),
     ("identification",          r"\bidentification\b|\bidentity\b"),
@@ -55,10 +58,19 @@ FAILURE_PATTERNS: list[tuple[str, str]] = [
     ("description_labelling",   r"\bdescriptions?\b|\bdescriptive\b|\bmisbrand|\bmisbrand[ae]d\b"
                                 r"|\blabell?ing\b|the label is|\blabel claim is\b"
                                 r"|not (?:mentioned|declared|printed|specified) on the label"),
+    ("ph",                      r"\bph\b|\bp\.h\.?\b"),
+    # "Loss on Drying" is excluded: it measures total volatiles, not water
+    # specifically, and §3.3 keeps them distinct. "Water-soluble substances" is
+    # excluded too — that is a solubility/impurity test, not a moisture limit.
+    ("water_content",           r"\bwater\b(?!\s*-?\s*soluble)|\bmoisture\b"),
+    ("uniformity_of_weight",    r"uniformity of (?:filled\s+)?weight"),
+    ("uniformity_of_dispersion", r"uniformity of dispersion"),
     # "labelled amount/claim" is an assay statement, not a labelling defect, so the
     # assay pattern owns those phrases and the labelling pattern above excludes them.
-    ("assay",                   r"\bassay\b|\bcontent\b|labell?ed (?:amount|claim)|\bpotency\b"
-                                r"|\bstrength\b"),
+    # The lookbehinds stop "water content" / "moisture content" being read as an
+    # assay of the active ingredient — those belong to water_content alone.
+    ("assay",                   r"\bassay\b|(?<!water )(?<!moisture )\bcontent\b"
+                                r"|labell?ed (?:amount|claim)|\bpotency\b|\bstrength\b"),
 ]
 
 # Used only for an exact, whole-word match against the tail of a manufacturer

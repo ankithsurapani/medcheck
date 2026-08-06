@@ -139,29 +139,47 @@ Mapping is keyword-based against plan.md §3.3's controlled vocabulary, and the
 verbatim text is always kept in `failure_reason_raw`.
 
 **Unmatched text becomes `["other"]` plus a `failure_category_unmapped` flag. It
-is never forced into the nearest bucket.** On the current corpus that is **657 of
-6,155 records (10.7%)**.
+is never forced into the nearest bucket.** On the current corpus that is **364 of
+6,155 records (5.9%)**.
 
-Those are not parser bugs. They are real, common test failures with **no bucket in
-§3.3**:
+### Vocabulary extension — 2026-08-06
 
-| Unmapped reason | Count (approx) |
+§3.3 originally had eleven buckets and left 657 records (10.7%) in `other`. Five
+buckets were added for test failures that occur constantly in CDSCO's data and
+had nowhere to go:
+
+| New bucket | Records |
 |---|---|
-| pH | 57 |
-| Uniformity of weight | 33 |
-| Water / Loss on drying | 30 |
-| Bacterial endotoxins / BET | 32 |
-| Uniformity of dispersion | 11 |
-| Weight per ml, specific gravity, length, appearance of solution | ~25 |
+| `ph` | 260 |
+| `uniformity_of_weight` | 114 |
+| `bacterial_endotoxins` | 106 |
+| `water_content` | 94 |
+| `uniformity_of_dispersion` | 46 |
 
-**Recommendation for the planner:** extend §3.3 with `ph`, `water_content`,
-`uniformity_of_weight`, `bacterial_endotoxins` and `uniformity_of_dispersion`.
-That is a spec change, so it was not made inside this ticket.
+`other` fell from 657 to 363 as a result — a 45% reduction, with 620 records
+gaining a real category.
 
-Deliberately *not* mapped: bacterial endotoxins was left out of
-`microbial_contamination` because endotoxins can be present without viable
-organisms — they are different findings, and merging them would misreport what
-the regulator said.
+Two boundaries were drawn deliberately rather than by convenience:
+
+- **`bacterial_endotoxins` is not folded into `microbial_contamination`.**
+  Endotoxins persist after the organisms that produced them are gone, so a batch
+  can fail endotoxin testing while passing sterility. Reporting one as the other
+  would misstate the regulator's finding.
+- **`water_content` excludes "Loss on Drying" and "Water-soluble substances".**
+  LOD measures total volatiles, not water specifically; water-soluble substances
+  is a solubility/impurity test. Both still fall to `other`.
+
+Additionally, the `assay` pattern uses negative lookbehinds so that
+*"water content"* and *"moisture content"* are read as `water_content` alone
+rather than also matching `assay`'s bare `content` keyword.
+
+### Still unmapped
+
+The remaining 364 are dominated by tests that genuinely have no bucket:
+Loss on Drying, weight per ml, specific gravity, length, appearance of solution,
+extractable volume, and a long tail of narrative one-offs. They stay in `other`
+with the specific term recorded in the flag, so a future extension can again be
+made on evidence.
 
 ---
 
