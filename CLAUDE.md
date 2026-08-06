@@ -29,9 +29,19 @@ Searchable public database of medicines CDSCO flagged as Not of Standard Quality
 
 **`failure_category` vocabulary extended twice (2026-08-06)** — §3.3 went from 11 to 21 buckets: `ph`, `water_content`, `uniformity_of_weight`, `bacterial_endotoxins`, `uniformity_of_dispersion`, then `loss_on_drying`, `density`, `extractable_volume`, `clarity_of_solution`, `dimensions`. `other` fell **657 → 363 → 269 records (10.7% → 4.4%)**. Guarded by `tests/test_categorise.py` (59 cases).
 
-**Phase 3a (search site) — now active.** Jumping ahead of Phase 2 (entity resolution) on user instruction — see `implementation.md`.
+**Phase 3a (search site) — complete.** Static Next.js 15 + Tailwind v4 app in `web/`, built against a static JSON export. **11,268 static pages** build clean (6,155 record pages + 5,107 manufacturer pages + 6 fixed). No API, no server, no tracking.
+
+- `scripts/export_static.py` → `web/public/data/search-index.json` (client, 1.6 MB raw / **297 KB brotli**) + `web/data/{records,manufacturers}.json` (build-time only, never shipped)
+- Search: MiniSearch fuzzy for drug names, exact for batch, substring for manufacturer
+- `web/lib/{copy,failure-categories}.ts` hold every user-facing string — all 21 categories have plain-language explanations
+- Verified: `label_claim_disputed` record renders the §5.5 notice with the firm's verbatim wording; missing-`state` record renders "Not published" + reason, never blank; non-disputed records do *not* show the dispute notice
+- `npm run test:search` — 17 assertions against the real index, all passing
+
+Design system persisted at `design-system/medcheck/MASTER.md` (Swiss Modernism 2.0 + "Patent / IP Database" palette, via the ui-ux-pro-max skill).
 
 Open / needs a planner decision:
+- **Search index is 297 KB brotli.** Lazy-loaded on idle/focus so the page is usable first, but it's the biggest cost on a slow connection. Phase 3b options: server-side search, or a two-tier prefix index.
+- **Manufacturer pages are per raw string, so there are 5,107 of them** — Zee Laboratories alone has 5 pages. Every page says so explicitly. Phase 2 collapses these.
 - **`alert_section` is unreliable.** The portal and the PDFs disagree on central-vs-state for 27 of 184 Jun-2025 records. Phase 4's "central vs state lab detection patterns" analysis needs this caveat.
 - **State coverage is 58%.** PIN-prefix → state mapping would lift it a lot; belongs with Phase 2's address parsing.
 - Phase 1b (pre-2019 PDF backfill) not started, per ticket boundary.
@@ -90,6 +100,16 @@ medcheck/
 - 2026-08-06 — Phase 3a serves the UI from a static JSON export of `medcheck.db`, not a live FastAPI. This is the same artifact already planned as the API fallback (§2) — building it now does double duty and avoids standing up Railway/Fly.io hosting before there's demand.
 - 2026-08-06 — Manufacturer search/pages in 3a match on exact `manufacturer_raw` text, not a resolved entity — near-duplicate company names will show as separate results until Phase 2 runs. The UI must say this, not hide it (§1.1 mirror-not-accuser: don't imply a merge that hasn't happened).
 
+- 2026-08-06 — **Phase 3a search library: MiniSearch**, not Fuse.js. Fuse scores every record on every keystroke over 6,155 records; MiniSearch builds an inverted index once and answers from it, and it ships a smaller bundle. Fuzzy 0.2 + prefix matching handles the typo tolerance the ticket asked for.
+- 2026-08-06 — **Batch search is exact and deliberately never fuzzy.** plan.md §5.4: batch numbers are not unique across manufacturers and are often short ("2451"). A fuzzy batch match would show a different company's batch as if it were the user's — the exact confusion the site exists to remove. Asserted in `web/tests/search.test.mjs` (`SIF2736B` must return 0).
+- 2026-08-06 — Client index is **columnar** (parallel arrays + deduped manufacturer table), not an array of objects: 377 KB → 277 KB gzipped. Manufacturer strings are *not* truncated — truncating saved only ~11 KB and would break substring matching on the full `manufacturer_raw` the ticket specifies.
+- 2026-08-06 — Index is **lazy-loaded** on browser idle or first input focus, not on mount, so a phone renders the page without paying for 297 KB first. Explicit "Preparing search…" state rather than a dead input.
+- 2026-08-06 — Manufacturer page slugs are `<60-char slug>-<8 hex of sha1 of the FULL raw string>`. The hash is not decoration: two manufacturers differing only past the 60-char cutoff must not collapse onto one page. Merging distinct companies is Phase 2's decision with a human in the loop, never a side effect of slug truncation (§5.3).
+- 2026-08-06 — **No red in the palette.** plan.md §1.1 — MedCheck mirrors a regulator, it does not accuse. Flags are amber; the only strong colour is reserved for `label_claim_disputed`, and the heaviest element on any result page is the §1.2 notice telling people *not* to stop their medicine.
+- 2026-08-06 — Deviated from the ui-ux-pro-max generic recommendation ("Exaggerated Minimalism", `font-weight: 900`, `clamp(3rem, 10vw, 12rem)`). Oversized statement typography reads as alarming on flagged-medicine data. Used the skill's "Patent / IP Database" analog instead — Swiss Modernism 2.0 + formal neutral palette + status chips — which is what a public-records lookup should feel like.
+- 2026-08-06 — Typography is Figtree + Noto Sans (the skill's healthcare pairing). Noto Sans also has full Devanagari coverage, so Phase 3b's Hindi translation won't force a type change.
+- 2026-08-06 — `output: 'export'` (fully static). No server means no server-side log of what anyone searched — §1.5 enforced by architecture, not by policy.
+
 ## Key learnings / gotchas
 
 <!-- Format: short bullet, concrete and specific. Newest last. -->
@@ -123,3 +143,10 @@ medcheck/
 - **`content` is ambiguous between buckets** — "water content" and "moisture content" are moisture limits, not an assay of the active ingredient. The `assay` pattern needs negative lookbehinds or it double-counts them.
 - **State names appear inside company names and road names.** "M/s. Karnataka Antibiotics… Palghar, Maharashtra", "G.I.D.C. Kerala (Bavla), Ahmedabad, Gujarat", "Delhi-Mathura Road, Faridabad, Haryana". Naive first-match state extraction would be wrong on all three — hence the ambiguity check.
 - **Himachal Pradesh dominates** (1,258 of 3,576 records with a derived state), then Uttarakhand (562) and Gujarat (365). Consistent with Baddi/Solan being India's pharma manufacturing hub — a sanity check that state derivation isn't badly skewed.
+- **Tailwind v4 silently breaks `@theme` nested inside `@media`.** A `@theme` block inside `@media (prefers-color-scheme: dark)` is hoisted and merged with the top-level one, so the dark values *replace* the light ones and the built CSS contains zero `prefers-color-scheme` rules — the site is permanently dark for everyone. Fix: keep one top-level `@theme` for light, override the plain custom properties in a normal `@media` + `:root` block. Caught by grepping the built CSS, not by looking at the page.
+- **Headless Chrome clamps its viewport to ~500px wide.** `--window-size=375,900` produces a 375px-wide *screenshot* of a 500px-wide *layout*, so a perfectly fine responsive page looks badly clipped. Verified with a control page reporting `window.innerWidth` (=500). To check a real 375px viewport, load the page in a 375px-wide `<iframe>` — iframes get their own layout viewport.
+- **5,107 distinct `manufacturer_raw` values for 6,155 records** — most manufacturers appear exactly once, and Zee Laboratories alone has 5 spellings differing only in punctuation and case. Until Phase 2 runs, every manufacturer page has to state that it matches one spelling, not one company.
+- **The mojibake `?` from the portal reaches the UI.** Addresses render as "Paonta Sahib?173025" and reasons as "It fails the test ?Dissolution?". It is not safely reversible (the original could be an en-dash, a quote, or a hyphen), so it is displayed as published rather than guessed at.
+- **`manufacturer_raw` is a full postal address, not a name**, so it is the single messiest field to display — up to 328 characters. Needs `overflow-wrap: anywhere` everywhere it appears or it forces horizontal scroll at 375px.
+- **51 records have "Under Investigation" as the manufacturer**, which would otherwise render as a company page with 51 flagged batches. It gets its own explicit "This is not a company" notice.
+- **The longest single failure reason is 994 characters** of narrative text — the design has to accommodate a paragraph, not a label, in the "CDSCO's exact wording" block.

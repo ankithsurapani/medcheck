@@ -44,8 +44,30 @@ Add `--dry-run` to `normalize.py` to see the record and flag counts without writ
 .venv/bin/python data/raw/crossvalidate.py    # JSON vs source PDFs for 2025-06
 ```
 
+## The search site
+
+```bash
+.venv/bin/python scripts/export_static.py   # medcheck.db -> static JSON for web/
+cd web && npm install && npm run dev        # http://localhost:3000
+npm run build                               # static export to web/out/
+```
+
+Re-run `export_static.py` after any change to `data/medcheck.db`. It writes two shapes:
+
+| Output | Shipped to the browser? | Purpose |
+|---|---|---|
+| `web/public/data/search-index.json` | yes (~297 KB brotli) | client-side search, lazy-loaded on first interaction |
+| `web/public/data/meta.json` | yes (~1.5 KB) | record counts and coverage |
+| `web/data/records.json` | **no** | read at build time to render static record pages |
+| `web/data/manufacturers.json` | **no** | read at build time to render manufacturer pages |
+
+Neither is committed — both regenerate from the database, which itself regenerates from `data/raw/portal/`.
+
+The build is a fully static export (`output: 'export'`): no server, so there is nowhere for a search to be logged. It produces ~11,000 pages, one per record and per manufacturer, which takes a couple of minutes.
+
 ## Tests
 
 ```bash
 .venv/bin/python tests/test_categorise.py     # failure_category mapper (no pytest needed)
+cd web && npm run test:search                 # search behaviour against the real index
 ```
