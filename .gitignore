@@ -1,0 +1,25 @@
+# Source PDFs — large, re-fetchable with `python src/fetch.py --all`
+data/pdfs/*.pdf
+
+# Phase 0 throwaway dumps
+data/raw/peek_*.txt
+data/raw/profile.log
+
+# Database
+data/medcheck.db
+*.db-journal
+
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Node (web/)
+node_modules/
+.next/
+.env
+.env.local
+
+# OS
+.DS_Store
