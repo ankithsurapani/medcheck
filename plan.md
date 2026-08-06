@@ -222,11 +222,11 @@ Keep them factual and non-alarming.
 
 - [ ] Total flagged batches across the full time range
 - [ ] Failures by category — which failure types dominate?
-- [ ] Repeat manufacturers — what share of flags come from what share of companies?
-- [ ] Therapeutic categories — are antibiotics over-represented? (Relevant to antimicrobial resistance.)
-- [ ] Central vs state lab detection patterns — do they find different things?
-- [ ] Trend over time — is the flag rate rising, falling, or is testing volume just changing?
-- [ ] Geographic clustering by manufacturing state
+- [ ] Repeat manufacturers — what share of flags come from what share of companies? (Caveat with Phase 2a's resolution status — partial, see §4 Phase 2a.)
+- [ ] Therapeutic categories — are antibiotics over-represented? (Relevant to antimicrobial resistance.) **Data gap:** the schema has no therapeutic classification field. Answer only if there's a defensible way to derive one without inventing data (§1.4) — otherwise document the gap instead of forcing an answer.
+- [ ] Central vs state lab detection patterns — do they find different things? (Caveat: Phase 1a found the portal and PDFs disagree on this for some records — §5, known hard problem.)
+- [ ] Trend over time — **count trend only, not a rate.** There is no testing-volume denominator anywhere in the data, so a rate claim here would itself violate §5.6's sampling-bias rule. Report flag counts by month/year, say so explicitly, and flag the Aug-2025 CDSCO portal migration as a possible reporting discontinuity, not necessarily a real trend.
+- [ ] Geographic clustering by manufacturing state (58% state coverage as of Phase 1a — caveat the other 42%)
 
 **Write it up properly**, with:
 - Methodology section — how PDFs were parsed, what the accuracy is
