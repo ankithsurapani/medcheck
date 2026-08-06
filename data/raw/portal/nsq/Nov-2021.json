@@ -1,0 +1,254 @@
+{
+ "url": "https://cdscoonline.gov.in/CDSCO/filteredNsqDrugTable?month=Nov-2021&source=All&tab=nsq",
+ "tab": "nsq",
+ "month": "Nov-2021",
+ "fetched_at": "2026-08-06T14:05:08+05:30",
+ "payload": {
+  "iTotalDisplayRecords": 22,
+  "iTotalRecords": 22,
+  "aaData": [
+   {
+    "str_product_name": "Vitamin B ? Complex Tablets NFI III",
+    "str_batch_no": "VPT801",
+    "dt_manufacturing_date": "Jun-2020",
+    "dt_expiry_date": "Nov-2021",
+    "str_manufactured_by": "M/s. Unicure India Ltd., C-21,22 & 23, Sector-3, Noida 201301, Dist. Gautam Budh Nagar, Uttar Pradesh",
+    "str_nsq_result": "Description, Assay of Vitamin B1 & Calcium Pantothenate",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "NOV-2021"
+   },
+   {
+    "str_product_name": "MULVIT (Multi Vitamin Tablets)",
+    "str_batch_no": "CU20003",
+    "dt_manufacturing_date": "Dec-2020",
+    "dt_expiry_date": "May-2022",
+    "str_manufactured_by": "M/s. Ortin Laboratories Ltd., 275 & 278 (part), I.D.A. Pashamilaram ? 502307, Telangana",
+    "str_nsq_result": "Description, Identification of Vitamin D3, Assay of Vitamin A Acetate & Vitamin D3",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "NOV-2021"
+   },
+   {
+    "str_product_name": "CLOPIDOGREL & ASPIRIN TABLETS IP (PILOGRELTM_ A75)",
+    "str_batch_no": "ALA21002",
+    "dt_manufacturing_date": "Feb-2021",
+    "dt_expiry_date": "Jan-2023",
+    "str_manufactured_by": "M/s. Psychotropics India Ltd., Plot No. 46 & 49, Sector-6A, IIE SIDCUL, Ranipur, Haridwar?249403, Uttarakhand",
+    "str_nsq_result": "Description",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDTL Hyderabad",
+    "dt_reporting_month_year": "NOV-2021"
+   },
+   {
+    "str_product_name": "LECETZY\n(Levocetirizine Tablets I.P.)",
+    "str_batch_no": "420-1286",
+    "dt_manufacturing_date": "Oct-2020",
+    "dt_expiry_date": "Sep-2022",
+    "str_manufactured_by": "M/s. Zee Laboratories, 47, Industrial Area, Paonta Sahib?173025, Himachal Pradesh",
+    "str_nsq_result": "Dissolution and Assay",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "NOV-2021"
+   },
+   {
+    "str_product_name": "ATENOLOL AND AMLODIPINE TABLETS",
+    "str_batch_no": "Z20-660",
+    "dt_manufacturing_date": "May-2020",
+    "dt_expiry_date": "Apr-2022",
+    "str_manufactured_by": "M/s. Zee Laboratories Ltd., Behind 47, Industrial Area, Paonta Sahib?173205, Himachal Pradesh",
+    "str_nsq_result": "Assay of Amlodipine",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "NOV-2021"
+   },
+   {
+    "str_product_name": "Telmopac ? AM (Telmisartan\n& Amlodipine Tablets)",
+    "str_batch_no": "APT/04282",
+    "dt_manufacturing_date": "Apr-2021",
+    "dt_expiry_date": "Mar-2023",
+    "str_manufactured_by": "M/s. Amkon Pharmaceuticals, Plot No. 242, Ind. Area, Phase IX, S.A.S. Nagar, Mohali ? 160062, Punjab",
+    "str_nsq_result": "Dissolutoin, Related Substances and Assay",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "NOV-2021"
+   },
+   {
+    "str_product_name": "Oflopac ? OZ Tablet (Ofloxacin & Ornidazole Tablets I.P.)",
+    "str_batch_no": "APT/03047",
+    "dt_manufacturing_date": "Apr-2020",
+    "dt_expiry_date": "Mar-2022",
+    "str_manufactured_by": "M/s. Amkon Pharmaceuticals, Plot No. 242, Phase?9, Industrial Area, Mohali?160062, Punjab",
+    "str_nsq_result": "Identification of Ofloxacin, and Dissolution  & Assay of Ofloxacin & Ornidazole",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "NOV-2021"
+   },
+   {
+    "str_product_name": "Ashialben 300\n(Albendazole 300 mg Bolus)",
+    "str_batch_no": "ALT-9096",
+    "dt_manufacturing_date": "Aug-2021",
+    "dt_expiry_date": "Jul-2025",
+    "str_manufactured_by": "M/s. Ashish Lifesciences Pvt. Ltd., J-137, MIDC, Tarapur, Maharashtra, India",
+    "str_nsq_result": "Moisture content",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDTL Mumbai",
+    "dt_reporting_month_year": "NOV-2021"
+   },
+   {
+    "str_product_name": "Ashialben 300\n(Albendazole 300 mg Bolus)",
+    "str_batch_no": "ALT-8958",
+    "dt_manufacturing_date": "May-2021",
+    "dt_expiry_date": "Apr-2025",
+    "str_manufactured_by": "M/s. Ashish Lifesciences Pvt. Ltd., J-137, MIDC, Tarapur, Maharashtra, India",
+    "str_nsq_result": "Moisture content",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDTL Mumbai",
+    "dt_reporting_month_year": "NOV-2021"
+   },
+   {
+    "str_product_name": "Ashialben 600 (Albendazole Bolus 600 mg)",
+    "str_batch_no": "ALT-8703",
+    "dt_manufacturing_date": "Dec-2020",
+    "dt_expiry_date": "Nov-2024",
+    "str_manufactured_by": "M/s. Ashish Lifesciences Pvt. Ltd., J-137, MIDC, Tarapur, Maharashtra, India",
+    "str_nsq_result": "Moisture content",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDTL Mumbai",
+    "dt_reporting_month_year": "NOV-2021"
+   },
+   {
+    "str_product_name": "Ashialben 300\n(Albendazole 300 mg Bolus)",
+    "str_batch_no": "ALT-9090",
+    "dt_manufacturing_date": "Aug-2021",
+    "dt_expiry_date": "Jul-2025",
+    "str_manufactured_by": "M/s. Ashish Lifesciences Pvt. Ltd., J-137, MIDC, Tarapur, Maharashtra, India",
+    "str_nsq_result": "Moisture content",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDTL Mumbai",
+    "dt_reporting_month_year": "NOV-2021"
+   },
+   {
+    "str_product_name": "Phytomenadione Injectoin IP 10mg/ml (Vitamin K1 Injection) 1 ml",
+    "str_batch_no": "P0383",
+    "dt_manufacturing_date": "Jul-2020",
+    "dt_expiry_date": "Jun-2022",
+    "str_manufactured_by": "M/s. Bharat Parenterals Ltd., Vill. Haripura, Ta. Savli, Dist. Vadodara-391520, Gujarat",
+    "str_nsq_result": "Description, Particulate Matter and Sterility",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "NOV-2021"
+   },
+   {
+    "str_product_name": "Atorvastatin Calcium Tablets IP 10 mg",
+    "str_batch_no": "CATO009001",
+    "dt_manufacturing_date": "Sep-2020",
+    "dt_expiry_date": "Aug-2022",
+    "str_manufactured_by": "M/s. Celebrity Biopharma Ltd., Vill. Panga, Jharmajri, Hill Top Estate, Barotiwala, Distt. Solan, H.P.?174103",
+    "str_nsq_result": "Related Substances",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "NOV-2021"
+   },
+   {
+    "str_product_name": "NORFLOXACIN TABLETS IP\n400 mg",
+    "str_batch_no": "RJNL-17",
+    "dt_manufacturing_date": "Jun-2021",
+    "dt_expiry_date": "May-2024",
+    "str_manufactured_by": "M/s. Combitic Global Caplet Pvt. Ltd., M-15, D-2, D-3, Ind. Area, Sonepat?131001, Haryana",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "NOV-2021"
+   },
+   {
+    "str_product_name": "Ofloxacin and Metronidazole Suspension (OFLOX OZ SUSPENSION )",
+    "str_batch_no": "CLOF1014",
+    "dt_manufacturing_date": "Sep-2021",
+    "dt_expiry_date": "Aug-2023",
+    "str_manufactured_by": "M/s. Crest Lifesciences Pvt. Ltd., Plot No. 127-128, EPIP Phase-1, Jharmajri, Tehsil Baddi, Dist. Solan, Himachal Pradesh?174103",
+    "str_nsq_result": "Assay of Ofloxacin &\nMetronidazole",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "NOV-2021"
+   },
+   {
+    "str_product_name": "Dixogyl-400 (Metronidazole Tablets IP 400 mg)",
+    "str_batch_no": "DLY2101",
+    "dt_manufacturing_date": "Jan-2021",
+    "dt_expiry_date": "Dec-2022",
+    "str_manufactured_by": "M/s. Danish Health Care (P) Ltd., 76/27-28, Industrial Estate, Maxi Road, Ujjain?456010, Madhya Pradesh",
+    "str_nsq_result": "Uniformity of weight",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDTL Mumbai",
+    "dt_reporting_month_year": "NOV-2021"
+   },
+   {
+    "str_product_name": "Mineral Supplements Tablets",
+    "str_batch_no": "ET-210101",
+    "dt_manufacturing_date": "Jan-2021",
+    "dt_expiry_date": "Dec-2022",
+    "str_manufactured_by": "M/s. Ethicare Laboratories, 15, Industrial Estate, Digiana, Jammu-180010",
+    "str_nsq_result": "Description",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "NOV-2021"
+   },
+   {
+    "str_product_name": "Glimepiride Tablets I.P. 1mg",
+    "str_batch_no": "GP108",
+    "dt_manufacturing_date": "Apr-2021",
+    "dt_expiry_date": "Mar-2023",
+    "str_manufactured_by": "M/s. Eurokem Laboratories Pvt. Ltd., C-25, Sidco Pharmaceuticals Complex, Alathur, Thiruporur-603110, Tamil Nadu",
+    "str_nsq_result": "Dissolution & Related Substances",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "NOV-2021"
+   },
+   {
+    "str_product_name": "Amlodipine Besylate and Atenolol Tablets (CARDINOL PLUS TABLETS)",
+    "str_batch_no": "1154-12",
+    "dt_manufacturing_date": "May-2021",
+    "dt_expiry_date": "Apr-2024",
+    "str_manufactured_by": "M/s. Hab Pharmaceuticals & Research Ltd., 10 Pharmacity, SIDCUL, Selaqui, Dehradun?248011, Uttarakhand",
+    "str_nsq_result": "Assay of Amlodipine",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "NOV-2021"
+   },
+   {
+    "str_product_name": "Lignocaine and Adrenaline Injection IP (A- CAINE ADR INJECTION)",
+    "str_batch_no": "HILR2006F",
+    "dt_manufacturing_date": "Nov-2020",
+    "dt_expiry_date": "Oct-2022",
+    "str_manufactured_by": "M/s. Health Biotech Ltd., Village Sandoli, Nalagarh Road, Baddi, Distt. Solan, Himachal Pradesh?173205",
+    "str_nsq_result": "Assay of Adrenaline",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "NOV-2021"
+   },
+   {
+    "str_product_name": "Diclofenac Sodium Prolonged Release Tablets IP (FENCO-100 SR)",
+    "str_batch_no": "IDM20020",
+    "dt_manufacturing_date": "May-2020",
+    "dt_expiry_date": "Apr-2023",
+    "str_manufactured_by": "M/s. IBN Herbals (A unit of Curetech Formulations Pvt. Ltd.), Khasra No. 63, Vill.?Juddi Kalan, Baddi, Dist.?Solan, Himachal Pradesh",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "NOV-2021"
+   },
+   {
+    "str_product_name": "RL (Compound Sodium Lactate injection I.P. 500 ml) (Ringe Lactate Solution for Injection I.P.)",
+    "str_batch_no": "103111",
+    "dt_manufacturing_date": "Mar-2021",
+    "dt_expiry_date": "Feb-2023",
+    "str_manufactured_by": "M/s. Ives Drugs (India) Pvt. Ltd., Works: Ghatabillod, Distt. Dhar, Madhya Pradesh",
+    "str_nsq_result": "Sterility",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "NOV-2021"
+   }
+  ]
+ }
+}

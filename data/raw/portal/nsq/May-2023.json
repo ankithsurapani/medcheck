@@ -1,0 +1,320 @@
+{
+ "url": "https://cdscoonline.gov.in/CDSCO/filteredNsqDrugTable?month=May-2023&source=All&tab=nsq",
+ "tab": "nsq",
+ "month": "May-2023",
+ "fetched_at": "2026-08-06T14:05:18+05:30",
+ "payload": {
+  "iTotalDisplayRecords": 28,
+  "iTotalRecords": 28,
+  "aaData": [
+   {
+    "str_product_name": "Bupivacaine Heavy (Bupivacaine Hydrochloride in Dextrose Injection USP 4 ml),",
+    "str_batch_no": "I?5319",
+    "dt_manufacturing_date": "Oct-2022",
+    "dt_expiry_date": "Sep-2024",
+    "str_manufactured_by": "M/s. Jackson Laboratories Pvt. Ltd., 22?24 Majitha Road, Bye Pass, Amritsar ? 143001, Punjab, India",
+    "str_nsq_result": "Description Foreign and Particulate matter",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "MAY-2023"
+   },
+   {
+    "str_product_name": "Doxycycline Hydrochloride Capsules IP 100 mg",
+    "str_batch_no": "115387",
+    "dt_manufacturing_date": "Oct-2022",
+    "dt_expiry_date": "Sep-2024",
+    "str_manufactured_by": "M/s. Modern Laboratories, 45?47 Sector D?2, Sanwer Road, Indore, Madhya Pradesh ? 452015, India",
+    "str_nsq_result": "Assay",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "MAY-2023"
+   },
+   {
+    "str_product_name": "Gentamicin (Gentamicin Injection I.P.) ? 2 ml",
+    "str_batch_no": "GM22242",
+    "dt_manufacturing_date": "Jul-2022",
+    "dt_expiry_date": "Jun-2024",
+    "str_manufactured_by": "M/s. Nandani Medical Laboratories Pvt. Ltd., 221/5 Bicholi Hapsi, Kanadia Road, Indore",
+    "str_nsq_result": "Description and\nParticulate Matter",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "MAY-2023"
+   },
+   {
+    "str_product_name": "Heparin Injection\nI.P. 25000 IU / 5ml",
+    "str_batch_no": "22HE17",
+    "dt_manufacturing_date": "Oct-2022",
+    "dt_expiry_date": "Sep-2024",
+    "str_manufactured_by": "M/s. Sai Parenterals Ltd., D1 & D4, Survey No. 280, Phase?V, IDA, Jeedimetla, Hyderabad ? 500055, Telangana",
+    "str_nsq_result": "Assay",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "MAY-2023"
+   },
+   {
+    "str_product_name": "Teripil -80 (Telmisartan Tablets I.P.)",
+    "str_batch_no": "STN?221142",
+    "dt_manufacturing_date": "Nov-2022",
+    "dt_expiry_date": "Oct-2024",
+    "str_manufactured_by": "M/s. Terrace Pharmaceuticals (P) Ltd., 3?B(a) Phase?III Industrial Area, Sansarpur Terrace, Distt. Kangra, Himachal Pradesh ? 176501",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "MAY-2023"
+   },
+   {
+    "str_product_name": "Ofloxacin & Ornidazole Tablets IP",
+    "str_batch_no": "2618015",
+    "dt_manufacturing_date": "Jan-2023",
+    "dt_expiry_date": "Dec-2024",
+    "str_manufactured_by": "M/s. Bengal Chemical and Pharmaceuticals Ltd., 164 Maniktala Main Road, Kolkata ? 700054",
+    "str_nsq_result": "Description",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "MAY-2023"
+   },
+   {
+    "str_product_name": "Paracetamol Tablets I.P.\n500 mg",
+    "str_batch_no": "DGT22?270",
+    "dt_manufacturing_date": "Jun-2022",
+    "dt_expiry_date": "May-2024",
+    "str_manufactured_by": "M/s. Ornate Labs Pvt. Ltd., Bela Industrial Area, Muzaffarpur ? 842005, Bihar",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "MAY-2023"
+   },
+   {
+    "str_product_name": "ENALAPRIL MALEATE TABLETS IP\n2.5mg (LAPRIL)",
+    "str_batch_no": "GB21113",
+    "dt_manufacturing_date": "Dec-2021",
+    "dt_expiry_date": "Nov-2023",
+    "str_manufactured_by": "M/s. ORTIN LABORATORIES LTD., 275 & 278 (Pt) I.D.A. Pashamylaram ? 502307, Sangareddy, Telangana, India",
+    "str_nsq_result": "Assay",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDTL Hyderabad",
+    "dt_reporting_month_year": "MAY-2023"
+   },
+   {
+    "str_product_name": "Rabeprazole Sodium and Domperidone Tablets",
+    "str_batch_no": "RT220468",
+    "dt_manufacturing_date": "May-2022",
+    "dt_expiry_date": "Apr-2024",
+    "str_manufactured_by": "M/s. Ridley Life Science Pvt. Ltd., D?1651 DSIDC Industrial Complex, Narela, Delhi ? 110040",
+    "str_nsq_result": "Description",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "MAY-2023"
+   },
+   {
+    "str_product_name": "Paracetamol, Phenylphrine Hydrochloride, Diphenhydramine Hydrochloride and Caffeine Tablets (Syscold Tablets)",
+    "str_batch_no": "SPT?192",
+    "dt_manufacturing_date": "Jan-2022",
+    "dt_expiry_date": "Dec-2023",
+    "str_manufactured_by": "M/s. Signoret Pharmaceuticals Pvt. Ltd., Plot No?556 Industrial Area Phase IX, SAS Nagar ? 160059, Punjab",
+    "str_nsq_result": "Disintegration test and Assay of Phenylephrine Hydrochloride",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "MAY-2023"
+   },
+   {
+    "str_product_name": "Spasom-40 Capsules (Omeprazole Capsules I. P.",
+    "str_batch_no": "SRGC?22051",
+    "dt_manufacturing_date": "Feb-2022",
+    "dt_expiry_date": "Jan-2024",
+    "str_manufactured_by": "M/s. SPAS Remedies, Village Bersan, P.O. Lodhi Majra, Teh. Baddi, Distt. Solan, Himachal Pradesh ? 173205",
+    "str_nsq_result": "Assay of Omeprazole",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "MAY-2023"
+   },
+   {
+    "str_product_name": "Probiotic Capsules",
+    "str_batch_no": "PTC/C/003",
+    "dt_manufacturing_date": "Jan-2022",
+    "dt_expiry_date": "Dec-2023",
+    "str_manufactured_by": "M/s. Unique Biotech Ltd., Plot No. 2 Phase?II MN Park, Kolthur Village, Shameerpet Mandal, Medchal?Malkajgiri Dist., Hyderabad ? 500101, Telangana, India",
+    "str_nsq_result": "Identification and Assay of Streptococcus faecalis",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "MAY-2023"
+   },
+   {
+    "str_product_name": "MONAMOX-CL\n625 (Amoxycillin& Potassium Clavulanate Tablets I.P.)",
+    "str_batch_no": "422?1199",
+    "dt_manufacturing_date": "Aug-2022",
+    "dt_expiry_date": "Jan-2024",
+    "str_manufactured_by": "M/s. Zee Laboratories Ltd., Behind 47 Industrial Area, Paonta Sahib ? 173025, Himachal Pradesh",
+    "str_nsq_result": "Assay and\nDissolution",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDTL Mumbai",
+    "dt_reporting_month_year": "MAY-2023"
+   },
+   {
+    "str_product_name": "Cefixime and Ofloxacin Tablets (ZENCEF-O TABLETS)",
+    "str_batch_no": "ZFO?2101",
+    "dt_manufacturing_date": "Mar-2022",
+    "dt_expiry_date": "Feb-2024",
+    "str_manufactured_by": "M/s. Cyper Pharma, K.No. 825?827 Gullarwala, Sai Road, Baddi, Tehsil Nalagarh, Distt. Solan, Himachal Pradesh ? 173205, India",
+    "str_nsq_result": "Assay of Cefixime Trihydrate Calculated as anhydrous Cefixime",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "MAY-2023"
+   },
+   {
+    "str_product_name": "Misoprostol Tablets I.P. 200 mcg",
+    "str_batch_no": "22HT303",
+    "dt_manufacturing_date": "Nov-2022",
+    "dt_expiry_date": "Oct-2024",
+    "str_manufactured_by": "M/s. Accent Pharmaceuticals & Diagnostics, Village Bhalon (Seri), Forest Road, Solan ? 173212, Himachal Pradesh",
+    "str_nsq_result": "Assay",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "MAY-2023"
+   },
+   {
+    "str_product_name": "CLAVAM 625\n(Amoxicillin And Potassium Clavulanate Tablets I.P.)",
+    "str_batch_no": "22442372",
+    "dt_manufacturing_date": "Aug-2022",
+    "dt_expiry_date": "Jan-2024",
+    "str_manufactured_by": "M/s. Alkem Health Science (Unit of Alkem Laboratories Ltd.), Unit?2, Samardung Karek Block, P.O. Namthang, South Sikkim ? 737137",
+    "str_nsq_result": "Identification of Clavulanic Acid and  Assay of Amoxicillin and Clavulanic Acid",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "MAY-2023"
+   },
+   {
+    "str_product_name": "AMOXICILLIN CAPSULES IP (ALMOX-500)",
+    "str_batch_no": "22281692",
+    "dt_manufacturing_date": "Jul-2022",
+    "dt_expiry_date": "Jun-2024",
+    "str_manufactured_by": "M/s. Alkem Laboratories Ltd., Village Thana, Tehsil Baddi, Dist. Solan, Himachal Pradesh ? 173205",
+    "str_nsq_result": "Assay",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDTL Hyderabad",
+    "dt_reporting_month_year": "MAY-2023"
+   },
+   {
+    "str_product_name": "Heparin Sodium Injection IP 5000 IU / 5ml",
+    "str_batch_no": "AIG?9415",
+    "dt_manufacturing_date": "May-2022",
+    "dt_expiry_date": "Apr-2024",
+    "str_manufactured_by": "M/s. Alliaance Biotech, 440/3 Village Katha, Baddi, Distt. Solan, Himachal Pradesh ? 173205",
+    "str_nsq_result": "Description, Identification & Particulate Matter, Assay (Sample is\ndeemed to be Spurious)",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "MAY-2023"
+   },
+   {
+    "str_product_name": "Doxycycline Capsules IP",
+    "str_batch_no": "AC22031",
+    "dt_manufacturing_date": "Oct-2022",
+    "dt_expiry_date": "Sep-2024",
+    "str_manufactured_by": "M/s. Alves Healthcare Pvt. Ltd., Nangal Uperla, Swarghat Road, Tehsil Nalagarh, Distt. Solan ? 174101, Himachal Pradesh, India",
+    "str_nsq_result": "Assay",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "MAY-2023"
+   },
+   {
+    "str_product_name": "Glimepiride Tablets IP 2 mg",
+    "str_batch_no": "T192009",
+    "dt_manufacturing_date": "May-2022",
+    "dt_expiry_date": "Apr-2024",
+    "str_manufactured_by": "M/s. ANG Lifesciences India Ltd., Village Malkumajra, Nalagarh Road, Baddi, Distt. Solan ? 173205, Himachal Pradesh",
+    "str_nsq_result": "Dissolution of Glimepiride",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "MAY-2023"
+   },
+   {
+    "str_product_name": "Tinvista 300 (Tinidazole Tablets I.P. 300 mg)",
+    "str_batch_no": "JKGJ20001",
+    "dt_manufacturing_date": "Mar-2020",
+    "dt_expiry_date": "Feb-2024",
+    "str_manufactured_by": "M/s. Cadila Pharmaceuticals Ltd., Industrial Growth Centre, SIDCO, Samba ? 184121, Jammu & Kashmir, India",
+    "str_nsq_result": "Disintegration",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "MAY-2023"
+   },
+   {
+    "str_product_name": "Nimesulide and Paracetamol Tablets (Nimfed Tablets)",
+    "str_batch_no": "CMT22?666",
+    "dt_manufacturing_date": "Sep-2022",
+    "dt_expiry_date": "Aug-2024",
+    "str_manufactured_by": "M/s. Cortex Medical Inc., Plot No. 3F Apparel Park, Katha Industrial Area, Baddi ? 173205, Distt. Solan, Himachal Pradesh",
+    "str_nsq_result": "Disintegration test",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "MAY-2023"
+   },
+   {
+    "str_product_name": "Paracetamol Oral Suspension IP (Paragus 250\nSuspension)",
+    "str_batch_no": "CL30476",
+    "dt_manufacturing_date": "Feb-2023",
+    "dt_expiry_date": "Jan-2025",
+    "str_manufactured_by": "M/s. Cosmas Pharmacls Ltd., Buranwala Road, Village Kotla, P.O. Barotiwala, Solan (H.P.) ? 1741003",
+    "str_nsq_result": "Assay of Paracetamol",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "MAY-2023"
+   },
+   {
+    "str_product_name": "Loperamide Hydrochloride Tablets IP (DYRIA STOP TABLETS)",
+    "str_batch_no": "DY?2214",
+    "dt_manufacturing_date": "Feb-2023",
+    "dt_expiry_date": "Jan-2025",
+    "str_manufactured_by": "M/s. Cyper Pharma, K.No. 825?827 Village Gullarwala, Sai Road, Baddi, Tehsil Nalagarh, Distt. Solan, Himachal Pradesh, India",
+    "str_nsq_result": "Dissolution of Loperamide Hydrochloride",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "MAY-2023"
+   },
+   {
+    "str_product_name": "Chlorpheniramine Maleate Tablets IP 4 mg",
+    "str_batch_no": "CPM2205",
+    "dt_manufacturing_date": "Dec-2022",
+    "dt_expiry_date": "Nov-2024",
+    "str_manufactured_by": "M/s. Cyper Pharma, K.No. 825?827 Village Gullarwala, Sai Road, Baddi, Tehsil Nalagarh, Distt. Solan (H.P.) ? 173205, India",
+    "str_nsq_result": "Assay of Chlorpheniramine Maleate",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "MAY-2023"
+   },
+   {
+    "str_product_name": "Doxycycline and Lactic Acid Bacillus Capsules (DOXYFIL-LB CAPSULES)",
+    "str_batch_no": "DXF?2103",
+    "dt_manufacturing_date": "Mar-2022",
+    "dt_expiry_date": "Feb-2024",
+    "str_manufactured_by": "M/s. Cyper Pharma, K.No. 825?827 Gullarwala, Sai Road, Baddi, Tehsil Nalagarh, Distt. Solan, Himachal Pradesh ? 173205, India",
+    "str_nsq_result": "Identification and Assay of Lactic Acid Bacillus.",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "MAY-2023"
+   },
+   {
+    "str_product_name": "Paracetamol Tablets IP 500 mg (Galpara)",
+    "str_batch_no": "GPT22002",
+    "dt_manufacturing_date": "Jul-2022",
+    "dt_expiry_date": "Jun-2025",
+    "str_manufactured_by": "M/s. Galpha Laboratories Ltd., Village Thana, Baddi, Himachal Pradesh ? 173205",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "MAY-2023"
+   },
+   {
+    "str_product_name": "LECET M Tablets (Levocetirizine Dihydrochloride, Montelukast Sodium Tablets I.P.)",
+    "str_batch_no": "INT?3551B",
+    "dt_manufacturing_date": "May-2022",
+    "dt_expiry_date": "Apr-2024",
+    "str_manufactured_by": "M/s. Instant Remedies Pvt. Ltd., V.P.O. Gholu Majra, Dappar ? 140507, Punjab",
+    "str_nsq_result": "Dissolution of Montelukast Levocetirizine Dihydrochloride",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "MAY-2023"
+   }
+  ]
+ }
+}

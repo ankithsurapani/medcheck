@@ -1,0 +1,177 @@
+{
+ "url": "https://cdscoonline.gov.in/CDSCO/filteredNsqDrugTable?month=Feb-2021&source=All&tab=nsq",
+ "tab": "nsq",
+ "month": "Feb-2021",
+ "fetched_at": "2026-08-06T14:05:03+05:30",
+ "payload": {
+  "iTotalDisplayRecords": 15,
+  "iTotalRecords": 15,
+  "aaData": [
+   {
+    "str_product_name": "Cardirid (Carvedilol Tablets IP)",
+    "str_batch_no": "CAR-2001",
+    "dt_manufacturing_date": "Jun-2020",
+    "dt_expiry_date": "May-2022",
+    "str_manufactured_by": "M/s. Ridley Life Science Pvt. Ltd., D-1651, DSIDC Indl. Complex, Narela, Delhi-110040",
+    "str_nsq_result": "Uniformity of Content and Related Substances",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "FEB-2021"
+   },
+   {
+    "str_product_name": "Prolonged-release Diltiazem Tablets BP 90mg",
+    "str_batch_no": "GM20128",
+    "dt_manufacturing_date": "Nov-2020",
+    "dt_expiry_date": "Oct-2022",
+    "str_manufactured_by": "M/s. Skymap Pharmaceuticals Pvt. Ltd., B-3, Dev Bhoomi Industrial Estate, Puhana Iqbalpur Road, Roorkee-247667, Uttarakhand",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDTL Mumbai",
+    "dt_reporting_month_year": "FEB-2021"
+   },
+   {
+    "str_product_name": "Amoxycillin & Potassium Clavulanate Tablets I.P.\n625 mg",
+    "str_batch_no": "17",
+    "dt_manufacturing_date": "Nov-2019",
+    "dt_expiry_date": "Apr-2021",
+    "str_manufactured_by": "M/s. Stride Organics Private Ltd., Sy. No. 265/P, Kondapur (Vill.), Ghatkesar, Medchal District (T.S.), Telangana",
+    "str_nsq_result": "Dissolution & Assay of Potassium Clavulanate",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "FEB-2021"
+   },
+   {
+    "str_product_name": "Rosuvas 20 (Rosuvastatin Tablets I.P.)",
+    "str_batch_no": "EMX0174",
+    "dt_manufacturing_date": "Jan-2020",
+    "dt_expiry_date": "Jun-2022",
+    "str_manufactured_by": "M/s. Sun Pharma Laboratories Ltd., Plot No. 107-108, Namli Block, P.O. Ranipool, East-Sikkim-737135",
+    "str_nsq_result": "Uniformity of Weight, Dissolution and Assay",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "FEB-2021"
+   },
+   {
+    "str_product_name": "Theopenam -1g (Meropenem Injection I.P.)",
+    "str_batch_no": "MERM19015A",
+    "dt_manufacturing_date": "Jul-2019",
+    "dt_expiry_date": "Jun-2021",
+    "str_manufactured_by": "M/s. Theon Pharmaceuticals Ltd., Village Saini Majra, Teh. Nalagarh, Distt. Solan, Himachal Pradesh ? 174101",
+    "str_nsq_result": "Particulate Matter and Clarity of Solution",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "FEB-2021"
+   },
+   {
+    "str_product_name": "Amoxycillin Capsules IP 500 mg",
+    "str_batch_no": "YAT91054",
+    "dt_manufacturing_date": "Nov-2019",
+    "dt_expiry_date": "Oct-2021",
+    "str_manufactured_by": "M/s. Yeluri Formulations Pvt. Ltd., Sy. No. 296/7/6, I.D.A. Bollaram, Sangareddy District-502325, Telangana",
+    "str_nsq_result": "Assay",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDTL Mumbai",
+    "dt_reporting_month_year": "FEB-2021"
+   },
+   {
+    "str_product_name": "RAMZE-5 (Ramipril Tablets I.P.)",
+    "str_batch_no": "420-578",
+    "dt_manufacturing_date": "May-2020",
+    "dt_expiry_date": "Apr-2022",
+    "str_manufactured_by": "M/s. Zee Laboratories, 47, Industrial Area, Paonta Sahib ? 173025, Himachal Pradesh",
+    "str_nsq_result": "Assay",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "FEB-2021"
+   },
+   {
+    "str_product_name": "DELSONE-M 16 Tablets (Methylprednisolone Tablets I.P. 16 mg)",
+    "str_batch_no": "ART29005",
+    "dt_manufacturing_date": "Nov-2019",
+    "dt_expiry_date": "Oct-2021",
+    "str_manufactured_by": "M/s. Psychotropics India Ltd., Plot No. 46 & 49, Sector-6A, IIE, SIDCUL, Ranipur, Haridwar-249403, Uttarakhand",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "FEB-2021"
+   },
+   {
+    "str_product_name": "Doxylamine Succinate & Pyridoxine Hydrochloride Tablets",
+    "str_batch_no": "PF8B101",
+    "dt_manufacturing_date": "Aug-2019",
+    "dt_expiry_date": "Jul-2021",
+    "str_manufactured_by": "M/s. Pure & Cure Healthcare Pvt. Ltd., Plot No. 26A, 27-30, Sector-8A, I.I.E., SIDCUL, Haridwar-249403, Uttarakhand",
+    "str_nsq_result": "Disintegration Time",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDTL Mumbai",
+    "dt_reporting_month_year": "FEB-2021"
+   },
+   {
+    "str_product_name": "Revol-CC (Calcium Carbonate Magnesium Oxide, Manganese Sulphate, Zinc & Vitamin D3 Tablets)",
+    "str_batch_no": "MT191325",
+    "dt_manufacturing_date": "Aug-2019",
+    "dt_expiry_date": "Jul-2021",
+    "str_manufactured_by": "M/s. Mascot Health Series Pvt. Ltd., Plot No. 79, 80, Sec-6A, IIE, Sidcul, Haridwar-249403, Uttarakhand",
+    "str_nsq_result": "Assay of Vitamin D3",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDTL Mumbai",
+    "dt_reporting_month_year": "FEB-2021"
+   },
+   {
+    "str_product_name": "Aspirin Gastro-Resistant Tablets IP 150 mg",
+    "str_batch_no": "APET716",
+    "dt_manufacturing_date": "Jun-2019",
+    "dt_expiry_date": "May-2021",
+    "str_manufactured_by": "M/s. Unicure India Ltd., C-21, 22 & 23, Sector-3, Noida-201301, Distt: Gautam Budh Nagar (U.P.)",
+    "str_nsq_result": "Test for Salicylic Acid",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDTL Mumbai",
+    "dt_reporting_month_year": "FEB-2021"
+   },
+   {
+    "str_product_name": "Clopitab (Clopidogrel tablets IP)",
+    "str_batch_no": "J901640",
+    "dt_manufacturing_date": "Oct-2019",
+    "dt_expiry_date": "Mar-2021",
+    "str_manufactured_by": "Not applicable",
+    "str_nsq_result": "Not applicable",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "Not applicable",
+    "dt_reporting_month_year": "FEB-2021"
+   },
+   {
+    "str_product_name": "ULGEL ? A 200 ml\n(Magaldrate, Simethicone & Oxetacaine Oral Suspension)",
+    "str_batch_no": "1808001807",
+    "dt_manufacturing_date": "Dec-2018",
+    "dt_expiry_date": "Nov-2021",
+    "str_manufactured_by": "M/s. Alembic Pharmaceuticals Ltd., Samardung Basti, Karek Block, Namthang Ilaka, South Sikkim ? 737126",
+    "str_nsq_result": "Assay of Oxetacaine",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "FEB-2021"
+   },
+   {
+    "str_product_name": "Cefpodoxime Proxetil Dispersible Tablets (BROTOCEF-100 DT TABLETS)",
+    "str_batch_no": "CT1904E",
+    "dt_manufacturing_date": "Dec-2019",
+    "dt_expiry_date": "Nov-2021",
+    "str_manufactured_by": "M/s. J.M. Laboratories, Village-Bhanat, P.O.-Ghatti, Subathu Road, Solan, Himachal Pradesh-173211",
+    "str_nsq_result": "Assay",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "FEB-2021"
+   },
+   {
+    "str_product_name": "Ciprofloxacin Hydrochloride Tablets IP 500 mg",
+    "str_batch_no": "703419",
+    "dt_manufacturing_date": "Sep-2019",
+    "dt_expiry_date": "Aug-2022",
+    "str_manufactured_by": "M/s. Karnataka Antibiotics & Pharmaceuticals Limited, Plot No. 14, II Phase, Peenya, Bengaluru-560058",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "FEB-2021"
+   }
+  ]
+ }
+}

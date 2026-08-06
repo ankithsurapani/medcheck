@@ -1,0 +1,320 @@
+{
+ "url": "https://cdscoonline.gov.in/CDSCO/filteredNsqDrugTable?month=Jun-2022&source=All&tab=nsq",
+ "tab": "nsq",
+ "month": "Jun-2022",
+ "fetched_at": "2026-08-06T14:05:12+05:30",
+ "payload": {
+  "iTotalDisplayRecords": 28,
+  "iTotalRecords": 28,
+  "aaData": [
+   {
+    "str_product_name": "Omeprazole Capsules IP 20mg.",
+    "str_batch_no": "CAG-21014",
+    "dt_manufacturing_date": "Jan-2021",
+    "dt_expiry_date": "Dec-2022",
+    "str_manufactured_by": "M/s. Pro Laboratories Private Limited, 140-141, Makkanpur, Bhagwanpur, Roorkee, Dist. Haridwar, Uttarakhand - 247661",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "JUN-2022"
+   },
+   {
+    "str_product_name": "Rabeprazole Gastro Resistant Tablets IP 20mg.",
+    "str_batch_no": "RRZT-021",
+    "dt_manufacturing_date": "Dec-2021",
+    "dt_expiry_date": "Nov-2023",
+    "str_manufactured_by": "M/s. Revat Laboratories Pvt. Ltd., 12-321 Opp. I.D.A., Kurnool Rd, Pernamitta Ongole - 523002, Andhra Pradesh",
+    "str_nsq_result": "Description and Assay",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "JUN-2022"
+   },
+   {
+    "str_product_name": "Rabeprazole Gastro Resistant Tablets I.P.\n20mg.",
+    "str_batch_no": "RRZT-022",
+    "dt_manufacturing_date": "Dec-2021",
+    "dt_expiry_date": "Nov-2023",
+    "str_manufactured_by": "M/s. Revat Laboratories Pvt. Ltd., 12-321 Opp. I.D.A., Kurnool Road, Pernamitta Ongole - 523002, Andhra Pradesh",
+    "str_nsq_result": "Assay and Description",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "JUN-2022"
+   },
+   {
+    "str_product_name": "Rabeprazole Gastro Resistant Tablets I.P.\n20mg.",
+    "str_batch_no": "RRZT-019",
+    "dt_manufacturing_date": "Dec-2021",
+    "dt_expiry_date": "Nov-2023",
+    "str_manufactured_by": "M/s. Revat Laboratories Pvt. Ltd., 12-321 Opp. I.D.A., Kurnool Road, Pernamitta Ongole - 523002, Andhra Pradesh",
+    "str_nsq_result": "Description and Assay",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "JUN-2022"
+   },
+   {
+    "str_product_name": "ISOXSUPRINE HYDROCHLORIDE TABLETS IP",
+    "str_batch_no": "ST21-0729",
+    "dt_manufacturing_date": "Apr-2021",
+    "dt_expiry_date": "Mar-2023",
+    "str_manufactured_by": "M/s. Salud Care (I) Pvt. Ltd., 435, Kashanpur, Roorkee - 247661, Uttarakhand",
+    "str_nsq_result": "Assay",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "JUN-2022"
+   },
+   {
+    "str_product_name": "PARACETAMOL PAEDIATRIC ORAL SUSPENSION IP",
+    "str_batch_no": "PFSC081019",
+    "dt_manufacturing_date": "Oct-2019",
+    "dt_expiry_date": "Sep-2022",
+    "str_manufactured_by": "M/s. Strassenburg Pharmaceuticals Ltd., 247, D.H. Road, 24Pgs (S), Pin - 700104, West Bengal",
+    "str_nsq_result": "Assay",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "JUN-2022"
+   },
+   {
+    "str_product_name": "Cyfolac* Forte (Prebiotic & Probiotics Capsules)",
+    "str_batch_no": "23CCF050",
+    "dt_manufacturing_date": "Jun-2021",
+    "dt_expiry_date": "Nov-2022",
+    "str_manufactured_by": "M/s. Swiss Garnier Biotech Pvt. Ltd., 21, Industrial Area, Mehatpur, Dist. UNA, Himachal Pradesh ? 174315",
+    "str_nsq_result": "Assay",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "JUN-2022"
+   },
+   {
+    "str_product_name": "PRE AND PROBIOTIC CAPSULES",
+    "str_batch_no": "SL1CB016",
+    "dt_manufacturing_date": "Nov-2021",
+    "dt_expiry_date": "Apr-2023",
+    "str_manufactured_by": "M/s. Unicure India Ltd., Plot No. 46(B)/49/B, Village Raipur, Bhagwanpur, Roorkee, Distt. Haridwar, Uttarakhand",
+    "str_nsq_result": "Identification and Assay of Streptococcus faecalis",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "JUN-2022"
+   },
+   {
+    "str_product_name": "Omeprazole Capsules IP 20mg",
+    "str_batch_no": "C-0038",
+    "dt_manufacturing_date": "Nov-2020",
+    "dt_expiry_date": "Oct-2022",
+    "str_manufactured_by": "M/s. Zenith Drugs Pvt. Ltd. (A WHO-GMP Certified Company), 72/5, Muradpura (Orangpura) Dhar Road, Near Kalaria, Indore - 453001, Madhya Pradesh, India",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "JUN-2022"
+   },
+   {
+    "str_product_name": "Ciprofloxacin Tablets IP",
+    "str_batch_no": "OCFG5-20-229",
+    "dt_manufacturing_date": "Nov-2020",
+    "dt_expiry_date": "Oct-2022",
+    "str_manufactured_by": "M/s. Ornate Labs Pvt. Ltd., Bela Industrial Estate, Muzaffarpur - 842005, Bihar",
+    "str_nsq_result": "Assay & Dissolution",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "JUN-2022"
+   },
+   {
+    "str_product_name": "Salmeterol 25 mcg and Fluticasone Propionate 250 mcg Inhalation IP",
+    "str_batch_no": "NSB2201C",
+    "dt_manufacturing_date": "Jan-2022",
+    "dt_expiry_date": "Dec-2024",
+    "str_manufactured_by": "M/s. Oxalis Labs, Village- Theda, P.O. Lodhimajra, Tehsil- Baddi, Dist. Solan, Himachal Pradesh - 174101",
+    "str_nsq_result": "Assay",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "JUN-2022"
+   },
+   {
+    "str_product_name": "Salmeterol 25 mcg and Fluticasone Propionate 250 mcg Inhalation IP",
+    "str_batch_no": "NSB2201B",
+    "dt_manufacturing_date": "Jan-2022",
+    "dt_expiry_date": "Dec-2024",
+    "str_manufactured_by": "M/s. Oxalis Labs, Village- Theda, P.O. Lodhimajra, Tehsil- Baddi, Dist. Solan, Himachal Pradesh - 174101",
+    "str_nsq_result": "Assay",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "JUN-2022"
+   },
+   {
+    "str_product_name": "Rabeprazole Gastro Resistant Tablets\nI.P. 20mg.",
+    "str_batch_no": "RRZT-009",
+    "dt_manufacturing_date": "May-2021",
+    "dt_expiry_date": "Apr-2023",
+    "str_manufactured_by": "M/s. Revat Laboratories Pvt. Ltd., 12-321 Opp. I.D.A., Kurnool Road, Pernamitta Ongole - 523002, Andhra Pradesh",
+    "str_nsq_result": "Description",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "JUN-2022"
+   },
+   {
+    "str_product_name": "Rabeprazole Gastro Resistant Tablets IP 20mg.",
+    "str_batch_no": "RRZT-011",
+    "dt_manufacturing_date": "Nov-2021",
+    "dt_expiry_date": "Oct-2023",
+    "str_manufactured_by": "M/s. Revat Laboratories Pvt. Ltd., 12-321 Opp. I.D.A. Kurnool Road, Pernarmitta Ongole - 523002, Andhra Pradesh",
+    "str_nsq_result": "Description & Assay",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "JUN-2022"
+   },
+   {
+    "str_product_name": "Atorvastatin Calcium Tablets I.P.\n40 mg",
+    "str_batch_no": "17T20T07",
+    "dt_manufacturing_date": "Oct-2020",
+    "dt_expiry_date": "Sep-2023",
+    "str_manufactured_by": "M/s. Shine Pharmaceuticals Limited, Plot No. 132, Karjan-Vemardi Road, Juni Jitherdi, Ta. Karjan 391240, Distt. Vadodara (Gujarat)",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "JUN-2022"
+   },
+   {
+    "str_product_name": "Salbutamol Tablets IP 4mg.",
+    "str_batch_no": "21112002",
+    "dt_manufacturing_date": "May-2021",
+    "dt_expiry_date": "Apr-2024",
+    "str_manufactured_by": "M/s. Mercury Laboratories Limited, Unit No.2, Halol-Baroda Road, Village: Jarod, Tal: Waghodia, Dist. Vadodara - 391510, Gujarat",
+    "str_nsq_result": "Disintegration",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "JUN-2022"
+   },
+   {
+    "str_product_name": "MONTELUKAST TABLETS IP 10 MG",
+    "str_batch_no": "C-1D0342",
+    "dt_manufacturing_date": "Apr-2021",
+    "dt_expiry_date": "Mar-2023",
+    "str_manufactured_by": "M/s. Morepen Laboratories Ltd., Unit-V, Plot No. 12-C, Sector-2, Parwanoo, Distt. Solan, Himachal Pradesh - 173220",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "JUN-2022"
+   },
+   {
+    "str_product_name": "IRON AND FOLIC\nACID TABLETS IP",
+    "str_batch_no": "IQTY-312",
+    "dt_manufacturing_date": "Nov-2021",
+    "dt_expiry_date": "Oct-2023",
+    "str_manufactured_by": "M/s. Nestor Pharmaceuticals Limited, 11, Western Extension Area, Faridabad - 121001, Haryana, INDIA",
+    "str_nsq_result": "Uniformity of\nContent (Folic",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "JUN-2022"
+   },
+   {
+    "str_product_name": "Covishield Vaccine",
+    "str_batch_no": "4121MC040",
+    "dt_manufacturing_date": "Jul-2021",
+    "dt_expiry_date": "Apr-2022",
+    "str_manufactured_by": "Spurious",
+    "str_nsq_result": "Spurious",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kasauli",
+    "dt_reporting_month_year": "JUN-2022"
+   },
+   {
+    "str_product_name": "Covishield Vaccine",
+    "str_batch_no": "4121MC019",
+    "dt_manufacturing_date": "Jun-2021",
+    "dt_expiry_date": "Mar-2022",
+    "str_manufactured_by": "Spurious",
+    "str_nsq_result": "Spurious",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kasauli",
+    "dt_reporting_month_year": "JUN-2022"
+   },
+   {
+    "str_product_name": "Paracetamol Tablets IP 650mg.",
+    "str_batch_no": "PRT-938",
+    "dt_manufacturing_date": "May-2021",
+    "dt_expiry_date": "Apr-2023",
+    "str_manufactured_by": "M/s. Alco Formulation (India), 14/5, Mathura Road, Faridabad - 121003, Haryana",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "JUN-2022"
+   },
+   {
+    "str_product_name": "Rolled Bandage",
+    "str_batch_no": "A104",
+    "dt_manufacturing_date": "Oct-2019",
+    "dt_expiry_date": "Sep-2022",
+    "str_manufactured_by": "M/s. Anamika Udyog, 127, Multan Nagar, Meerut, Uttar Pradesh (India)",
+    "str_nsq_result": "Test for Threads per dm, Length, Width, Weight in gm/m2, Foreign Matter\n& Fluorescence",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "JUN-2022"
+   },
+   {
+    "str_product_name": "Amoxycillin and Potassium Clavulanate Tablets IP",
+    "str_batch_no": "20A1430",
+    "dt_manufacturing_date": "Oct-2020",
+    "dt_expiry_date": "Sep-2022",
+    "str_manufactured_by": "M/s. Astam Healthcare Pvt. Ltd., Vill. Theda, Teh. Nalagarh, Distt. Solan - 174101, Himachal Pradesh",
+    "str_nsq_result": "Assay of Clavulanic Acid",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "JUN-2022"
+   },
+   {
+    "str_product_name": "Povidone-Iodine Ointment USP 5% w/w (ELDINE OINTMENT)",
+    "str_batch_no": "EE11004",
+    "dt_manufacturing_date": "Oct-2021",
+    "dt_expiry_date": "Nov-2023",
+    "str_manufactured_by": "M/s. Elder Labs Limited, Vill: Kishanpura, Baddi-Nalagarh Road, Baddi, Distt.-Solan, Himachal Pradesh - 174101",
+    "str_nsq_result": "Assay",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "JUN-2022"
+   },
+   {
+    "str_product_name": "Atorvastatin Tablets IP 20 mg.",
+    "str_batch_no": "AVAT21001",
+    "dt_manufacturing_date": "Feb-2021",
+    "dt_expiry_date": "Jan-2023",
+    "str_manufactured_by": "M/s. Galpha Laboratories Ltd., Village: Thane, Baddi, Himachal Pradesh - 173205",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "JUN-2022"
+   },
+   {
+    "str_product_name": "Albendazole Tablets I.P.",
+    "str_batch_no": "ALO-522",
+    "dt_manufacturing_date": "Jan-2021",
+    "dt_expiry_date": "Dec-2022",
+    "str_manufactured_by": "M/s. Healer's Lab Unit II, Plot No. 33, H.P.S.I.D.C. Extn., Baddi, Dist. Solan, Himachal Pradesh",
+    "str_nsq_result": "Description",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "JUN-2022"
+   },
+   {
+    "str_product_name": "Ibuprofen Tablets\nI.P. 400 mg",
+    "str_batch_no": "IDTY-04",
+    "dt_manufacturing_date": "Jun-2021",
+    "dt_expiry_date": "May-2023",
+    "str_manufactured_by": "M/s. Hindustan Antibiotics Ltd., At-11, W.E.A. Faridabad - 121001, Haryana",
+    "str_nsq_result": "Assay &\nDissolution",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "JUN-2022"
+   },
+   {
+    "str_product_name": "Omeprazole Capsules IP 20mg",
+    "str_batch_no": "5704620",
+    "dt_manufacturing_date": "Sep-2020",
+    "dt_expiry_date": "Aug-2022",
+    "str_manufactured_by": "M/s. Karnataka Antibiotics & Pharmaceuticals Limited (A Govt. of India Enterprise), Plot No. 14, II Phase, Peenya, Bengaluru - 560058",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "JUN-2022"
+   }
+  ]
+ }
+}

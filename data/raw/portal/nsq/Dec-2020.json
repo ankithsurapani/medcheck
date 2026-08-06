@@ -1,0 +1,177 @@
+{
+ "url": "https://cdscoonline.gov.in/CDSCO/filteredNsqDrugTable?month=Dec-2020&source=All&tab=nsq",
+ "tab": "nsq",
+ "month": "Dec-2020",
+ "fetched_at": "2026-08-06T14:05:02+05:30",
+ "payload": {
+  "iTotalDisplayRecords": 15,
+  "iTotalRecords": 15,
+  "aaData": [
+   {
+    "str_product_name": "HAND SANITIZER",
+    "str_batch_no": "V20EL011",
+    "dt_manufacturing_date": "Apr-2020",
+    "dt_expiry_date": "Aug-2022",
+    "str_manufactured_by": "M/s. VOWCARE PRODUCTS, Plot No. 77, Zone 4th, I.G.C., SIDCO Lassipora, Dist. Pulwama, Jammu & Kashmir?192305",
+    "str_nsq_result": "Assay of Isopropyl Alcohol, Hydrogen Peroxide, Glycerol",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "DEC-2020"
+   },
+   {
+    "str_product_name": "Fluconazole Tablets IP 150 mg FLUCOL TABLETS",
+    "str_batch_no": "BY20002",
+    "dt_manufacturing_date": "Mar-2020",
+    "dt_expiry_date": "Feb-2022",
+    "str_manufactured_by": "M/s. Ortin Laboratories Ltd., 275 & 278 (Part), I.D.A. Pashamilaram?502307, Sanga Reddy Dist., Telangana",
+    "str_nsq_result": "Dissolution and Related Substances",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "DEC-2020"
+   },
+   {
+    "str_product_name": "DOCTORS CARE HAND SANITIZER",
+    "str_batch_no": "114D",
+    "dt_manufacturing_date": "Apr-2020",
+    "dt_expiry_date": "Mar-2022",
+    "str_manufactured_by": "M/s. Beaubelle?Z Health & Beauty Care, NH8, Gujarat",
+    "str_nsq_result": "Assay of Ethyl Alcohol",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "DEC-2020"
+   },
+   {
+    "str_product_name": "Tramadol Prolonged Release Tablets (CORLIVIDOL-100 SR TABLETS)",
+    "str_batch_no": "PTN-026",
+    "dt_manufacturing_date": "May-2020",
+    "dt_expiry_date": "Apr-2022",
+    "str_manufactured_by": "M/s. Perk Pharmaceuticals Ltd., A-7, Industrial Estate, Partapur?250103, Uttar Pradesh",
+    "str_nsq_result": "Dissolution and Related Substances",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "DEC-2020"
+   },
+   {
+    "str_product_name": "Alora 0.25 (Alprazolam Tablets I.P. 0.25 mg)",
+    "str_batch_no": "03A19T02",
+    "dt_manufacturing_date": "Nov-2019",
+    "dt_expiry_date": "Oct-2022",
+    "str_manufactured_by": "M/s. Shine Pharmaceuticals Limited, Plot No. 132, Karjan?Vemardi Road, Juni Jitherdi, Te. Karjan?391240, Dist. Vadodara, Gujarat",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "DEC-2020"
+   },
+   {
+    "str_product_name": "Levofloxacin Tablets IP L-FOX-500 TABLETS",
+    "str_batch_no": "SPTG-20639",
+    "dt_manufacturing_date": "Oct-2020",
+    "dt_expiry_date": "Sep-2022",
+    "str_manufactured_by": "M/s. Spectrum Formulation Pvt. Ltd., Khasra No. 12, Makhanpur, Bhagwanpur, Roorkee, Haridwar, Uttarakhand",
+    "str_nsq_result": "Uniformity of weight",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "DEC-2020"
+   },
+   {
+    "str_product_name": "SULFASALAZINE TABLETS B.P. 500 mg",
+    "str_batch_no": "SSZT718",
+    "dt_manufacturing_date": "Mar-2020",
+    "dt_expiry_date": "Feb-2022",
+    "str_manufactured_by": "M/s. Unicure India Ltd., C-21, 22 & 23, Sector-3, Noida?201301, Distt. Gautam Budh Nagar, Uttar Pradesh",
+    "str_nsq_result": "Related Substances",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "DEC-2020"
+   },
+   {
+    "str_product_name": "Paracetamol Tablets IP 650 mg PARLIN- 650 TABLETS",
+    "str_batch_no": "CD505598",
+    "dt_manufacturing_date": "Dec-2019",
+    "dt_expiry_date": "Nov-2021",
+    "str_manufactured_by": "M/s. Unisafe Bioscience Pvt. Ltd., 3726/27, GIDC, Vatwa, Ahmedabad, Gujarat",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "DEC-2020"
+   },
+   {
+    "str_product_name": "Calamine, Diphenhydramine Hydrochloride and Camphor Lotion NANZIDRYL LOTION",
+    "str_batch_no": "NYL-002",
+    "dt_manufacturing_date": "Sep-2019",
+    "dt_expiry_date": "Aug-2022",
+    "str_manufactured_by": "M/s. Nanz Med Science Pharma Pvt. Ltd. (A unit of Med Science Canada Inc.), Rampur Ghat, Paonta Sahib?173205, District?Sirmour, Himachal Pradesh",
+    "str_nsq_result": "Assay of Camphor",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "DEC-2020"
+   },
+   {
+    "str_product_name": "Cystecot-600\n(N - Acetylcysteine Tablets)",
+    "str_batch_no": "MT191313",
+    "dt_manufacturing_date": "Aug-2019",
+    "dt_expiry_date": "Jul-2021",
+    "str_manufactured_by": "M/s. Mascot Health Series Pvt. Ltd., Plot No. 79, 80, Sector 6A, IIE, SIDCUL, Haridwar?249403, Uttarakhand",
+    "str_nsq_result": "Assay",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDTL Mumbai",
+    "dt_reporting_month_year": "DEC-2020"
+   },
+   {
+    "str_product_name": "PANTOPRAZOLE SODIUM TABLETS IP 40 MG",
+    "str_batch_no": "ATPP-2011",
+    "dt_manufacturing_date": "Jun-2020",
+    "dt_expiry_date": "May-2022",
+    "str_manufactured_by": "M/s. ANG Lifesciences India Ltd., Kh No. 139/2, Village Jodhapur, Barotiwala, Dist. Solan (H.P.)",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "DEC-2020"
+   },
+   {
+    "str_product_name": "Rosuvastain Tablets IP 20 mg",
+    "str_batch_no": "T9329",
+    "dt_manufacturing_date": "Sep-2019",
+    "dt_expiry_date": "Aug-2022",
+    "str_manufactured_by": "M/s. Bharat Parenterals Ltd., Vill. Haripura, Tal. Savli, Vadodara?391520, Gujarat",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDTL Mumbai",
+    "dt_reporting_month_year": "DEC-2020"
+   },
+   {
+    "str_product_name": "Pantoprazole Tablets IP 40 mg",
+    "str_batch_no": "T9356",
+    "dt_manufacturing_date": "Sep-2019",
+    "dt_expiry_date": "Aug-2022",
+    "str_manufactured_by": "M/s. Bharat Parenterals Ltd., Vill. Haripura, Tal. Savli, Vadodara?391520, Gujarat",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDTL Mumbai",
+    "dt_reporting_month_year": "DEC-2020"
+   },
+   {
+    "str_product_name": "Telmicept ? 40 (Telmisartan Tablets I.P. 40 mg)",
+    "str_batch_no": "C21T479003",
+    "dt_manufacturing_date": "Sep-2019",
+    "dt_expiry_date": "Aug-2022",
+    "str_manufactured_by": "M/s. Concept Pharmaceuticals Ltd., A-28/3, MIDC, Chikalthana, Aurangabad?431006, Maharashtra",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "DEC-2020"
+   },
+   {
+    "str_product_name": "CIPROFLOXACIN TABLETS I.P. 500\nmg",
+    "str_batch_no": "DT-281",
+    "dt_manufacturing_date": "Jan-2020",
+    "dt_expiry_date": "Jun-2021",
+    "str_manufactured_by": "M/s. Daffodills Pharmaceuticals Ltd., Jawahar Nagar, Rohta Road, Meerut?250001, Uttar Pradesh",
+    "str_nsq_result": "Uniformity of weight",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "DEC-2020"
+   }
+  ]
+ }
+}

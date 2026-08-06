@@ -1,0 +1,210 @@
+{
+ "url": "https://cdscoonline.gov.in/CDSCO/filteredNsqDrugTable?month=Mar-2021&source=All&tab=nsq",
+ "tab": "nsq",
+ "month": "Mar-2021",
+ "fetched_at": "2026-08-06T14:05:03+05:30",
+ "payload": {
+  "iTotalDisplayRecords": 18,
+  "iTotalRecords": 18,
+  "aaData": [
+   {
+    "str_product_name": "Ondansetron Tablets IP 4 mg",
+    "str_batch_no": "T13104",
+    "dt_manufacturing_date": "Feb-2020",
+    "dt_expiry_date": "Jan-2022",
+    "str_manufactured_by": "M/s. Quest Laboratories Pvt. Ltd., Plot No. 45, Sector-III, Pithampur, Dist. Dhar ? 454775, Madhya Pradesh",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDTL Mumbai",
+    "dt_reporting_month_year": "MAR-2021"
+   },
+   {
+    "str_product_name": "VEL-SAFE HAND SANITIZER",
+    "str_batch_no": "VH-1505",
+    "dt_manufacturing_date": "Nov-2020",
+    "dt_expiry_date": "Nov-2022",
+    "str_manufactured_by": "M/s. VELNEX MEDICARE, 344-A, HSIIDC, SAHA (AMBALA), Haryana ? 133104",
+    "str_nsq_result": "Assay of Glycerol and Hydrogen Peroxide",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "MAR-2021"
+   },
+   {
+    "str_product_name": "MOXEL-250\n(Amoxycillin Capsules IP 250 mg)",
+    "str_batch_no": "VBC-19I25",
+    "dt_manufacturing_date": "Sep-2019",
+    "dt_expiry_date": "Aug-2022",
+    "str_manufactured_by": "M/s. Venus Biosciences P. Ltd., 116, Export Promotion Industrial Park, Phase I, Jharmajri, Baddi, Dist. Solan ? 173205, Himachal Pradesh",
+    "str_nsq_result": "Assay",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDTL Mumbai",
+    "dt_reporting_month_year": "MAR-2021"
+   },
+   {
+    "str_product_name": "XTER-250 (Terbinafine Tablets I.P. 250 mg)",
+    "str_batch_no": "419-1282",
+    "dt_manufacturing_date": "Sep-2019",
+    "dt_expiry_date": "Aug-2021",
+    "str_manufactured_by": "M/s. Zee Laboratories, 47, Industrial Area, Paonta Sahib ? 173025, Himachal Pradesh",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "MAR-2021"
+   },
+   {
+    "str_product_name": "Combine Dressing Pad\nB.P. 1980",
+    "str_batch_no": "CD012",
+    "dt_manufacturing_date": "Nov-2018",
+    "dt_expiry_date": "Oct-2021",
+    "str_manufactured_by": "M/s. Modern Healthcare, 782/15, North Street, Chatrapatti ? 626102 (Via) Rajapalayam, Tamil Nadu",
+    "str_nsq_result": "Sterility",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "MAR-2021"
+   },
+   {
+    "str_product_name": "ERA CARE HAND SANITIZER",
+    "str_batch_no": "LTLAP035",
+    "dt_manufacturing_date": "Jun-2020",
+    "dt_expiry_date": "May-2023",
+    "str_manufactured_by": "M/s. Nature?s Boon Ayurvedic Pharmacy, Punjab ? 141012",
+    "str_nsq_result": "Identification",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "MAR-2021"
+   },
+   {
+    "str_product_name": "LEEGRA 120 Tablets (Fexofenndine Hydrochloride Tablets IP 120 mg)",
+    "str_batch_no": "OLST?035",
+    "dt_manufacturing_date": "Feb-2020",
+    "dt_expiry_date": "Jan-2022",
+    "str_manufactured_by": "M/s. Oaksun Life Sciences, Plot No. 36, 37, 38, 46 & 47, Chengicherla (V), Medipally (M), Medchal-Malkajgiri (Dist.), Telangana ? 500092",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDTL Chennai",
+    "dt_reporting_month_year": "MAR-2021"
+   },
+   {
+    "str_product_name": "Ofloxacin and Ornidazole Suspension (INTRACARE R.T.U. SUSPENSION)",
+    "str_batch_no": "UIU-22120",
+    "dt_manufacturing_date": "Jun-2020",
+    "dt_expiry_date": "May-2022",
+    "str_manufactured_by": "M/s. Senate Laboratories, 252, Sisona, Bhagwanpur, Roorkee ? 247661, Uttarakhand",
+    "str_nsq_result": "Assay of Ofloxacin and Ornidazole",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "MAR-2021"
+   },
+   {
+    "str_product_name": "CORSAVE-10\n(Rosuvastatin Calcium Tablets I.P. 10 mg)",
+    "str_batch_no": "19SGLT011",
+    "dt_manufacturing_date": "Dec-2019",
+    "dt_expiry_date": "Nov-2021",
+    "str_manufactured_by": "M/s. Synokem Pharmaceuticals Limited, Plot No. 35?36, Sector-6A, I.I.E. (SIDCUL), Ranipur (BHEL), Haridwar ? 249403, Uttarakhand",
+    "str_nsq_result": "Related Substances",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "MAR-2021"
+   },
+   {
+    "str_product_name": "Surgicom (Cotton Gauze Pad) (Absorbent Gauze ? BP Type 13 Absorbent Cotton Wool IP)",
+    "str_batch_no": "1023/20",
+    "dt_manufacturing_date": "Mar-2020",
+    "dt_expiry_date": "Feb-2023",
+    "str_manufactured_by": "M/s. The Ramaraju Surgical Cotton Mills Ltd., 2/318?2/321, Sankarankovil Road, Perumalpatti ? 627753, Tamil Nadu",
+    "str_nsq_result": "Threads per stated length for the absorbent cotton gauze (13 light)",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "MAR-2021"
+   },
+   {
+    "str_product_name": "i Clean Hand Sanitizer (Isopropyl Alcohol)",
+    "str_batch_no": "IC328",
+    "dt_manufacturing_date": "Mar-2020",
+    "dt_expiry_date": "Mar-2022",
+    "str_manufactured_by": "Not Mentioned",
+    "str_nsq_result": "Assay of Isopropyl Alcohol",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDTL Chennai",
+    "dt_reporting_month_year": "MAR-2021"
+   },
+   {
+    "str_product_name": "i Clean Hand Sanitizer (Isopropyl Alcohol)",
+    "str_batch_no": "1220",
+    "dt_manufacturing_date": "Dec-2020",
+    "dt_expiry_date": "Dec-2022",
+    "str_manufactured_by": "Not Mentioned",
+    "str_nsq_result": "Assay of Isopropyl Alcohol",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDTL Chennai",
+    "dt_reporting_month_year": "MAR-2021"
+   },
+   {
+    "str_product_name": "CHYMOCIP (Trypsin & Chymotrypsin Tablets)",
+    "str_batch_no": "G19CHP004",
+    "dt_manufacturing_date": "Jun-2019",
+    "dt_expiry_date": "May-2022",
+    "str_manufactured_by": "M/s. Acme Generics LLP, Plot No. 115, HPSIDC, Industrial Area, Davni, P.O. Gurumajra, Tehsil, Nalagarh, Distt. Solan, Himachal Pradesh ? 174101",
+    "str_nsq_result": "Assay of Trypsin and Chymotrypsin",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "MAR-2021"
+   },
+   {
+    "str_product_name": "Operation Theatre Gauze (Gauze Swabs B.P. 80)",
+    "str_batch_no": "8",
+    "dt_manufacturing_date": "Aug-2020",
+    "dt_expiry_date": "Jul-2023",
+    "str_manufactured_by": "M/s. Anand Product, 8/162, J?17, Vanniyampatti Road, Sankarapandiyapuram, Chatrapatti ? 626102, Tamil Nadu",
+    "str_nsq_result": "(Warp) Threads per 10 cm",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "MAR-2021"
+   },
+   {
+    "str_product_name": "HAVLOC INSTANT HAND SANITIZER GEL",
+    "str_batch_no": "BR0402",
+    "dt_manufacturing_date": "Apr-2020",
+    "dt_expiry_date": "Oct-2021",
+    "str_manufactured_by": "M/s. BRP Industry Pvt. Ltd., No. 42/2, First Floor, Govindan Street, Ayyavoo Colony, Aminjikarai, Chennai, Tamil Nadu ? 600029",
+    "str_nsq_result": "Assay of Ethyl Alcohol",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDTL Chennai",
+    "dt_reporting_month_year": "MAR-2021"
+   },
+   {
+    "str_product_name": "HAVLOC INSTANT HAND SANITIZER LIQUID",
+    "str_batch_no": "BR0401",
+    "dt_manufacturing_date": "Apr-2020",
+    "dt_expiry_date": "Oct-2021",
+    "str_manufactured_by": "M/s. BRP Industry Pvt. Ltd., No. 42/2, First Floor, Govindan Street, Ayyavoo Colony, Aminjikarai, Chennai, Tamil Nadu ? 600029",
+    "str_nsq_result": "Assay of Ethyl Alcohol",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDTL Chennai",
+    "dt_reporting_month_year": "MAR-2021"
+   },
+   {
+    "str_product_name": "HAVLOC INSTANT HAND SANITIZER GEL",
+    "str_batch_no": "BR0412",
+    "dt_manufacturing_date": "Apr-2020",
+    "dt_expiry_date": "Oct-2021",
+    "str_manufactured_by": "M/s. BRP Industry Pvt. Ltd., No. 42/2, First Floor, Govindan Street, Ayyavoo Colony, Aminjikarai, Chennai, Tamil Nadu ? 600029",
+    "str_nsq_result": "Assay of Ethyl Alcohol",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDTL Chennai",
+    "dt_reporting_month_year": "MAR-2021"
+   },
+   {
+    "str_product_name": "Paracetamol Tablets IP 650 mg (Febrex -650)",
+    "str_batch_no": "FAP1D07",
+    "dt_manufacturing_date": "Apr-2020",
+    "dt_expiry_date": "Mar-2022",
+    "str_manufactured_by": "M/s. Indoco Remedies Ltd., Mumbai ? 400098",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "MAR-2021"
+   }
+  ]
+ }
+}

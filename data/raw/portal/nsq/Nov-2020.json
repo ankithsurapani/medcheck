@@ -1,0 +1,166 @@
+{
+ "url": "https://cdscoonline.gov.in/CDSCO/filteredNsqDrugTable?month=Nov-2020&source=All&tab=nsq",
+ "tab": "nsq",
+ "month": "Nov-2020",
+ "fetched_at": "2026-08-06T14:05:01+05:30",
+ "payload": {
+  "iTotalDisplayRecords": 14,
+  "iTotalRecords": 14,
+  "aaData": [
+   {
+    "str_product_name": "Pheniramine Maleate Tablets I.P.",
+    "str_batch_no": "TPNM-003",
+    "dt_manufacturing_date": "Dec-2018",
+    "dt_expiry_date": "Nov-2020",
+    "str_manufactured_by": "M/s. Medipol Pharmaceutical India Pvt. Ltd., 1199/3, Bhud, Baddi, Distt. Solan, Himachal Pradesh",
+    "str_nsq_result": "Description",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "NOV-2020"
+   },
+   {
+    "str_product_name": "Erythromycin Stearate Tablets I.P. 250 mg",
+    "str_batch_no": "ENT1911",
+    "dt_manufacturing_date": "Dec-2019",
+    "dt_expiry_date": "Nov-2021",
+    "str_manufactured_by": "M/s. Modern Laboratories, 45-47, Sector D-2, Sanwer Road, Indore (MP)?452015",
+    "str_nsq_result": "Description & Dissolution",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "NOV-2020"
+   },
+   {
+    "str_product_name": "Ethyl Alcohol, Isopropyl Alcohol (Xerorub Hand Santizer)",
+    "str_batch_no": "S-34520",
+    "dt_manufacturing_date": "May-2020",
+    "dt_expiry_date": "Apr-2022",
+    "str_manufactured_by": "M/s. Seamac Formulations Pvt. Ltd., Plot No. 35, Phase 3rd, Industrial Area, Sansarpur Terrace, Distt. Kangra (Himachal Pradesh)?176501",
+    "str_nsq_result": "Assay of Ethyl Alcohol, Isopropyl Alcohol",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "NOV-2020"
+   },
+   {
+    "str_product_name": "Isopropyl Rubbing Alcohol IP Hand Sanitizer (Pure-hand Zenitizer)",
+    "str_batch_no": "SRI-331",
+    "dt_manufacturing_date": "Mar-2020",
+    "dt_expiry_date": "Feb-2022",
+    "str_manufactured_by": "M/s. Shri Ramesth Industry Pvt. Ltd., Baddi Barotiwala Road, Vill. Juddi Kalan, P.O. & Teh. Baddi, Distt. Solan?173205 (Himachal Pradesh)",
+    "str_nsq_result": "Specific Gravity, Acidity, Limit of non Volatile residue and Assay of Isopropyl Alcohol",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "NOV-2020"
+   },
+   {
+    "str_product_name": "Glimas-1,Glimepiride Tablets I.P. 5mg",
+    "str_batch_no": "MT191240",
+    "dt_manufacturing_date": "Aug-2019",
+    "dt_expiry_date": "Jul-2021",
+    "str_manufactured_by": "M/s. Mascot Health Series Pvt. Ltd., Plot No. 79, 80, Sec-6A, IIE, Sidcul, Haridwar?249403, Uttarakhand",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "NOV-2020"
+   },
+   {
+    "str_product_name": "Rosloy ASP 10/75 (Rosuvastatin & Aspirin Capsules)",
+    "str_batch_no": "19ISGC040",
+    "dt_manufacturing_date": "Sep-2019",
+    "dt_expiry_date": "Feb-2021",
+    "str_manufactured_by": "M/s. Synokem Pharmaceuticals Ltd., Plot No. 56-57, Sector 6A, I.I.E. (SIDCUL), Ranipur (BHEL), Haridwar?249403, Uttarakhand",
+    "str_nsq_result": "Assay of Rosuvastatin",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDTL Mumbai",
+    "dt_reporting_month_year": "NOV-2020"
+   },
+   {
+    "str_product_name": "Hebose-50 (Acarbose Tablets IP 50 mg)",
+    "str_batch_no": "MT190814",
+    "dt_manufacturing_date": "Jun-2019",
+    "dt_expiry_date": "May-2021",
+    "str_manufactured_by": "M/s. Mascot Health Series Pvt. Ltd., Plot No. 79, 80, Sec-6A, IIE, Sidcul, Haridwar?249403, Uttarakhand",
+    "str_nsq_result": "Dissolution & Assay",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDTL Mumbai",
+    "dt_reporting_month_year": "NOV-2020"
+   },
+   {
+    "str_product_name": "Paracetamol Paediatric oral Suspension IP (Parawin ?DS Suspension)",
+    "str_batch_no": "PWS-1905",
+    "dt_manufacturing_date": "Dec-2019",
+    "dt_expiry_date": "Nov-2021",
+    "str_manufactured_by": "M/s. Apple Formulations Pvt. Ltd., Plot No. 208, Kishanpur, Roorkee?247667 (U.K.)",
+    "str_nsq_result": "Related Substances",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "NOV-2020"
+   },
+   {
+    "str_product_name": "Ranitidine Injection IP 25mg/ml (ACILOC Injection)",
+    "str_batch_no": "RP20139",
+    "dt_manufacturing_date": "Jun-2020",
+    "dt_expiry_date": "May-2023",
+    "str_manufactured_by": "M/s. Cadila Pharmaceuticals Ltd., 1389, Dholka?382225, Distt.: Ahmedabad",
+    "str_nsq_result": "Particulate Matter",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "NOV-2020"
+   },
+   {
+    "str_product_name": "Levocetrizine Tablets\nI.P. 5mg",
+    "str_batch_no": "1911",
+    "dt_manufacturing_date": "Oct-2019",
+    "dt_expiry_date": "Sep-2021",
+    "str_manufactured_by": "M/s. Deepin Pharmaceuticals Pvt. Ltd., Village: Dharawara, Post: Kalaria?453001, Tehsil: Depalpur (Madhya Pradesh)",
+    "str_nsq_result": "Description",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "NOV-2020"
+   },
+   {
+    "str_product_name": "Paracetamol Tablets\nI.P. 500 mg",
+    "str_batch_no": "251907",
+    "dt_manufacturing_date": "Jun-2019",
+    "dt_expiry_date": "May-2022",
+    "str_manufactured_by": "M/s. Goa Antibiotics & Pharmaceuticals Ltd., Goa (Subsidiary of HLL Lifecare Ltd. A Government of India Enterprise), Near Tuem Industrial Estate, Tuem, Pernem?Goa?403512",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDTL Mumbai",
+    "dt_reporting_month_year": "NOV-2020"
+   },
+   {
+    "str_product_name": "Folic Acid Tablets I.P.",
+    "str_batch_no": "FA-1901",
+    "dt_manufacturing_date": "Aug-2019",
+    "dt_expiry_date": "Jan-2021",
+    "str_manufactured_by": "M/s. HLL Lifecare Limited, 11A-1 & 12/C-1, Sector-E, Industrial Area, Sanwer Road, Indore?452015",
+    "str_nsq_result": "Hydrolysis Products & Assay",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "NOV-2020"
+   },
+   {
+    "str_product_name": "Pregabalin and Methylcobalamin Capsules I.P. (Mobil-P Capsules)",
+    "str_batch_no": "C9090149C",
+    "dt_manufacturing_date": "Sep-2019",
+    "dt_expiry_date": "Feb-2021",
+    "str_manufactured_by": "M/s. ION Healthcare Pvt. Ltd., Baddi-Barotiwala Road, Baddi, Distt. Solan (H.P.)?173205",
+    "str_nsq_result": "Description",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "NOV-2020"
+   },
+   {
+    "str_product_name": "Telmisartan Tablets\nI.P. (Telmimac 40 mg Tablets)",
+    "str_batch_no": "TC4T-027",
+    "dt_manufacturing_date": "May-2020",
+    "dt_expiry_date": "Oct-2022",
+    "str_manufactured_by": "M/s. IOSIS Remedies, Rajpura Road, Village?Khera Nihla, Tehsil?Nalagarh, District?Solan, Himachal Pradesh?174101",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "NOV-2020"
+   }
+  ]
+ }
+}

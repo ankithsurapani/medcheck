@@ -1,0 +1,309 @@
+{
+ "url": "https://cdscoonline.gov.in/CDSCO/filteredNsqDrugTable?month=Jan-2022&source=All&tab=nsq",
+ "tab": "nsq",
+ "month": "Jan-2022",
+ "fetched_at": "2026-08-06T14:05:09+05:30",
+ "payload": {
+  "iTotalDisplayRecords": 27,
+  "iTotalRecords": 27,
+  "aaData": [
+   {
+    "str_product_name": "Alcohol/Chlorhexidine Gluconate Hand Rub (MICRO-CV HAND SANITIZER)",
+    "str_batch_no": "8267",
+    "dt_manufacturing_date": "Mar-2020",
+    "dt_expiry_date": "Feb-2022",
+    "str_manufactured_by": "M/s. RAMSON REMEDIES, 186-187, Industrial Focal Point, Amritsar A.O: 2, G.Floor Baktawar, Malabar Hill, MUMBAI ? 6",
+    "str_nsq_result": "Identification",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "JAN-2022"
+   },
+   {
+    "str_product_name": "Doxycycline Hydrochloride & Ambroxol HCl Tablets",
+    "str_batch_no": "DOX-2009",
+    "dt_manufacturing_date": "Jan-2021",
+    "dt_expiry_date": "Dec-2022",
+    "str_manufactured_by": "M/s. RIDLEY LIFE SCIENCE PVT. LTD., D-1651, DSIDC Indl. Complex, Narela, Delhi-110040",
+    "str_nsq_result": "Description",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "JAN-2022"
+   },
+   {
+    "str_product_name": "Ondansetron Orally Disintegrating Tablets IP 4 mg (ONVIN-4MD TABLETS)",
+    "str_batch_no": "RV21023",
+    "dt_manufacturing_date": "Jul-2021",
+    "dt_expiry_date": "Jun-2023",
+    "str_manufactured_by": "M/s. Rivpra Formulation Pvt. Ltd., Plot No. 8, Sector-6A, I.I.E. SIDCUL, Haridwar-249403, Uttarakhand",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "JAN-2022"
+   },
+   {
+    "str_product_name": "Isopropyl Rubbing Alcohol I.P.",
+    "str_batch_no": "SP-851",
+    "dt_manufacturing_date": "May-2020",
+    "dt_expiry_date": "Apr-2023",
+    "str_manufactured_by": "M/s. Sritech Pharma, F-19, UPSIDC Industrial Area, Gajraula JP Nagar, Uttar Pradesh ? 244235",
+    "str_nsq_result": "Assay",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "JAN-2022"
+   },
+   {
+    "str_product_name": "Atenolol Tablets IP 50 mg.",
+    "str_batch_no": "TPT GOV-21139",
+    "dt_manufacturing_date": "Jun-2021",
+    "dt_expiry_date": "May-2023",
+    "str_manufactured_by": "M/s. Terrace Pharmaceutical (P) Ltd., 3-B (a) Phase III, Industrial Area, Sansarpur Terrace, Distt. Kangra, Himachal Pradesh ? 176501",
+    "str_nsq_result": "Disintegration",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDTL Mumbai",
+    "dt_reporting_month_year": "JAN-2022"
+   },
+   {
+    "str_product_name": "Ceftriaxone Injection IP",
+    "str_batch_no": "I.269",
+    "dt_manufacturing_date": "Apr-2021",
+    "dt_expiry_date": "Mar-2023",
+    "str_manufactured_by": "M/s. Jackson Laboratories Pvt. Ltd., 22-24, Majitha Road, Bye pass, Amritsar-143001, Punjab (India)",
+    "str_nsq_result": "Clarity of Solution & Particulate matter",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "JAN-2022"
+   },
+   {
+    "str_product_name": "Trypsin, Bromelain & Rutoside Trihydrate Tablets",
+    "str_batch_no": "GT200466",
+    "dt_manufacturing_date": "Mar-2020",
+    "dt_expiry_date": "Feb-2022",
+    "str_manufactured_by": "M/s. Theon Pharmaceuticals Ltd., Vill. Saini Majra, Teh. Nalagarh, Distt. Solan, Himachal Pradesh-174101",
+    "str_nsq_result": "Description & Disintegration",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "JAN-2022"
+   },
+   {
+    "str_product_name": "Calcium with Vitamin D3 Tablets",
+    "str_batch_no": "CV-212",
+    "dt_manufacturing_date": "Nov-2020",
+    "dt_expiry_date": "May-2022",
+    "str_manufactured_by": "M/s. VINTOCHEM PHARMACEUTICALS, Industrial Area, Maxi Road, Ujjain-456010, Madhya Pradesh",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "JAN-2022"
+   },
+   {
+    "str_product_name": "Calcium with Vitamin D3 Tablets",
+    "str_batch_no": "CV-212",
+    "dt_manufacturing_date": "Nov-2020",
+    "dt_expiry_date": "May-2022",
+    "str_manufactured_by": "M/s. VINTOCHEM PHARMACEUTICALS, Industrial Area, Maxi Road, Ujjain-456010, Madhya Pradesh",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "JAN-2022"
+   },
+   {
+    "str_product_name": "Paracetamol Tablets IP 650 mg",
+    "str_batch_no": "FDR3A101",
+    "dt_manufacturing_date": "Jan-2021",
+    "dt_expiry_date": "Dec-2022",
+    "str_manufactured_by": "M/s. ZIM LABORATORIES LIMITED, B-21/22, MIDC Area, Kalmeshwar-441501, Dist. Nagpur, Maharashtra",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "JAN-2022"
+   },
+   {
+    "str_product_name": "WARZYME Digestive Enzymes (Pepsin & Fungal Diastase Syrup), 200 ml",
+    "str_batch_no": "AA21036",
+    "dt_manufacturing_date": "Jun-2021",
+    "dt_expiry_date": "Nov-2022",
+    "str_manufactured_by": "M/s. Skymap Pharmaceuticals Pvt. Ltd., B-3, Dev Bhoomi Industrial Estate, Puhana Iqbalpur Road, Roorkee-247667, Uttarakhand",
+    "str_nsq_result": "Assay of Pepsin & Fungal Diastase",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "JAN-2022"
+   },
+   {
+    "str_product_name": "Adrenochrome Monosemicarbazone Injection, 2 ml",
+    "str_batch_no": "01ACA295",
+    "dt_manufacturing_date": "Feb-2021",
+    "dt_expiry_date": "Jul-2022",
+    "str_manufactured_by": "M/s. SPM Drugs (P) Ltd., S.F. 52/1 Main Road, K.R. Palayam, Bhavani ? 638301 Tamil Nadu",
+    "str_nsq_result": "Description & Particulate Matter",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "JAN-2022"
+   },
+   {
+    "str_product_name": "NITZO -2.6 (Controlled Release Tablets of Nitrogylcerin)",
+    "str_batch_no": "420-1291",
+    "dt_manufacturing_date": "Oct-2020",
+    "dt_expiry_date": "Sep-2022",
+    "str_manufactured_by": "M/s. Zee Laboratories, 47, Industrial Area, Paonta Sahib -173025, Himachal Pradesh",
+    "str_nsq_result": "Assay",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "JAN-2022"
+   },
+   {
+    "str_product_name": "Ferrous Sulphate &\nFolic Acid Tablets IP",
+    "str_batch_no": "B210049",
+    "dt_manufacturing_date": "Jun-2021",
+    "dt_expiry_date": "May-2023",
+    "str_manufactured_by": "M/s. Bochem Healthcare Pvt. Ltd., 83-84, Industrial Area, Dewas Road, Nagziri, Ujjain 456010, Madhya Pradesh, India",
+    "str_nsq_result": "Uniformity of Content of Folic Acid",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "JAN-2022"
+   },
+   {
+    "str_product_name": "Mymi D (Alpha Lipoic Acid, Pyridoxine Hydrochloride, Methylcobalamin, Folic Acid & Vitamin D3 Tablets)",
+    "str_batch_no": "TT21031",
+    "dt_manufacturing_date": "Jun-2021",
+    "dt_expiry_date": "May-2023",
+    "str_manufactured_by": "M/s. Kausikh Therapeutics (P) Ltd., Unit II, Plot No. 54, SIDCO Industrial Estate, Thirumudivakkam, Chennai -600044",
+    "str_nsq_result": "Assay of Methylcobala min & Vitamin D3",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "JAN-2022"
+   },
+   {
+    "str_product_name": "Clopidogrel & Aspirin Tablets I.P.",
+    "str_batch_no": "TACB-017",
+    "dt_manufacturing_date": "May-2020",
+    "dt_expiry_date": "Apr-2022",
+    "str_manufactured_by": "M/s. Medipol Pharmaceutical India Pvt. Ltd., 1199/3, Budh, Baddi, Dist. Solan, Himachal Pradesh, India",
+    "str_nsq_result": "Related Substances",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "JAN-2022"
+   },
+   {
+    "str_product_name": "Pantoprazole Sodium Tablets I.P. 40 mg",
+    "str_batch_no": "TN-5142",
+    "dt_manufacturing_date": "Nov-2020",
+    "dt_expiry_date": "Oct-2022",
+    "str_manufactured_by": "M/s. Naptune Life Sciences Pvt. Ltd., 100-B, EPIP, Phase-II, Thana, Baddi -173205, Himachal Pradesh",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "JAN-2022"
+   },
+   {
+    "str_product_name": "Pantoprazole Gastro- Resistant Tablets IP",
+    "str_batch_no": "TF1036A",
+    "dt_manufacturing_date": "Jun-2021",
+    "dt_expiry_date": "Nov-2022",
+    "str_manufactured_by": "M/s. Navkar Lifesciences, Plot No.76, Lodhi Majra, Industrial Area, Baddi, Distt. Solan, Himachal Pradesh",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDTL Chennai",
+    "dt_reporting_month_year": "JAN-2022"
+   },
+   {
+    "str_product_name": "Pantoprazole Gastro- Resistant Tablets I.P.",
+    "str_batch_no": "TA21-11",
+    "dt_manufacturing_date": "Jan-2021",
+    "dt_expiry_date": "Dec-2022",
+    "str_manufactured_by": "M/s. Om Biomedic Pvt. Ltd., Plot No. 68, 69, 82 & 83, Sector-6A, IIE SIDCUL, Haridwar ? 249403, Uttarakhand",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "JAN-2022"
+   },
+   {
+    "str_product_name": "ENALAPRIL MALEATE TABLETS\nIP 5 mg",
+    "str_batch_no": "GA21002",
+    "dt_manufacturing_date": "Feb-2021",
+    "dt_expiry_date": "Jan-2023",
+    "str_manufactured_by": "M/s. Ortin Laboratories Ltd., 275 & 278 (part), IDA, Pashamylaram-502307, Sanga Reddy, Dist. Telangana",
+    "str_nsq_result": "Dissolution &\nAssay",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDTL Hyderabad",
+    "dt_reporting_month_year": "JAN-2022"
+   },
+   {
+    "str_product_name": "Itraconazole Capsules 200 mg",
+    "str_batch_no": "MC21250",
+    "dt_manufacturing_date": "Apr-2021",
+    "dt_expiry_date": "Mar-2023",
+    "str_manufactured_by": "M/s. Mascot Health Series Pvt. Ltd., Plot No. 79, 80, Sec.6A, IIE, SIDCUL, Haridwar-249403, Uttarakhand",
+    "str_nsq_result": "Disintegration",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "JAN-2022"
+   },
+   {
+    "str_product_name": "Favipiravir Tablets 400 mg",
+    "str_batch_no": "TP-0421903",
+    "dt_manufacturing_date": "Apr-2021",
+    "dt_expiry_date": "Mar-2023",
+    "str_manufactured_by": "M/s. Maxrelief Healthcare, Vill.-Anji, Solan, Himachal Pradesh-173212",
+    "str_nsq_result": "Identification, Dissolution & Assay",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "JAN-2022"
+   },
+   {
+    "str_product_name": "Pantoprazole Gastro- Resistant Tablets I.P.\n40 mg",
+    "str_batch_no": "AT201095",
+    "dt_manufacturing_date": "Mar-2021",
+    "dt_expiry_date": "Feb-2023",
+    "str_manufactured_by": "M/s. Aarpic Pharmaceuticals Pvt. Ltd., C1/306/5 Kerala G.I.D.C., Kerala, Bavla Road, Dist. Ahmedabad",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "JAN-2022"
+   },
+   {
+    "str_product_name": "Alprazolam Tablets IP",
+    "str_batch_no": "TP.1901",
+    "dt_manufacturing_date": "Dec-2019",
+    "dt_expiry_date": "Nov-2022",
+    "str_manufactured_by": "M/s. Achemic Pharmaceuticals (INDIA) Pvt. Ltd., 71-A, I.D.A. (Etn) Phase-II, Mangalpur, Nacharam, Hyderabad - 500076",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "JAN-2022"
+   },
+   {
+    "str_product_name": "Levetripac-500 Tablets (Levetiracetam Tablets IP 500 mg)",
+    "str_batch_no": "APT/04306",
+    "dt_manufacturing_date": "Apr-2021",
+    "dt_expiry_date": "Mar-2023",
+    "str_manufactured_by": "M/s. Amkon Pharmaceuticals, Plot No. 242, Phase 9, Industrial Area, Mohali-160062, Punjab",
+    "str_nsq_result": "Dissolution &\nAssay",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "JAN-2022"
+   },
+   {
+    "str_product_name": "Pantoprazole for Injection B.P. 40 mg",
+    "str_batch_no": "AA011068",
+    "dt_manufacturing_date": "Apr-2021",
+    "dt_expiry_date": "Mar-2023",
+    "str_manufactured_by": "M/s. ANG Lifesciences India Ltd., Village-Kishanpura, Nalagarh Road, Tehsil-Baddi, Distt. Solan, Himachal Pradesh -174101",
+    "str_nsq_result": "Sterility",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "JAN-2022"
+   },
+   {
+    "str_product_name": "Pantoprazole Sodium Tablets I.P. 40 mg",
+    "str_batch_no": "SL20098",
+    "dt_manufacturing_date": "Nov-2020",
+    "dt_expiry_date": "Oct-2022",
+    "str_manufactured_by": "M/s. IBN Herbals (A unit of Curetech Formulations (P) Ltd.), Khasra No. 63, Vill. JuddiKalan, Baddi, Dist. Solan, Himachal Pradesh",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "JAN-2022"
+   }
+  ]
+ }
+}

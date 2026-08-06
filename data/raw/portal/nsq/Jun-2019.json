@@ -1,0 +1,287 @@
+{
+ "url": "https://cdscoonline.gov.in/CDSCO/filteredNsqDrugTable?month=Jun-2019&source=All&tab=nsq",
+ "tab": "nsq",
+ "month": "Jun-2019",
+ "fetched_at": "2026-08-06T14:04:52+05:30",
+ "payload": {
+  "iTotalDisplayRecords": 25,
+  "iTotalRecords": 25,
+  "aaData": [
+   {
+    "str_product_name": "Glimepiride Tablets IP 3mg",
+    "str_batch_no": "GPDT18005",
+    "dt_manufacturing_date": "Oct-2018",
+    "dt_expiry_date": "Sep-2020",
+    "str_manufactured_by": "M/s. RAVIAN LIFESCIENCE PVT. LTD., Plot No. 34, Sector-8A, IIE, SIDCUL, Haridwar-249403, Uttarakhand",
+    "str_nsq_result": "Test for Dissolution",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "JUN-2019"
+   },
+   {
+    "str_product_name": "Ofloxacin Tablets\nI.P. 400 mg",
+    "str_batch_no": "BT8291",
+    "dt_manufacturing_date": "Oct-2018",
+    "dt_expiry_date": "Sep-2020",
+    "str_manufactured_by": "M/s. Omega Biotech Ltd., 7th Mile Stone, Dehradun Road, Roorkee-247667, Uttarakhand",
+    "str_nsq_result": "Uniformity of weight",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "JUN-2019"
+   },
+   {
+    "str_product_name": "Compound Sodium Lactate Injections I.P.",
+    "str_batch_no": "R-1/18/145",
+    "dt_manufacturing_date": "Jul-2018",
+    "dt_expiry_date": "Jun-2020",
+    "str_manufactured_by": "M/s. Sanctus Drugs & Pharmaceutical Pvt. Ltd, Plot No. 251, Sector-1, Pithampur, Dist. Dhar (M.P.)",
+    "str_nsq_result": "BET",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "JUN-2019"
+   },
+   {
+    "str_product_name": "Compound Sodium Lactate Injections I.P.",
+    "str_batch_no": "R-1/18/140",
+    "dt_manufacturing_date": "Jul-2018",
+    "dt_expiry_date": "Jun-2020",
+    "str_manufactured_by": "M/s. Sanctus Drugs & Pharmaceutical Pvt. Ltd, Plot No. 251, Sector-1, Pithampur, Dist. Dhar, Madhya Pradesh",
+    "str_nsq_result": "BET",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "JUN-2019"
+   },
+   {
+    "str_product_name": "TELMISARTAN TABLETS IP 40 MG (TELMIRAL 40)",
+    "str_batch_no": "78TML18002",
+    "dt_manufacturing_date": "Nov-2018",
+    "dt_expiry_date": "Jun-2020",
+    "str_manufactured_by": "M/s. Crescent Therapeutics Limited, Khasra No. 587/588, Beside Jharmajri, Village: Kunjhal, Baddi, Tehsil: Nalagarh, Dist. Solan (H.P) 173205",
+    "str_nsq_result": "Test for Dissolution",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDTL Chennai",
+    "dt_reporting_month_year": "JUN-2019"
+   },
+   {
+    "str_product_name": "LEVOCETIRIZINE HYDROCHLORIDE TABLETS IP 5 MG",
+    "str_batch_no": "SHT8957",
+    "dt_manufacturing_date": "Sep-2018",
+    "dt_expiry_date": "Aug-2021",
+    "str_manufactured_by": "M/s. SYNCOM Healthcare Limited, D-42, IIE SIDCUL, Selaqui, Dehradun-248197 Uttarakhand",
+    "str_nsq_result": "Test of Dissolution",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "JUN-2019"
+   },
+   {
+    "str_product_name": "Pantoprazole For Injection (Panzel)",
+    "str_batch_no": "318-7",
+    "dt_manufacturing_date": "Jan-2018",
+    "dt_expiry_date": "Jun-2019",
+    "str_manufactured_by": "M/s. Zee Laboratories, 47, Industrial Areas, Paonta Sahib-173025",
+    "str_nsq_result": "Particulate Contamination",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "JUN-2019"
+   },
+   {
+    "str_product_name": "Amoxycillin And Potassium Clavulanate Tablets\nI.P. (Clavage-1000)",
+    "str_batch_no": "SBPT-4321",
+    "dt_manufacturing_date": "Feb-2018",
+    "dt_expiry_date": "Jul-2019",
+    "str_manufactured_by": "M/s. Saitech Medicare Pvt. Ltd., Trilokpur Road, Kala Amb (H.P.)-173030",
+    "str_nsq_result": "Test  for Dissolution",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "JUN-2019"
+   },
+   {
+    "str_product_name": "Pantoprazole For Injection (Panzel)",
+    "str_batch_no": "FZ0417",
+    "dt_manufacturing_date": "Nov-2017",
+    "dt_expiry_date": "Oct-2019",
+    "str_manufactured_by": "M/s. Medizest Pharmaceuticals Pvt. Ltd., Plot No. L-40, Verna Industrial Estate, Verna, Goa-403722",
+    "str_nsq_result": "pH",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDTL Mumbai",
+    "dt_reporting_month_year": "JUN-2019"
+   },
+   {
+    "str_product_name": "Lignocaine and Adrenaline Injection IP",
+    "str_batch_no": "V-7079",
+    "dt_manufacturing_date": "Nov-2017",
+    "dt_expiry_date": "Oct-2019",
+    "str_manufactured_by": "M/s. ALPA LABORATORIES LTD, 33/2, A.B. Road, Pigdamber-453446, Indore (M.P.)",
+    "str_nsq_result": "Test for Assay",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "JUN-2019"
+   },
+   {
+    "str_product_name": "Amoxycillin and Potassium Clavulanate Tablets IP 625 mg\n(ANAXIM-CV 625 TABLETS)",
+    "str_batch_no": "R-20219",
+    "dt_manufacturing_date": "Dec-2018",
+    "dt_expiry_date": "Nov-2020",
+    "str_manufactured_by": "M/s. AnA Pharmaceuticals, Plot No. 183, Sector 6A, IIE, Sidhgual, Haridwar (U.K.)",
+    "str_nsq_result": "Identification & Assay",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "JUN-2019"
+   },
+   {
+    "str_product_name": "Domperidone Tablets I.P. 10 mg",
+    "str_batch_no": "DMP-18",
+    "dt_manufacturing_date": "Feb-2017",
+    "dt_expiry_date": "Jan-2020",
+    "str_manufactured_by": "M/s. Bewell Labs Pvt. Ltd., Rabindranagar, P.O. Laskarpur, Dist. 24 Parganas (S), West Bengal 700153",
+    "str_nsq_result": "Assay & Dissolution",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "JUN-2019"
+   },
+   {
+    "str_product_name": "Cefixime Tablets IP (MICRA-200\nTablets)",
+    "str_batch_no": "R-132",
+    "dt_manufacturing_date": "Feb-2018",
+    "dt_expiry_date": "Jan-2020",
+    "str_manufactured_by": "M/s. Escape Lifesciences Pvt. Ltd., Chudiala Station Road, Village Khelpur, Bhagwanpur, Roorkee, UK",
+    "str_nsq_result": "Identification & Assay",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "JUN-2019"
+   },
+   {
+    "str_product_name": "Cefixime Tablets IP (GECEFF-200\nTablets)",
+    "str_batch_no": "R-129",
+    "dt_manufacturing_date": "Feb-2018",
+    "dt_expiry_date": "Jan-2020",
+    "str_manufactured_by": "M/s. GEFEX PHARMA Pvt. Ltd., IGC, Phase-I, Samba-184121 (J&K)",
+    "str_nsq_result": "Identification & Assay",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "JUN-2019"
+   },
+   {
+    "str_product_name": "Neomycin Sulphate, Polymixin-B Sulphate and Bacitracin Zinc Powder",
+    "str_batch_no": "GLEP-181020",
+    "dt_manufacturing_date": "Oct-2018",
+    "dt_expiry_date": "Sep-2020",
+    "str_manufactured_by": "M/s. Grampus Laboratories, Vill. Johron, Industrial Area, Kala Amb, Distt. Sirmour (H.P.)",
+    "str_nsq_result": "Identification",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "JUN-2019"
+   },
+   {
+    "str_product_name": "Neomycin Sulphate, Polymixin-B Sulphate and Bacitracin Zinc Powder",
+    "str_batch_no": "GLEP-181006",
+    "dt_manufacturing_date": "Oct-2018",
+    "dt_expiry_date": "Sep-2020",
+    "str_manufactured_by": "M/s. Grampus Laboratories, Vill. Johron, Industrial Area, Kala Amb, Distt. Sirmour (H.P.)",
+    "str_nsq_result": "Identification",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "JUN-2019"
+   },
+   {
+    "str_product_name": "PRE AND PROBIOTIC CAPSULES-DS",
+    "str_batch_no": "UPPC-1801",
+    "dt_manufacturing_date": "Aug-2018",
+    "dt_expiry_date": "Jan-2020",
+    "str_manufactured_by": "M/s. Heal (India) Laboratories Pvt. Ltd., No. 197/1, Periyapalayam Road, Manjankaranai-601102, Tamil Nadu",
+    "str_nsq_result": "Identification & Assay",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "JUN-2019"
+   },
+   {
+    "str_product_name": "Alprazolam Tablets I.P.",
+    "str_batch_no": "TAZP-002",
+    "dt_manufacturing_date": "Nov-2018",
+    "dt_expiry_date": "Oct-2020",
+    "str_manufactured_by": "M/s. Medipol Pharmaceuticals India Pvt. Ltd., 1199/3, Bhud, Baddi, Distt. Solan, H.P., India",
+    "str_nsq_result": "Test for Dissolution",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "JUN-2019"
+   },
+   {
+    "str_product_name": "M-BETASONE\n(Betamethasone Tablets I.P. 0.5 mg)",
+    "str_batch_no": "OPT7531",
+    "dt_manufacturing_date": "Jan-2018",
+    "dt_expiry_date": "Jun-2020",
+    "str_manufactured_by": "M/s. Omega Pharma, Khasra No. 482, Village Saliyar, Roorkee, Dist. Haridwar, Uttarakhand",
+    "str_nsq_result": "Assay & Related substances",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "JUN-2019"
+   },
+   {
+    "str_product_name": "METRONIDAZOLE BENZOATE ORAL SUSPENSION",
+    "str_batch_no": "MNSG18-255",
+    "dt_manufacturing_date": "Nov-2018",
+    "dt_expiry_date": "Oct-2020",
+    "str_manufactured_by": "M/s. ORNATE LABS PVT. LTD., Bela Industrial Estate, Muzaffarpur-842005, Bihar",
+    "str_nsq_result": "Test for Metronidazole",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "JUN-2019"
+   },
+   {
+    "str_product_name": "Ciprofloxacin Tablets IP (P-CIP 500 TABLETS )",
+    "str_batch_no": "R-124",
+    "dt_manufacturing_date": "Feb-2018",
+    "dt_expiry_date": "Jan-2020",
+    "str_manufactured_by": "M/s. Pansun Pharmaceuticals, Plot No. 183, Sector 6A, IIE, Sidhgual, Haridwar (U.K.)",
+    "str_nsq_result": "Identification, Uniformity of weight & Assay",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "JUN-2019"
+   },
+   {
+    "str_product_name": "Cefixime and Ofloxacin Tablets (P-XIME-O TABLETS )",
+    "str_batch_no": "R-110",
+    "dt_manufacturing_date": "Feb-2018",
+    "dt_expiry_date": "Jan-2020",
+    "str_manufactured_by": "M/s. Pansun Pharmaceuticals, Plot No. 22 & 23, Station Road, Bala Industrial Area, Sikkim",
+    "str_nsq_result": "Identification, & Assay",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "JUN-2019"
+   },
+   {
+    "str_product_name": "Ciprofloxacin HCl Tablets IP (PENCIP- 500 TABLETS)",
+    "str_batch_no": "R-21719",
+    "dt_manufacturing_date": "Dec-2018",
+    "dt_expiry_date": "Nov-2020",
+    "str_manufactured_by": "M/s. Pansun Pharmaceuticals, Plot No. 183, Sector 6A, IIE, Sidhgual, Haridwar (U.K.)",
+    "str_nsq_result": "Identification, & Assay",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "JUN-2019"
+   },
+   {
+    "str_product_name": "Drotaverine Hydrochloride Injection",
+    "str_batch_no": "DTB-003",
+    "dt_manufacturing_date": "Oct-2017",
+    "dt_expiry_date": "Sep-2019",
+    "str_manufactured_by": "M/s. Radico Remedies, 123, Mandhala, Barotiwala, Distt. Solan (H.P.)-174103",
+    "str_nsq_result": "Description & Particulate Matter",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "JUN-2019"
+   },
+   {
+    "str_product_name": "ASPIRIN GASTRO- RESISTANT TABLETS IP",
+    "str_batch_no": "HAGT18004",
+    "dt_manufacturing_date": "Sep-2018",
+    "dt_expiry_date": "Aug-2020",
+    "str_manufactured_by": "M/s. RAVIAN LIFE SCIENCE PVT. LTD, Plot No 34 Sector-8A IIE SIDCUL Haridwar-249403, Uttarakhand",
+    "str_nsq_result": "Test for Salicylic Acid  and assay of Aspirin",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "JUN-2019"
+   }
+  ]
+ }
+}

@@ -1,0 +1,342 @@
+{
+ "url": "https://cdscoonline.gov.in/CDSCO/filteredNsqDrugTable?month=Apr-2019&source=All&tab=nsq",
+ "tab": "nsq",
+ "month": "Apr-2019",
+ "fetched_at": "2026-08-06T14:04:50+05:30",
+ "payload": {
+  "iTotalDisplayRecords": 30,
+  "iTotalRecords": 30,
+  "aaData": [
+   {
+    "str_product_name": "PANTOPRAZOLE GASTRO- RESISTANT TABLETS IP 40 MG",
+    "str_batch_no": "TJPE802",
+    "dt_manufacturing_date": "Mar-2018",
+    "dt_expiry_date": "Feb-2020",
+    "str_manufactured_by": "M/s. Unicure (India) Ltd., Roorkee, Uttarakhand",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "APR-2019"
+   },
+   {
+    "str_product_name": "Vomiros-4MD (Ondansetron Orally Disintegrating Tablets IP)",
+    "str_batch_no": "ST-457",
+    "dt_manufacturing_date": "Nov-2018",
+    "dt_expiry_date": "Oct-2020",
+    "str_manufactured_by": "M/s. Sridhara Life Science Pvt. Ltd., Haridwar (Uttarakhand)",
+    "str_nsq_result": "Disintegration",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDTL Mumbai",
+    "dt_reporting_month_year": "APR-2019"
+   },
+   {
+    "str_product_name": "Ciprofloxacin HCL Tablets I.P 500mg",
+    "str_batch_no": "CT70140",
+    "dt_manufacturing_date": "Jun-2017",
+    "dt_expiry_date": "May-2019",
+    "str_manufactured_by": "M/s. Omega Biotech Ltd., Roorkee, Uttarakhand-247667",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "APR-2019"
+   },
+   {
+    "str_product_name": "IBUPROFEN TABLETS IP 200 MG",
+    "str_batch_no": "5922",
+    "dt_manufacturing_date": "Jun-2018",
+    "dt_expiry_date": "May-2020",
+    "str_manufactured_by": "M/s. Vikram Laboratories (P) Ltd., Meerut Road, Muzaffarnagar-251002",
+    "str_nsq_result": "Test for Dissolution",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDTL Chennai",
+    "dt_reporting_month_year": "APR-2019"
+   },
+   {
+    "str_product_name": "Tranexamic Acid Injection I.P. 500mg\n/5 ml",
+    "str_batch_no": "TA-024",
+    "dt_manufacturing_date": "Jan-2018",
+    "dt_expiry_date": "Dec-2019",
+    "str_manufactured_by": "M/s. Redico Remedies, Solan (H.P.)",
+    "str_nsq_result": "Description & Particulate Matter",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "APR-2019"
+   },
+   {
+    "str_product_name": "Hemosponge (Absorbable Gelatin Sponge U.S.P.)",
+    "str_batch_no": "20180601",
+    "dt_manufacturing_date": "Jun-2018",
+    "dt_expiry_date": "May-2022",
+    "str_manufactured_by": "M/s. Goodwill Lifesciences, Surat - 394510",
+    "str_nsq_result": "Sterility",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "APR-2019"
+   },
+   {
+    "str_product_name": "Gentamicin Injection\nI.P. 80 mg / 2ml",
+    "str_batch_no": "1794",
+    "dt_manufacturing_date": "Dec-2017",
+    "dt_expiry_date": "Nov-2020",
+    "str_manufactured_by": "M/s. Sai Parenterals Pvt. Ltd., Hyderabad - 500055",
+    "str_nsq_result": "Description & Particulate Matter",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "APR-2019"
+   },
+   {
+    "str_product_name": "Climox 1.2g (Amoxycillin & Potassium Clavulanate Injection I.P.),",
+    "str_batch_no": "I-16813",
+    "dt_manufacturing_date": "Apr-2018",
+    "dt_expiry_date": "Mar-2020",
+    "str_manufactured_by": "M/s. Jackson Laboratories Pvt. Ltd., Amritsar -143001",
+    "str_nsq_result": "Particulate Matter & Clarity of Solution",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "APR-2019"
+   },
+   {
+    "str_product_name": "Oxytocin Injection I.P.",
+    "str_batch_no": "I-16999",
+    "dt_manufacturing_date": "May-2018",
+    "dt_expiry_date": "Apr-2020",
+    "str_manufactured_by": "M/s. Jackson Laboratories Pvt. Ltd., Amritsar -143001",
+    "str_nsq_result": "Description, Particulate Matter, Extractable Volume & Assay",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "APR-2019"
+   },
+   {
+    "str_product_name": "DIASET 2\n(Glimepiride Tablets I.P. 2 mg)",
+    "str_batch_no": "L35C15",
+    "dt_manufacturing_date": "Jun-2018",
+    "dt_expiry_date": "May-2021",
+    "str_manufactured_by": "M/s. Stadmed Private Limited, Lucknow ? 226008",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "APR-2019"
+   },
+   {
+    "str_product_name": "PANCURE TABLETS (PANTOPRAZOLE TABLETS IP 40 MG)",
+    "str_batch_no": "SLP-18123",
+    "dt_manufacturing_date": "Jun-2018",
+    "dt_expiry_date": "May-2020",
+    "str_manufactured_by": "M/s. Sterlife Pharma Pvt Ltd., Rajkot, Gujarat",
+    "str_nsq_result": "Test for Dissolution",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDTL Chennai",
+    "dt_reporting_month_year": "APR-2019"
+   },
+   {
+    "str_product_name": "B-COMPLEX TABLETS NFI",
+    "str_batch_no": "T-17313",
+    "dt_manufacturing_date": "Jul-2018",
+    "dt_expiry_date": "Jun-2020",
+    "str_manufactured_by": "M/s. Jackson Laboratories Pvt. Ltd., Amritsar-143001",
+    "str_nsq_result": "Identification B and the Assay of Calcium Pantothenate",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "APR-2019"
+   },
+   {
+    "str_product_name": "B-COMPLEX TABLETS NFI",
+    "str_batch_no": "T-17377",
+    "dt_manufacturing_date": "Jul-2018",
+    "dt_expiry_date": "Jun-2020",
+    "str_manufactured_by": "M/s. Jackson Laboratories Pvt. Ltd., Amritsar-143001",
+    "str_nsq_result": "Identification B and the Assay of Calcium Pantothenate.",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "APR-2019"
+   },
+   {
+    "str_product_name": "Carbamazepine Tablets I.P. 200 mg",
+    "str_batch_no": "CRB801",
+    "dt_manufacturing_date": "Feb-2018",
+    "dt_expiry_date": "Jan-2021",
+    "str_manufactured_by": "M/s. Medico Remedies Ltd., Mumbai-400049",
+    "str_nsq_result": "Disintegration",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDTL Mumbai",
+    "dt_reporting_month_year": "APR-2019"
+   },
+   {
+    "str_product_name": "Ciprofloxacin Tablets I.P. 500mg",
+    "str_batch_no": "CT70140",
+    "dt_manufacturing_date": "Jun-2017",
+    "dt_expiry_date": "May-2019",
+    "str_manufactured_by": "M/s. Omega Biotech Ltd., Roorkee, Uttarakhand-247667",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "APR-2019"
+   },
+   {
+    "str_product_name": "Thyrocure - 100 (Thyroxine Tablets I.P. 100 mcg)",
+    "str_batch_no": "THDT605",
+    "dt_manufacturing_date": "Jul-2018",
+    "dt_expiry_date": "Dec-2019",
+    "str_manufactured_by": "M/s. Unicure India Ltd., Noida-201301, U.P.",
+    "str_nsq_result": "Assay",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "APR-2019"
+   },
+   {
+    "str_product_name": "Paracetamol Tablets I.P 650 mg (Pelmol-650)",
+    "str_batch_no": "MST-17528",
+    "dt_manufacturing_date": "Jul-2017",
+    "dt_expiry_date": "Jun-2019",
+    "str_manufactured_by": "M/s. M Sea Pharmaceuticals Pvt. Ltd., Paonta Sahib, H.P.",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "APR-2019"
+   },
+   {
+    "str_product_name": "Paracetamol Tablets I.P 500 mg",
+    "str_batch_no": "CT70153",
+    "dt_manufacturing_date": "Jun-2017",
+    "dt_expiry_date": "May-2019",
+    "str_manufactured_by": "M/s. Omega Biotech Ltd., Roorkee, Uttarakhand-247667",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "APR-2019"
+   },
+   {
+    "str_product_name": "Cefpodoxime Proxetil Dispersible Tablets (Eziprod 200)",
+    "str_batch_no": "MHV-100",
+    "dt_manufacturing_date": "Dec-2017",
+    "dt_expiry_date": "Nov-2019",
+    "str_manufactured_by": "M/s. Vee Laboratories, Solan (H.P.)",
+    "str_nsq_result": "Assay &\nDisintegration",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "APR-2019"
+   },
+   {
+    "str_product_name": "Paracetamol Tablets I.P 500 mg",
+    "str_batch_no": "BT70106",
+    "dt_manufacturing_date": "May-2017",
+    "dt_expiry_date": "Apr-2019",
+    "str_manufactured_by": "M/s. Omega Biotech Ltd., Roorkee, Uttarakhand-247667",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "APR-2019"
+   },
+   {
+    "str_product_name": "Paracetamol Tablets I.P 500 mg",
+    "str_batch_no": "CT70154",
+    "dt_manufacturing_date": "Jun-2017",
+    "dt_expiry_date": "May-2019",
+    "str_manufactured_by": "M/s. Omega Biotech Ltd., Roorkee, Uttarakhand-247667",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "APR-2019"
+   },
+   {
+    "str_product_name": "(DEXAMETHASON E SODIUM PHOSPHATE INJECTION IP)",
+    "str_batch_no": "317-936",
+    "dt_manufacturing_date": "Sep-2017",
+    "dt_expiry_date": "Aug-2019",
+    "str_manufactured_by": "M/s. Zee Laboratories Ltd., Paonta Sahib",
+    "str_nsq_result": "Assay of Dexamethasone Sodium Phosphate Calculated as Dexamethasone Phosphate",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "APR-2019"
+   },
+   {
+    "str_product_name": "Amoxycillin, Potassium Clavulanate and Lactic Acid Bacillus Tablets ( AMOXRAG-625 TABLETS )",
+    "str_batch_no": "SLB-759",
+    "dt_manufacturing_date": "Aug-2018",
+    "dt_expiry_date": "Jan-2020",
+    "str_manufactured_by": "M/s. SKOHIND LABS, Baddi (H.P.)",
+    "str_nsq_result": "Identification B and the Assay of Potassium Clavulanate Diluted calculated as Clavulanic Acid, Lactic Acid\nBacillus.",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "APR-2019"
+   },
+   {
+    "str_product_name": "Hydroxy Propyl Methyl Cellulose Ophthalmic Solution ( HYPROMELLOSE OPHTHALMIC SOLUTION USP )",
+    "str_batch_no": "8B05170",
+    "dt_manufacturing_date": "Dec-2018",
+    "dt_expiry_date": "Nov-2020",
+    "str_manufactured_by": "M/s. Ciron Drugs & Pharmaceuticals Pvt Ltd., Palghar - 401506",
+    "str_nsq_result": "Sterility",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "APR-2019"
+   },
+   {
+    "str_product_name": "Tetanus Vaccine (Adsorbed) I.P.",
+    "str_batch_no": "1641V",
+    "dt_manufacturing_date": "Nov-2016",
+    "dt_expiry_date": "Oct-2019",
+    "str_manufactured_by": "M/s DANO Vaccines & Biologicals Pvt\nLtd., Factory-575, Sivaredyguda,\nGhatkesar-501301, (T.S.)",
+    "str_nsq_result": "Physical aspect",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kasauli",
+    "dt_reporting_month_year": "APR-2019"
+   },
+   {
+    "str_product_name": "OCONA-CT Scalp Solution (Coal Tar & Ketoconazole Solution) ? 50 ml",
+    "str_batch_no": "COAK89",
+    "dt_manufacturing_date": "Dec-2017",
+    "dt_expiry_date": "Nov-2019",
+    "str_manufactured_by": "M/s. Akums Drugs & Pharmaceuticals Ltd., Haridwar ? 249403",
+    "str_nsq_result": "Foreign Matter",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "APR-2019"
+   },
+   {
+    "str_product_name": "Hydroxypropyl Methyl Cellulose Ophthalmic Solution USP along with sterile Pricon Angular Cannula 23G. ( APPAVISC PFS SOLUTION )",
+    "str_batch_no": "PFB-701, OPCP-195",
+    "dt_manufacturing_date": "Feb-2018",
+    "dt_expiry_date": "Jan-2020",
+    "str_manufactured_by": "M/s. Appasamy Ocular Devices Pvt. Ltd., Solan (H.P.) & Iscon Surgicals Ltd., Jodhpur",
+    "str_nsq_result": "Sterility B.",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "APR-2019"
+   },
+   {
+    "str_product_name": "Fusigen Ointment (Sodium Fusidate Ointment BP)",
+    "str_batch_no": "GF568003",
+    "dt_manufacturing_date": "Nov-2018",
+    "dt_expiry_date": "Apr-2021",
+    "str_manufactured_by": "M/s. Geno Pharmaceuticals Pvt. Ltd., Goa-403526",
+    "str_nsq_result": "Assay",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDTL Mumbai",
+    "dt_reporting_month_year": "APR-2019"
+   },
+   {
+    "str_product_name": "Heparin Injection IP 25000 units (AZZIRIN INJECTION )",
+    "str_batch_no": "MCP19388",
+    "dt_manufacturing_date": "Aug-2018",
+    "dt_expiry_date": "Jul-2020",
+    "str_manufactured_by": "M/s. Health Biotech Ltd., Sandholi-173205",
+    "str_nsq_result": "Assay of Heparin Sodium",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "APR-2019"
+   },
+   {
+    "str_product_name": "Amoxycillin Trihydrate, Clavulanate Potassium Tablets (AMOXCV-625 TABLETS)",
+    "str_batch_no": "VRBT-1863",
+    "dt_manufacturing_date": "Sep-2018",
+    "dt_expiry_date": "Feb-2020",
+    "str_manufactured_by": "M/s. Vaishnav Remedies, Roorkee, Uttarakhand",
+    "str_nsq_result": "Identification and the Assay of Amoxycillin Trihydrate calculated as Amoxycillin, Clavulanate Potassium calculated as\nClavulanic Acid.",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "APR-2019"
+   }
+  ]
+ }
+}

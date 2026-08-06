@@ -18,10 +18,20 @@ Searchable public database of medicines CDSCO flagged as Not of Standard Quality
 
 ## Current status
 
-**Phase 0 (Discovery) — complete.** Phase 1a (JSON ingestion) ticket is now active — see `implementation.md`.
+**Phase 0 (Discovery) — complete and committed.**
 
-Still open:
-- Nothing committed yet: `git init` done but no git `user.name`/`user.email` configured, so no initial commit was made. Set this — ask the user for values, don't invent them — and commit Phase 0's work before starting Phase 1.
+**Phase 1a (JSON ingestion) — complete.** `data/medcheck.db` holds **6,155 records across 90 alert months (Jan-2019 → Jun-2026)**: 3,029 central_lab, 3,079 state_lab, 46 spurious, 43 marked `label_claim_disputed`. Whole pipeline is idempotent — re-running ingest and normalize leaves the count unchanged.
+
+- `src/ingest/cdsco_json.py` — caches every raw portal response to `data/raw/portal/` before normalizing (plan.md §5.8)
+- `src/db.py` / `src/normalize.py` / `src/validate.py` — schema, mapping, sanity rules
+- `docs/methodology.md` — id scheme, field derivation, confidence model
+- `docs/parser_accuracy.md` — cross-validation vs the Jun-2025 PDFs
+
+Open / needs a planner decision:
+- **`failure_category` vocabulary is too small.** 657 records (10.7%) land in `other` because §3.3 has no bucket for pH, uniformity of weight, water content, bacterial endotoxins or uniformity of dispersion. These are common, legitimate failures. Recommend extending §3.3 — that's a spec change, so it wasn't made in-ticket.
+- **`alert_section` is unreliable.** The portal and the PDFs disagree on central-vs-state for 27 of 184 Jun-2025 records. Phase 4's "central vs state lab detection patterns" analysis needs this caveat.
+- **State coverage is 58%.** PIN-prefix → state mapping would lift it a lot; belongs with Phase 2's address parsing.
+- Phase 1b (pre-2019 PDF backfill) not started, per ticket boundary.
 
 ## Tech stack
 
@@ -60,6 +70,11 @@ medcheck/
 - 2026-08-06 — Downloaded all 50 discoverable alerts rather than the 8–10 the ticket asked for. The recent 10 are all 2025, which would have made "inspect PDFs from different eras" impossible; the full set is ~15 MB and the fetch is idempotent.
 - 2026-08-06 — Phase 0 structural profiling lives in `data/raw/profile_pdfs.py` (throwaway), not `src/parse/`, to respect the ticket boundary. It measures shape only — no normalization.
 - 2026-08-06 — **Phase 1 pivots to JSON-first**, given the discovery that CDSCO's portal covers Jan-2019→present more completely than the PDF corpus does. Phase 1a (JSON ingestion, `src/ingest/`) is now the primary path and comes first; Phase 1b (PDF layout parsers) is deferred and scoped down to pre-2019 backfill only. See `plan.md` §4 Phase 1.
+- 2026-08-06 — **id scheme:** `NSQ_<alert_month>_<12 hex of sha256>` over `alert_month|batch|drug|manufacturer|testing_lab|failure_reason`. Manufacturer is in the key because §5.4 batch numbers aren't unique; lab and reason are in it because CDSCO legitimately lists one batch twice when two labs tested it. Spurious uses `SPU_<num_id>` when the portal gives one, else the same hash. Collisions are detected and disambiguated with a flag, never resolved by silent overwrite. Full rationale in `docs/methodology.md` §2.
+- 2026-08-06 — Unmapped failure reasons go to `["other"]` + a flag rather than being forced into the nearest §3.3 bucket. Bacterial endotoxins specifically was *not* folded into `microbial_contamination` — endotoxins can be present without viable organisms, so merging them would misreport the regulator.
+- 2026-08-06 — `state` is derived only from an explicit state field, an exact state-name match, or one of seven unambiguous abbreviations (`U.P.`, `H.P.`, `M.P.`, `T.N.`, `W.B.`, `J&K`, `New Delhi`). `A.P.` and `U.K.` are excluded as ambiguous. Two different states named → null + `state_ambiguous` flag.
+- 2026-08-06 — `label_claim_disputed` is null (not 0) for all NSQ records: the NSQ endpoint has no dispute field, so null means "not published", not "not disputed". Only the spurious endpoint carries `str_firm_reply`/`str_nsq_remarks`, and both are appended verbatim to `failure_reason_raw` so the published wording travels with the boolean (§1.1).
+- 2026-08-06 — Cross-validation is a throwaway script in `data/raw/crossvalidate.py`, not `src/`, matching the Phase 0 precedent for discovery-only tooling.
 - 2026-08-06 — `nsq_records` schema changed: `source_pdf_url` → `source_url` + new `source_type` ("pdf"|"portal_json"), since records can now come from a JSON portal query, not just a PDF. `failure_category` changed from a single value to a JSON array, since `NSQ Result` is multi-valued at the source. Non-negotiable §1.1 wording updated to match ("link to its source" instead of "link to the source PDF").
 
 ## Key learnings / gotchas
@@ -80,3 +95,14 @@ medcheck/
 - **CDSCO never links PDFs directly.** Downloads go through `download_file_division.jsp?num_id=<base64 id>`, which returns a ~275-byte HTML wrapper containing an `<iframe src='...pdf'>`. Two requests per download.
 - **Scrape only `<tbody>`.** Every CDSCO page has a sidebar `<marquee>` repeating alert links; unscoped scraping double-counts. The listing table ships all 300 rows inline — pagination is client-side.
 - **cdsco.gov.in is slow** (4–20s responses) but was up throughout. `fetch.py` retries 3× with linear backoff.
+- **The two spurious endpoints return different field sets.** `viewPublicSpuriousDrugData` (current month) gives 23 fields including a stable `num_id`, `str_manufacturing_state` and `str_dosage_form`. The per-month `filteredSpuriousDrugTable` gives only 13 and has **no `num_id`**. Don't assume one shape per tab.
+- **The portal is NOT a strict superset of the PDFs.** Jun-2025: 187 of 188 PDF batches are in the JSON, but batch `1-3098` (Dextrose Injection I.P. 5%w/v, M/s. Tam-Bran) appears only in the PDF. Keep the PDF path alive as a cross-check (§5.8), don't retire it.
+- **The portal and the PDFs disagree on central vs state.** 27 of 184 Jun-2025 records sit in the State PDF but are labelled `CDSCO lab` by the portal. The portal is internally consistent about it, so it's a real disagreement between two CDSCO publications, not a parse error. `FDA Lab, Mumbai` — a state lab — is labelled `CDSCO lab`.
+- **Portal dates are clean, unlike the PDFs.** Every `dt_*` value is `Mon-YYYY`; only 100/6,126 mfg and 105/6,126 expiry dates are empty. The messy formats catalogued in `pdf_inventory.md` §4.5 are a PDF problem, so `norm_date` handles them for Phase 1b but they never fire on portal data.
+- **`str_reporting_source` has four casings plus a junk value** — `CDSCO lab`, `CDSCO Labs`, `State lab`, `State Lab`, and one `Not applicable`. Match case-insensitively on substrings.
+- **The portal mangles typographic quotes into literal `?`** — e.g. `It fails the test ?Dissolution? as per IP`, `Amritsar ? 143001`. Not an encoding fix we can safely reverse, so it's normalized to whitespace and the original is kept in the `*_raw` column.
+- **Spurious records name no manufacturer.** 51 records carry the literal string `Under Investigation` in `str_manufactured_by` because the true maker of a counterfeit is unknown. Flagged `manufacturer_unknown_placeholder` so Phase 2 never resolves it into a company entity — treating it as one would be a §1.1 violation.
+- **A single PDF can change column count mid-document.** The Jun-2025 spurious alert has 12 columns on page 1 and 10 on page 2. Phase 1b must locate columns per-table from the header, not by fixed index.
+- **`?pH?`, `Uniformity of weight`, `Water`, `Bacterial endotoxins`, `Loss on Drying` have no §3.3 bucket** — 657 records (10.7%) land in `other` as a result. That's the vocabulary being too small, not the mapper failing.
+- **State names appear inside company names and road names.** "M/s. Karnataka Antibiotics… Palghar, Maharashtra", "G.I.D.C. Kerala (Bavla), Ahmedabad, Gujarat", "Delhi-Mathura Road, Faridabad, Haryana". Naive first-match state extraction would be wrong on all three — hence the ambiguity check.
+- **Himachal Pradesh dominates** (1,258 of 3,576 records with a derived state), then Uttarakhand (562) and Gujarat (365). Consistent with Baddi/Solan being India's pharma manufacturing hub — a sanity check that state derivation isn't badly skewed.

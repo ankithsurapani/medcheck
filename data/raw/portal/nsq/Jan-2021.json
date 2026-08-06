@@ -1,0 +1,188 @@
+{
+ "url": "https://cdscoonline.gov.in/CDSCO/filteredNsqDrugTable?month=Jan-2021&source=All&tab=nsq",
+ "tab": "nsq",
+ "month": "Jan-2021",
+ "fetched_at": "2026-08-06T14:05:02+05:30",
+ "payload": {
+  "iTotalDisplayRecords": 16,
+  "iTotalRecords": 16,
+  "aaData": [
+   {
+    "str_product_name": "Hand Sanitizer",
+    "str_batch_no": "V20EL011",
+    "dt_manufacturing_date": "Apr-2020",
+    "dt_expiry_date": "Aug-2022",
+    "str_manufactured_by": "M/s. Vowcare Products, Plot No. 77, Zone 4th, I.G.C., SIDCO Lassipora, Dist. Pulwama, Jammu & Kashmir 192305",
+    "str_nsq_result": "Assay of Isopropyl Alcohol Hydrogen Peroxide Glycerol",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "JAN-2021"
+   },
+   {
+    "str_product_name": "DAYS 2X HAND SANITIZER",
+    "str_batch_no": "BYHS29",
+    "dt_manufacturing_date": "Sep-2020",
+    "dt_expiry_date": "Aug-2023",
+    "str_manufactured_by": "M/s. Yadav?s Health & Beauty Herbal Products, Plot No. 25, EPIP, Phase-2, Thana, Baddi, Distt. Solan, Himachal Pradesh - 173205",
+    "str_nsq_result": "Assay of Ethyl Alcohol",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "JAN-2021"
+   },
+   {
+    "str_product_name": "Nitzo - 2.6 (Controlled Release Tablets of Nitroglycerin)",
+    "str_batch_no": "419-1544",
+    "dt_manufacturing_date": "Nov-2019",
+    "dt_expiry_date": "Oct-2021",
+    "str_manufactured_by": "M/s. Zee Laboratories, 47, Industrial Area, Paonta Sahib ? 173025, Himachal Pradesh",
+    "str_nsq_result": "Assay of Glyceryl Trinitrate",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "JAN-2021"
+   },
+   {
+    "str_product_name": "Clopidogrel & Aspirin Tablets",
+    "str_batch_no": "TACB-013",
+    "dt_manufacturing_date": "Jul-2019",
+    "dt_expiry_date": "Jun-2021",
+    "str_manufactured_by": "M/s. Medipol Pharmaceutical India Pvt. Ltd., 1199/3, Bhud, Baddi, Dist. Solan, Himachal Pradesh",
+    "str_nsq_result": "Free salicylic acid, Disintegration, Assay of Aspirin",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDTL Mumbai",
+    "dt_reporting_month_year": "JAN-2021"
+   },
+   {
+    "str_product_name": "Amitriptyline Tablets I.P.",
+    "str_batch_no": "TAMF-026",
+    "dt_manufacturing_date": "Mar-2020",
+    "dt_expiry_date": "Feb-2022",
+    "str_manufactured_by": "M/s. Medipol Pharmaceutical India Pvt. Ltd., 1199/3, Bhud, Baddi, Dist. Solan, Himachal Pradesh",
+    "str_nsq_result": "Description",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "JAN-2021"
+   },
+   {
+    "str_product_name": "Tolvat 30 (Tolvaptan\nTablets 30 mg)",
+    "str_batch_no": "BRA02174D",
+    "dt_manufacturing_date": "Feb-2020",
+    "dt_expiry_date": "Jan-2023",
+    "str_manufactured_by": "M/s. MSN Laboratories Private Limited, Plot No. 42, Anrich Industrial Estate, Bollaram, Sangareddy District-502325, Telangana",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "JAN-2021"
+   },
+   {
+    "str_product_name": "Amlor -2.5(Amlodipine Besylate Tablets I.P. 2.5 mg)",
+    "str_batch_no": "KN20001",
+    "dt_manufacturing_date": "May-2020",
+    "dt_expiry_date": "Apr-2022",
+    "str_manufactured_by": "M/s. Ortin Laboratories Ltd., 275 & 278 (Part), I.D.A. Pashamylaram -502307, Sangareddy Dist., Telangana",
+    "str_nsq_result": "Dissolution, Related Substances and Assay",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "JAN-2021"
+   },
+   {
+    "str_product_name": "Disilox MPS (Aluminium, Magnesium & Simethicone Oral Suspension I.P.)",
+    "str_batch_no": "C20C92",
+    "dt_manufacturing_date": "Jun-2019",
+    "dt_expiry_date": "May-2022",
+    "str_manufactured_by": "M/s. Stadmed Private Limited, 15, Jawpore Road, Kolkata-700074",
+    "str_nsq_result": "Microbial Contamination (Total Aerobic Viable Count)",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "JAN-2021"
+   },
+   {
+    "str_product_name": "Diclofenac Gastro Resistant Tablets I.P. 50 mg (Regunac -50)",
+    "str_batch_no": "FZ57K801",
+    "dt_manufacturing_date": "Oct-2018",
+    "dt_expiry_date": "Sep-2021",
+    "str_manufactured_by": "M/s. Zim Laboratories Ltd., B-21/22, MIDC Area, Kalmeshwar, Nagpur, Maharashtra",
+    "str_nsq_result": "Description",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "JAN-2021"
+   },
+   {
+    "str_product_name": "1. Ancef 1 gm (Ceftriaxone Injection\nI.P.)\n2. Sterile Water For Injection I.P. 10 ml",
+    "str_batch_no": "13018A\n1902022",
+    "dt_manufacturing_date": "Mar-2019",
+    "dt_expiry_date": "Jan-2022",
+    "str_manufactured_by": "M/s. Osper Formulations Pvt. Ltd., Plot No. 134-B, Export Promotion Industrial Park, Phase-1, Jharmajri Baddi, Dist. Solan, Himachal Pradesh\nM/s. Legency Remedies Pvt. Ltd., P.O. Baddi, Dist. Solan, Himachal Pradesh",
+    "str_nsq_result": "Particulate Matter & Clarity of Solution\nIdentification of Chlorhexidine Gluconate",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "JAN-2021"
+   },
+   {
+    "str_product_name": "(Omeprazole Capsules I.P.) 20 mg",
+    "str_batch_no": "5703320",
+    "dt_manufacturing_date": "Jun-2020",
+    "dt_expiry_date": "May-2022",
+    "str_manufactured_by": "M/s. Karnataka Antibiotics & Pharmaceuticals Ltd. (A Govt. of India Enterprise), Plot No. 14, II Phase, Peenya, Bengaluru - 560058, Karnataka",
+    "str_nsq_result": "Dissolution (Acid Stage)",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDTL Mumbai",
+    "dt_reporting_month_year": "JAN-2021"
+   },
+   {
+    "str_product_name": "Omnikacin ? 250 (Amikacin Injection I.P.)",
+    "str_batch_no": "C2VAR02",
+    "dt_manufacturing_date": "Jan-2020",
+    "dt_expiry_date": "Dec-2021",
+    "str_manufactured_by": "M/s. Akums Drugs & Pharmaceuticals Ltd., 2, 3, 4 & 5, Sector 6-B, I.I.E., SIDCUL, Ranipur, Haridwar-249403, Uttarakhand",
+    "str_nsq_result": "Assay",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "JAN-2021"
+   },
+   {
+    "str_product_name": "Ontic Syrup (Ondansetron Oral Solution I.P- 30 ml)",
+    "str_batch_no": "CL19136",
+    "dt_manufacturing_date": "Oct-2019",
+    "dt_expiry_date": "Sep-2021",
+    "str_manufactured_by": "M/s. Corona Remedies Pvt. Ltd., Vill. Jatoli, P.O. Oachghat, Tehsil: Solan, Dist. Solan, Himachal Pradesh - 173223",
+    "str_nsq_result": "Description",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "JAN-2021"
+   },
+   {
+    "str_product_name": "VEDARK INSTANT HAND SANITIZER",
+    "str_batch_no": "A-142",
+    "dt_manufacturing_date": "May-2020",
+    "dt_expiry_date": "Apr-2022",
+    "str_manufactured_by": "M/s. Gladios Products Pvt. Ltd., 31, Virat Industrial Estate, Dhanot, Gandhinagar-382721, Gujarat",
+    "str_nsq_result": "Not applicable",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "JAN-2021"
+   },
+   {
+    "str_product_name": "Doxycycline and Lactic Acid Bacillus Capsules (Mesodox LB Capsules)",
+    "str_batch_no": "HBC-4052",
+    "dt_manufacturing_date": "Feb-2020",
+    "dt_expiry_date": "Jul-2021",
+    "str_manufactured_by": "M/s. Haustus Biotech Pvt. Ltd., 44-45, Industrial Area, Tahliwal, Distt. Una, Himachal Pradesh",
+    "str_nsq_result": "Uniformity of filled weight",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "JAN-2021"
+   },
+   {
+    "str_product_name": "Omecot Capsules (Omperazole Capsules IP)",
+    "str_batch_no": "MC 19235",
+    "dt_manufacturing_date": "Aug-2019",
+    "dt_expiry_date": "Jul-2021",
+    "str_manufactured_by": "M/s. Mascot Health Series Pvt. Ltd., Plot No. 79, 80, Sector 6 A, IIE, Sidcul, Haridwar - 249403, Uttarakhand",
+    "str_nsq_result": "Assay & Dissolution",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDTL Mumbai",
+    "dt_reporting_month_year": "JAN-2021"
+   }
+  ]
+ }
+}

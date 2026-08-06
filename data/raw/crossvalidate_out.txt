@@ -1,0 +1,50 @@
+# Cross-validation — alert month 2025-06
+
+## central_lab
+  PDF  : 2025-07-18_cdsco-nsq-alert-for-the-month-of-june-2025_d2879e.pdf  -> 55 data rows
+  JSON : 81 records in db
+  delta: +26
+  batches in both : 54
+  only in PDF     : 1 ['13098']
+  only in JSON    : 27 ['2023113', '2451', 'apgt24513', 'b82', 'cht23320', 'd0241', 'dp4259', 'e240113a']
+
+## state_lab
+  PDF  : 2025-07-18_state-nsq-alert-for-the-month-of-june-2025_5bd0fd.pdf  -> 130 data rows
+  JSON : 103 records in db
+  delta: -27
+  batches in both : 102
+  only in PDF     : 27 ['2023113', '2451', 'apgt24513', 'b82', 'cht23320', 'd0241', 'dp4259', 'e240113a']
+  only in JSON    : 0 []
+
+## spurious
+  PDF  : 2025-07-18_list-of-spurious-drugs-for-the-month-of-june-2025_f9baf5.pdf  -> 4 data rows
+  JSON : 4 records in db
+  delta: +0
+  batches in both : 3
+  only in PDF     : 1 ['052027']
+  only in JSON    : 1 ['sif2736a']
+
+## union across sections
+  distinct batches in PDFs : 188
+  distinct batches in JSON : 187
+  in both                  : 186
+  only in PDFs             : 2 ['052027', '13098']
+  only in JSON             : 1 ['sif2736a']
+  JSON recall of PDF batches: 98.9%
+
+## Spot-check — 10 records, JSON vs PDF text
+  [13098] NOT FOUND in db
+  [p24l220] drug=Y mfr=Y lab=Y  Dexamethasone Sodium Phosphate Injection I.P. 
+  [s4h046] drug=Y mfr=Y lab=Y  Methylcobalamin Injection
+  [z24185] drug=Y mfr=Y lab=Y  Tranexamic Acid Injection IP 500 mg/5ml
+  [aox2402] drug=Y mfr=Y lab=Y  Oxytocin Injection I.P. 1ml
+  [ezf2107] drug=Y mfr=Y lab=Y  Calcium Aspartate, Calcium Orotate, Calcitriol
+  [p25l269] drug=Y mfr=Y lab=Y  Ascorbic Acid Injection I.P. (Vitson-C)
+  [al92] drug=Y mfr=Y lab=Y  Adrenaline Injection IP (Aline Injection 1 ml.
+  [mv24b36] drug=Y mfr=Y lab=Y  Calcium Gluconate Injection I.P. 10 ml.
+  [cg230372f] drug=Y mfr=Y lab=Y  Rabeprazole Sodium (EC) & Domperidone (SR) Cap
+
+  agreed on all 3 fields: 9/10
+
+## machine summary
+[["central_lab", 55, 81, 54, 1, 27], ["state_lab", 130, 103, 102, 27, 0], ["spurious", 4, 4, 3, 1, 1]]

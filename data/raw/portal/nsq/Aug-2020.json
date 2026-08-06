@@ -1,0 +1,254 @@
+{
+ "url": "https://cdscoonline.gov.in/CDSCO/filteredNsqDrugTable?month=Aug-2020&source=All&tab=nsq",
+ "tab": "nsq",
+ "month": "Aug-2020",
+ "fetched_at": "2026-08-06T14:04:59+05:30",
+ "payload": {
+  "iTotalDisplayRecords": 22,
+  "iTotalRecords": 22,
+  "aaData": [
+   {
+    "str_product_name": "(Allyn Instant Dry Hand Rub)",
+    "str_batch_no": "PKE-06",
+    "dt_manufacturing_date": "Jun-2020",
+    "dt_expiry_date": "May-2023",
+    "str_manufactured_by": "M/s. P.K. Cosmetics, C-152, Sector-2, DSIIDC, Bawana Industrial Area, Delhi-110039",
+    "str_nsq_result": "Assay of Ethyl Alcohol",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "AUG-2020"
+   },
+   {
+    "str_product_name": "Diclofenac gel B.P. 1% w/w",
+    "str_batch_no": "8916",
+    "dt_manufacturing_date": "Sep-2019",
+    "dt_expiry_date": "Aug-2020",
+    "str_manufactured_by": "M/s. Syncom Healthcare Ltd., D-42, IIE SIDCUL, Selaqui, Dehradun-248197, Uttarakhand",
+    "str_nsq_result": "ASSAY",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "AUG-2020"
+   },
+   {
+    "str_product_name": "Clidinium Bromide, Chlordiazepoxide and Magnesium Hydroxide Tablets (Ulcon Tablets)",
+    "str_batch_no": "ULGT20031",
+    "dt_manufacturing_date": "Jan-2020",
+    "dt_expiry_date": "Dec-2021",
+    "str_manufactured_by": "M/s. Unimarck Healthcare Ltd., Plot No. 25 & 37, Sector-6A, SIDCUL, Haridwar-249403 (Uttarakhand)",
+    "str_nsq_result": "Assay of Clidinium Bromide",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "AUG-2020"
+   },
+   {
+    "str_product_name": "Winpress-XL 5mg (Prazosin Hydrochloride Sustained Release Tablets)",
+    "str_batch_no": "PST9001",
+    "dt_manufacturing_date": "Feb-2019",
+    "dt_expiry_date": "Jan-2021",
+    "str_manufactured_by": "M/s. Vivimed Labs Limited, D-125 & 128, Phase III, IDA, Jeedimetla, Hyderabad-500055, Telangana",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "AUG-2020"
+   },
+   {
+    "str_product_name": "Vitamin C, Vitamin B-12, Folic Acid and Niacinamide Injection\n(Eldervit-12 Im/Iv Drip)",
+    "str_batch_no": "20NI0212",
+    "dt_manufacturing_date": "Feb-2020",
+    "dt_expiry_date": "Jan-2022",
+    "str_manufactured_by": "M/s. Nuclotec Remedies Pvt. Ltd., 14-Mile Stone, Rudrapur-Kashipur Road, Gadarpur, Distt. U.S. Nagar, (Uttarakhand)-263152",
+    "str_nsq_result": "Sterility A, Sterility B",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "AUG-2020"
+   },
+   {
+    "str_product_name": "New Fame N Love Fairness Cream",
+    "str_batch_no": "5",
+    "dt_manufacturing_date": "Jul-2020",
+    "dt_expiry_date": "Jun-2023",
+    "str_manufactured_by": "M/s. P.C. Cosmetics",
+    "str_nsq_result": "Total Aerobic Microbial Count, Total yeast and Mould Count, Pseudomonas aeruginosa per gram",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "AUG-2020"
+   },
+   {
+    "str_product_name": "(Allyn Instant Dry Hand Rub)",
+    "str_batch_no": "PKEA-07",
+    "dt_manufacturing_date": "Jul-2020",
+    "dt_expiry_date": "Jul-2023",
+    "str_manufactured_by": "M/s. P.K. Cosmetics, C-152, Sector-2, DSIIDC, Bawana Industrial Area, Delhi-110039",
+    "str_nsq_result": "Assay of Ethyl Alcohol",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "AUG-2020"
+   },
+   {
+    "str_product_name": "Vitamin C, Vitamin B-12, Folic Acid and Niacinamide Injection ( Eldervit- 12 Im/Iv Drip)",
+    "str_batch_no": "20NI0210",
+    "dt_manufacturing_date": "Feb-2020",
+    "dt_expiry_date": "Jan-2022",
+    "str_manufactured_by": "M/s. Nuclotec Remedies Pvt. Ltd., 14-Mile Stone, Rudrapur-Kashipur Road, Gadarpur, Distt. U.S. Nagar, (Uttarakhand)-263152",
+    "str_nsq_result": "Particulate Matter",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "AUG-2020"
+   },
+   {
+    "str_product_name": "Ethyl Alcohol Solution 70% (Handzon Instant Hand Sanitizer)",
+    "str_batch_no": "HDZC-016",
+    "dt_manufacturing_date": "May-2020",
+    "dt_expiry_date": "Apr-2022",
+    "str_manufactured_by": "M/s. RPL (India) Pharmaceuticals Pvt. Ltd., D-8/5 & D-8/6, Okhla Industrial Area, Phase-1, New Delhi-110020",
+    "str_nsq_result": "Assay of Ethanol",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "AUG-2020"
+   },
+   {
+    "str_product_name": "Ethyl Alcohol, Isopropyl Alcohol and Niacinamide Hand Sanitizer Gel ( Tanzo)",
+    "str_batch_no": "SM041",
+    "dt_manufacturing_date": "Mar-2020",
+    "dt_expiry_date": "Feb-2022",
+    "str_manufactured_by": "M/s. Swiss Biotech Parentrals, Kewat No. 1138, VPO Kachhwa, Karnal-132001 (Haryana)",
+    "str_nsq_result": "Assay of Ethyl Alcohol, Isopropyl Alcohol",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "AUG-2020"
+   },
+   {
+    "str_product_name": "Instant Hand Sanitizer Original Alcohol Based (Safe Me Sanitizer)",
+    "str_batch_no": "SM/2020/508",
+    "dt_manufacturing_date": "Feb-2020",
+    "dt_expiry_date": "Jan-2022",
+    "str_manufactured_by": "M/s. KDM Goldstar Co., New Delhi-110019",
+    "str_nsq_result": "Identification for Alcohol (Ethyl Alcohol)",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "AUG-2020"
+   },
+   {
+    "str_product_name": "Cefixime Dispersible Tablets (Micfox-100 Dt Tablets)",
+    "str_batch_no": "FBT19-186B",
+    "dt_manufacturing_date": "Jun-2019",
+    "dt_expiry_date": "May-2021",
+    "str_manufactured_by": "M/s. Athens Life Sciences, Mauza Rampur Jattan, Nahan Road, Kala Amb, Distt. Sirmour, H.P.-173030",
+    "str_nsq_result": "Assay",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "AUG-2020"
+   },
+   {
+    "str_product_name": "Folic Acid Tablets\nI.P. 5mg.",
+    "str_batch_no": "T9125",
+    "dt_manufacturing_date": "May-2019",
+    "dt_expiry_date": "Apr-2022",
+    "str_manufactured_by": "M/s. Bharat Parenterals Ltd., Vill. Haripura, Ta. Savli, Dist. Vadodara-391520, Gujarat",
+    "str_nsq_result": "ASSAY",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "AUG-2020"
+   },
+   {
+    "str_product_name": "Advanced Hand Rub 70% Alcohol (RYAAL)",
+    "str_batch_no": "BO208586",
+    "dt_manufacturing_date": "Mar-2020",
+    "dt_expiry_date": "Feb-2022",
+    "str_manufactured_by": "M/s. Bo International, A91, Wazirpur Industrial Area, New Delhi-110052",
+    "str_nsq_result": "Assay of Isopropyl Alcohol and Chlorhexidine Gluconate Solution",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "AUG-2020"
+   },
+   {
+    "str_product_name": "Aciclovir Tablets IP (Herpivir-800 Tablets)",
+    "str_batch_no": "DVT197055",
+    "dt_manufacturing_date": "Jul-2019",
+    "dt_expiry_date": "Jun-2021",
+    "str_manufactured_by": "M/s. Digital Vision, 176, Mauza Ogli, Nahan Road, Kala-Amb, Distt. Sirmour (H.P.)-173030",
+    "str_nsq_result": "Uniformity of weight",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "AUG-2020"
+   },
+   {
+    "str_product_name": "Halopar (Haloperidol Injection IP 5mg/ml) 1ml.",
+    "str_batch_no": "DP9004",
+    "dt_manufacturing_date": "Jan-2019",
+    "dt_expiry_date": "Dec-2020",
+    "str_manufactured_by": "M/s. Divine Laboratories Pvt. Ltd., Block No. 471, Dabhasa, Ta. Padra, Dist. Vadodara",
+    "str_nsq_result": "Description  & Particulate Matter",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "AUG-2020"
+   },
+   {
+    "str_product_name": "Amoxycillin & Potassium Clavulanate Tablets IP 625 mg (Amzeclav-625 Tablets)",
+    "str_batch_no": "KPT-3348",
+    "dt_manufacturing_date": "Nov-2019",
+    "dt_expiry_date": "Apr-2021",
+    "str_manufactured_by": "M/s. G Nine Bioceuticals Pvt. Ltd., 208-F, Sector-3, HSIDC Industrial Estate, Karnal-132001 (Haryana)",
+    "str_nsq_result": "Dissolution (Amoxycillin Trihydrate)",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "AUG-2020"
+   },
+   {
+    "str_product_name": "Hypodermic Syringe 2ml.",
+    "str_batch_no": "19501",
+    "dt_manufacturing_date": "Dec-2019",
+    "dt_expiry_date": "Nov-2021",
+    "str_manufactured_by": "M/s. Gurumangalam International, Rancharda-382115, Ta. Kalol, Dist. Gandhinagar",
+    "str_nsq_result": "Sterility",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "AUG-2020"
+   },
+   {
+    "str_product_name": "Hypodermic Syringe 2ml.",
+    "str_batch_no": "19503",
+    "dt_manufacturing_date": "Dec-2019",
+    "dt_expiry_date": "Nov-2021",
+    "str_manufactured_by": "M/s. Gurumangalam International, Rancharda-382115, Ta. Kalol, Dist. Gandhinagar",
+    "str_nsq_result": "Sterility",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "AUG-2020"
+   },
+   {
+    "str_product_name": "Hypodermic Syringe 5ml.",
+    "str_batch_no": "19703",
+    "dt_manufacturing_date": "Dec-2019",
+    "dt_expiry_date": "Nov-2021",
+    "str_manufactured_by": "M/s. Gurumangalam International, Rancharda-382115, Ta. Kalol, Dist. Gandhinagar",
+    "str_nsq_result": "Sterility",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "AUG-2020"
+   },
+   {
+    "str_product_name": "Isopropyl Alcohol and Chlorhexidine Gluconate Hand Sanitizer\n(Vibpure Hand Sanitizer)",
+    "str_batch_no": "231H",
+    "dt_manufacturing_date": "Jun-2020",
+    "dt_expiry_date": "May-2022",
+    "str_manufactured_by": "M/s. Haustus Biotech Pvt. Ltd., 44-45, Ind. Area, Tahliwal, Distt. Una (H.P.)",
+    "str_nsq_result": "Assay of Isopropyl Alcohol",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "AUG-2020"
+   },
+   {
+    "str_product_name": "Ethanol Hand Sanitizer (Instawash Hand Sanitizer)",
+    "str_batch_no": "247H",
+    "dt_manufacturing_date": "Jun-2020",
+    "dt_expiry_date": "May-2022",
+    "str_manufactured_by": "M/s. Haustus Biotech Pvt. Ltd., 44-45, Ind. Area, Tahliwal, Distt. Una (H.P.)",
+    "str_nsq_result": "Assay of Ethanol",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "AUG-2020"
+   }
+  ]
+ }
+}

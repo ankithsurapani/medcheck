@@ -1,0 +1,210 @@
+{
+ "url": "https://cdscoonline.gov.in/CDSCO/filteredNsqDrugTable?month=Jul-2019&source=All&tab=nsq",
+ "tab": "nsq",
+ "month": "Jul-2019",
+ "fetched_at": "2026-08-06T14:04:52+05:30",
+ "payload": {
+  "iTotalDisplayRecords": 18,
+  "iTotalRecords": 18,
+  "aaData": [
+   {
+    "str_product_name": "Diclofenac Sodium Injection I.P.",
+    "str_batch_no": "I-17507",
+    "dt_manufacturing_date": "Jul-2018",
+    "dt_expiry_date": "Jun-2020",
+    "str_manufactured_by": "M/s. Jackson Laboratories Pvt. Ltd., 22-24, Majitha Road, Bye Pass, Amritsar-143001",
+    "str_nsq_result": "Description & Particulate Matter",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "JUL-2019"
+   },
+   {
+    "str_product_name": "Albendazole Tablets I.P. 400 mg",
+    "str_batch_no": "ABT18032",
+    "dt_manufacturing_date": "Aug-2018",
+    "dt_expiry_date": "Jul-2020",
+    "str_manufactured_by": "M/s. Vivek Pharmachem (India) Ltd., NH-8, Chimanpura, Amer, Jaipur-303102, Rajasthan",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "JUL-2019"
+   },
+   {
+    "str_product_name": "Regunac®  - 50 (Diclofenac Gastro- Resistant Tablets\nI.P. 50 mg)",
+    "str_batch_no": "FZ57F801",
+    "dt_manufacturing_date": "Jun-2018",
+    "dt_expiry_date": "May-2021",
+    "str_manufactured_by": "M/s. Zim Laboratories Limited, B-21/22, MIDC Area, Kalmeshwar-441501, Dist. Nagpur, Maharashtra",
+    "str_nsq_result": "Description",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "JUL-2019"
+   },
+   {
+    "str_product_name": "Parazim 650 (Paracetamol Tablets I.P. 650 mg)",
+    "str_batch_no": "FAX8A801",
+    "dt_manufacturing_date": "Jan-2018",
+    "dt_expiry_date": "Dec-2020",
+    "str_manufactured_by": "M/s. Zim Laboratories Limited, B-21/22, MIDC, Kalmeshwar-441501, Dist. Nagpur, Maharashtra",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "JUL-2019"
+   },
+   {
+    "str_product_name": "Ewit-DSR Capsules (Esomeprazole- 40mg (E.C) & Domperidone 30 mg (SR) Capsules)",
+    "str_batch_no": "C-6601",
+    "dt_manufacturing_date": "Aug-2018",
+    "dt_expiry_date": "Jul-2020",
+    "str_manufactured_by": "M/s. A.S. Lifesciences, 136, Ind. Estate Kutana-124001, Haryana",
+    "str_nsq_result": "Dissolution for Esomeprazole",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDTL Mumbai",
+    "dt_reporting_month_year": "JUL-2019"
+   },
+   {
+    "str_product_name": "(Cefotaxime Injection IP)",
+    "str_batch_no": "B028004A",
+    "dt_manufacturing_date": "Jul-2018",
+    "dt_expiry_date": "Jun-2020",
+    "str_manufactured_by": "M/s. ANG Lifesciences India Ltd., Village Kishanpura, Nalagarh Road, Tehsil Baddi, Distt. Solan, H.P.-174101",
+    "str_nsq_result": "Related Substances",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "JUL-2019"
+   },
+   {
+    "str_product_name": "Phenytoin Oral Suspension I.P.",
+    "str_batch_no": "8L03129",
+    "dt_manufacturing_date": "Apr-2018",
+    "dt_expiry_date": "Mar-2020",
+    "str_manufactured_by": "M/s. Ciron Drugs & Pharmaceuticals Pvt. Ltd., N-118, N-119, N-113, M.I.D.C., Tarapur, Boisar, Palghar-401506",
+    "str_nsq_result": "Assay",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "JUL-2019"
+   },
+   {
+    "str_product_name": "Diclofenac Sodium Tablets I.P. 50 mg",
+    "str_batch_no": "1511917",
+    "dt_manufacturing_date": "Oct-2017",
+    "dt_expiry_date": "Sep-2019",
+    "str_manufactured_by": "M/s. Karnataka Antibiotics & Pharmaceuticals Ltd., Plot No. 14, II Phase, Peenya, Bangalore-560058",
+    "str_nsq_result": "Disintegration & Related Substances",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "JUL-2019"
+   },
+   {
+    "str_product_name": "Paracetamol Tablets I.P. 500 mg",
+    "str_batch_no": "PR1902",
+    "dt_manufacturing_date": "Jan-2019",
+    "dt_expiry_date": "Dec-2020",
+    "str_manufactured_by": "M/s. Danish Health Care (P) Ltd., 76/27-28, Industrial Estate, Maxi Road, Ujjain-456010 (M.P.)",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "JUL-2019"
+   },
+   {
+    "str_product_name": "Pantoprazole Gastro Resistant Tablets I.P. 40 mg",
+    "str_batch_no": "T-7164",
+    "dt_manufacturing_date": "Oct-2018",
+    "dt_expiry_date": "Sep-2020",
+    "str_manufactured_by": "M/s. Kwality Pharmaceuticals Ltd., Nag Kalan, Majitha Road, Amritsar (Punjab)",
+    "str_nsq_result": "Dissolution (Both Acid Stage &\nBuffer Stage)",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "JUL-2019"
+   },
+   {
+    "str_product_name": "Calcium and Vitamin D3 Tablets IP\n(500 mg + 250 IU)",
+    "str_batch_no": "CWTV-56",
+    "dt_manufacturing_date": "Sep-2018",
+    "dt_expiry_date": "Aug-2020",
+    "str_manufactured_by": "M/s. Nestor Pharmaceuticals, 11, Western Extension Area, Faridabad-121001, Haryana",
+    "str_nsq_result": "Assay of Vitamin D3",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDTL Mumbai",
+    "dt_reporting_month_year": "JUL-2019"
+   },
+   {
+    "str_product_name": "Prednisolone Acetate and Moxifloxacin Ophthalmic Suspension(M- Floxin-P Eye\nDrops)",
+    "str_batch_no": "O-066",
+    "dt_manufacturing_date": "Apr-2018",
+    "dt_expiry_date": "Mar-2020",
+    "str_manufactured_by": "M/s. Oscar Remedies Pvt. Ltd., Oscar House, Baddi Majara, Yamuna Nagar-135001, Haryana",
+    "str_nsq_result": "Particle size and Assay of Predisolone Acetate",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "JUL-2019"
+   },
+   {
+    "str_product_name": "Ciprofloxacin Tablets IP (P-CIP 500 Tabelets)",
+    "str_batch_no": "R-21119",
+    "dt_manufacturing_date": "Dec-2018",
+    "dt_expiry_date": "Nov-2020",
+    "str_manufactured_by": "M/s. Pansun Pharmaceuticals, Plot No. 183, Sector 6A, IIE, Sidhgual, Haridwar, Uttarakhand",
+    "str_nsq_result": "Identification and Assay",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "JUL-2019"
+   },
+   {
+    "str_product_name": "Multivitamin Tablets with minerals and Trace Elements (Supradyn Tablets)",
+    "str_batch_no": "MH3080",
+    "dt_manufacturing_date": "Feb-2019",
+    "dt_expiry_date": "Oct-2020",
+    "str_manufactured_by": "M/s. Piramal Enterprises Ltd., K-1, Addl. MIDC area, Mahad-402302, Maharashtra",
+    "str_nsq_result": "Assay of Cyanocobalamin",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "JUL-2019"
+   },
+   {
+    "str_product_name": "Tolperison Hydrochloride IP",
+    "str_batch_no": "CHT019001",
+    "dt_manufacturing_date": "Feb-2019",
+    "dt_expiry_date": "Jan-2022",
+    "str_manufactured_by": "M/s. Sai Tech Pharmaceuticals Pvt. Ltd., A-145/B, Khairane MIDC, Navi Mumbai-400705",
+    "str_nsq_result": "Test for Piperidine Hydrochloride",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDTL Mumbai",
+    "dt_reporting_month_year": "JUL-2019"
+   },
+   {
+    "str_product_name": "Fexofendine Tablets I.P. 180 mg",
+    "str_batch_no": "JDT-3617",
+    "dt_manufacturing_date": "Sep-2018",
+    "dt_expiry_date": "Aug-2020",
+    "str_manufactured_by": "M/s. Jpee Drugs, Plot No. 53, Sector-6A, SIDCUL, Haridwar, Uttarakhand",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "JUL-2019"
+   },
+   {
+    "str_product_name": "Diclofenac Sodium Tablets I.P. 50 mg",
+    "str_batch_no": "1508318",
+    "dt_manufacturing_date": "May-2018",
+    "dt_expiry_date": "Apr-2020",
+    "str_manufactured_by": "M/s. Karnataka Antibiotics & Pharmaceuticals Ltd., Plot No. 14, II Phase, Peenya, Bangalore-560058",
+    "str_nsq_result": "Related Substances",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "JUL-2019"
+   },
+   {
+    "str_product_name": "Diclofenac Sodium Tablets I.P. 50 mg",
+    "str_batch_no": "1512117",
+    "dt_manufacturing_date": "Nov-2017",
+    "dt_expiry_date": "Oct-2019",
+    "str_manufactured_by": "M/s. Karnataka Antibiotics & Pharmaceuticals Ltd., Plot No. 14, II Phase, Peenya, Bangalore-560058",
+    "str_nsq_result": "Disintegration & Related Substances",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "JUL-2019"
+   }
+  ]
+ }
+}

@@ -1,0 +1,287 @@
+{
+ "url": "https://cdscoonline.gov.in/CDSCO/filteredNsqDrugTable?month=May-2020&source=All&tab=nsq",
+ "tab": "nsq",
+ "month": "May-2020",
+ "fetched_at": "2026-08-06T14:04:58+05:30",
+ "payload": {
+  "iTotalDisplayRecords": 25,
+  "iTotalRecords": 25,
+  "aaData": [
+   {
+    "str_product_name": "Gauze Swabs B.P.\n:88: Type 17",
+    "str_batch_no": "1907225",
+    "dt_manufacturing_date": "Jul-2019",
+    "dt_expiry_date": "Jun-2022",
+    "str_manufactured_by": "M/s. Premier Enterprises, Chatrapatti -626 102",
+    "str_nsq_result": "Threads per stated Length and Wt. per Unit Area",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "MAY-2020"
+   },
+   {
+    "str_product_name": "Fungdid- B Cream (Clotrimazole with Beclomethasone Dipropionate Cream)15 g",
+    "str_batch_no": "19285",
+    "dt_manufacturing_date": "Oct-2019",
+    "dt_expiry_date": "Sep-2021",
+    "str_manufactured_by": "M/s. Rednex Pharmaceuticals, LS No-142, Nr. HBS, Chacharvadi Vasna, Ta Sanand, Di. Ahmedabad",
+    "str_nsq_result": "Assay of Beclomethas one Dipropionate",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "MAY-2020"
+   },
+   {
+    "str_product_name": "Fungdid- B Cream (Clotrimazole with Beclomethasone Dipropionate Cream)15 g",
+    "str_batch_no": "19170",
+    "dt_manufacturing_date": "Aug-2019",
+    "dt_expiry_date": "Jul-2021",
+    "str_manufactured_by": "M/s. Rednex Pharmaceuticals, LS No-142, Nr. HBS, Chacharvadi Vasna, Ta Sanand, Di. Ahmedabad",
+    "str_nsq_result": "Assay of Beclomethas one Dipropionate",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "MAY-2020"
+   },
+   {
+    "str_product_name": "Onstal - 4 (Ondansetron Tablets IP 4 mg)",
+    "str_batch_no": "T2227",
+    "dt_manufacturing_date": "Aug-2018",
+    "dt_expiry_date": "Jul-2020",
+    "str_manufactured_by": "M/s. Stallion Laboratories, Pvt. Ltd., C-1B, 305/2, 3, 4 & 5, G.I.D.C, Kerala (Bavla), Distt. Ahmedabad â?? 382220, Gujarat, India",
+    "str_nsq_result": "Description",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "MAY-2020"
+   },
+   {
+    "str_product_name": "Calcigard -10 (Nifedipine Capsules IP)",
+    "str_batch_no": "S175E004",
+    "dt_manufacturing_date": "Jun-2018",
+    "dt_expiry_date": "May-2020",
+    "str_manufactured_by": "M/s. Torrent Pharmaceuticals Ltd., At: Plot No. 708/6, Behind Somnath Road, Dabhel Village, Nani Daman -396215",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "MAY-2020"
+   },
+   {
+    "str_product_name": "Dexamethasone Injection IP (Uni- Dexa Injection)",
+    "str_batch_no": "ULI-180019",
+    "dt_manufacturing_date": "Jul-2018",
+    "dt_expiry_date": "Jun-2020",
+    "str_manufactured_by": "M/s. Unital Formulations 144- B EPIP, Phase-1, Jharmajri Baddi, Solan (H.P.)",
+    "str_nsq_result": "Sterility, Free Dexamethas one and the Assay of Dexamethas one Sodium\nPhosphate",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "MAY-2020"
+   },
+   {
+    "str_product_name": "Alprazolam Tablets IP",
+    "str_batch_no": "TAZP-003",
+    "dt_manufacturing_date": "Dec-2018",
+    "dt_expiry_date": "Nov-2020",
+    "str_manufactured_by": "M/s. Medipol Pharmaceutical India Pvt. Ltd., 1199/3, Bhud, Baddi, Distt. Solan, H.P. India",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "MAY-2020"
+   },
+   {
+    "str_product_name": "Metoclopramide Hydrochloride Injection IP 5 mg/ml",
+    "str_batch_no": "MEI1902",
+    "dt_manufacturing_date": "May-2019",
+    "dt_expiry_date": "Apr-2021",
+    "str_manufactured_by": "M/s. Modern Laboratories 45-47, Sector D-2, Sanwer Road, Indore (M.P.) 452015, India",
+    "str_nsq_result": "pH",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "MAY-2020"
+   },
+   {
+    "str_product_name": "ReGermina (Prebiotic & Probiotics Capsules)",
+    "str_batch_no": "P90087",
+    "dt_manufacturing_date": "Feb-2019",
+    "dt_expiry_date": "Jun-2020",
+    "str_manufactured_by": "M/s. Morepen Laboratories Limited, Plot. No 12-B, Sector-2, Parwanoo, Dist. Solan (H.P.) -173220",
+    "str_nsq_result": "Content of Streptococcu s faecalis and Clostridium butyricum",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "MAY-2020"
+   },
+   {
+    "str_product_name": "Clonazepam Tablets\nI.P. (Clozep 0.5 mg)",
+    "str_batch_no": "T-19281",
+    "dt_manufacturing_date": "Apr-2019",
+    "dt_expiry_date": "Mar-2022",
+    "str_manufactured_by": "M/s. Jackson Laboratories Pvt. Ltd., 22-24, Majitha Road, Bye Pass, Amristar - 143001",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "MAY-2020"
+   },
+   {
+    "str_product_name": "Iofer -12 (Iron, Folic Acid & Vitamin B 12 Capsules)",
+    "str_batch_no": "RW19002",
+    "dt_manufacturing_date": "Apr-2019",
+    "dt_expiry_date": "Sep-2020",
+    "str_manufactured_by": "M/s. Ortin Laboratories Ltd., 275 & 278 (part), I.D.A. Pashamylaram -502307, Medak Dist., Andhra Pradesh",
+    "str_nsq_result": "Assay of Vitamin B12",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "MAY-2020"
+   },
+   {
+    "str_product_name": "Iofer -12 (Iron, Folic Acid & Vitamin B 12 Capsules)",
+    "str_batch_no": "RW19002",
+    "dt_manufacturing_date": "Apr-2019",
+    "dt_expiry_date": "Sep-2020",
+    "str_manufactured_by": "M/s. Ortin Laboratories Ltd., 275 & 278 (part), I.D.A. Pashamylaram -502307, Medak Dist., Andhra Pradesh",
+    "str_nsq_result": "Assay of Vitamin B12",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "MAY-2020"
+   },
+   {
+    "str_product_name": "Ofloxacin Tablets IP (Floxa-200 Tablets)",
+    "str_batch_no": "GPT76",
+    "dt_manufacturing_date": "Feb-2020",
+    "dt_expiry_date": "Jan-2022",
+    "str_manufactured_by": "Anecxa Pharma Sector-8A, Bhel Township, Salarapu Mahdood (U.K.)-249403",
+    "str_nsq_result": "Identification",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "MAY-2020"
+   },
+   {
+    "str_product_name": "Nucerin -50 Capsules (Diacerein Capsules I.P. 50 mg)",
+    "str_batch_no": "MC19145",
+    "dt_manufacturing_date": "Jun-2019",
+    "dt_expiry_date": "May-2021",
+    "str_manufactured_by": "M/s. Mascot Health Services Pvt. Ltd., Plot No. 79, 80, Sec-6A, IIE, Sidcul, Haridwar â?? 249403",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "MAY-2020"
+   },
+   {
+    "str_product_name": "Cefpodoxime Tablets I.P. 200 mg",
+    "str_batch_no": "GSM2T9I002",
+    "dt_manufacturing_date": "Sep-2019",
+    "dt_expiry_date": "Feb-2022",
+    "str_manufactured_by": "M/s. Nootan Pharmaceuticals, Vill: Tripta, Barotiwala, Dist-Solan (H.P) 174103",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "MAY-2020"
+   },
+   {
+    "str_product_name": "P-QUIN-2.5\n(Primaquine Tablets I.P. 2.5 mg)",
+    "str_batch_no": "T1903",
+    "dt_manufacturing_date": "Sep-2018",
+    "dt_expiry_date": "Aug-2020",
+    "str_manufactured_by": "M/s. Quest Laboratories Pvt. Ltd., Plot No. 45, Sector-III, Pithampur, Dist. Dhar- 454775, (M.P)",
+    "str_nsq_result": "Assay and Dissolution",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "MAY-2020"
+   },
+   {
+    "str_product_name": "Levetiracetam Injection (Nuatam Injection)",
+    "str_batch_no": "L2001/17",
+    "dt_manufacturing_date": "Jan-2020",
+    "dt_expiry_date": "Dec-2021",
+    "str_manufactured_by": "M/s. SBS Biotech Mouza Rampur Jattan, Nahan Road, Kala Amb, Dist. Sirmour (H.P.)",
+    "str_nsq_result": "Particulate matter",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "MAY-2020"
+   },
+   {
+    "str_product_name": "Ferrous Sulphate and Folic Acid Syrup I.P.",
+    "str_batch_no": "19579",
+    "dt_manufacturing_date": "Jul-2019",
+    "dt_expiry_date": "Dec-2020",
+    "str_manufactured_by": "M/s. HLL Lifecare Limited Kangala-591225, Dist-Belgaum, Karnataka, Works at: 72/5, Muradpura (Orangpura), Dhar Road, Near Kalaria, Indore 453001 (M.P)",
+    "str_nsq_result": "Assay of Folic acid and pH",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "MAY-2020"
+   },
+   {
+    "str_product_name": "Ferrous Sulphate and Folic Acid Syrup I.P.",
+    "str_batch_no": "19583",
+    "dt_manufacturing_date": "Jul-2019",
+    "dt_expiry_date": "Dec-2020",
+    "str_manufactured_by": "HLL Lifecare Limited Kangala-591225, Dist-Belgaum, Karnataka, Works at: 72/5, Muradpura (Orangpura), Dhar Road, Near Kalaria, Indore 453001 (M.P)",
+    "str_nsq_result": "pH",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "MAY-2020"
+   },
+   {
+    "str_product_name": "Ferrous Sulphate & Folic Acid Tablets\nI.P. (Large)",
+    "str_batch_no": "19574",
+    "dt_manufacturing_date": "Jul-2019",
+    "dt_expiry_date": "Dec-2020",
+    "str_manufactured_by": "HLL Lifecare Limited Kangala-591225, Dist-Belgaum, Karnataka, Works at: 72/5, Muradpura (Orangpura), Dhar Road, Near Kalaria, Indore 453001 (M.P)",
+    "str_nsq_result": "pH",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "MAY-2020"
+   },
+   {
+    "str_product_name": "Ferrous Sulphate and Folic Acid Syrup I.P.",
+    "str_batch_no": "19581",
+    "dt_manufacturing_date": "Jul-2019",
+    "dt_expiry_date": "Dec-2020",
+    "str_manufactured_by": "HLL Lifecare Limited Kangala-591225, Dist-Belgaum, Karnataka, Works at: 72/5, Muradpura (Orangpura), Dhar Road, Near Kalaria, Indore 453001 (M.P)",
+    "str_nsq_result": "pH",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "MAY-2020"
+   },
+   {
+    "str_product_name": "Ferrous Sulphate and Folic Acid Syrup I.P.",
+    "str_batch_no": "19580",
+    "dt_manufacturing_date": "Jul-2019",
+    "dt_expiry_date": "Dec-2020",
+    "str_manufactured_by": "HLL Lifecare Limited Kangala-591225, Dist-Belgaum, Karnataka, Works at: 72/5, Muradpura (Orangpura), Dhar Road, Near Kalaria, Indore 453001 (M.P)",
+    "str_nsq_result": "pH",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "MAY-2020"
+   },
+   {
+    "str_product_name": "Atorfirst-10 (Atorvastatin Tablets IP 10 mg)",
+    "str_batch_no": "BT-0364",
+    "dt_manufacturing_date": "Jul-2019",
+    "dt_expiry_date": "Jun-2021",
+    "str_manufactured_by": "M/s. Bayberry Pharmaceuticals Pvt. Ltd., At. Plot No.45, HIMUDA, Ind., Area, Bhatolikalan, Dist. Solan, H.P.",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDTL Mumbai",
+    "dt_reporting_month_year": "MAY-2020"
+   },
+   {
+    "str_product_name": "Cipjohn 500 (Ciprofloxacin Tablets I.P. 500 mg)",
+    "str_batch_no": "HTN813D",
+    "dt_manufacturing_date": "Apr-2018",
+    "dt_expiry_date": "Mar-2021",
+    "str_manufactured_by": "M/s. Himalaya Meditek Pvt. Ltd., Plot No. 35 & 36, Pharmacity, Selaqui Industrial Area, Dehradun - 248197",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "MAY-2020"
+   },
+   {
+    "str_product_name": "DOXIN - 75\n(Doxepin Hydrochloride Capsules I.P. 75 mg)",
+    "str_batch_no": "NW2013",
+    "dt_manufacturing_date": "Dec-2017",
+    "dt_expiry_date": "Nov-2020",
+    "str_manufactured_by": "M/s. Intas Pharmaceuticals Ltd., Samardung Road, Kabrey Block, Namthang Elaka, South Sikkim - 737132, India",
+    "str_nsq_result": "Description and Assay",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "MAY-2020"
+   }
+  ]
+ }
+}

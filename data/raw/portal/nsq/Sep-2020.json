@@ -1,0 +1,122 @@
+{
+ "url": "https://cdscoonline.gov.in/CDSCO/filteredNsqDrugTable?month=Sep-2020&source=All&tab=nsq",
+ "tab": "nsq",
+ "month": "Sep-2020",
+ "fetched_at": "2026-08-06T14:05:00+05:30",
+ "payload": {
+  "iTotalDisplayRecords": 10,
+  "iTotalRecords": 10,
+  "aaData": [
+   {
+    "str_product_name": "Clopidogrel & Aspirin Tablets",
+    "str_batch_no": "TACB-010",
+    "dt_manufacturing_date": "Jul-2019",
+    "dt_expiry_date": "Jun-2021",
+    "str_manufactured_by": "M/s. Medipol Pharmaceutical India Pvt. Ltd., 1199/3, Bhud, Baddi, Distt. Solan (Himachal Pradesh)",
+    "str_nsq_result": "Description, Limit of Salicylic Acid and Assay of aspirin",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "SEP-2020"
+   },
+   {
+    "str_product_name": "Ranius ? 300 (Ranitidine Tablets I.P. 300 mg)",
+    "str_batch_no": "VNT?19A02",
+    "dt_manufacturing_date": "Jan-2019",
+    "dt_expiry_date": "Dec-2020",
+    "str_manufactured_by": "M/s. Venus Biosciences Pvt. Ltd., 116, Export Promotion Industrial Park, Phase?I, Jharmajri, Baddi, Distt. Solan?173205, H.P.",
+    "str_nsq_result": "Dissolution & Assay",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "SEP-2020"
+   },
+   {
+    "str_product_name": "Noradrenaline Bitartrate I.P.",
+    "str_batch_no": "MLPL/NABT/0220/84",
+    "dt_manufacturing_date": "Feb-2020",
+    "dt_expiry_date": "Jan-2023",
+    "str_manufactured_by": "M/s. Medinex Laboratories Pvt. Ltd., Plot No. 2 & 3, Survey No. 277/1, Vill. Ukharla?364050, Distt. Bhavnagar (Gujarat)",
+    "str_nsq_result": "pH",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "SEP-2020"
+   },
+   {
+    "str_product_name": "CefiximeTablets\nI.P. 100 mg",
+    "str_batch_no": "8513007",
+    "dt_manufacturing_date": "Nov-2018",
+    "dt_expiry_date": "Oct-2020",
+    "str_manufactured_by": "M/s. Bengal Chemicals & Pharmaceuticals Ltd., 164, Maniktala Main Road, Kolkata?700054",
+    "str_nsq_result": "Description, Dissolution & Assay",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "SEP-2020"
+   },
+   {
+    "str_product_name": "CIROPRAZ ? 1\nInjection ? 5 ml (Midazolam Injection I.P. 1 mg/ml)",
+    "str_batch_no": "9B04028",
+    "dt_manufacturing_date": "Apr-2019",
+    "dt_expiry_date": "Mar-2021",
+    "str_manufactured_by": "M/s. Ciron Drugs & Pharmaceuticals Pvt. Ltd., N-118, 119, 113, 119/1, 119/2 & 118/1, M.I.D.C., Tarapur, Boisar, Distt. Palghar ? 401506 (Maharashtra)",
+    "str_nsq_result": "Description & Particulate Matter",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "SEP-2020"
+   },
+   {
+    "str_product_name": "ROOTCAL\n((Calcium Citrate Malate & Vitamin D3 Tablets)",
+    "str_batch_no": "RTC-1910",
+    "dt_manufacturing_date": "Oct-2019",
+    "dt_expiry_date": "Sep-2021",
+    "str_manufactured_by": "M/s. Concord Drugs Ltd., Survey No. 249, Brahmanapally, R.R. (DT.) TS?501511 Hyderabad, Telangana",
+    "str_nsq_result": "Disintegration and Assay of Vitamin D3",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "SEP-2020"
+   },
+   {
+    "str_product_name": "Isopropyl Alcohol, Carbopol, Triethanolamine, Glycerin and Chlorhexidine Digluconate Hand Sanitizer ( Safe And Clean Hand Sanitizer)",
+    "str_batch_no": "C-02",
+    "dt_manufacturing_date": "Apr-2020",
+    "dt_expiry_date": "Mar-2022",
+    "str_manufactured_by": "M/s. Cosway Pharmaceuticals, Plot No. 11C, Industrial Area, Tahiwal, Teh. Haroli, Distt. Una, (H.P.)?174507",
+    "str_nsq_result": "Assay of Glycerin, Chlorhexidine Digluconate",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "SEP-2020"
+   },
+   {
+    "str_product_name": "(ISO PROPYL ALCOHOL IP)",
+    "str_batch_no": "IPA/GCPL/532",
+    "dt_manufacturing_date": "May-2020",
+    "dt_expiry_date": "Apr-2023",
+    "str_manufactured_by": "M/s. Gujarat Chempac Pvt. Ltd., Valsad, Gujarat",
+    "str_nsq_result": "Refractive Index, Water",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "SEP-2020"
+   },
+   {
+    "str_product_name": "(ISO PROPYL ALCOHOL IP)",
+    "str_batch_no": "IPA/GCPL/532",
+    "dt_manufacturing_date": "May-2020",
+    "dt_expiry_date": "Apr-2023",
+    "str_manufactured_by": "M/s. Gujarat Chempac Pvt. Ltd., Valsad, Gujarat",
+    "str_nsq_result": "Identification",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "SEP-2020"
+   },
+   {
+    "str_product_name": "Levocetirizine Tablets I.P. 5 mg",
+    "str_batch_no": "9700719",
+    "dt_manufacturing_date": "May-2019",
+    "dt_expiry_date": "Apr-2021",
+    "str_manufactured_by": "M/s. Karnataka Antibiotics & Pharmaceuticals Limited, Plot No.?14, II Phase, Peenya, Bangalore?560058",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "SEP-2020"
+   }
+  ]
+ }
+}

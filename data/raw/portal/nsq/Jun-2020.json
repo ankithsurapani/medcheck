@@ -1,0 +1,232 @@
+{
+ "url": "https://cdscoonline.gov.in/CDSCO/filteredNsqDrugTable?month=Jun-2020&source=All&tab=nsq",
+ "tab": "nsq",
+ "month": "Jun-2020",
+ "fetched_at": "2026-08-06T14:04:58+05:30",
+ "payload": {
+  "iTotalDisplayRecords": 20,
+  "iTotalRecords": 20,
+  "aaData": [
+   {
+    "str_product_name": "Calcium And Vitamin D3 Tablets IP",
+    "str_batch_no": "CVDT-1384",
+    "dt_manufacturing_date": "Apr-2019",
+    "dt_expiry_date": "Mar-2021",
+    "str_manufactured_by": "M/s. Wings Biotech 43 & 44 HPSIDC, Industrial Area, Baddi-173205 (H.P.)",
+    "str_nsq_result": "Dissolution of Calcium Carbonate",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "JUN-2020"
+   },
+   {
+    "str_product_name": "Calcium And Vitamin D3 Tablets IP",
+    "str_batch_no": "CVDT-1653",
+    "dt_manufacturing_date": "Jul-2019",
+    "dt_expiry_date": "Jun-2021",
+    "str_manufactured_by": "M/s. Wings Biotech 43 & 44 HPSIDC Industrial Area, Baddi-173205 (H.P.)",
+    "str_nsq_result": "Dissolution of Calcium Carbonate",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "JUN-2020"
+   },
+   {
+    "str_product_name": "Dextromethorphan hydrobromide and Chlorpheniramine Maleate Syrup (Heel-DX Syrup)",
+    "str_batch_no": "YHL-39",
+    "dt_manufacturing_date": "Aug-2019",
+    "dt_expiry_date": "Jul-2021",
+    "str_manufactured_by": "M/s. Yashwin Healthcare, Village Shahpur Taga, Ganaur, Sonipat-131001 (HR.)",
+    "str_nsq_result": "Assay of Dextromethorphan Hydrobromide and Chlorpheniramine Maleate",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "JUN-2020"
+   },
+   {
+    "str_product_name": "Sustained Release Capsules of Ferrous Sulphate with Folic Acid (Folron Capsules)",
+    "str_batch_no": "F921K901",
+    "dt_manufacturing_date": "Oct-2019",
+    "dt_expiry_date": "Sep-2021",
+    "str_manufactured_by": "M/s. ZIM LABORATORIES LTD., B-21/22, MIDC, Area, Kalmeshwar-441501, Dist.Nagpur, Maharashtra",
+    "str_nsq_result": "Assay of Folic Acid",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "JUN-2020"
+   },
+   {
+    "str_product_name": "Auditon-MD 8 Tablets (Ondansetron Orally Disintegrating Tablets IP 8 mg)",
+    "str_batch_no": "RT181032",
+    "dt_manufacturing_date": "Oct-2018",
+    "dt_expiry_date": "Sep-2020",
+    "str_manufactured_by": "M/s. Rachil Pharma, 18-19, Phase â?? I, Ind. Area, Sansarpur Terrace, Distt. Kangra (H.P.) â?? 176501",
+    "str_nsq_result": "Description & Disintegration",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "JUN-2020"
+   },
+   {
+    "str_product_name": "Nitrobact-100 (Nitrofurantoin Capsules U.S.P.)",
+    "str_batch_no": "A6JQS030",
+    "dt_manufacturing_date": "Sep-2019",
+    "dt_expiry_date": "Aug-2021",
+    "str_manufactured_by": "M/s. Swiss Garnier Biotech Pvt. Ltd., 21, Ind. Area, Mehatpur, Dist. Una, Himachal Pradesh-74315",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "JUN-2020"
+   },
+   {
+    "str_product_name": "Eudox-100 (Doxycycline Capsules I.P.)",
+    "str_batch_no": "EDX-1006",
+    "dt_manufacturing_date": "Mar-2019",
+    "dt_expiry_date": "Feb-2021",
+    "str_manufactured_by": "M/s. Ultra-Chiron Pharmaceuticals Pvt. Ltd., 575, Phase-IX, Industrial Area, Mohali-160062 Punjab",
+    "str_nsq_result": "Uniformity of Weight",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDTL Mumbai",
+    "dt_reporting_month_year": "JUN-2020"
+   },
+   {
+    "str_product_name": "Absorbent Guaze",
+    "str_batch_no": "304",
+    "dt_manufacturing_date": "Jan-2019",
+    "dt_expiry_date": "Dec-2021",
+    "str_manufactured_by": "M/s. Balu Surgicals, 1/243, Labhvinayagar Kovil Street, Samusigapuram-626102 Tamil Nadu",
+    "str_nsq_result": "Length",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "JUN-2020"
+   },
+   {
+    "str_product_name": "Doxyrap-100 (Doxycycline & Lactic Acid Bacillus Tablets)",
+    "str_batch_no": "DET-02830",
+    "dt_manufacturing_date": "Jan-2019",
+    "dt_expiry_date": "Dec-2020",
+    "str_manufactured_by": "M/s. Dr. Edwin Lab Plot No. 517, Indl. Area, Phase IX, Sas Nagar-160059 (PB)",
+    "str_nsq_result": "Uniformity of weight, Assay",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "JUN-2020"
+   },
+   {
+    "str_product_name": "Cefotaxime Sodium Injection IP 250 mg",
+    "str_batch_no": "0322",
+    "dt_manufacturing_date": "Jul-2019",
+    "dt_expiry_date": "Jun-2021",
+    "str_manufactured_by": "M/s. Hindustan Antibiotics Ltd., Pimpri, Pune -411018",
+    "str_nsq_result": "Water",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "JUN-2020"
+   },
+   {
+    "str_product_name": "Mometran Cream (Mometasone Furoate Cream IP)",
+    "str_batch_no": "716",
+    "dt_manufacturing_date": "Jun-2019",
+    "dt_expiry_date": "Jul-2021",
+    "str_manufactured_by": "M/s. Mascot Health Series Pvt. Ltd., Plot No. 79, 80, Sector-6A, IIE Sidcul, Haridwar-249403 (Uttarakhand)",
+    "str_nsq_result": "Assay",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDTL Mumbai",
+    "dt_reporting_month_year": "JUN-2020"
+   },
+   {
+    "str_product_name": "Glicot -60 (Gliclazide Extended release Tablets 60 mg)",
+    "str_batch_no": "MT190903",
+    "dt_manufacturing_date": "Jul-2019",
+    "dt_expiry_date": "Jun-2021",
+    "str_manufactured_by": "M/s. Mascot Health Series Pvt. Ltd., Plot No.79,80, Sector 6A, IIE, SIDCUL, Haridwar -249403, India (Uttarakhand)",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "JUN-2020"
+   },
+   {
+    "str_product_name": "Telmisartan Tablets I.P. 20 mg",
+    "str_batch_no": "TLMT703",
+    "dt_manufacturing_date": "Jul-2019",
+    "dt_expiry_date": "Jun-2021",
+    "str_manufactured_by": "M/s. Unicure India Ltd., C-21, 22 & 23 Sector - 3, Noida-201301, Distt. Gautam Budh Nagar (U.P.)",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "JUN-2020"
+   },
+   {
+    "str_product_name": "Setnorm ? 4 (Ondansetron Tablets IP 4 mg)",
+    "str_batch_no": "SMT610Z",
+    "dt_manufacturing_date": "Feb-2019",
+    "dt_expiry_date": "Jan-2021",
+    "str_manufactured_by": "M/s. Unicure India Ltd., C-21, 22 & 23 Sector - 3, Noida-201301, Distt. Gautam Budh Nagar (U.P.)",
+    "str_nsq_result": "Description",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "JUN-2020"
+   },
+   {
+    "str_product_name": "Amoxycillin and Potassium Clavulanate Tablets IP",
+    "str_batch_no": "18A310",
+    "dt_manufacturing_date": "Sep-2018",
+    "dt_expiry_date": "Aug-2020",
+    "str_manufactured_by": "M/s. Astam Healthcare Pvt. Ltd., Vill. Theda, Teh. Nalagarh, Distt. Solan-174101 (H.P.)",
+    "str_nsq_result": "Identification of Potassium Clavulanate and Assay of Amoxycillin Trihydrate and Potassium Clavulanate",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "JUN-2020"
+   },
+   {
+    "str_product_name": "Thyroxine Sodium Tablets IP 50 mcg (Thyroute 50 Tablets)",
+    "str_batch_no": "LTA-4081",
+    "dt_manufacturing_date": "Nov-2019",
+    "dt_expiry_date": "Oct-2021",
+    "str_manufactured_by": "M/s. Life Vision Healthcare, Plot No.140-141, E.P.I.P., Phase-I, Jharmajri, Baddi, Distt.Solan (H.P.)-174103",
+    "str_nsq_result": "Uniformity of content",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "JUN-2020"
+   },
+   {
+    "str_product_name": "Fexcor-120 (Fexofenadine Hydrochloride Tablets I.P. 120 mg)",
+    "str_batch_no": "OBRP01",
+    "dt_manufacturing_date": "Aug-2019",
+    "dt_expiry_date": "Jul-2021",
+    "str_manufactured_by": "M/s. Akums Drugs & Pharmaceuticals Ltd., 19, 20, 21 Sector -6A, I.I.E, SIDCUL, Ranipur, Haridwar-249403, India",
+    "str_nsq_result": "Description",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "JUN-2020"
+   },
+   {
+    "str_product_name": "Bhringraj Hair oil 200 ml. (Liquid\nParafin 55% vegetable oil including seasame oil, Eclipta Alba)",
+    "str_batch_no": "A0014",
+    "dt_manufacturing_date": "May-2019",
+    "dt_expiry_date": "Apr-2022",
+    "str_manufactured_by": "M/s. Ananya Herbal Pvt. Ltd., Khasra no. 6/67/8/2 min 10- village, Safiabad Dist. Sonepat Haryana-131209",
+    "str_nsq_result": "Acid value (Type 1 & Type 3)",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "JUN-2020"
+   },
+   {
+    "str_product_name": "Ocupol Dx. (Polymyxin B Sulphate, Chloramphenicol & Dexamethasone Eye/Ear Drops)",
+    "str_batch_no": "CB013",
+    "dt_manufacturing_date": "Jul-2019",
+    "dt_expiry_date": "Dec-2020",
+    "str_manufactured_by": "M/s. Centaur Pharmaceuticals Pvt. Ltd., At. Vidhyanagar, Margao, Goa-403601",
+    "str_nsq_result": "Assay of Chloramphenicol",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "JUN-2020"
+   },
+   {
+    "str_product_name": "Pioglitazone & Metformin Hydrochloride (Prolonged Release) Tablets",
+    "str_batch_no": "CT9620",
+    "dt_manufacturing_date": "Aug-2019",
+    "dt_expiry_date": "Jan-2022",
+    "str_manufactured_by": "M/s. Cian Healthcare Ltd., Kh. No. 248, Village Sisona, Bhagwanpur, Roorkee, Haridwar, Uttarakhand, India",
+    "str_nsq_result": "Dissolution of Metformin Hydrochloride",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "JUN-2020"
+   }
+  ]
+ }
+}

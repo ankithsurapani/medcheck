@@ -1,0 +1,221 @@
+{
+ "url": "https://cdscoonline.gov.in/CDSCO/filteredNsqDrugTable?month=May-2021&source=All&tab=nsq",
+ "tab": "nsq",
+ "month": "May-2021",
+ "fetched_at": "2026-08-06T14:05:05+05:30",
+ "payload": {
+  "iTotalDisplayRecords": 19,
+  "iTotalRecords": 19,
+  "aaData": [
+   {
+    "str_product_name": "Sertraline Tablets IP 50 mg",
+    "str_batch_no": "GM19030",
+    "dt_manufacturing_date": "Sep-2019",
+    "dt_expiry_date": "Aug-2021",
+    "str_manufactured_by": "M/s. Skymap Pharmaceuticals Pvt. Ltd., B-3, Dev Bhoomi Industrial Estate, Puhana Iqbalpur Road, Roorkee ? 247667, Uttarakhand",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDTL Mumbai",
+    "dt_reporting_month_year": "MAY-2021"
+   },
+   {
+    "str_product_name": "Rosuvas 20 (Rosuvastatin Tablets I.P.)",
+    "str_batch_no": "EMX0685",
+    "dt_manufacturing_date": "Mar-2020",
+    "dt_expiry_date": "Aug-2023",
+    "str_manufactured_by": "M/s. Sun Pharma Laboratories Ltd., Plot No. 107-108, Namli Block, P.O. Ranipool, East Sikkim ? 737135",
+    "str_nsq_result": "Dissolution &\nAssay",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "MAY-2021"
+   },
+   {
+    "str_product_name": "Rosuvas® F-5 (Rosuvastatin and Fenofibrate Tablets I.P.)",
+    "str_batch_no": "EMU2687",
+    "dt_manufacturing_date": "Sep-2019",
+    "dt_expiry_date": "Feb-2022",
+    "str_manufactured_by": "M/s. Sun Pharma Laboratories Ltd., Plot No. 107-108, Namli Block, P.O. Ranipool, East Sikkim ? 737135",
+    "str_nsq_result": "Dissolution of Fenofibrate",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "MAY-2021"
+   },
+   {
+    "str_product_name": "Nitrazepam Tablets\nI.P. 5 mg",
+    "str_batch_no": "DNIT2001",
+    "dt_manufacturing_date": "Feb-2020",
+    "dt_expiry_date": "Jan-2022",
+    "str_manufactured_by": "M/s. Sunrise International Labs Ltd., Plot No. 100, Lane-5, Sector-II, Phase-II, IDA Cherlapally, Hyderabad ? 500051",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "MAY-2021"
+   },
+   {
+    "str_product_name": "Pantoprazole Tablets\nI.P. 40 mg",
+    "str_batch_no": "PP22",
+    "dt_manufacturing_date": "Sep-2020",
+    "dt_expiry_date": "Feb-2022",
+    "str_manufactured_by": "M/s. Suzikem Drugs Pvt. Ltd., Plot No. 205/2A, IDA Cherlapally Phase II, Medchal-Malkajgiri District, Telangana ? 500051",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "MAY-2021"
+   },
+   {
+    "str_product_name": "Amlodipine Tablets IP (LOPIN-5 TABLETS)",
+    "str_batch_no": "STN-200968",
+    "dt_manufacturing_date": "Jan-2021",
+    "dt_expiry_date": "Dec-2022",
+    "str_manufactured_by": "M/s. Terrace Pharmaceuticals (P) Ltd., 3-B(a), Phase-III, Industrial Area, Sansarpur Terrace, Distt. Kangra, Himachal Pradesh ? 176501",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "MAY-2021"
+   },
+   {
+    "str_product_name": "Primaquine Phosphate\nI.P. 2.5 mg",
+    "str_batch_no": "T-22109",
+    "dt_manufacturing_date": "Apr-2020",
+    "dt_expiry_date": "Mar-2022",
+    "str_manufactured_by": "M/s. Jackson Laboratories Pvt. Ltd., Majitha Road, Bye Pass, Amritsar ? 143001, Punjab",
+    "str_nsq_result": "Dissolution and Assay Test",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "MAY-2021"
+   },
+   {
+    "str_product_name": "FEXOFENADINE HYDROCHLORIDE TABLETS IP",
+    "str_batch_no": "FXNT-1009",
+    "dt_manufacturing_date": "Nov-2020",
+    "dt_expiry_date": "Oct-2022",
+    "str_manufactured_by": "M/s. WINGS BIOTECH, 43 & 44 HPSIDC, Industrial Area, Baddi ? 173205, Himachal Pradesh",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "MAY-2021"
+   },
+   {
+    "str_product_name": "Clopidogrel & Aspirin Tablets",
+    "str_batch_no": "TACB-011",
+    "dt_manufacturing_date": "Jul-2019",
+    "dt_expiry_date": "Jun-2021",
+    "str_manufactured_by": "M/s. Medipol Pharmaceutical India Pvt. Ltd., 1199/3, Bhud, Baddi, Dist. Solan, Himachal Pradesh",
+    "str_nsq_result": "Disintegration, free salicylic acid &\nAssay of Aspirin",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDTL Mumbai",
+    "dt_reporting_month_year": "MAY-2021"
+   },
+   {
+    "str_product_name": "Inmecin R (Indomethacin Sustained Release Capsules U.S.P.)",
+    "str_batch_no": "PC-111958",
+    "dt_manufacturing_date": "Nov-2019",
+    "dt_expiry_date": "Apr-2022",
+    "str_manufactured_by": "M/s. Primus Pharmaceuticals, Sadhoura Road, Mouza Ogli Khari, Vill Asgarpur Majra, Kala Amb, Distt. Sirmour, Himachal Pradesh ? 173030",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "MAY-2021"
+   },
+   {
+    "str_product_name": "Diclofenac Sodium Tablets IP 50 mg",
+    "str_batch_no": "T2224",
+    "dt_manufacturing_date": "Oct-2019",
+    "dt_expiry_date": "Sep-2021",
+    "str_manufactured_by": "M/s. Quest Laboratories Pvt. Ltd., Plot No. 45, Sector-III, Pithampur, Dist. Dhar ? 454775, Madhya Pradesh",
+    "str_nsq_result": "Disintegration",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDTL Mumbai",
+    "dt_reporting_month_year": "MAY-2021"
+   },
+   {
+    "str_product_name": "DIPHENHYDRAMINE HYDROCHLORIDE, AMMONIUM CHLORIDE, SODIUM CITRATE AND MENTHOL SRYUP",
+    "str_batch_no": "LX-5435",
+    "dt_manufacturing_date": "Jan-2021",
+    "dt_expiry_date": "Jun-2022",
+    "str_manufactured_by": "M/s. LEGEN HEALTHCARE, Plot No. 20, Sector-5, Parwanoo, Distt. Solan, Himachal Pradesh ? 173220",
+    "str_nsq_result": "Assay of Menthol",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "MAY-2021"
+   },
+   {
+    "str_product_name": "Piclin (Sodium Picosulfate Tablets 10 mg)",
+    "str_batch_no": "NT00061",
+    "dt_manufacturing_date": "Mar-2020",
+    "dt_expiry_date": "Feb-2022",
+    "str_manufactured_by": "M/s. Medicamen Biotech Ltd., SP-1192, A & B, Phase IV, Industrial Area, Bhiwadi ? 301019, Distt. Alwar, Rajasthan",
+    "str_nsq_result": "Diameter, Thickness and Hardness",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDTL Mumbai",
+    "dt_reporting_month_year": "MAY-2021"
+   },
+   {
+    "str_product_name": "Nofloxacin Tablets I.P.\n400 mg",
+    "str_batch_no": "NT801",
+    "dt_manufacturing_date": "Jul-2020",
+    "dt_expiry_date": "Jun-2022",
+    "str_manufactured_by": "M/s. Unicure India Ltd., C-21, 22 & 23, Sector-3, Noida ? 201301, Distt. Gautam Budh Nagar, Uttar Pradesh",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "RDTL Guwahati",
+    "dt_reporting_month_year": "MAY-2021"
+   },
+   {
+    "str_product_name": "LEDOVANC\n(Vancomycin Hydrochloride for Intravenous Infusion\nI.P. 500 mg)",
+    "str_batch_no": "VNI20335AC",
+    "dt_manufacturing_date": "Oct-2020",
+    "dt_expiry_date": "Sep-2022",
+    "str_manufactured_by": "M/s. Celon Laboratories Pvt. Ltd., Plot No. 2, Alep Industrial Estate, Gajularamaram, Medchal District, Telangana ? 500090",
+    "str_nsq_result": "Clarity of Solution &\nAppearance of Solution",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "MAY-2021"
+   },
+   {
+    "str_product_name": "Telmisartan 40 mg and Amlodipine\n5 mg Tablets IP (TELMA-AM TABLETS)",
+    "str_batch_no": "5201874",
+    "dt_manufacturing_date": "Oct-2020",
+    "dt_expiry_date": "Sep-2023",
+    "str_manufactured_by": "M/s. Glenmark Pharmaceuticals Ltd., Village Kishanpura, Baddi-Nalagarh Road, Tehsil Baddi, Distt. Solan, Himachal Pradesh ? 173205",
+    "str_nsq_result": "Dissolution of Amlodipine",
+    "str_reporting_source": "State lab",
+    "str_reported_by_lab_or_state": "RDTL Chandigarh",
+    "dt_reporting_month_year": "MAY-2021"
+   },
+   {
+    "str_product_name": "CARDINOL-50\n(Atenolol Tablets I.P.\n50 mg)",
+    "str_batch_no": "1091-05",
+    "dt_manufacturing_date": "Feb-2020",
+    "dt_expiry_date": "Jan-2023",
+    "str_manufactured_by": "M/s. Hab Pharmaceuticals & Research Limited, 10, Pharmacity SIDCUL, Selaqui, Dehradun, Uttarakhand ? 248011",
+    "str_nsq_result": "Disintegration",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "MAY-2021"
+   },
+   {
+    "str_product_name": "Paracetamol Tablets IP 500 mg",
+    "str_batch_no": "999",
+    "dt_manufacturing_date": "Mar-2019",
+    "dt_expiry_date": "Feb-2022",
+    "str_manufactured_by": "M/s. Hindustan Antibiotics Ltd., Pimpri, Pune ? 411018, Maharashtra",
+    "str_nsq_result": "Dissolution",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDTL Chennai",
+    "dt_reporting_month_year": "MAY-2021"
+   },
+   {
+    "str_product_name": "Ramipril Tablets I.P.\n2.5 mg",
+    "str_batch_no": "RMP-23",
+    "dt_manufacturing_date": "Aug-2020",
+    "dt_expiry_date": "Jul-2022",
+    "str_manufactured_by": "M/s. C.I. Laboratories, 24-B, B.L. Shah Road, Kolkata ? 700053",
+    "str_nsq_result": "Assay",
+    "str_reporting_source": "CDSCO lab",
+    "str_reported_by_lab_or_state": "CDL Kolkata",
+    "dt_reporting_month_year": "MAY-2021"
+   }
+  ]
+ }
+}
