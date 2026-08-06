@@ -39,13 +39,15 @@ Searchable public database of medicines CDSCO flagged as Not of Standard Quality
 
 Design system persisted at `design-system/medcheck/MASTER.md` (Swiss Modernism 2.0 + "Patent / IP Database" palette, via the ui-ux-pro-max skill).
 
+**Phase 2a (manufacturer entity resolution) — now active.** See `implementation.md`. Ends in a human review checkpoint (0.75–0.92 fuzzy-match band) that the user has to actually sit through — plan.md's non-negotiable requires a human judgment call there, not an automated one.
+
 Open / needs a planner decision:
 - **Search index is 297 KB brotli.** Lazy-loaded on idle/focus so the page is usable first, but it's the biggest cost on a slow connection. Phase 3b options: server-side search, or a two-tier prefix index.
-- **Manufacturer pages are per raw string, so there are 5,107 of them** — Zee Laboratories alone has 5 pages. Every page says so explicitly. Phase 2 collapses these.
+- **Manufacturer pages are per raw string, so there are 5,107 of them** — Zee Laboratories alone has 5 pages. Every page says so explicitly. Phase 2a collapses these; re-pointing `web/` at the result is the ticket right after this one (folds into Phase 3b).
 - **`alert_section` is unreliable.** The portal and the PDFs disagree on central-vs-state for 27 of 184 Jun-2025 records. Phase 4's "central vs state lab detection patterns" analysis needs this caveat.
-- **State coverage is 58%.** PIN-prefix → state mapping would lift it a lot; belongs with Phase 2's address parsing.
+- **State coverage is 58%.** PIN-prefix → state mapping would lift it a lot; belongs with Phase 2a's address parsing.
 - Phase 1b (pre-2019 PDF backfill) not started, per ticket boundary.
-- Phase 2 (entity resolution) not started — Phase 3a's manufacturer search/pages run on raw text, not merged identity, until it does.
+- Phase 2b (drug-name resolution) deferred — nothing depends on it yet.
 
 ## Tech stack
 
@@ -109,6 +111,9 @@ medcheck/
 - 2026-08-06 — Deviated from the ui-ux-pro-max generic recommendation ("Exaggerated Minimalism", `font-weight: 900`, `clamp(3rem, 10vw, 12rem)`). Oversized statement typography reads as alarming on flagged-medicine data. Used the skill's "Patent / IP Database" analog instead — Swiss Modernism 2.0 + formal neutral palette + status chips — which is what a public-records lookup should feel like.
 - 2026-08-06 — Typography is Figtree + Noto Sans (the skill's healthcare pairing). Noto Sans also has full Devanagari coverage, so Phase 3b's Hindi translation won't force a type change.
 - 2026-08-06 — `output: 'export'` (fully static). No server means no server-side log of what anyone searched — §1.5 enforced by architecture, not by policy.
+- 2026-08-06 — **Phase 2 splits into 2a (manufacturers, now) / 2b (drug names, deferred)** — same a/b pattern as Phase 1 and 3. Manufacturer resolution is what's actually blocking things (5,107 unmerged pages); drug names aren't blocking anything yet. See `plan.md` §4 Phase 2.
+- 2026-08-06 — Phase 2a's human review queue is a CLI/offline step, not a web UI — Phase 3a's architecture is fully static with no backend to host one.
+- 2026-08-06 — Phase 2a is scoped data-only: produces `manufacturers` + `manufacturer_id` backfill, but does not touch `web/` to collapse the 5,107 pages. That regeneration is the next ticket, kept separate on purpose.
 
 ## Key learnings / gotchas
 

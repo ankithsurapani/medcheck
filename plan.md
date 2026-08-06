@@ -172,16 +172,18 @@ Phase 0 found that CDSCO now publishes NSQ data as structured JSON (`docs/pdf_in
 
 ### Phase 2 — Entity resolution (Week 3–4)
 
-**The genuinely hard problem.** Manufacturer names appear inconsistently across years: "M/s. Gidsha Pharmaceuticals", "Gidsha Pharma Pvt Ltd", "GIDSHA PHARMACEUTICALS PVT. LTD."
+**The genuinely hard problem.** Manufacturer names appear inconsistently across years: "M/s. Gidsha Pharmaceuticals", "Gidsha Pharma Pvt Ltd", "GIDSHA PHARMACEUTICALS PVT. LTD." Split into 2a/2b since manufacturer resolution is what's actually blocking things (Phase 3a shipped with 5,107 unmerged manufacturer pages) and drug-name resolution isn't blocking anything yet.
 
+**Phase 2a — Manufacturers (do this first)**
 - [ ] Normalizer: strip "M/s.", legal suffixes, punctuation, casing
 - [ ] Blocking: group candidates by first token + state to avoid O(n²)
 - [ ] `rapidfuzz` similarity within blocks, threshold tuned by hand
 - [ ] Address as a secondary signal — same address is strong evidence
-- [ ] **Human review queue**: anything in the 0.75–0.92 similarity band goes to a manual review UI. You approve or reject.
+- [ ] **Human review queue**: anything in the 0.75–0.92 similarity band goes to a review pass. You approve or reject. Since Phase 3a is fully static with no backend, this is a CLI/offline step, not a web UI.
 - [ ] Store every merge decision in a log so it's auditable and reversible
 
-**Do the same for drug names**, but be more conservative — merging two different drugs is worse than leaving duplicates.
+**Phase 2b — Drug names (deferred)**
+- [ ] Same approach, but be more conservative — merging two different drugs is worse than leaving duplicates
 
 **Rule:** never auto-merge above the review band without spot-checking a sample. A wrongly-merged manufacturer means you'd be attributing another company's failures to them. That's a real reputational harm.
 

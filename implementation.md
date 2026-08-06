@@ -1,53 +1,54 @@
-# Current Task — Phase 3a: Search Site (static-data MVP)
+# Current Task — Phase 2a: Manufacturer Entity Resolution
 
-**Read first:** `CLAUDE.md` (current status + decisions), `plan.md` §1 (non-negotiables — these gate every page, not optional polish), §3 (schema, `failure_category` is a JSON array), §3.3 (21-category vocabulary), §4 Phase 3 (now split 3a/3b, this ticket is 3a only).
+**Read first:** `CLAUDE.md` (current status + decisions), `plan.md` §1 (non-negotiable: never auto-merge the 0.75–0.92 band without a human), §3.2 (`manufacturers` schema), §4 Phase 2 (now split 2a/2b, this ticket is 2a only).
 
-**Design direction:** use the `ui-ux-pro-max` skill for visual/UX decisions (style, layout, typography, color, accessibility). This ticket scopes *what* to build and the constraints it must respect; the skill should drive *how it looks*.
+## Why this matters more than it looks
 
-## Why static data, not a live API
+Phase 3a shipped with `manufacturer_id` null on every record — 5,107 distinct `manufacturer_raw` strings became 5,107 separate manufacturer pages (Zee Laboratories alone has 5). Each page already discloses this, but it's a real defect, and it blocks Phase 4's "repeat manufacturers" analysis outright. This ticket fixes the data. **It does not touch `web/`** — regenerating the site against resolved entities is the very next ticket, kept separate on purpose so this one stays data engineering, not frontend work.
 
-Phase 2 (entity resolution) hasn't run and there's no FastAPI yet. Rather than block the UI on either, this ticket ships against a static pre-built JSON export of `data/medcheck.db` — the same artifact already planned as the API fallback (`plan.md` §2), so building it now does double duty. No Railway/Fly.io hosting needed yet. A live API is Phase 3b, later.
+**The review step is real, not a formality.** `plan.md` §4 Phase 2's rule: *"never auto-merge above the review band without spot-checking a sample. A wrongly-merged manufacturer means attributing another company's failures to them. That's a real reputational harm."* The 0.75–0.92 band needs a human judgment call on each pair — build the tooling to make that fast, but don't skip it or auto-approve it yourself.
 
 ## Task
 
-1. **Export script** (`scripts/export_static.py` or similar) — dump `data/medcheck.db` → static JSON consumed by `web/`. Two shapes, not one blob, since 6,155 full records is too heavy for mobile-first (`plan.md` §4 Phase 3a):
-   - a **lightweight search index**: id, drug name, batch number, manufacturer, month, failure category — small enough to ship to the client for instant fuzzy search
-   - **full per-record data**, used at build time for static detail pages (Next.js SSG/`generateStaticParams`) — good for SEO, which `plan.md` §2 flags as mattering a lot here
-   Re-run whenever `medcheck.db` changes; not committed to git (regenerate, like `data/medcheck.db` itself).
+1. **`src/resolve/manufacturers.py`**:
+   - Normalizer: strip `M/s.`, legal suffixes (`Pvt Ltd`, `Ltd`, `Private Limited`, `Pharmaceuticals`/`Pharma`, etc.), punctuation, casing, whitespace
+   - Reuse the state-derivation logic already built in `src/normalize.py` (Phase 1a) rather than rebuilding it — it already handles the ambiguous-abbreviation cases (`A.P.`, `U.K.` excluded, etc.)
+   - Blocking: normalized first token + state, to avoid O(n²) over ~5,107 distinct `manufacturer_raw` strings
+   - `rapidfuzz` similarity within blocks; address as a secondary signal for borderline pairs
+   - Three tiers: **<0.75** no match · **0.75–0.92** human review band · **>0.92** auto-merge candidate
 
-2. **`web/` Next.js + Tailwind app**:
-   - **Search** — drug name (fuzzy, typo-tolerant — a client-side index lib like Fuse.js/MiniSearch is a reasonable fit, your call), batch number (exact), manufacturer (substring match on `manufacturer_raw` — see boundary below)
-   - **Result card** — drug, batch, manufacturer, month, failure reason in plain language (not the raw CDSCO text alone), source link, and the mandatory non-dismissible safety copy (`plan.md` §1.2, verbatim)
-   - **Result/detail page** — everything on the card, plus: the "batch failure ≠ product failure" note (§1.3, must be visible, not footnoted), `label_claim_disputed` shown prominently when true (§5.5 — defamation risk if buried or missing), and low-confidence fields (`parse_confidence`, empty `state`, etc.) shown as *unknown*, never silently blank or guessed (§1.4)
-   - **"No results" page** — explicit: not found means not flagged in *our* data, not verified safe
-   - **Manufacturer page** — all records matching that exact `manufacturer_raw` string, chronological, with a visible note that this is raw-name matching, not a resolved company identity (near-duplicate names are separate pages for now — Phase 2 isn't done)
-   - **Mobile-first** — this is the primary target, not an afterthought
-   - **No login, no signup, no tracking tied to identity** (§1.5)
+2. **Review tooling** (CLI — no backend exists to host a web review UI):
+   - A script that steps through the 0.75–0.92 band, shows both raw strings + addresses side by side, records approve/reject. This is the step the user runs themselves.
+   - A second script that samples the >0.92 auto-merge tier for spot-checking (required even for the "confident" tier per the non-negotiable above)
+   - Every decision — human or auto — written to an append-only log (e.g. `data/resolve/manufacturer_merge_log.jsonl`). Never overwritten silently; a bad merge must be traceable and reversible.
 
-3. **Plain-language failure explanations** — one short paragraph per `failure_category` bucket (21 total, `plan.md` §3.3), factual and non-alarming, same tone as the dissolution example in §4 Phase 3a. Cover every bucket including `other` (explain that CDSCO's stated reason didn't match a known test).
+3. **Apply merges**: populate `manufacturers` (`canonical_name`, `known_aliases`, `address_raw`, `state`, `first_seen_month`, `total_flags` computed), backfill `manufacturer_id` on every `nsq_records` row. Unmatched raw strings still get their own singleton `manufacturers` row — nothing ends up without an id.
+   - Respect the existing `manufacturer_unknown_placeholder` flag from Phase 1a — the 51 `"Under Investigation"` spurious records must never be resolved into a company entity (§1.1 — that would misattribute a counterfeit to a real company).
+
+4. **Write it up** — thresholds used, block strategy, the collapse ratio (5,107 raw strings → N canonical manufacturers), and spot-check results, in `docs/methodology.md` or a new `docs/entity_resolution.md`.
 
 ## Explicit boundary — do NOT do yet
 
-- No live FastAPI / `api/` code — static export only, this ticket.
-- No entity resolution — manufacturer matching is exact-string on `manufacturer_raw`, not fuzzy/merged. Don't build a resolution shortcut inside the UI layer to compensate; that's Phase 2's job and doing it here risks exactly the reputational-harm scenario `plan.md` §5.3/§2 Phase 2 warns about (wrongly merging two companies).
-- No Hindi/i18n content — English only this ticket, but don't hardcode English strings in a way that blocks adding it later (Phase 3b).
-- No recommendation of alternate medicine, no price/pharmacy features (`plan.md` §6, unchanged).
+- No drug-name resolution (Phase 2b — separate ticket, deferred, needs a more conservative threshold approach).
+- No changes to `web/` or `scripts/export_static.py` — the 5,107 pages stay exactly as they are until the next ticket regenerates against resolved entities.
+- No merge, in either tier, skips the log or the spot-check step — not even the >0.92 "obvious" ones.
 
 ## Done when
 
-- [ ] Static export script runs, produces both the lightweight index and per-record data, documented (how to re-run it after a `medcheck.db` update)
-- [ ] Search works for drug name (fuzzy), batch number (exact), manufacturer (substring) against real data
-- [ ] Result/detail pages render all required non-negotiable copy — spot check a `label_claim_disputed=true` record and a record with missing `state` to confirm both render correctly, not silently
-- [ ] "No results" and manufacturer pages exist and say what they need to say
-- [ ] Mobile viewport checked, not just desktop
-- [ ] All 21 failure categories have a written explanation
+- [ ] `src/resolve/manufacturers.py` runs end to end, produces all three tiers
+- [ ] CLI review tool exists, and the 0.75–0.92 band has actually been reviewed by the user (real approve/reject calls, not rubber-stamped)
+- [ ] Auto-merge tier sample spot-checked and results recorded
+- [ ] `manufacturers` table populated, `manufacturer_id` backfilled on all `nsq_records`
+- [ ] Merge log complete, auditable, append-only
+- [ ] `manufacturer_unknown_placeholder` records confirmed still unresolved (no company entity assigned)
+- [ ] Write-up exists with the collapse ratio and threshold rationale
 - [ ] `CLAUDE.md` updated: Current Status, Decisions Log, Key Learnings
 
 ## Before ending the session
 
 Update `CLAUDE.md`:
-- **Current Status** → what's built, what's still open in 3a, any record counts/screenshots-worth-noting
-- **Decisions Log** → search library chosen, any deviation from this scope
-- **Key Learnings** → anything about the data that surprised you once it hit a UI (e.g. which fields are messiest to display, any records that read oddly)
+- **Current Status** → collapse ratio achieved (5,107 → N), review band size, how many were human-approved vs rejected
+- **Decisions Log** → exact thresholds/blocking strategy used, any deviation from this scope
+- **Key Learnings** → anything about manufacturer name variation that surprised you, tricky pairs the reviewer had to think hard about, edge cases in the address-derived state signal
 
-Do not start Phase 3b (Hindi, live API, resolved manufacturer identity) or Phase 2 even if it feels like the natural next step — that's the next ticket, written after the planner reviews what this one built.
+Do not start Phase 2b or the `web/` regeneration even if it feels like the natural next step — those are separate tickets, written after the planner reviews what this one produced.
