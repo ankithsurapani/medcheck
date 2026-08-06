@@ -4,9 +4,13 @@ A searchable public database of medicines flagged as Not of Standard Quality (NS
 
 CDSCO tests medicines pulled from real pharmacy shelves every month and publishes the failures — as unsearchable monthly PDFs. MedCheck makes that data searchable.
 
-**Status:** Phase 1a complete — 6,155 records across 90 alert months (Jan-2019 → Jun-2026) in `data/medcheck.db`.
+**Status:** 6,155 records across 90 alert months (Jan-2019 → Jun-2026), search site live, dataset published, analysis written up. Manufacturer identity resolution is intentionally partial (1,856 of ~5,107 raw spellings collapsed so far) — every merged page says so.
 
-See `plan.md` for the full spec, `CLAUDE.md` for current state, `docs/pdf_inventory.md` for what the source data looks like, `docs/methodology.md` for how records are identified and scored, and `docs/parser_accuracy.md` for the accuracy evidence.
+- **Search the data:** _(live URL added here at deploy time)_
+- **Download the dataset:** `analysis/dataset/medcheck_nsq_records.csv` (CC0) — see `analysis/dataset/README.md`
+- **Read the findings:** `analysis/FINDINGS.md` — methodology, limitations, every number reproducible
+
+See `plan.md` for the full spec, `CLAUDE.md` for current project state and decision history, `docs/pdf_inventory.md` for what the source data looks like, `docs/methodology.md` for how records are identified and scored, `docs/entity_resolution.md` for the manufacturer-matching approach, and `docs/parser_accuracy.md` for the accuracy evidence.
 
 ## What MedCheck is not
 
