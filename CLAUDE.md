@@ -82,12 +82,12 @@ Design system persisted at `design-system/medcheck/MASTER.md` (Swiss Modernism 2
 - Phase 4 q4 now does the real comparison: central labs report **9.4% particulate matter vs 0.7%** for state labs, plus more related-substances and clarity failures — the instrument-heavy injectable tests. State labs skew to description/labelling (19.7% vs 15.0%) and `other` (7.0% vs 2.7%). Capability difference, not diligence.
 - Propagated end to end: normalize → resolve → export_static → 8,017-page rebuild → analysis → CC0 dataset (2 new columns)
 
-**MedCheck is live.** GitHub: https://github.com/ankithsurapani/medcheck (public). Site: https://web-navy-three-91.vercel.app/ (Vercel, static export, free tier).
+**MedCheck is live.** GitHub: https://github.com/ankithsurapani/medcheck (public). Site: **https://medcheck-india.vercel.app/** (Vercel, static export, free tier). The launch URL `web-navy-three-91.vercel.app` still resolves — it stayed attached to the project as a second alias, so nothing that linked to it broke.
 
 - Repo was previously local-only, no remote. Created public via `gh repo create`, pushed all history — clean secrets scan first (no `.env`/keys tracked).
 - Deploy hit two real blockers, both fixed before going live, not worked around: (1) Vercel's file-count cap (8,017 pages = 16k+ files) — solved with `vercel --archive=tgz`; (2) Vercel refused the build outright over a **critical (CVSS 10) Next.js RCE** in the pinned `15.5.4` (`GHSA-9qr9-h5gf-34mp`, react flight protocol). Bumped to `15.5.22` (latest 15.5.x patch, no major-version risk), re-ran `test:search` (29/29 still pass), rebuilt, redeployed clean.
 - 3 remaining `npm audit` findings (`postcss`/`sharp`, high severity) are build-tooling only — `images.unoptimized: true` means `sharp` isn't exercised, and nothing processes untrusted CSS/images. Fixing them needs Next.js 16 (breaking), deliberately not forced through mid-deploy — logged as a follow-up, not silently ignored.
-- The per-deployment Vercel URL (e.g. `web-powrksadx-...`) redirects to Vercel SSO — that's normal per-deploy protection, not a public-access problem. The **stable production alias** (`web-navy-three-91.vercel.app`) is the real public URL and was verified 200 OK on `/`, a record page, a manufacturer page, and the search index asset.
+- The per-deployment Vercel URL (e.g. `web-powrksadx-...`) redirects to Vercel SSO — that's normal per-deploy protection, not a public-access problem. The **stable production alias** is the real public URL and was verified 200 OK on `/`, a record page, a manufacturer page, and the search index asset.
 - README.md updated — was stuck describing "Phase 1a complete," now points at the live site, dataset, and findings.
 
 **Post-launch hardening — Ticket 1 (content-derived manufacturer slugs) — complete.**
@@ -115,9 +115,9 @@ Manufacturer URLs no longer move when an unrelated merge decision is made.
 - `analysis/FINDINGS.md` §5 rewritten with the two-source derivation; limitations table gained rows 4b and 4c. `docs/methodology.md` §5a. `web/app/about/page.tsx` updated
 - **Ticket 1 proved itself here:** a full normalize + re-apply + re-export moved **zero** manufacturer URLs. Under the positional scheme this pipeline run would have been a mass rename
 
-**Post-launch hardening — Ticket 3 (Next.js 16 upgrade) — complete, NOT deployed.**
+**Post-launch hardening — Ticket 3 (Next.js 16 upgrade) — complete and deployed.**
 
-**`npm audit`: 3 high → 0.** Built and verified locally; the production deploy is deliberately still pending (see below).
+**`npm audit`: 3 high → 0.**
 
 - `next` **15.5.22 → 16.3.0** (current stable; 16.3.1 is canary-only). Next 16 dropped its `sharp` dependency, so that advisory is gone rather than mitigated
 - `postcss` **8.5.6 → ^8.5.26**. It is a *direct* devDependency pinned exactly — the Next bump alone did not clear it. This is the other half of the finding, not scope creep
@@ -128,13 +128,25 @@ Manufacturer URLs no longer move when an unrelated merge decision is made.
 - **Build identical:** 8,016 pages, 0 missing manufacturer or record pages, 78 with no manufacturer link. `test:search` 29/29. (`find out -name '*.html'` reads 8,017 now — Next 16 emits `404/index.html` alongside `404.html`)
 - **Smoke-checked against the local static export**, same four checks as the launch: `/`, a record page, a manufacturer page, the search index asset — all 200, index has 6,155 rows and 1,856 canonical slugs, and the PIN-provenance note renders
 
+**Post-launch hardening — Ticket 4 (Vercel project rename) — complete. Tickets 1–3 deployed with it.**
+
+Live at **https://medcheck-india.vercel.app/** (was `web-navy-three-91.vercel.app`). One production deploy shipped Tickets 1, 2 and 3 together, on the user's explicit go-ahead.
+
+- Project renamed `web` → `medcheck-india`. **The CLI cannot do this** — `vercel project` has `add`/`inspect`/`list`/`remove` and no `rename` — so it went through `PATCH /v9/projects/{id}` on Vercel's REST API using the CLI's existing session
+- **Renaming does not move the URL.** Vercel keeps the original auto-generated `<name>-<words>-<n>.vercel.app` alias, so after the rename `medcheck-india.vercel.app` still 404'd. It took `POST /v10/projects/{id}/domains` + `vercel alias set` against the new production deployment
+- `medcheck.vercel.app` is **taken** by someone else (401, SSO-protected). `medcheck-india` and `medcheck-nsq` were both free
+- **`web-navy-three-91.vercel.app` still resolves** — it stayed on the project as a second alias, so the launch URL did not break. Deliberate: it costs nothing and it is the URL that has been public since launch
+- Deployed with `vercel --archive=tgz --prod` (the file-count cap from launch still applies — 64.5 MB uploaded)
+- **Verified against the live site**, not the dashboard: `/`, a record page, a manufacturer page and the search index asset all 200; the search index has 6,155 rows and 1,856 canonical slugs; the PIN-provenance note renders; and an **old positional slug now correctly 404s** — proof the new build is actually serving, not a cached old one
+- `README.md` and `CLAUDE.md` updated to the new URL
+
 Open / needs a planner decision:
-- **Next 16 is committed but NOT live.** The ticket requires explicit confirmation before `vercel --prod` pushes it to the public site. The live site is still serving the Next 15.5.22 build, which also means it still has the pre-Ticket-1 slugs and the 58.1% state coverage. **One deploy ships Tickets 1, 2 and 3 together.**
+- **A real custom domain is still not set up.** `medcheck-india.vercel.app` is cosmetic progress, not a domain MedCheck owns. Needs DNS and is its own ticket.
 - ~~190 review-band pairs undecided *and* slugs positional~~ — the slug half is **fixed** (above); resuming the 190-pair review is now safe and is still its own ticket.
 - **`manufacturers.state` carries no provenance.** It is a majority vote across a company's records, some of which are now PIN-derived, and the manufacturer page shows it uncaveated. It was uncaveated before this ticket too, so nothing regressed — but it is the one place a PIN-derived state renders without saying so.
 - **827 records still have no state and no PIN.** PIN lookup cannot help them; they need real address parsing (city/district → state), which is Phase 2 work.
 - ~~The 3 remaining build-tooling vulnerabilities~~ — **fixed**, `npm audit` is at 0 (Ticket 3 above).
-- **Vercel project is named `web`** (generic) — the URL slug `web-navy-three-91` doesn't say "MedCheck." A custom domain or project rename is cosmetic, not urgent.
+- ~~Vercel project is named `web`~~ — **renamed** to `medcheck-india` (Ticket 4 above). A real custom domain is still a separate, future ticket.
 - ~~`alert_section` unreliability~~ — **fixed**, see the lab-labelling section above.
 - **Search index is 255 KB brotli** (down from 297 KB). Lazy-loaded on idle/focus so the page is usable first, but still the biggest cost on a slow connection. A later Phase 3b option: server-side search, or a two-tier prefix index.
 - Rest of Phase 3b (Hindi/i18n, live FastAPI) still deferred.
@@ -145,7 +157,7 @@ Open / needs a planner decision:
 
 ## Decisions log
 
-Moved to [`docs/decisions.md`](docs/decisions.md) — 79 entries of "why is it this
+Moved to [`docs/decisions.md`](docs/decisions.md) — 84 entries of "why is it this
 way", read on demand rather than loaded into every session. Append new ones there.
 
 ## Key learnings / gotchas
@@ -224,3 +236,6 @@ way", read on demand rather than loaded into every session. Append new ones ther
 - **Next 16's `next build` rewrites `tsconfig.json` in place.** It sets `jsx: "react-jsx"`, adds `.next/dev/types/**/*.ts` to `include`, and reformats every array onto multiple lines. Not a prompt, not a codemod — a side effect of building. Anything that diffs a clean tree after a build will see it.
 - **The static export gained a page without changing.** `find out -name '*.html'` went 8,016 → 8,017 on Next 16 because it now writes `404/index.html` *and* `404.html` under `trailingSlash: true`. The route set is identical; a page-count regression check has to know that or it reads as a phantom extra page.
 - **Turbopack kept the Tailwind v4 dark-mode rule that Tailwind itself once dropped.** Worth checking explicitly rather than assuming: the earlier `@theme`-inside-`@media` bug shipped a permanently-dark site and was only ever caught by grepping the built CSS, so a whole new bundler is exactly when to grep it again. `prefers-color-scheme` is present.
+- **Renaming a Vercel project does not rename its URL.** The auto-generated production alias (`web-navy-three-91.vercel.app`) is a *domain attached to the project*, not a view of the project's name, so it survives the rename untouched — `medcheck-india.vercel.app` still 404'd afterwards. Getting the new URL took three steps, not one: PATCH the project name, POST the new domain, then `vercel alias set` it to the production deployment.
+- **`vercel project` has no `rename` subcommand** (CLI 48.8.2 — only `add`, `inspect`, `list`, `remove`). The REST API does it fine with the token the CLI already stores in `~/Library/Application Support/com.vercel.cli/auth.json`, so a rename does not actually need a dashboard visit.
+- **Verify a deploy by checking something that should have *stopped* working.** All four launch checks return 200 against a stale cached build just as happily as against a new one. The proof the new build was live was `/manufacturer/zee-laboratories-ltd-m1834/` returning 404 — an old positional slug that only the pre-Ticket-1 export could serve.

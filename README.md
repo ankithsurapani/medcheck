@@ -6,7 +6,7 @@ CDSCO tests medicines pulled from real pharmacy shelves every month and publishe
 
 **Status:** 6,155 records across 90 alert months (Jan-2019 → Jun-2026), search site live, dataset published, analysis written up. Manufacturer identity resolution is intentionally partial (1,856 of ~5,107 raw spellings collapsed so far) — every merged page says so.
 
-- **Search the data:** https://web-navy-three-91.vercel.app/
+- **Search the data:** https://medcheck-india.vercel.app/
 - **Download the dataset:** [`analysis/dataset/medcheck_nsq_records.csv`](analysis/dataset/medcheck_nsq_records.csv) (CC0) — see `analysis/dataset/README.md`
 - **Read the findings:** [`analysis/FINDINGS.md`](analysis/FINDINGS.md) — methodology, limitations, every number reproducible
 - **Source:** [github.com/ankithsurapani/medcheck](https://github.com/ankithsurapani/medcheck)
