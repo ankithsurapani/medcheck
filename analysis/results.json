@@ -244,11 +244,11 @@
     "other_share": 4.4
   },
   "q3_manufacturers": {
-    "manufacturers": 1856,
+    "manufacturers": 1791,
     "flags_attributed": 6077,
     "records_without_manufacturer": 78,
     "resolution_is_partial": true,
-    "review_pairs_pending": 170,
+    "review_pairs_pending": 90,
     "top": [
       {
         "rank": 1,
@@ -287,59 +287,59 @@
       },
       {
         "rank": 6,
+        "name": "Vivek Pharmachem (India) Ltd",
+        "state": "Rajasthan",
+        "flags": 45,
+        "spellings": 38
+      },
+      {
+        "rank": 7,
         "name": "Karnataka Antibiotics & Pharmaceuticals Ltd",
         "state": "Karnataka",
         "flags": 44,
         "spellings": 36
       },
       {
-        "rank": 7,
+        "rank": 8,
         "name": "Mascot Health Series Pvt. Ltd",
         "state": "Uttarakhand",
         "flags": 43,
         "spellings": 38
       },
       {
-        "rank": 8,
+        "rank": 9,
         "name": "Gidsha Pharmaceuticals",
         "state": "Gujarat",
         "flags": 42,
         "spellings": 9
       },
       {
-        "rank": 9,
-        "name": "Vivek Pharmachem (India) Ltd",
-        "state": "Rajasthan",
-        "flags": 41,
+        "rank": 10,
+        "name": "Hindustan Antibiotics Ltd",
+        "state": "Haryana",
+        "flags": 37,
         "spellings": 34
       },
       {
-        "rank": 10,
+        "rank": 11,
         "name": "Affy Parenterals",
         "state": "Himachal Pradesh",
         "flags": 36,
         "spellings": 22
       },
       {
-        "rank": 11,
+        "rank": 12,
         "name": "Life Max Cancer Laboratories",
         "state": "Uttarakhand",
         "flags": 36,
         "spellings": 20
       },
       {
-        "rank": 12,
-        "name": "Hindustan Antibiotics Ltd",
-        "state": "Haryana",
-        "flags": 35,
-        "spellings": 32
-      },
-      {
         "rank": 13,
         "name": "Ridley Life Science Pvt. Ltd",
         "state": "Delhi",
-        "flags": 35,
-        "spellings": 28
+        "flags": 36,
+        "spellings": 29
       },
       {
         "rank": 14,
@@ -350,24 +350,24 @@
       },
       {
         "rank": 15,
+        "name": "Himalaya Meditek Pvt. Ltd",
+        "state": "Uttarakhand",
+        "flags": 33,
+        "spellings": 26
+      },
+      {
+        "rank": 16,
         "name": "Paschim Banga Pharmaceuticals",
         "state": "West Bengal",
         "flags": 33,
         "spellings": 16
       },
       {
-        "rank": 16,
+        "rank": 17,
         "name": "Digital Vision",
         "state": "Himachal Pradesh",
         "flags": 32,
         "spellings": 24
-      },
-      {
-        "rank": 17,
-        "name": "Himalaya Meditek Pvt. Ltd",
-        "state": "Uttarakhand",
-        "flags": 32,
-        "spellings": 25
       },
       {
         "rank": 18,
@@ -406,37 +406,37 @@
       },
       {
         "manufacturers": 10,
-        "share_of_manufacturers": 0.5,
-        "flags": 550,
+        "share_of_manufacturers": 0.6,
+        "flags": 555,
         "share_of_flags": 9.1
       },
       {
         "manufacturers": 25,
-        "share_of_manufacturers": 1.3,
-        "flags": 1024,
-        "share_of_flags": 16.9
+        "share_of_manufacturers": 1.4,
+        "flags": 1032,
+        "share_of_flags": 17.0
       },
       {
         "manufacturers": 50,
-        "share_of_manufacturers": 2.7,
-        "flags": 1520,
-        "share_of_flags": 25.0
+        "share_of_manufacturers": 2.8,
+        "flags": 1537,
+        "share_of_flags": 25.3
       },
       {
         "manufacturers": 100,
-        "share_of_manufacturers": 5.4,
-        "flags": 2207,
-        "share_of_flags": 36.3
+        "share_of_manufacturers": 5.6,
+        "flags": 2233,
+        "share_of_flags": 36.7
       },
       {
         "manufacturers": 250,
-        "share_of_manufacturers": 13.5,
-        "flags": 3313,
-        "share_of_flags": 54.5
+        "share_of_manufacturers": 14.0,
+        "flags": 3372,
+        "share_of_flags": 55.5
       }
     ],
-    "single_flag_manufacturers": 979,
-    "single_flag_share": 52.7,
+    "single_flag_manufacturers": 922,
+    "single_flag_share": 51.5,
     "median_flags": 1,
     "max_flags": 88
   },
