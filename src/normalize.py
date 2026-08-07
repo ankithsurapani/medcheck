@@ -26,6 +26,7 @@ from datetime import datetime
 
 from ingest.cdsco_json import load_cached
 from resolve.labs import classify_lab
+from resolve.pin_state import extract_pin, state_from_pin
 
 import db
 import validate
@@ -221,7 +222,20 @@ def categorise(reason: str | None) -> tuple[list[str], str | None]:
 
 def derive_state(address: str | None, explicit: str | None = None) -> tuple[str | None, str | None]:
     """State from an explicit field if present, else an exact state-name match in
-    the address. Ambiguity (two different states named) yields null + a flag."""
+    the address, else the address's PIN code. Ambiguity yields null + a flag.
+
+    The three sources are strictly ordered and never compete. An explicit field
+    beats a name match beats a PIN lookup, because that is the order of how
+    directly CDSCO stated the thing. In particular a PIN never overrides a name
+    match and never resolves a `state_ambiguous` address — an address naming two
+    states is a genuine contradiction in what the regulator published, and
+    quietly settling it with the more-confident-looking source is exactly the
+    move §1.4 forbids.
+
+    A PIN-sourced hit returns a flag of its own. It is a real answer, but a
+    weaker one than the regulator writing the state down, and that difference has
+    to be visible rather than merely tracked internally.
+    """
     if (e := clean_text(explicit)):
         return STATE_ALIASES.get(e.lower(), e), None
     s = clean_text(address)
@@ -242,6 +256,13 @@ def derive_state(address: str | None, explicit: str | None = None) -> tuple[str 
         return canon.pop(), None
     if len(canon) > 1:
         return None, f"state_ambiguous:{'/'.join(sorted(canon))}"
+
+    # No state named anywhere in the address — most of the corpus. Fall back to
+    # the PIN, which is what these addresses do end in (src/resolve/pin_state.py).
+    if (pin := extract_pin(s)):
+        state, flag = state_from_pin(pin)
+        if flag:
+            return state, flag
     return None, "state_not_derived:no_match"
 
 

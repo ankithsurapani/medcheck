@@ -59,10 +59,14 @@ COLUMNS: list[tuple[str, str, str]] = [
     ("manufacturer_canonical", "manufacturers.canonical_name",
      "Company name after entity resolution. PARTIAL — see the limitations below."),
     ("manufacturer_state", "manufacturers.state",
-     "State of the resolved company, derived from the address. Empty ~42% of the time."),
+     "State of the resolved company: the most common `state` across its records. "
+     "A summary of the column below, and inherits its two sources."),
     ("state", "nsq_records.state",
-     "Manufacturing state derived from this record's address. Empty where the "
-     "address could not be read unambiguously — never guessed."),
+     "Manufacturing state derived from this record's address, from two sources in "
+     "strict order: a state named in the address text, else the address's PIN "
+     "code. Rows sourced from a PIN carry `state_derived_from_pin:<pin>` in "
+     "`parse_flags` — filter on it to keep only states CDSCO actually named. "
+     "Empty where neither source answers unambiguously — never guessed."),
     ("failure_reason", "nsq_records.failure_reason_raw",
      "CDSCO's exact wording for why the batch failed, reproduced unchanged. For "
      "spurious records this also carries the firm's reply and CDSCO's remarks."),
@@ -130,7 +134,9 @@ but which matter more than most licence terms would:
 
 
 def readme(row_count: int, mfr_count: int, months: tuple[str, str],
-           unresolved: int, with_state: int) -> str:
+           unresolved: int, with_state: int, state_from_pin: int,
+           state_ambiguous_pin: int) -> str:
+    state_named = with_state - state_from_pin
     cols = "\n".join(
         f"| `{name}` | `{src}` | {desc} |" for name, src, desc in COLUMNS)
     return f"""# MedCheck NSQ dataset
@@ -183,6 +189,8 @@ Empty means "CDSCO did not publish this", never zero and never "none".
 | Manufacturer resolution is **partial** | {mfr_count:,} companies from 5,107 published spellings, but 190 ambiguous pairs were left unmerged pending human review. Some companies still appear under more than one `manufacturer_id`. Concentration measured from this file is a **lower bound**. |
 | `alert_section` is unreliable | CDSCO files 13 laboratories under both `central_lab` and `state_lab`, and the field contradicts the laboratory's identity on 857 rows. It is kept verbatim for fidelity. **Use `lab_type` instead** — derived from which laboratory it is, against CDSCO's published list of its own labs. |
 | `state` is {with_state / row_count * 100:.0f}% populated | Derived from free-text addresses, left empty rather than guessed where ambiguous. Do not treat the populated subset as the whole picture. |
+| `state` mixes two sources of different strength | {state_named:,} rows have a state CDSCO named in the address. {state_from_pin:,} have one read back from the address's PIN code, using only prefixes that are uniform across India Post's All India Pincode Directory — a well-founded inference, but an inference. Those rows carry `state_derived_from_pin:<pin>` in `parse_flags`. |
+| {state_ambiguous_pin:,} rows have a PIN whose prefix spans a state boundary | Flagged `state_ambiguous_pin:<prefix>` and left empty. Eighteen of India Post's sorting districts predate the 2000 state reorganisation (247xxx is both Saharanpur, Uttar Pradesh and Roorkee, Uttarakhand), and 194xxx is refused because the source directory predates Ladakh's 2019 separation. Assigning the majority state would have filled these with a silent error rate. |
 | No therapeutic classification | There is no drug-class column. `analysis/drug_classes.py` derives anti-infective groups from published WHO INN stems; that is a claim about names, not an ATC classification. |
 | {unresolved} rows have no `manufacturer_id` | Their manufacturer field is a placeholder ("Under Investigation" and similar), not a company. Deliberately not resolved. |
 | Pre-2019 is absent | CDSCO's portal starts at January 2019. Earlier PDF alerts exist but are not yet ingested. |
@@ -237,9 +245,16 @@ def main() -> int:
         "SELECT COUNT(*) FROM nsq_records WHERE manufacturer_id IS NULL").fetchone()[0]
     with_state = conn.execute(
         "SELECT COUNT(*) FROM nsq_records WHERE state IS NOT NULL").fetchone()[0]
+    state_from_pin = conn.execute(
+        "SELECT COUNT(*) FROM nsq_records WHERE parse_flags LIKE "
+        "'%state_derived_from_pin%'").fetchone()[0]
+    state_ambiguous_pin = conn.execute(
+        "SELECT COUNT(*) FROM nsq_records WHERE parse_flags LIKE "
+        "'%state_ambiguous_pin%'").fetchone()[0]
 
     (OUT / "README.md").write_text(
-        readme(len(rows), mfr_count, span, unresolved, with_state), encoding="utf-8")
+        readme(len(rows), mfr_count, span, unresolved, with_state,
+               state_from_pin, state_ambiguous_pin), encoding="utf-8")
     (OUT / "LICENSE").write_text(LICENSE, encoding="utf-8")
 
     print(f"wrote {len(rows)} rows to {path.relative_to(ROOT)} "

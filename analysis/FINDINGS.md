@@ -266,28 +266,62 @@ is not published.
 
 `analyse.py::q6_states`
 
-**Coverage first: a manufacturing state could be derived for 3,576 of 6,155 records
-— 58.1%.** The remaining 2,579 records (2,536 where no state could be read from the
-address, 43 where the address named two) are not missing at random: they are the
-records with the messiest addresses. Everything below describes the 58%.
+**Coverage first: a manufacturing state could be derived for 5,104 of 6,155 records
+— 82.9%.**
+
+State comes from two sources, in strict order, and they never compete:
+
+1. **The address names the state**, in full or as an unambiguous abbreviation
+   ("…Baddi, Dist-Solan, H.P.-173205"). 3,576 records.
+2. **The address's PIN code**, consulted only where the first found nothing.
+   CDSCO usually does not write the state down — the address simply ends in six
+   digits — so this is where most of the corpus lives. 1,528 records, each
+   flagged `state_derived_from_pin:<pin>` in the published dataset, because a PIN
+   lookup is a weaker claim than the regulator stating the state and the two must
+   not be indistinguishable. Prefixes come from India Post's own All India
+   Pincode Directory, and a prefix is used **only if every post office under it
+   is in one state** (`src/resolve/pin_state.py`).
+
+The remaining **1,051 records** still have no state, for three separate reasons,
+none of which is guessed at:
+
+| Why no state | Records |
+|---|---|
+| No state named and no PIN in the address at all | 827 |
+| PIN present, but its prefix spans a state boundary (`state_ambiguous_pin`) | 181 |
+| The address named two different states (`state_ambiguous`) | 43 |
+
+The 181 are the honest cost of the rule above. India's 2000 state
+reorganisation cut new boundaries across sorting districts drawn before it, so
+247xxx is Saharanpur (Uttar Pradesh) *and* Roorkee (Uttarakhand); 605xxx is
+Tamil Nadu *and* Puducherry. Eighteen sorting districts are like this. Naming
+the majority state would have added ~180 records and a silent error rate.
+
+Missingness is still not random — these are the records with the messiest
+addresses — but it is now 17.1% rather than 41.9%. Everything below describes
+the 82.9%.
 
 | State | Records | Share of records *with a state* |
 |---|---|---|
-| Himachal Pradesh | 1,258 | 35.2% |
-| Uttarakhand | 562 | 15.7% |
-| Gujarat | 365 | 10.2% |
-| Madhya Pradesh | 145 | 4.1% |
-| Haryana | 122 | 3.4% |
-| Sikkim | 116 | 3.2% |
-| Telangana | 110 | 3.1% |
-| Uttar Pradesh | 106 | 3.0% |
-| Punjab | 104 | 2.9% |
-| Maharashtra | 98 | 2.7% |
+| Himachal Pradesh | 1,717 | 33.6% |
+| Uttarakhand | 723 | 14.2% |
+| Gujarat | 502 | 9.8% |
+| Madhya Pradesh | 267 | 5.2% |
+| Maharashtra | 213 | 4.2% |
+| Haryana | 198 | 3.9% |
+| Punjab | 176 | 3.4% |
+| Uttar Pradesh | 154 | 3.0% |
+| Telangana | 144 | 2.8% |
+| Tamil Nadu | 135 | 2.6% |
 
-**The clustering is real and it is geographic.** Himachal Pradesh, Uttarakhand and
-Gujarat account for 61.1% of records where a state is known. Himachal Pradesh alone
-is 35.2% of those — though only **20.4% of all records**, which is the figure to
-quote if the 42% with no state are not to be silently discarded.
+**The clustering is real, it is geographic, and it survived the coverage jump.**
+Himachal Pradesh, Uttarakhand and Gujarat account for 57.6% of records where a
+state is known. Himachal Pradesh alone is 33.6% of those — and **27.9% of all
+records**, the figure to quote if the 17% with no state are not to be silently
+discarded. Adding 1,528 records moved the top-three share only from 61.1% to
+57.6% and lifted Himachal Pradesh's share of the *whole corpus* from 20.4% to
+27.9%: the concentration was not an artifact of which addresses happened to be
+readable.
 
 This is consistent with where India makes medicines: the Baddi–Solan belt in
 Himachal Pradesh and the Roorkee–Haridwar belt in Uttarakhand are the country's
@@ -439,7 +473,9 @@ Collected in one place. Each is load-bearing for at least one finding above.
 | 2 | **Manufacturer resolution is partial** — 190 review-band pairs undecided, so one company can still hold more than one id. | §3's concentration figures are a **lower bound**. |
 | 3 | **`alert_section` is unreliable** — CDSCO files 13 laboratories under both labels, contradicting the laboratory's identity on 857 records. It is kept verbatim and **`lab_type` is derived instead**, from CDSCO's own published list of its laboratories. | Nothing, now — but any analysis using `alert_section` rather than `lab_type` inherits the error. §4. |
 | 3b | **`lab_type` is derived, not published.** 23 records (0.4%) could not be classified and are `unknown`; CDSCO publishes no machine-readable list of which laboratories are its own, so the registry in `src/resolve/labs.py` is assembled from its website and a government press release and would need updating if CDSCO opens new laboratories. | The precision of §4's split, at the margin. |
-| 4 | **State is 58.1% populated**, and missing non-randomly (messiest addresses). | §5's shares are of the 58%, not of the corpus. Both denominators are given. |
+| 4 | **State is 82.9% populated**, and missing non-randomly (messiest addresses). | §5's shares are of the 82.9%, not of the corpus. Both denominators are given. |
+| 4b | **State comes from two sources of different strength.** 3,576 records have a state CDSCO named in the address; 1,528 have one read back from the address's PIN code and flagged `state_derived_from_pin`. A PIN prefix identifies a postal sorting district, not a legal boundary, so this is an inference — a well-founded one (only prefixes uniform across India Post's own directory are used), but not the regulator's statement. | Nothing in §5's shape, which barely moved when coverage rose from 58.1%. Anyone needing regulator-stated states only should filter on the flag. |
+| 4c | **181 records have a PIN whose prefix straddles a state boundary** and are left empty rather than assigned the majority state — 18 sorting districts predate the 2000 state reorganisation. A further 1 prefix (194xxx, Leh/Kargil) is refused because the source directory predates Ladakh's 2019 separation. | Nothing. It is why §5's coverage is 82.9% and not ~86%. |
 | 5 | **No testing-volume denominator for trends.** | §1's growth is in *published flags*. It cannot be attributed to drug quality. |
 | 6 | **The August 2025 portal migration is a reporting discontinuity.** | Any before/after comparison spanning it, including the 4.78× growth figure. |
 | 7 | **No therapeutic classification exists in the data**, and antibiotic over-representation has no available denominator. | §6's second question, which is documented as unanswerable rather than estimated. |

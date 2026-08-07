@@ -69,7 +69,7 @@ Design system persisted at `design-system/medcheck/MASTER.md` (Swiss Modernism 2
 - **6,155 batches, 90 months, 4.78× growth 2019 → 2025** (last complete year). Counts, not rates.
 - **64.1% failed assay or dissolution** (potency); only **12.0%** are contamination-type. The published quality problem is medicines that may not work, not medicines that are dangerous.
 - **13.5% of companies hold 54.5% of flags** — but **52.9% appear exactly once** and the median company has 1. Long tail with a heavy head, not a few bad actors.
-- **58.1% state coverage**; Himachal Pradesh is 35.2% of records *with* a state but only **20.4% of all** records.
+- **82.9% state coverage** (was 58.1% before the PIN fallback); Himachal Pradesh is 33.6% of records *with* a state and **27.9% of all** records.
 - **19.4% name an anti-infective** by INN stem. Over-representation is **not answerable** — no denominator.
 
 **Lab labelling fix — complete.** `alert_section` was unusable: CDSCO files 13 of 239 laboratories under *both* `central_lab` and `state_lab`. `lab_type` is now derived from the laboratory's identity instead.
@@ -102,21 +102,36 @@ Manufacturer URLs no longer move when an unrelated merge decision is made.
 - Rebuild clean: 8,016 HTML pages, 0 missing manufacturer or record pages, 78 records with no manufacturer link (unchanged). `npm run test:search` 29/29
 - `docs/entity_resolution.md` has the scheme and why it replaced the positional one
 
+**Post-launch hardening — Ticket 2 (state coverage via PIN prefixes) — complete.**
+
+**State coverage 58.1% → 82.9%** (3,576 of 6,155 → 5,104 of 6,155).
+
+- `src/resolve/pin_state.py` — **generated**, not hand-typed: `scripts/build_pin_table.py --csv <pincode.csv>` derives it from India Post's *All India Pincode Directory*. A prefix is written only if **every** post office under it is in one state. 51 two-digit prefixes, 104 three-digit overrides, 18 sorting districts deliberately unmapped. `python src/resolve/pin_state.py` prints the table and everything it refuses
+- `derive_state()` gained step 4, strictly after the existing checks: explicit field → state name in address → abbreviation → **last plausible PIN**. It never overrides, and it never resolves a `state_ambiguous` address
+- **1,528 records** got a state from a PIN, each flagged `state_derived_from_pin:<pin>`. **181** hit a boundary-straddling prefix (`state_ambiguous_pin`), **827** have no PIN and no state name, **43** name two states — all four reported separately, none guessed
+- **Shown, not just flagged (§1.4):** the record page prints "…the state the address's PIN code (248197) belongs to, not something the regulator wrote down" beside the value. A name-matched state shows no such note; verified on rendered HTML for all three cases
+- Propagated end to end: normalize → resolve `--apply --allow-pending` → export_static → 8,016-page rebuild → `analyse.py --json` → CC0 dataset (2.8 → 3.1 MB; no new column — the flags ride in `parse_flags`, which was already published)
+- `tests/test_pin_state.py` — **44 checks**, all passing. Every other suite still passes (categorise 59, labs 90, resolve 45, drug classes 41, `test:search` 29)
+- `analysis/FINDINGS.md` §5 rewritten with the two-source derivation; limitations table gained rows 4b and 4c. `docs/methodology.md` §5a. `web/app/about/page.tsx` updated
+- **Ticket 1 proved itself here:** a full normalize + re-apply + re-export moved **zero** manufacturer URLs. Under the positional scheme this pipeline run would have been a mass rename
+
 Open / needs a planner decision:
 - ~~190 review-band pairs undecided *and* slugs positional~~ — the slug half is **fixed** (above); resuming the 190-pair review is now safe and is still its own ticket.
+- **`manufacturers.state` carries no provenance.** It is a majority vote across a company's records, some of which are now PIN-derived, and the manufacturer page shows it uncaveated. It was uncaveated before this ticket too, so nothing regressed — but it is the one place a PIN-derived state renders without saying so.
+- **827 records still have no state and no PIN.** PIN lookup cannot help them; they need real address parsing (city/district → state), which is Phase 2 work.
 - **The 3 remaining build-tooling vulnerabilities** (`postcss`/`sharp`) need a Next.js 16 major-version upgrade to clear — real work, not urgent (build-time only, no untrusted input processed), but shouldn't sit forever on a public repo.
 - **Vercel project is named `web`** (generic) — the URL slug `web-navy-three-91` doesn't say "MedCheck." A custom domain or project rename is cosmetic, not urgent.
 - ~~`alert_section` unreliability~~ — **fixed**, see the lab-labelling section above.
 - **Search index is 255 KB brotli** (down from 297 KB). Lazy-loaded on idle/focus so the page is usable first, but still the biggest cost on a slow connection. A later Phase 3b option: server-side search, or a two-tier prefix index.
 - Rest of Phase 3b (Hindi/i18n, live FastAPI) still deferred.
 - **`alert_section` is unreliable.** The portal and the PDFs disagree on central-vs-state for 27 of 184 Jun-2025 records. Phase 4's "central vs state lab detection patterns" analysis needs this caveat.
-- **State coverage is 58%.** PIN-prefix → state mapping would lift it a lot; belongs with Phase 2a's address parsing.
+- ~~State coverage is 58%~~ — **fixed**, 82.9% via the PIN fallback (Ticket 2 above).
 - Phase 1b (pre-2019 PDF backfill) not started, per ticket boundary.
 - Phase 2b (drug-name resolution) deferred — nothing depends on it yet.
 
 ## Decisions log
 
-Moved to [`docs/decisions.md`](docs/decisions.md) — 66 entries of "why is it this
+Moved to [`docs/decisions.md`](docs/decisions.md) — 73 entries of "why is it this
 way", read on demand rather than loaded into every session. Append new ones there.
 
 ## Key learnings / gotchas
@@ -185,3 +200,9 @@ way", read on demand rather than loaded into every session. Append new ones ther
 - **A positional id in a public URL is a link-rot generator, and the blast radius is much bigger than it looks.** `manufacturers.id` renumbers `1..N` in canonical-name order, so approving *one* merge near the top of the alphabet shifted **1,207 of 1,856** manufacturer URLs — not the two rows involved. The scheme looked fine for a year of local work and was only wrong once something outside the repo could hold a link.
 - **The right hash input was already being computed.** `apply()` builds `sorted(members)` and serialises it to `known_aliases` before writing the row; the slug fix reads that back. Cluster membership is the only property invariant under re-sorting — canonical name isn't (ties break on record counts), address isn't (`primary` is picked by record count), and the id is the thing being replaced.
 - **"Only the touched cluster changes" has to be tested by actually simulating a merge**, not by reasoning about the hash. Doing it needs a scratch copy of the merge log as well as the DB — `MERGE_LOG` is module-level in `src/resolve/manufacturers.py`, and `log_append` is append-only by design, so a check that forgot to redirect it would have permanently recorded a review decision nobody made.
+- **Two thirds of the state-less records were one regex away from an answer.** 1,745 of the 2,579 records with no state ended in a plausible PIN code. The 58% coverage figure sat in CLAUDE.md for two phases reading like an inherent limit of messy addresses; it was mostly an unimplemented lookup.
+- **India Post's sorting districts predate India's states.** The first three PIN digits identify a sorting district, and the 2000 reorganisation (Uttarakhand, Jharkhand, Chhattisgarh) cut new state lines *through* districts already drawn. 247xxx is Saharanpur (Uttar Pradesh) **and** Roorkee (Uttarakhand); 262xxx is a near-even Uttar Pradesh/Uttarakhand split; 81x and 82x each straddle Bihar/Jharkhand. Eighteen districts are like this, and no amount of prefix precision fixes them — going to four digits costs 80 more table entries and resolves **9 more records**, because 247 is still mixed at 2476.
+- **Deriving the table from India Post's own directory made it 51 + 104 entries with zero judgement calls in it.** Written from memory it would have been a list of plausible-looking guesses at exactly the boundaries that are actually contested. Purity is measurable: count post offices per prefix, and write the prefix down only if they all agree.
+- **An authoritative source can be authoritative and still be out of date.** The directory files 194xxx (Leh, Kargil) under Jammu & Kashmir because it predates the 2019 reorganisation that made Ladakh a UT. A generator can measure purity but cannot notice that its input is older than a border — that entry has to be hand-maintained, and is the only hand-maintained thing in the generated module.
+- **`?` in an address does not break PIN extraction, but a leading plot number would.** The portal's mangled punctuation gives "Amritsar ? 143001", which a trailing-six-digit regex handles fine. The real trap is "Plot No. 611612, ... Ahmedabad-382445" — taking the *first* six-digit run reads that address as Uttar Pradesh. Last match wins, and the negative lookarounds keep it out of longer digit runs.
+- **A flag in the database is tracking, not showing.** §1.4 says uncertainty is *shown*. `state_derived_from_pin` was in `parse_flags` and in the exported record and the page still rendered a bare "Uttarakhand", identical to a state CDSCO wrote down. Getting it visible needed a UI change too — a `note` prop on the field component, since the existing `hint` only rendered when a field was *missing*.

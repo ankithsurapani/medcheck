@@ -230,11 +230,51 @@ If two different states are named, `state` is left null with a
 | "G.I.D.C, **Kerala** (Bavla), Distt. Ahmedabad, **Gujarat**" | Kerala | Gujarat (Kerala is a village) |
 | "14/4, **Delhi**-Mathura Road, Faridabad, **Haryana**" | Delhi | Haryana (road name) |
 
-**Current coverage: 3,576 of 6,155 records (58%) have a state; 43 are flagged
-ambiguous; 2,536 have no derivable state.** Most of the remainder are addresses
-that give only a city and PIN code. PIN-prefix → state mapping would raise
-coverage substantially and is recommended for Phase 2, alongside full address
-parsing.
+### 5a. PIN-code fallback
+
+Most addresses that reach step 3 without a match name no state at all — they end
+in a city and a six-digit PIN code and stop. Step 4 reads the state back out of
+that PIN (`src/resolve/pin_state.py`):
+
+4. Otherwise, the **last** plausible PIN in `manufacturer_raw` — a six-digit run
+   not embedded in a longer one, inside India's allocated range 110001–855126 —
+   looked up against a prefix table derived from India Post's *All India Pincode
+   Directory*. `state_derived_from_pin:<pin>` is recorded on the record.
+
+Three rules keep this from becoming a guess:
+
+- **It is a fallback, never an override.** An explicit field beats a name match
+  beats a PIN. In particular a PIN does **not** resolve a `state_ambiguous`
+  address: two states named in one address is a contradiction in what CDSCO
+  published, and settling it with a third source would hide the contradiction
+  rather than report it (§1.4).
+- **A prefix is used only if it is uniform.** India Post's structure is: first
+  two digits = postal circle, first three = sorting district. A prefix enters the
+  table only when every post office under it in the directory sits in one state.
+  Fourteen two-digit prefixes straddle a boundary and drop to three digits;
+  eighteen sorting districts straddle one even there and map to nothing,
+  returning `state_ambiguous_pin:<prefix>`. 247xxx is both Saharanpur (Uttar
+  Pradesh) and Roorkee (Uttarakhand) — the 2000 state reorganisation cut across
+  districts drawn before it.
+- **A stale source is refused, not trusted.** The directory predates the 2019
+  reorganisation that separated Ladakh, so 194xxx (Leh, Kargil) is explicitly
+  unmapped rather than answered "Jammu and Kashmir".
+
+The flag is returned on success as well as failure. A PIN-derived state is a
+real answer but a weaker one than the regulator writing the state down, and §1.4
+requires that difference be visible — the record page says so beside the value,
+and the published CC0 dataset carries the flag.
+
+The table is generated, not hand-typed: `python scripts/build_pin_table.py --csv
+<pincode.csv>` regenerates `src/resolve/pin_state.py`, and
+`python src/resolve/pin_state.py` prints the whole table plus everything it
+declines to answer.
+
+**Current coverage: 5,104 of 6,155 records (82.9%) have a state** — 3,576 from
+the address text, 1,528 from a PIN. Of the 1,051 without one: 827 have neither a
+state name nor a PIN, 181 have a PIN on a boundary-straddling prefix, 43 name two
+states. Full address parsing (street, city, district) is still Phase 2 work and
+would mostly help the 827.
 
 ---
 

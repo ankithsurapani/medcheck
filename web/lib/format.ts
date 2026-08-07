@@ -44,6 +44,13 @@ export function describeFlag(flag: string): string | null {
       return 'The manufacturing state could not be read from the address CDSCO published.';
     case 'state_ambiguous':
       return 'The published address named more than one state, so no state is shown rather than guessing.';
+    case 'state_ambiguous_pin':
+      return 'The published address names no state and ends in a PIN code whose range spans more than one state, so no state is shown rather than guessing.';
+    // `state_derived_from_pin` is deliberately absent. It is not a caveat about
+    // the record as a whole — it is provenance for one field that *does* have a
+    // value, so it renders inline beside the state on the record page rather
+    // than in the "how to read this record" list. Same treatment as
+    // `alert_section_disputed`.
     case 'manufacturer_unknown_placeholder':
       return 'CDSCO did not name a manufacturer for this batch — the entry reads “Under Investigation”.';
     case 'failure_category_unmapped':

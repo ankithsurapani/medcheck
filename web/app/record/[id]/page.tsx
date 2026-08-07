@@ -41,11 +41,15 @@ function Field({
   value,
   mono = false,
   hint,
+  note,
 }: {
   label: string;
   value: string | null | undefined;
   mono?: boolean;
+  /** Shown when the field is absent — why there is nothing here. */
   hint?: string;
+  /** Shown when the field is present — where the value came from. */
+  note?: string;
 }) {
   const missing = value === null || value === undefined || value === '';
   return (
@@ -61,6 +65,9 @@ function Field({
         {missing ? COPY.unknownField : value}
         {missing && hint ? (
           <span className="mt-0.5 block text-xs not-italic text-muted-foreground">{hint}</span>
+        ) : null}
+        {!missing && note ? (
+          <span className="mt-0.5 block text-xs not-italic text-muted-foreground">{note}</span>
         ) : null}
       </dd>
     </div>
@@ -91,6 +98,13 @@ function RecordView({ r }: { r: MedRecord }) {
       : r.labType === 'state' ? COPY.labType.stateHint
         : COPY.labType.unknownHint;
   const publishedSectionLabel = r.alertSection ? SECTION_LABELS[r.alertSection] ?? null : null;
+
+  // "state_derived_from_pin:248197" -> "248197". The state on this record was
+  // read out of the address's PIN code because CDSCO named no state in it, and
+  // the page has to say so — a PIN lookup is a weaker claim than the regulator
+  // writing the state down, and §1.4 does not let the two render identically.
+  const statePin =
+    r.parseFlags.find((f) => f.startsWith('state_derived_from_pin:'))?.split(':')[1] ?? null;
 
   const reason = r.failureReason ?? '';
   const firmIdx = reason.indexOf("[Firm's reply]");
@@ -208,7 +222,12 @@ function RecordView({ r }: { r: MedRecord }) {
           <Field
             label="Manufacturing state"
             value={r.state}
-            hint="CDSCO published an address this could not be read from unambiguously"
+            hint={
+              r.parseFlags.some((f) => f.startsWith('state_ambiguous_pin'))
+                ? COPY.state.ambiguousPinHint
+                : 'CDSCO published an address this could not be read from unambiguously'
+            }
+            note={statePin ? COPY.state.fromPin.replace('{pin}', statePin) : undefined}
           />
           <div className="border-b border-border py-3 last:border-b-0 sm:grid sm:grid-cols-[11rem_1fr] sm:gap-4">
             <dt className="text-sm text-muted-foreground">Reporting source</dt>

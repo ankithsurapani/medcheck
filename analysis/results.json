@@ -821,147 +821,148 @@
   },
   "q6_states": {
     "records": 6155,
-    "records_with_a_state": 3576,
-    "coverage": 58.1,
-    "records_without_a_state": 2579,
+    "records_with_a_state": 5104,
+    "coverage": 82.9,
+    "records_without_a_state": 1051,
     "why_missing": {
-      "state_not_derived": 2536,
+      "state_not_derived": 827,
+      "state_ambiguous_pin": 181,
       "state_ambiguous": 43
     },
     "states": [
       {
         "state": "Himachal Pradesh",
-        "records": 1258,
-        "share_of_records_with_a_state": 35.2
+        "records": 1717,
+        "share_of_records_with_a_state": 33.6
       },
       {
         "state": "Uttarakhand",
-        "records": 562,
-        "share_of_records_with_a_state": 15.7
+        "records": 723,
+        "share_of_records_with_a_state": 14.2
       },
       {
         "state": "Gujarat",
-        "records": 365,
-        "share_of_records_with_a_state": 10.2
+        "records": 502,
+        "share_of_records_with_a_state": 9.8
       },
       {
         "state": "Madhya Pradesh",
-        "records": 145,
-        "share_of_records_with_a_state": 4.1
-      },
-      {
-        "state": "Haryana",
-        "records": 122,
-        "share_of_records_with_a_state": 3.4
-      },
-      {
-        "state": "Sikkim",
-        "records": 116,
-        "share_of_records_with_a_state": 3.2
-      },
-      {
-        "state": "Telangana",
-        "records": 110,
-        "share_of_records_with_a_state": 3.1
-      },
-      {
-        "state": "Uttar Pradesh",
-        "records": 106,
-        "share_of_records_with_a_state": 3.0
-      },
-      {
-        "state": "Punjab",
-        "records": 104,
-        "share_of_records_with_a_state": 2.9
+        "records": 267,
+        "share_of_records_with_a_state": 5.2
       },
       {
         "state": "Maharashtra",
-        "records": 98,
-        "share_of_records_with_a_state": 2.7
+        "records": 213,
+        "share_of_records_with_a_state": 4.2
+      },
+      {
+        "state": "Haryana",
+        "records": 198,
+        "share_of_records_with_a_state": 3.9
+      },
+      {
+        "state": "Punjab",
+        "records": 176,
+        "share_of_records_with_a_state": 3.4
+      },
+      {
+        "state": "Uttar Pradesh",
+        "records": 154,
+        "share_of_records_with_a_state": 3.0
+      },
+      {
+        "state": "Telangana",
+        "records": 144,
+        "share_of_records_with_a_state": 2.8
+      },
+      {
+        "state": "Tamil Nadu",
+        "records": 135,
+        "share_of_records_with_a_state": 2.6
+      },
+      {
+        "state": "Sikkim",
+        "records": 118,
+        "share_of_records_with_a_state": 2.3
+      },
+      {
+        "state": "West Bengal",
+        "records": 103,
+        "share_of_records_with_a_state": 2.0
       },
       {
         "state": "Delhi",
         "records": 98,
-        "share_of_records_with_a_state": 2.7
+        "share_of_records_with_a_state": 1.9
+      },
+      {
+        "state": "Karnataka",
+        "records": 95,
+        "share_of_records_with_a_state": 1.9
       },
       {
         "state": "Puducherry",
         "records": 82,
-        "share_of_records_with_a_state": 2.3
-      },
-      {
-        "state": "Kerala",
-        "records": 75,
-        "share_of_records_with_a_state": 2.1
-      },
-      {
-        "state": "Karnataka",
-        "records": 67,
-        "share_of_records_with_a_state": 1.9
-      },
-      {
-        "state": "Andhra Pradesh",
-        "records": 47,
-        "share_of_records_with_a_state": 1.3
-      },
-      {
-        "state": "Tamil Nadu",
-        "records": 40,
-        "share_of_records_with_a_state": 1.1
+        "share_of_records_with_a_state": 1.6
       },
       {
         "state": "Rajasthan",
-        "records": 39,
+        "records": 80,
+        "share_of_records_with_a_state": 1.6
+      },
+      {
+        "state": "Kerala",
+        "records": 77,
+        "share_of_records_with_a_state": 1.5
+      },
+      {
+        "state": "Andhra Pradesh",
+        "records": 56,
         "share_of_records_with_a_state": 1.1
       },
       {
-        "state": "West Bengal",
-        "records": 34,
+        "state": "Jammu and Kashmir",
+        "records": 52,
         "share_of_records_with_a_state": 1.0
+      },
+      {
+        "state": "Bihar",
+        "records": 42,
+        "share_of_records_with_a_state": 0.8
       },
       {
         "state": "Goa",
         "records": 29,
-        "share_of_records_with_a_state": 0.8
-      },
-      {
-        "state": "Bihar",
-        "records": 29,
-        "share_of_records_with_a_state": 0.8
+        "share_of_records_with_a_state": 0.6
       },
       {
         "state": "Assam",
         "records": 20,
-        "share_of_records_with_a_state": 0.6
+        "share_of_records_with_a_state": 0.4
       },
       {
         "state": "Odisha",
-        "records": 11,
-        "share_of_records_with_a_state": 0.3
-      },
-      {
-        "state": "Jammu and Kashmir",
-        "records": 11,
+        "records": 13,
         "share_of_records_with_a_state": 0.3
       },
       {
         "state": "Chandigarh",
         "records": 6,
-        "share_of_records_with_a_state": 0.2
+        "share_of_records_with_a_state": 0.1
+      },
+      {
+        "state": "Chhattisgarh",
+        "records": 3,
+        "share_of_records_with_a_state": 0.1
       },
       {
         "state": "Jharkhand",
         "records": 1,
         "share_of_records_with_a_state": 0.0
-      },
-      {
-        "state": "Chhattisgarh",
-        "records": 1,
-        "share_of_records_with_a_state": 0.0
       }
     ],
-    "top3_share_of_known": 61.1,
-    "top1_share_of_all_records": 20.4,
+    "top3_share_of_known": 57.6,
+    "top1_share_of_all_records": 27.9,
     "distinct_states": 26
   },
   "q7_classes": {

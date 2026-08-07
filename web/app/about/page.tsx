@@ -90,10 +90,13 @@ export default function AboutPage() {
           </li>
           <li>
             <strong className="font-semibold text-foreground">
-              Manufacturing state is often missing.
+              Manufacturing state is sometimes missing, and sometimes inferred.
             </strong>{' '}
-            CDSCO publishes the manufacturer as one block of text with the address inside it. Where
-            the state cannot be read from that unambiguously, we show nothing rather than guess.
+            CDSCO publishes the manufacturer as one block of text with the address inside it, and
+            usually does not name the state — the address just ends in a PIN code. Where it does
+            name one, we use it. Where it does not, we use the state that PIN code belongs to and
+            say so on the record. Where neither works — no PIN, or a PIN whose range covers more
+            than one state — we show nothing rather than guess.
           </li>
           <li>
             <strong className="font-semibold text-foreground">

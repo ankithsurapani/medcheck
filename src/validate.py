@@ -51,6 +51,15 @@ DEDUCTIONS = {
     "alert_section_disputed": 0.0,
     # Declined to classify rather than guessed — same posture as state_not_derived.
     "lab_type_underived": 0.0,
+    # A state recovered from the address's PIN code. No penalty: the record gained
+    # a field it did not have, and deducting for it would say a record got less
+    # trustworthy for being better resolved. The flag is what carries the fact
+    # that this state came from a weaker source than CDSCO writing it down —
+    # §1.4 is about showing the uncertainty, not about arithmetic.
+    "state_derived_from_pin": 0.0,
+    # The PIN's prefix straddles a state boundary, so it was left null. Declining
+    # to answer, same posture as state_ambiguous.
+    "state_ambiguous_pin": 0.0,
 }
 FLOOR = 0.3
 BASE = 1.0

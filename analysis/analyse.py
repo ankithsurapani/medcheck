@@ -15,7 +15,7 @@ Three constraints from plan.md that this file enforces rather than mentions:
         so no function returns a "rate" and every percentage carries a denominator
         that says what it is a share *of*.
   §1.4  Uncertainty is shown, not hidden. Coverage is reported next to any figure
-        computed on a subset (state is populated for 58% of records), and the
+        computed on a subset (state is populated for 83% of records), and the
         questions that the data cannot answer say so instead of approximating.
   §4    `alert_section` is informative, not authoritative — q4 measures how
         unreliable it is rather than assuming it.

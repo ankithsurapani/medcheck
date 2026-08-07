@@ -93,6 +93,17 @@ export const COPY = {
   unknownField: 'Not published',
   unknownFieldHint: 'CDSCO did not publish this field for this record',
 
+  state: {
+    // CDSCO usually does not write the state down — the address just ends in a
+    // PIN code. Reading the state back out of the PIN is a real answer but a
+    // weaker one than the regulator stating it, and §1.4 says a weaker source
+    // has to be visible as one, not rendered identically to a stronger one.
+    fromPin:
+      'CDSCO did not name a state in this address. This is the state the address’s PIN code ({pin}) belongs to, not something the regulator wrote down.',
+    ambiguousPinHint:
+      'The address ends in a PIN code whose range covers more than one state, so no state is shown rather than guessing.',
+  },
+
   lowConfidence: {
     heading: 'Some fields on this record are uncertain',
     body:
