@@ -108,7 +108,9 @@ record.
 | Column | Derived from | Rule |
 |---|---|---|
 | `alert_month` | `dt_reporting_month_year` | `"JUN-2026"` → `"2026-06"` |
-| `alert_section` | `str_reporting_source` | contains "cdsco"/"central" → `central_lab`; "state" → `state_lab`; spurious endpoint → `spurious` |
+| `alert_section` | `str_reporting_source` | contains "cdsco"/"central" → `central_lab`; "state" → `state_lab`; spurious endpoint → `spurious`. **Reproduced as published even where it is wrong — see §5b** |
+| `lab_type` | `str_reported_by_lab_or_state` | `central` / `state` / `unknown`, derived from *which laboratory it is* rather than from `alert_section` — see §5b |
+| `lab_name_canonical` | `str_reported_by_lab_or_state` | full name where the lab is one of CDSCO's own; null otherwise |
 | `drug_name_raw` | `str_product_name` / `product_name_from_dtl` | whitespace-collapsed only |
 | `drug_name_clean` | as above | lowercased, quotes stripped — **search convenience only**, never displayed as fact |
 | `batch_number` | `str_batch_no` | verbatim |
@@ -235,6 +237,62 @@ coverage substantially and is recommended for Phase 2, alongside full address
 parsing.
 
 ---
+
+## 5b. Laboratory type — why `alert_section` is not used
+
+`alert_section` comes from CDSCO's `str_reporting_source` field, and that field
+contradicts itself. **13 of 239 laboratories are filed under both "CDSCO lab" and
+"State lab".** The two worst are not marginal:
+
+| Laboratory | Filed "CDSCO lab" | Filed "State lab" |
+|---|---|---|
+| RDTL Guwahati | 202 | **571** |
+| RDTL Chandigarh | 380 | **234** |
+
+Both are CDSCO's own National Drugs Testing Laboratories. Broken down by year the
+split drifts rather than switching cleanly — Guwahati is mostly "State lab"
+2019–2023 and mostly "CDSCO lab" 2024–2025 — so this is inconsistent data entry,
+not a convention CDSCO changed on a date we could split on.
+
+A laboratory's identity is stable where CDSCO's label for it is not, so `lab_type`
+is derived from which laboratory the record names, matched against CDSCO's own
+published list of its laboratories (`src/resolve/labs.py`):
+
+- CDSCO's seven National Drugs Testing Laboratories —
+  <https://cdsco.gov.in/opencms/opencms/en/About-us/Laboratories/>
+- CDTL Indore, inaugurated January 2024 —
+  <https://www.pib.gov.in/PressReleasePage.aspx?PRID=1994024>
+- Karnataka's state regional laboratories at Hubli and Bellary —
+  <https://drugs.karnataka.gov.in/39/manual-9/en>
+
+**`RDTL` is the trap.** It names CDSCO laboratories at Guwahati and Chandigarh
+*and* Karnataka state laboratories at Bellary and Hubli, plus Kerala's at
+Ernakulam. Classification is per named laboratory, never per acronym; a rule
+reading "RDTL means central" would move 89 state records onto the central
+regulator. The same applies to the spelled-out form: "Drugs Testing Laboratory,
+Chennai-06" is Tamil Nadu's, while "Central Drugs Testing Laboratory, Chennai" is
+CDSCO's, so the spelled-out central patterns require the word *Central* or
+*Regional*.
+
+Results: 3,860 central (62.7%), 2,272 state (36.9%), 23 unknown (0.4%). CDSCO's
+published field disagrees on **857 records** — 832 of its own laboratories' records
+filed as "State lab", and 25 state records filed as "CDSCO lab" (including all 13
+from Maharashtra FDA's Mumbai laboratory).
+
+**`alert_section` is never overwritten** (§1.1). MedCheck reproduces what the
+regulator published; correcting the field in place would destroy the evidence that
+CDSCO's own records disagree, which is itself a finding. Both values sit on every
+record and the 857 conflicts carry an `alert_section_disputed` flag.
+
+That flag deducts **nothing** from `parse_confidence`. It marks a contradiction in
+CDSCO's publication, not a defect in our parse — the record is intact and now
+carries a better-sourced `lab_type` than before, so scoring it down would tell
+readers those records got less trustworthy when they got more so. `§1.4` is about
+showing the uncertainty, not about arithmetic. `lab_type_underived` (23 records) is
+likewise penalty-free, on the same footing as `state_not_derived`: declining to
+classify is not an error.
+
+Guarded by 90 cases in `tests/test_labs.py`.
 
 ## 6. `label_claim_disputed`
 

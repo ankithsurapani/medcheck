@@ -73,6 +73,10 @@ def main() -> int:
     mfr_rows = [dict(r) for r in conn.execute(
         "SELECT id, canonical_name, known_aliases, address_raw, state, first_seen_month, "
         "total_flags FROM manufacturers ORDER BY total_flags DESC, canonical_name")]
+    # lab_type is derived from the laboratory's identity; alert_section is CDSCO's
+    # own field, which contradicts it on 857 records. Both ship — the UI leads with
+    # the derived value and says so where they differ (plan.md §1.1).
+    LAB_TYPE_CODE = {"central": 0, "state": 1, "unknown": 2}
     print(f"read {len(rows)} records and {len(mfr_rows)} resolved manufacturers from {DB.name}")
 
     if not mfr_rows:
@@ -125,6 +129,7 @@ def main() -> int:
     idx_canon_slugs: list[str] = []
     col_id, col_drug, col_batch, col_mfr = [], [], [], []
     col_month, col_cats, col_section, col_disputed = [], [], [], []
+    col_lab_type: list[int] = []
 
     def canon_pos(mid) -> int:
         """Index into the client's canonical table; -1 when unresolved."""
@@ -167,6 +172,9 @@ def main() -> int:
             "failureReason": r["failure_reason_raw"],
             "failureCategories": cats,
             "testingLab": r["testing_lab"],
+            "labType": r["lab_type"],
+            "labName": r["lab_name_canonical"],
+            "sectionDisputed": any(f.startswith("alert_section_disputed") for f in flags),
             "state": r["state"],
             "sourceUrl": r["source_url"],
             "sourceType": r["source_type"],
@@ -187,6 +195,7 @@ def main() -> int:
         col_cats.append(cats)
         col_section.append(r["alert_section"])
         col_disputed.append(1 if r["label_claim_disputed"] == 1 else 0)
+        col_lab_type.append(LAB_TYPE_CODE.get(r["lab_type"], 2))
 
         if mid is not None:
             m = manufacturers[mid]
@@ -215,6 +224,7 @@ def main() -> int:
         "month": col_month,
         "categories": col_cats,
         "section": col_section,
+        "labType": col_lab_type,
         "disputed": col_disputed,
     }
     write(PUBLIC_DATA / "search-index.json", index, f"search index ({len(col_id)})")

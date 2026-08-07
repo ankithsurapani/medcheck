@@ -41,6 +41,16 @@ DEDUCTIONS = {
     "state_not_derived": 0.0,
     "state_ambiguous": 0.0,
     "duplicate_source_rows_collapsed": 0.0,
+    # Also no penalty, for a different reason. These mark a contradiction in
+    # CDSCO's *own* publication — the same laboratory filed as "CDSCO lab" on one
+    # record and "State lab" on the next — not a problem with our parse. The
+    # record is intact and now carries a better-sourced lab_type than it did
+    # before, so scoring it down would tell readers 857 records got less
+    # trustworthy when they got more so. The flag is still recorded: §1.4 is about
+    # showing the uncertainty, not about arithmetic.
+    "alert_section_disputed": 0.0,
+    # Declined to classify rather than guessed — same posture as state_not_derived.
+    "lab_type_underived": 0.0,
 }
 FLOOR = 0.3
 BASE = 1.0

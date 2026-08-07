@@ -13,6 +13,8 @@ export interface ResultCardData {
   month: string;
   categories: string[];
   section: string;
+  /** Derived from the laboratory's identity, not CDSCO's reporting-source field. */
+  labType: 'central' | 'state' | 'unknown';
   disputed: boolean;
 }
 
@@ -57,8 +59,15 @@ export function ResultCard({ r }: { r: ResultCardData }) {
           <dt className="text-muted-foreground">Flagged</dt>
           <dd className="text-foreground">
             {month ?? COPY.unknownField}
-            {r.section ? (
-              <span className="text-muted-foreground"> · {SECTION_LABELS[r.section] ?? r.section}</span>
+            {/* The derived lab type, not CDSCO's reporting-source field — that
+                field contradicts the laboratory it names on 857 records. Spurious
+                records keep their own label, which is a list, not a lab type. */}
+            {r.section === 'spurious' ? (
+              <span className="text-muted-foreground"> · {SECTION_LABELS.spurious}</span>
+            ) : r.labType === 'central' ? (
+              <span className="text-muted-foreground"> · Central lab</span>
+            ) : r.labType === 'state' ? (
+              <span className="text-muted-foreground"> · State lab</span>
             ) : null}
           </dd>
         </dl>

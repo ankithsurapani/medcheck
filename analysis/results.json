@@ -441,24 +441,35 @@
     "max_flags": 88
   },
   "q4_labs": {
-    "sections": {
+    "derived_from": "lab identity (src/resolve/labs.py), not CDSCO's reporting-source field",
+    "lab_type": {
+      "central": 3860,
+      "state": 2272,
+      "unknown": 23
+    },
+    "lab_type_shares": {
+      "central": 62.7,
+      "state": 36.9,
+      "unknown": 0.4
+    },
+    "published_sections": {
       "missing": 1,
       "central_lab": 3029,
       "spurious": 46,
       "state_lab": 3079
     },
-    "section_shares": {
+    "published_section_shares": {
       "missing": 0.0,
       "central_lab": 49.2,
       "spurious": 0.7,
       "state_lab": 50.0
     },
+    "records_where_published_disagrees": 857,
+    "reclassified_state_to_central": 832,
+    "reclassified_central_to_state": 25,
+    "labs_filed_under_both_labels": 13,
     "distinct_labs": 239,
-    "labs_filed_under_both": 13,
-    "records_involving_such_a_lab": 3537,
-    "records_involving_such_a_lab_share": 57.5,
-    "minority_labelled_records": 459,
-    "worst": [
+    "worst_published_conflicts": [
       {
         "lab": "cdl kolkata",
         "records": 1248,
@@ -466,8 +477,7 @@
           "central_lab": 1246,
           "state_lab": 2
         },
-        "minority_records": 2,
-        "minority_share": 0.2
+        "minority_records": 2
       },
       {
         "lab": "rdtl guwahati",
@@ -476,8 +486,7 @@
           "central_lab": 202,
           "state_lab": 571
         },
-        "minority_records": 202,
-        "minority_share": 26.1
+        "minority_records": 202
       },
       {
         "lab": "rdtl chandigarh",
@@ -486,8 +495,7 @@
           "central_lab": 380,
           "state_lab": 234
         },
-        "minority_records": 234,
-        "minority_share": 38.1
+        "minority_records": 234
       },
       {
         "lab": "cdl, kolkata",
@@ -497,8 +505,7 @@
           "spurious": 17,
           "state_lab": 3
         },
-        "minority_records": 3,
-        "minority_share": 0.8
+        "minority_records": 3
       },
       {
         "lab": "cdtl mumbai",
@@ -507,8 +514,7 @@
           "central_lab": 271,
           "state_lab": 4
         },
-        "minority_records": 4,
-        "minority_share": 1.5
+        "minority_records": 4
       },
       {
         "lab": "rdtl, guwahati",
@@ -517,8 +523,7 @@
           "central_lab": 81,
           "state_lab": 2
         },
-        "minority_records": 2,
-        "minority_share": 2.4
+        "minority_records": 2
       },
       {
         "lab": "cdtl hyderabad",
@@ -527,8 +532,7 @@
           "central_lab": 62,
           "state_lab": 1
         },
-        "minority_records": 1,
-        "minority_share": 1.6
+        "minority_records": 1
       },
       {
         "lab": "cdtl chennai",
@@ -537,11 +541,249 @@
           "central_lab": 56,
           "state_lab": 3
         },
-        "minority_records": 3,
-        "minority_share": 5.1
+        "minority_records": 3
       }
     ],
-    "authoritative": false
+    "records_by_type": {
+      "central": 3860,
+      "state": 2272
+    },
+    "category_profile": [
+      {
+        "category": "assay",
+        "central_records": 1577,
+        "central_share": 40.9,
+        "state_records": 973,
+        "state_share": 42.8,
+        "difference_pp": -1.9
+      },
+      {
+        "category": "dissolution",
+        "central_records": 1138,
+        "central_share": 29.5,
+        "state_records": 552,
+        "state_share": 24.3,
+        "difference_pp": 5.2
+      },
+      {
+        "category": "description_labelling",
+        "central_records": 579,
+        "central_share": 15.0,
+        "state_records": 448,
+        "state_share": 19.7,
+        "difference_pp": -4.7
+      },
+      {
+        "category": "particulate_matter",
+        "central_records": 362,
+        "central_share": 9.4,
+        "state_records": 16,
+        "state_share": 0.7,
+        "difference_pp": 8.7
+      },
+      {
+        "category": "identification",
+        "central_records": 244,
+        "central_share": 6.3,
+        "state_records": 72,
+        "state_share": 3.2,
+        "difference_pp": 3.1
+      },
+      {
+        "category": "sterility",
+        "central_records": 192,
+        "central_share": 5.0,
+        "state_records": 88,
+        "state_share": 3.9,
+        "difference_pp": 1.1
+      },
+      {
+        "category": "other",
+        "central_records": 104,
+        "central_share": 2.7,
+        "state_records": 158,
+        "state_share": 7.0,
+        "difference_pp": -4.3
+      },
+      {
+        "category": "ph",
+        "central_records": 192,
+        "central_share": 5.0,
+        "state_records": 68,
+        "state_share": 3.0,
+        "difference_pp": 2.0
+      },
+      {
+        "category": "disintegration",
+        "central_records": 136,
+        "central_share": 3.5,
+        "state_records": 98,
+        "state_share": 4.3,
+        "difference_pp": -0.8
+      },
+      {
+        "category": "related_substances",
+        "central_records": 173,
+        "central_share": 4.5,
+        "state_records": 13,
+        "state_share": 0.6,
+        "difference_pp": 3.9
+      },
+      {
+        "category": "uniformity_of_weight",
+        "central_records": 64,
+        "central_share": 1.7,
+        "state_records": 50,
+        "state_share": 2.2,
+        "difference_pp": -0.5
+      },
+      {
+        "category": "bacterial_endotoxins",
+        "central_records": 90,
+        "central_share": 2.3,
+        "state_records": 16,
+        "state_share": 0.7,
+        "difference_pp": 1.6
+      },
+      {
+        "category": "spurious",
+        "central_records": 59,
+        "central_share": 1.5,
+        "state_records": 45,
+        "state_share": 2.0,
+        "difference_pp": -0.5
+      },
+      {
+        "category": "water_content",
+        "central_records": 82,
+        "central_share": 2.1,
+        "state_records": 12,
+        "state_share": 0.5,
+        "difference_pp": 1.6
+      },
+      {
+        "category": "clarity_of_solution",
+        "central_records": 92,
+        "central_share": 2.4,
+        "state_records": 1,
+        "state_share": 0.0,
+        "difference_pp": 2.4
+      },
+      {
+        "category": "microbial_contamination",
+        "central_records": 59,
+        "central_share": 1.5,
+        "state_records": 23,
+        "state_share": 1.0,
+        "difference_pp": 0.5
+      },
+      {
+        "category": "uniformity_of_dispersion",
+        "central_records": 33,
+        "central_share": 0.9,
+        "state_records": 13,
+        "state_share": 0.6,
+        "difference_pp": 0.3
+      },
+      {
+        "category": "density",
+        "central_records": 27,
+        "central_share": 0.7,
+        "state_records": 16,
+        "state_share": 0.7,
+        "difference_pp": 0.0
+      },
+      {
+        "category": "extractable_volume",
+        "central_records": 30,
+        "central_share": 0.8,
+        "state_records": 1,
+        "state_share": 0.0,
+        "difference_pp": 0.8
+      },
+      {
+        "category": "dimensions",
+        "central_records": 23,
+        "central_share": 0.6,
+        "state_records": 3,
+        "state_share": 0.1,
+        "difference_pp": 0.5
+      },
+      {
+        "category": "loss_on_drying",
+        "central_records": 15,
+        "central_share": 0.4,
+        "state_records": 9,
+        "state_share": 0.4,
+        "difference_pp": 0.0
+      }
+    ],
+    "biggest_divergences": [
+      {
+        "category": "particulate_matter",
+        "central_records": 362,
+        "central_share": 9.4,
+        "state_records": 16,
+        "state_share": 0.7,
+        "difference_pp": 8.7
+      },
+      {
+        "category": "dissolution",
+        "central_records": 1138,
+        "central_share": 29.5,
+        "state_records": 552,
+        "state_share": 24.3,
+        "difference_pp": 5.2
+      },
+      {
+        "category": "description_labelling",
+        "central_records": 579,
+        "central_share": 15.0,
+        "state_records": 448,
+        "state_share": 19.7,
+        "difference_pp": -4.7
+      },
+      {
+        "category": "other",
+        "central_records": 104,
+        "central_share": 2.7,
+        "state_records": 158,
+        "state_share": 7.0,
+        "difference_pp": -4.3
+      },
+      {
+        "category": "related_substances",
+        "central_records": 173,
+        "central_share": 4.5,
+        "state_records": 13,
+        "state_share": 0.6,
+        "difference_pp": 3.9
+      },
+      {
+        "category": "identification",
+        "central_records": 244,
+        "central_share": 6.3,
+        "state_records": 72,
+        "state_share": 3.2,
+        "difference_pp": 3.1
+      },
+      {
+        "category": "clarity_of_solution",
+        "central_records": 92,
+        "central_share": 2.4,
+        "state_records": 1,
+        "state_share": 0.0,
+        "difference_pp": 2.4
+      },
+      {
+        "category": "ph",
+        "central_records": 192,
+        "central_share": 5.0,
+        "state_records": 68,
+        "state_share": 3.0,
+        "difference_pp": 2.0
+      }
+    ]
   },
   "q5_trend": {
     "by_year": {

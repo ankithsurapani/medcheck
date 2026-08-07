@@ -27,6 +27,12 @@ export interface MedRecord {
   failureReason: string | null;
   failureCategories: string[];
   testingLab: string | null;
+  /** Derived from the laboratory's identity, not from CDSCO's reporting-source
+   *  field. 'central' | 'state' | 'unknown'. See src/resolve/labs.py. */
+  labType: string | null;
+  labName: string | null;
+  /** True when CDSCO's published alert_section contradicts labType (857 records). */
+  sectionDisputed: boolean;
   state: string | null;
   sourceUrl: string;
   sourceType: string | null;

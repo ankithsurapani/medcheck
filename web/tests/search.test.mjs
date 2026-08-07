@@ -70,6 +70,23 @@ check('slug is present iff canonical name is',
   hits.every(h=>Boolean(h.manufacturerSlug)===Boolean(h.manufacturerCanonical)), true);
 check('every hit has an id', hits.every(h=>h.id.length>0), true);
 
+// Lab type is derived from the laboratory's identity, not CDSCO's reporting-source
+// field. The field contradicts the lab it names on 857 records, so these assert the
+// derived value reaches the client and that the two are genuinely different.
+const central = hits.filter(h=>h.labType==='central');
+const stateLab = hits.filter(h=>h.labType==='state');
+check('every hit has a lab type', hits.every(h=>['central','state','unknown'].includes(h.labType)), true);
+check('central lab records (derived)', central.length, 3860);
+check('state lab records (derived)', stateLab.length, 2272);
+check('unknown lab type is rare', hits.filter(h=>h.labType==='unknown').length, n=>n<50);
+// The whole point: derived central > published central, because CDSCO files 832
+// of its own laboratories' records as "State lab".
+check('derived central exceeds published central',
+  central.length > hits.filter(h=>h.section==='central_lab').length, true);
+check('records where published section disagrees with derived type',
+  hits.filter(h=>(h.section==='state_lab'&&h.labType==='central')||(h.section==='central_lab'&&h.labType==='state')).length,
+  857);
+
 // Index shape: the canonical table is per company, the raw table per spelling.
 check('canonSlugs matches canonNames length', payload.canonSlugs.length, payload.canonNames.length);
 check('canonical table is smaller than the raw table',

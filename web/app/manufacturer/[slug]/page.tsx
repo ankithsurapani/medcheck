@@ -147,6 +147,7 @@ export default async function ManufacturerPage({ params }: { params: Promise<{ s
                 month: r.alertMonth ?? '',
                 categories: r.failureCategories,
                 section: r.alertSection ?? '',
+                labType: (r.labType as 'central' | 'state' | 'unknown') ?? 'unknown',
                 disputed: r.labelClaimDisputed === 1,
               }}
             />

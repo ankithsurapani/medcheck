@@ -82,6 +82,16 @@ function RecordView({ r }: { r: MedRecord }) {
   // The firm's own wording is appended to failure_reason_raw by the normalizer,
   // marked "[Firm's reply]". Split it back out so the dispute notice can quote
   // the company verbatim rather than paraphrasing it (plan.md §1.1).
+  const labTypeLabel =
+    r.labType === 'central' ? COPY.labType.central
+      : r.labType === 'state' ? COPY.labType.state
+        : r.testingLab ? COPY.labType.unknown : null;
+  const labTypeHint =
+    r.labType === 'central' ? COPY.labType.centralHint
+      : r.labType === 'state' ? COPY.labType.stateHint
+        : COPY.labType.unknownHint;
+  const publishedSectionLabel = r.alertSection ? SECTION_LABELS[r.alertSection] ?? null : null;
+
   const reason = r.failureReason ?? '';
   const firmIdx = reason.indexOf("[Firm's reply]");
   const testResult = firmIdx >= 0 ? reason.slice(0, firmIdx).trim() : reason;
@@ -166,7 +176,35 @@ function RecordView({ r }: { r: MedRecord }) {
           <Field label="Manufactured" value={formatMonth(r.mfgDate)} hint={COPY.unknownFieldHint} />
           <Field label="Expires" value={formatMonth(r.expiryDate)} hint={COPY.unknownFieldHint} />
           <Field label="Alert month" value={month} />
-          <Field label="Tested by" value={r.testingLab} hint={COPY.unknownFieldHint} />
+          <div className="border-b border-border py-3 sm:grid sm:grid-cols-[11rem_1fr] sm:gap-4">
+            <dt className="text-sm text-muted-foreground">Tested by</dt>
+            <dd className="mt-0.5 text-[0.9375rem] text-foreground break-anywhere sm:mt-0">
+              {r.labName ?? r.testingLab ?? COPY.unknownField}
+              {r.labName && r.testingLab && r.labName !== r.testingLab ? (
+                <span className="mt-0.5 block text-xs text-muted-foreground break-anywhere">
+                  Published as “{r.testingLab}”.
+                </span>
+              ) : null}
+              {/* The type comes from which laboratory this is, not from CDSCO's
+                  reporting-source field, which contradicts itself on 857 records.
+                  Where the two disagree the published wording is shown too — the
+                  regulator's own records differ, and concealing that would be a
+                  §1.1 violation in the other direction. */}
+              {labTypeLabel ? (
+                <span className="mt-1 block text-sm text-foreground">
+                  {labTypeLabel}
+                  <span className="mt-0.5 block text-xs text-muted-foreground">
+                    {labTypeHint}
+                  </span>
+                </span>
+              ) : null}
+              {r.sectionDisputed && publishedSectionLabel ? (
+                <span className="mt-1.5 block rounded border border-accent-border bg-accent-soft px-2.5 py-2 text-xs leading-relaxed text-muted-foreground">
+                  {COPY.labType.disputed.replace('{published}', publishedSectionLabel)}
+                </span>
+              ) : null}
+            </dd>
+          </div>
           <Field
             label="Manufacturing state"
             value={r.state}

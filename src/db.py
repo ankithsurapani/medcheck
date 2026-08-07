@@ -29,6 +29,12 @@ CREATE TABLE IF NOT EXISTS nsq_records (
     failure_reason_raw   TEXT,
     failure_category     TEXT,      -- JSON array (plan.md §3.3)
     testing_lab          TEXT,
+    -- Derived from the laboratory's identity, NOT from CDSCO's reporting-source
+    -- field. alert_section above stays exactly as published even where the two
+    -- disagree (857 records); the disagreement is recorded in parse_flags.
+    -- See src/resolve/labs.py.
+    lab_type             TEXT,      -- central | state | unknown
+    lab_name_canonical   TEXT,
     state                TEXT,
     source_url           TEXT NOT NULL,
     source_type          TEXT,      -- pdf | portal_json
@@ -60,8 +66,17 @@ COLUMNS = [
     "id", "alert_month", "alert_section", "drug_name_raw", "drug_name_clean",
     "active_ingredients", "dosage_form", "batch_number", "mfg_date", "expiry_date",
     "manufacturer_raw", "manufacturer_id", "label_claim_disputed", "failure_reason_raw",
-    "failure_category", "testing_lab", "state", "source_url", "source_type",
-    "source_page", "parse_confidence", "parse_flags", "created_at",
+    "failure_category", "testing_lab", "lab_type", "lab_name_canonical", "state",
+    "source_url", "source_type", "source_page", "parse_confidence", "parse_flags",
+    "created_at",
+]
+
+# Columns added after the table first shipped. CREATE TABLE IF NOT EXISTS will not
+# alter an existing table, so an already-populated data/medcheck.db needs these
+# added explicitly rather than silently going without them.
+MIGRATIONS = [
+    ("nsq_records", "lab_type", "TEXT"),
+    ("nsq_records", "lab_name_canonical", "TEXT"),
 ]
 
 
@@ -75,7 +90,21 @@ def connect(path: Path = DB_PATH) -> sqlite3.Connection:
 
 def init(conn: sqlite3.Connection) -> None:
     conn.executescript(SCHEMA)
+    migrate(conn)
     conn.commit()
+
+
+def migrate(conn: sqlite3.Connection) -> list[str]:
+    """Add any post-launch columns missing from an existing database. Idempotent."""
+    applied = []
+    for table, column, decl in MIGRATIONS:
+        existing = {r[1] for r in conn.execute(f"PRAGMA table_info({table})")}
+        if column not in existing:
+            conn.execute(f"ALTER TABLE {table} ADD COLUMN {column} {decl}")
+            applied.append(f"{table}.{column}")
+    if applied:
+        conn.commit()
+    return applied
 
 
 def upsert_records(conn: sqlite3.Connection, records: list[dict]) -> int:

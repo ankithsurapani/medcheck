@@ -171,19 +171,14 @@ output fails.
 
 ## 4. Central versus state laboratories
 
-`analyse.py::q4_labs`
+`analyse.py::q4_labs` · [`../src/resolve/labs.py`](../src/resolve/labs.py)
 
-The published split is almost exactly even — 3,079 batches (50.0%) attributed to
-state laboratories, 3,029 (49.2%) to CDSCO/central laboratories, 46 to the spurious
-list, 1 with no attribution.
+### The published field could not be used, so it isn't
 
-**That number should not be used, because the field it comes from is not reliable.**
+CDSCO's own reporting-source field contradicts itself. **The same named laboratory
+is filed under both labels:**
 
-Phase 1a already found the portal and the PDFs disagreeing on central-vs-state for
-27 of 184 June 2025 records. The full dataset contains a sharper version of the
-same problem: **the same named laboratory is filed under both labels.**
-
-| Records | Laboratory | Filed as |
+| Records | Laboratory | Filed by CDSCO as |
 |---|---|---|
 | 1,248 | CDL Kolkata | central 1,246 · state 2 |
 | 773 | RDTL Guwahati | central 202 · **state 571** |
@@ -191,22 +186,81 @@ same problem: **the same named laboratory is filed under both labels.**
 | 385 | CDL, Kolkata | central 365 · spurious 17 · state 3 |
 | 275 | CDTL Mumbai | central 271 · state 4 |
 
-**13 of 239 laboratories appear under both labels, across 3,537 records (57.5% of
-the dataset).** At minimum **459 records are mislabelled** — that is the count of
-records sitting on the minority side of a split lab, and it is a floor, not an
-estimate.
+13 of 239 laboratories appear under both labels. Per year the split drifts rather
+than switching cleanly — Guwahati is mostly "State lab" 2019–2023 and mostly
+"CDSCO lab" 2024–2025 — so this is inconsistent data entry, not a convention CDSCO
+changed on a knowable date.
 
-RDTL Guwahati and RDTL Chandigarh are the serious cases. A Regional Drug Testing
-Laboratory is a central facility, yet 571 of Guwahati's records are filed as state
-lab and 234 of Chandigarh's are too. These are not rounding errors at the edge of
-a large dataset; they are near-even splits on two of the busiest laboratories in
-the record.
+**A laboratory's identity is stable even when CDSCO's label for it is not.** So
+`lab_type` is derived from *which laboratory it is*, checked against CDSCO's
+published list of its own laboratories:
 
-**Conclusion: `alert_section` is informative, not authoritative.** Any analysis of
-central-versus-state detection patterns built on it would be measuring CDSCO's
-filing inconsistency as much as anything real. That is why this section reports the
-unreliability rather than the comparison — the comparison is not currently
-supportable.
+> CDSCO's seven National Drugs Testing Laboratories —
+> <https://cdsco.gov.in/opencms/opencms/en/About-us/Laboratories/> · CDTL Indore,
+> inaugurated January 2024 —
+> <https://www.pib.gov.in/PressReleasePage.aspx?PRID=1994024> · Karnataka's state
+> regional laboratories at Hubli and Bellary —
+> <https://drugs.karnataka.gov.in/39/manual-9/en>
+
+The trap this avoids: **`RDTL` names two different kinds of institution.** CDSCO
+runs Regional Drugs Testing Laboratories at Guwahati and Chandigarh; *Karnataka*
+runs Regional Drugs Testing Laboratories at Bellary and Hubli, and Kerala one at
+Ernakulam. A rule reading "RDTL means central" would have moved 89 state records
+onto the central regulator. Classification is therefore per named laboratory, not
+per acronym.
+
+**`alert_section` is not overwritten.** MedCheck mirrors what the regulator
+published (§1.1); silently correcting the field would destroy the evidence that
+CDSCO's own publications disagree. Both values are on every record, and the 857
+where they conflict carry an `alert_section_disputed` flag.
+
+### The corrected split
+
+| | Derived from lab identity | As CDSCO published |
+|---|---|---|
+| Central | **3,860 (62.7%)** | 3,029 (49.2%) |
+| State | **2,272 (36.9%)** | 3,079 (50.0%) |
+| Unknown | 23 (0.4%) | — |
+
+**CDSCO's published field understates central-laboratory testing by 831 records.**
+Of the 857 disagreements, 832 are records filed as "State lab" that come from a
+CDSCO laboratory, and 25 are the reverse — including all 13 records from Maharashtra
+FDA's Mumbai laboratory, which CDSCO files as "CDSCO lab".
+
+Only 23 records (0.4%) could not be classified, 20 of which are the literal string
+"Not applicable". The remaining three are genuinely ambiguous and are left
+`unknown` rather than assigned.
+
+### What each kind of laboratory finds
+
+Now that the split is trustworthy, the comparison the data was collected for
+becomes possible. Shares are within each laboratory type, so the columns are
+comparable to each other.
+
+| Failure | Central labs | State labs | Difference |
+|---|---|---|---|
+| Particulate matter | 9.4% | 0.7% | **+8.7pp** |
+| Dissolution | 29.5% | 24.3% | +5.2pp |
+| Description / labelling | 15.0% | 19.7% | **−4.7pp** |
+| *(other — no bucket matched)* | 2.7% | 7.0% | −4.3pp |
+| Related substances | 4.5% | 0.6% | +3.9pp |
+| Identification | 6.3% | 3.2% | +3.1pp |
+| Clarity of solution | 2.4% | 0.0% | +2.4pp |
+| pH | 5.0% | 3.0% | +2.0pp |
+
+**The pattern is instrument capability, not diligence.** The tests central
+laboratories report far more often — particulate matter, related substances,
+clarity of solution — are the analytically demanding ones: particulate counting for
+injectables, chromatography for degradation products. The tests state laboratories
+report more often are description and labelling, which need a trained eye rather
+than an instrument, and `other`, which is disproportionately free text that names
+no standard test at all.
+
+This says something about **where a given kind of defect is likely to be caught**,
+which is a real finding about the testing system. It says nothing about which
+laboratories are better, and — no denominator again — nothing about how often
+either kind of laboratory finds anything, since the number of samples each tested
+is not published.
 
 ## 5. Where flagged medicines are made
 
@@ -335,6 +389,12 @@ manufacturer name is the name being counterfeited, not the maker.
 
 ## Methodology
 
+**Laboratory type.** `alert_section` reproduces CDSCO's reporting-source field
+unchanged. `lab_type` is derived separately from the laboratory's identity
+(`src/resolve/labs.py`), because that field contradicts itself on 857 records —
+see §4. 90 cases in `tests/test_labs.py` pin the collisions, chiefly that `RDTL`
+names both CDSCO and Karnataka laboratories.
+
 **Ingestion.** CDSCO publishes NSQ data two ways: monthly PDF alerts, and a JSON
 data portal at `cdscoonline.gov.in`. The portal covers January 2019 to the present
 more completely than the PDF corpus does — there are no monthly PDF alerts at all
@@ -377,7 +437,8 @@ Collected in one place. Each is load-bearing for at least one finding above.
 |---|---|---|
 | 1 | **CDSCO does not sample at random.** Samples are drawn on suspicion, complaint and risk-targeting; only failures are published; no denominator exists anywhere in the data. | Every rate-style claim. No percentage in this document is a failure rate for medicines on the market. |
 | 2 | **Manufacturer resolution is partial** — 190 review-band pairs undecided, so one company can still hold more than one id. | §3's concentration figures are a **lower bound**. |
-| 3 | **`alert_section` is unreliable** — 13 laboratories filed under both labels, ≥459 records mislabelled. | Any central-vs-state comparison. §4 reports the unreliability instead. |
+| 3 | **`alert_section` is unreliable** — CDSCO files 13 laboratories under both labels, contradicting the laboratory's identity on 857 records. It is kept verbatim and **`lab_type` is derived instead**, from CDSCO's own published list of its laboratories. | Nothing, now — but any analysis using `alert_section` rather than `lab_type` inherits the error. §4. |
+| 3b | **`lab_type` is derived, not published.** 23 records (0.4%) could not be classified and are `unknown`; CDSCO publishes no machine-readable list of which laboratories are its own, so the registry in `src/resolve/labs.py` is assembled from its website and a government press release and would need updating if CDSCO opens new laboratories. | The precision of §4's split, at the margin. |
 | 4 | **State is 58.1% populated**, and missing non-randomly (messiest addresses). | §5's shares are of the 58%, not of the corpus. Both denominators are given. |
 | 5 | **No testing-volume denominator for trends.** | §1's growth is in *published flags*. It cannot be attributed to drug quality. |
 | 6 | **The August 2025 portal migration is a reporting discontinuity.** | Any before/after comparison spanning it, including the 4.78× growth figure. |
@@ -400,6 +461,6 @@ python analysis/drug_classes.py                      # INN stem audit
 ```
 
 Tests: `tests/test_categorise.py` (59), `tests/test_resolve_manufacturers.py` (45),
-`tests/test_drug_classes.py` (41).
+`tests/test_drug_classes.py` (41), `tests/test_labs.py` (90).
 
 `python analysis/analyse.py --sql q3` prints the query behind any question.

@@ -25,6 +25,7 @@ from collections import Counter
 from datetime import datetime
 
 from ingest.cdsco_json import load_cached
+from resolve.labs import classify_lab
 
 import db
 import validate
@@ -244,6 +245,30 @@ def derive_state(address: str | None, explicit: str | None = None) -> tuple[str 
     return None, "state_not_derived:no_match"
 
 
+def derive_lab(testing_lab: str | None, alert_section: str | None) -> tuple[str, str | None, str | None]:
+    """Lab type from the laboratory's identity. Returns (type, canonical, flag).
+
+    CDSCO's own reporting-source field contradicts itself — the same laboratory is
+    filed as "CDSCO lab" in one record and "State lab" in the next, on 857 records.
+    The lab's identity is stable where the label is not, so type is derived from
+    which lab it is (src/resolve/labs.py).
+
+    `alert_section` is NOT corrected from this. §1.1 — MedCheck mirrors what the
+    regulator published; overwriting the field would hide the fact that CDSCO's own
+    two publications disagree, which is itself a finding. Where the derived type
+    contradicts the published section, both are kept and a flag records it (§1.4).
+    """
+    lab_type, canonical, basis = classify_lab(testing_lab)
+    flag = None
+    if lab_type in ("central", "state") and alert_section in ("central_lab", "state_lab"):
+        published = "central" if alert_section == "central_lab" else "state"
+        if published != lab_type:
+            flag = f"alert_section_disputed:published_{published}_lab_but_{basis}"
+    elif lab_type == "unknown" and testing_lab:
+        flag = f"lab_type_underived:{(testing_lab or '')[:40]}"
+    return lab_type, canonical, flag
+
+
 def clean_drug_name(raw: str | None) -> str | None:
     """Light normalization for search only. Raw is always kept in drug_name_raw."""
     s = clean_text(raw)
@@ -301,6 +326,8 @@ def normalize_nsq_row(row: dict, source_url: str) -> dict:
     if manufacturer_raw and UNKNOWN_MANUFACTURER_RE.match(manufacturer_raw):
         flag(f"manufacturer_unknown_placeholder:{manufacturer_raw}")
     state, f = derive_state(manufacturer_raw);                       flag(f)
+    testing_lab = clean_text(row.get("str_reported_by_lab_or_state"))
+    lab_type, lab_canonical, f = derive_lab(testing_lab, section);   flag(f)
 
     rec = _base_record(source_url)
     rec.update({
@@ -315,7 +342,9 @@ def normalize_nsq_row(row: dict, source_url: str) -> dict:
         "label_claim_disputed": None,   # NSQ endpoint carries no dispute field
         "failure_reason_raw": clean_text(row.get("str_nsq_result")),
         "failure_category": json.dumps(cats),
-        "testing_lab": clean_text(row.get("str_reported_by_lab_or_state")),
+        "testing_lab": testing_lab,
+        "lab_type": lab_type,
+        "lab_name_canonical": lab_canonical,
         "state": state,
     })
     rec["id"] = make_id(alert_month, rec["batch_number"], rec["drug_name_raw"],
@@ -367,6 +396,12 @@ def normalize_spurious_row(row: dict, source_url: str) -> dict:
                                 f"[Firm's reply] {firm_reply}" if firm_reply else None,
                                 f"[Remarks] {remarks}" if remarks else None] if p]
 
+    testing_lab = clean_text(row.get("str_reported_by_lab_or_state"))
+    # alert_section is "spurious" here, not central/state, so there is nothing for
+    # the derived type to contradict — the flag from derive_lab only fires when the
+    # lab itself cannot be identified.
+    lab_type, lab_canonical, f = derive_lab(testing_lab, "spurious"); flag(f)
+
     rec = _base_record(source_url)
     rec.update({
         "alert_month": alert_month,
@@ -381,7 +416,9 @@ def normalize_spurious_row(row: dict, source_url: str) -> dict:
         "label_claim_disputed": 1 if disputed else 0,
         "failure_reason_raw": "\n".join(reason_parts) or None,
         "failure_category": json.dumps(cats),
-        "testing_lab": clean_text(row.get("str_reported_by_lab_or_state")),
+        "testing_lab": testing_lab,
+        "lab_type": lab_type,
+        "lab_name_canonical": lab_canonical,
         "state": state,
     })
     # Only the current-month endpoint (viewPublicSpuriousDrugData) exposes num_id;

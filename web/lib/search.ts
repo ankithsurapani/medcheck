@@ -38,6 +38,8 @@ export interface IndexPayload {
   month: (string | null)[];
   categories: string[][];
   section: (string | null)[];
+  /** 0 = central, 1 = state, 2 = unknown. Derived from the lab's identity. */
+  labType: number[];
   disputed: number[];
 }
 
@@ -53,8 +55,11 @@ export interface SearchHit {
   month: string;
   categories: string[];
   section: string;
+  labType: 'central' | 'state' | 'unknown';
   disputed: boolean;
 }
+
+const LAB_TYPES = ['central', 'state', 'unknown'] as const;
 
 export type SearchMode = 'all' | 'drug' | 'batch' | 'manufacturer';
 
@@ -75,6 +80,7 @@ export function hydrate(payload: IndexPayload): SearchHit[] {
       month: payload.month[i] ?? '',
       categories: payload.categories[i] ?? [],
       section: payload.section[i] ?? '',
+      labType: LAB_TYPES[payload.labType?.[i] ?? 2] ?? 'unknown',
       disputed: payload.disputed[i] === 1,
     };
   }

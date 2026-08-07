@@ -69,6 +69,27 @@ export const COPY = {
       'The manufacturer field on this record reads “{text}”. That is not a company — it is what the regulator publishes when the real maker of a batch is not known, which is usual for a suspected counterfeit. There is no manufacturer page for it, because there is no company to attribute it to.',
   },
 
+  /**
+   * Laboratory type. CDSCO's own "reporting source" field contradicts itself —
+   * it files the same laboratory as a central lab on one record and a state lab
+   * on the next, on 857 records. MedCheck shows the type derived from which
+   * laboratory it actually is, and says so where CDSCO's own field disagrees,
+   * rather than silently correcting the regulator (plan.md §1.1).
+   */
+  labType: {
+    central: 'Central laboratory (CDSCO)',
+    state: 'State laboratory',
+    unknown: 'Laboratory not identified',
+    centralHint:
+      'One of the Central Drugs Standard Control Organisation’s own laboratories.',
+    stateHint: 'A laboratory run by a state drugs control authority.',
+    unknownHint:
+      'CDSCO named a reporting source we could not match to a specific laboratory, so no type is shown rather than guessing.',
+    disputed:
+      'CDSCO’s own alert filed this under “{published}”, which does not match the laboratory it names. We show the laboratory’s type and leave CDSCO’s wording visible above — the regulator’s two records disagree, and hiding that would be worse than showing it.',
+    publishedAs: 'CDSCO published this as',
+  },
+
   unknownField: 'Not published',
   unknownFieldHint: 'CDSCO did not publish this field for this record',
 
@@ -85,8 +106,13 @@ export const SECTION_LABELS: Record<string, string> = {
   spurious: 'Spurious',
 };
 
+/**
+ * These describe CDSCO's OWN filing of a record, which is not always consistent
+ * with the laboratory it names — hence "as filed by", not "tested by". The
+ * laboratory's actual type is shown separately, under Tested by.
+ */
 export const SECTION_DESCRIPTIONS: Record<string, string> = {
-  central_lab: 'Tested by a CDSCO or central laboratory, as recorded by the regulator.',
-  state_lab: 'Tested by a state drug testing laboratory, as recorded by the regulator.',
+  central_lab: 'How CDSCO filed this record in its own alert. See the laboratory above for what it actually is.',
+  state_lab: 'How CDSCO filed this record in its own alert. See the laboratory above for what it actually is.',
   spurious: 'Published by CDSCO on its list of spurious drugs.',
 };

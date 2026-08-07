@@ -185,46 +185,88 @@ def q3_manufacturers(conn) -> dict:
 
 
 def q4_labs(conn) -> dict:
-    """Central vs state lab — and how far `alert_section` can be trusted.
+    """Central vs state laboratories, using the derived lab_type.
 
-    plan.md flags a portal-vs-PDF disagreement on 27 of 184 Jun-2025 records. The
-    database contains a sharper version of the same problem: the *same laboratory*
-    is filed under both labels, so the disagreement is measurable across the whole
-    corpus rather than inferred from one month.
+    This question was unanswerable before. `alert_section` comes from CDSCO's
+    reporting-source field, which contradicts itself: 13 laboratories appear under
+    both labels. `lab_type` is derived instead from which laboratory it is, against
+    CDSCO's published list of its own laboratories (src/resolve/labs.py), so the
+    comparison below rests on lab identity rather than on a field that disagrees
+    with itself.
+
+    Still not a rate: neither figure has a denominator of samples *tested*.
     """
     sections: Counter = Counter()
-    for r in conn.execute(
-            "SELECT alert_section, COUNT(*) n FROM nsq_records GROUP BY 1"):
+    for r in conn.execute("SELECT alert_section, COUNT(*) n FROM nsq_records GROUP BY 1"):
         sections[r["alert_section"] or "missing"] = r["n"]
+    types: Counter = Counter()
+    for r in conn.execute("SELECT lab_type, COUNT(*) n FROM nsq_records GROUP BY 1"):
+        types[r["lab_type"] or "missing"] = r["n"]
+    total = sum(sections.values())
+
+    # How far the published field was off, and in which direction.
+    disputed = conn.execute(
+        "SELECT COUNT(*) FROM nsq_records WHERE parse_flags LIKE "
+        "'%alert_section_disputed%'").fetchone()[0]
+    moved_to_central = conn.execute(
+        "SELECT COUNT(*) FROM nsq_records WHERE lab_type='central' "
+        "AND alert_section='state_lab'").fetchone()[0]
+    moved_to_state = conn.execute(
+        "SELECT COUNT(*) FROM nsq_records WHERE lab_type='state' "
+        "AND alert_section='central_lab'").fetchone()[0]
 
     by_lab: dict[str, Counter] = defaultdict(Counter)
     for r in conn.execute(SQL["q4_labs"]):
         by_lab[r["testing_lab"].strip().lower()][r["alert_section"] or "missing"] += r["n"]
-
     ambiguous = []
     for lab, secs in by_lab.items():
         both = {s: c for s, c in secs.items() if s in ("central_lab", "state_lab")}
         if len(both) > 1:
-            minority = min(both.values())
             ambiguous.append({"lab": lab, "records": sum(secs.values()),
                               "by_section": dict(secs),
-                              "minority_records": minority,
-                              "minority_share": pct(minority, sum(both.values()))})
+                              "minority_records": min(both.values())})
     ambiguous.sort(key=lambda a: -a["records"])
-    total = sum(sections.values())
+
+    # What each kind of laboratory reports. The interesting comparison: do central
+    # and state labs surface different KINDS of failure? Shares are within each
+    # lab type, so the two columns are comparable to each other.
+    profile: dict[str, Counter] = {"central": Counter(), "state": Counter()}
+    totals = {"central": 0, "state": 0}
+    for r in conn.execute(
+            "SELECT lab_type, failure_category FROM nsq_records "
+            "WHERE lab_type IN ('central','state')"):
+        totals[r["lab_type"]] += 1
+        for c in set(json.loads(r["failure_category"] or "[]")):
+            profile[r["lab_type"]][c] += 1
+    cats = sorted(set(profile["central"]) | set(profile["state"]),
+                  key=lambda c: -(profile["central"][c] + profile["state"][c]))
+    comparison = [{
+        "category": c,
+        "central_records": profile["central"][c],
+        "central_share": pct(profile["central"][c], totals["central"]),
+        "state_records": profile["state"][c],
+        "state_share": pct(profile["state"][c], totals["state"]),
+        "difference_pp": round(pct(profile["central"][c], totals["central"])
+                               - pct(profile["state"][c], totals["state"]), 1),
+    } for c in cats]
+
     return {
-        "sections": dict(sections),
-        "section_shares": {k: pct(v, total) for k, v in sections.items()},
+        "derived_from": "lab identity (src/resolve/labs.py), not CDSCO's reporting-source field",
+        "lab_type": dict(types),
+        "lab_type_shares": {k: pct(v, total) for k, v in types.items()},
+        "published_sections": dict(sections),
+        "published_section_shares": {k: pct(v, total) for k, v in sections.items()},
+        "records_where_published_disagrees": disputed,
+        "reclassified_state_to_central": moved_to_central,
+        "reclassified_central_to_state": moved_to_state,
+        "labs_filed_under_both_labels": len(ambiguous),
         "distinct_labs": len(by_lab),
-        "labs_filed_under_both": len(ambiguous),
-        "records_involving_such_a_lab": sum(a["records"] for a in ambiguous),
-        "records_involving_such_a_lab_share": pct(
-            sum(a["records"] for a in ambiguous), total),
-        # The minority-label count is the number of records that must be wrong on
-        # one side or the other — a floor on the labelling error, not a guess.
-        "minority_labelled_records": sum(a["minority_records"] for a in ambiguous),
-        "worst": ambiguous[:8],
-        "authoritative": False,
+        "worst_published_conflicts": ambiguous[:8],
+        "records_by_type": totals,
+        "category_profile": comparison,
+        "biggest_divergences": sorted(
+            [c for c in comparison if max(c["central_records"], c["state_records"]) >= 50],
+            key=lambda c: -abs(c["difference_pp"]))[:8],
     }
 
 
@@ -389,17 +431,26 @@ def report(res: dict) -> None:
     for r in m["top"][:8]:
         print(f"    {r['flags']:4}  {r['name'][:52]:52} {r['spellings']:3} spellings")
 
-    head("q4 — central vs state lab")
+    head("q4 — central vs state laboratories")
     l = res["q4_labs"]
-    for k, n in sorted(l["sections"].items(), key=lambda kv: -kv[1]):
-        print(f"    {k:14} {n:5}  {l['section_shares'][k]:5.1f}%")
-    print(f"\n  alert_section is NOT authoritative:")
-    print(f"    {l['labs_filed_under_both']} of {l['distinct_labs']} labs appear under BOTH labels")
-    print(f"    {l['records_involving_such_a_lab']} records "
-          f"({l['records_involving_such_a_lab_share']}%) involve such a lab")
-    print(f"    at least {l['minority_labelled_records']} records are mislabelled on one side")
-    for a in l["worst"][:5]:
+    print(f"  derived from {l['derived_from']}\n")
+    print(f"  {'':10} {'derived':>9} {'':6} {'as published':>14}")
+    for k in ("central", "state", "unknown"):
+        pub = {"central": "central_lab", "state": "state_lab"}.get(k)
+        pubn = l["published_sections"].get(pub, 0) if pub else "-"
+        print(f"    {k:10} {l['lab_type'].get(k, 0):7} "
+              f"({l['lab_type_shares'].get(k, 0):4.1f}%)   {pubn:>10}")
+    print(f"\n  CDSCO's published field disagreed on {l['records_where_published_disagrees']} records:")
+    print(f"    {l['reclassified_state_to_central']} filed 'State lab' are CDSCO laboratories")
+    print(f"    {l['reclassified_central_to_state']} filed 'CDSCO lab' are state laboratories")
+    print(f"    ({l['labs_filed_under_both_labels']} of {l['distinct_labs']} labs appear under both labels)")
+    for a in l["worst_published_conflicts"][:4]:
         print(f"      {a['records']:5}  {a['lab'][:32]:32} {a['by_section']}")
+    print(f"\n  What each kind of lab reports (share within that lab type):")
+    print(f"    {'category':26} {'central':>8} {'state':>8}  {'diff':>6}")
+    for c in l["biggest_divergences"]:
+        print(f"    {c['category']:26} {c['central_share']:7.1f}% {c['state_share']:7.1f}% "
+              f"{c['difference_pp']:+6.1f}pp")
 
     head("q5 — trend (counts, not rates)")
     t = res["q5_trend"]

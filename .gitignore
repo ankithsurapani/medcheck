@@ -24,6 +24,7 @@ __pycache__/
 # Node (web/)
 node_modules/
 .next/
+web/tsconfig.tsbuildinfo
 .env
 .env.local
 
