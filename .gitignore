@@ -15,6 +15,10 @@ data/medcheck.db
 # recorded against one build are still found by the next one.
 data/resolve/candidates.json
 
+# Reading order for the review session — derived from candidates.json + the
+# merge log by `triage_review.py`, regenerate any time either changes.
+data/resolve/review_triage.json
+
 # Python
 .venv/
 __pycache__/
