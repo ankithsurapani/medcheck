@@ -4,7 +4,7 @@ Every medicine batch India's drug regulator (CDSCO) published as **Not of Standa
 Quality** or **spurious**, from 2019-01 to 2026-06.
 
 - **6,155 rows**, one per flagged batch
-- **1,856 resolved manufacturers**
+- **1,865 resolved manufacturers**
 - Licence: **CC0 1.0** — public domain, no attribution required (see `LICENSE`)
 - Generated: 2026-08-07 by `analysis/export_dataset.py`
 - Findings computed from this data: [`../FINDINGS.md`](../FINDINGS.md)
@@ -67,7 +67,7 @@ Empty means "CDSCO did not publish this", never zero and never "none".
 | Limitation | Effect |
 |---|---|
 | Sampling is not random | Nothing here is a population failure rate. |
-| Manufacturer resolution is **partial** | 1,856 companies from 5,107 published spellings, but 190 ambiguous pairs were left unmerged pending human review. Some companies still appear under more than one `manufacturer_id`. Concentration measured from this file is a **lower bound**. |
+| Manufacturer resolution is **partial** | 1,865 companies from 5,107 published spellings, but 184 ambiguous pairs were left unmerged pending human review. Some companies still appear under more than one `manufacturer_id`. Concentration measured from this file is a **lower bound**. |
 | `alert_section` is unreliable | CDSCO files 13 laboratories under both `central_lab` and `state_lab`, and the field contradicts the laboratory's identity on 857 rows. It is kept verbatim for fidelity. **Use `lab_type` instead** — derived from which laboratory it is, against CDSCO's published list of its own labs. |
 | `state` is 83% populated | Derived from free-text addresses, left empty rather than guessed where ambiguous. Do not treat the populated subset as the whole picture. |
 | `state` mixes two sources of different strength | 3,576 rows have a state CDSCO named in the address. 1,528 have one read back from the address's PIN code, using only prefixes that are uniform across India Post's All India Pincode Directory — a well-founded inference, but an inference. Those rows carry `state_derived_from_pin:<pin>` in `parse_flags`. |

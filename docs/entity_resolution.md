@@ -168,7 +168,16 @@ failure mode the ticket names, and queue length is what causes it.
 
 ## 8. Results
 
-Numbers below are from the build of 2026-08-06 (`--build`, then `--apply`).
+Numbers below are from the 2026-08-07 rebuild (`--build`, then `--apply`), run as
+the pre-flight for resuming the review (§9). The original 2026-08-06 build scored
+21,219/2,716/205 for the auto/review/queue rows below; the PIN-prefix state
+fallback (state coverage 58.1% → 82.9%, `docs/methodology.md` §5a) gave more
+entities a known state between builds, and the scorer's `state_differs:` penalty
+now applies to pairs it previously couldn't evaluate — so re-running `--build`
+against the same 6,155 records produced a **different** score for some pairs, not
+just a re-count. That's expected: a rebuild is a re-scoring against current data,
+not a replay of a fixed one. See `docs/decisions.md` 2026-08-07 for the specific
+pair (Bioaltus Pharmaceuticals) whose approval didn't survive the rescoring intact.
 
 | | |
 |---|---|
@@ -176,14 +185,21 @@ Numbers below are from the build of 2026-08-06 (`--build`, then `--apply`).
 | placeholder strings excluded | 7 (78 records) |
 | entities clustered | 5,100 |
 | candidate pairs scored | 38,095 |
-| pairs scoring ≥ 0.70 | 24,550 |
-| auto tier (> 0.92) | 21,219 pairs, of which **3,229 actually joined two clusters** |
-| review band (0.75–0.92) | 2,716 pairs → 1,183 already implied → **205 cluster-pair decisions** |
-| clusters after auto-merge | **1,871** |
+| pairs scoring ≥ 0.70 | 24,416 |
+| auto tier (> 0.92) | 20,632 pairs, of which **3,211 actually joined two clusters** |
+| review band (0.75–0.92) | 3,101 pairs → 1,605 already implied → **210 cluster-pair decisions** |
+| clusters after auto-merge | **1,889** |
 
-**Collapse ratio: 5,100 → 1,871 canonical manufacturers (2.73 : 1)** before the
-review band is applied. With the 15 human approvals recorded so far (§9), the
-applied figure is **1,856 (2.75 : 1)** — the numbers the site is built against.
+**Collapse ratio: 5,100 → 1,889 canonical manufacturers (2.70 : 1)** before the
+review band is applied. With 26 of the 210 review-band pairs now decided (§9), the
+applied figure is **1,865 (2.73 : 1)** — the numbers the site is built against.
+Note this is a *higher* manufacturer count than the previous 1,856, even though
+more pairs are now approved (26 vs 15) — the rescored auto tier alone produced 18
+more pre-review clusters (1,871 → 1,889) than the 2026-08-06 build did, and the
+26 approvals reduce that new baseline by less than the gap. Manufacturer count
+moving up between builds is not regression; it's the same "lower bound, not a
+measurement" property §9 and `FINDINGS.md` §3 already describe, applied to a
+rebuild instead of to unfinished review.
 
 Largest clusters:
 
@@ -225,15 +241,36 @@ The per-plant detail is not lost — it is all in `known_aliases`.
 
 | | |
 |---|---|
-| review-band pairs decided | **15 of 205** — 15 approved, 0 rejected |
-| score range of the decided pairs | 0.910 – 0.919 (the top of the band) |
-| review-band pairs still undecided | **190**, treated as *rejected* |
+| review-band pairs decided | **26 of 210** — 26 approved, 0 rejected |
+| score range of the decided pairs | 0.860 – 0.919 |
+| review-band pairs still undecided | **184**, treated as *rejected* |
 | auto-tier clusters spot-checked | **5**, all verdict `correct` |
 | spot-check sample | weakest-cohesion first: internal name similarity 0.88–0.889, cluster sizes 4–38 |
 
-**Applied result: 1,871 → 1,856 manufacturers, collapse ratio 2.73 → 2.75 : 1.**
+The first pass (2026-08-06) decided 15 of the then-205 pairs, all in a single
+0.910–0.919 score band. The second pass (2026-08-07, `src/resolve/triage_review.py`
+ordering the queue into `multi_plant`/`near_typo`/`other`) decided 12 more —
+started against the rescored 210-pair queue (§8), stopped deliberately partway
+through the `multi_plant` bucket at the reviewer's own call, and covered a wider
+score range (0.860–0.910) because the triage grouping surfaced same-name,
+different-state pairs the first pass's straight score-order hadn't reached yet.
+All 12 were multi-plant Indian pharma manufacturers confirmed by a human reading
+the actual cluster evidence — Apex Formulations, Aristo Pharmaceuticals (3
+plants), Alkem Laboratories, Hetero Labs (3 plants), Intas Pharmaceuticals, Linux
+Life Sciences, Sanofi India. One pair (Bal Pharma) was explicitly skipped by the
+reviewer rather than decided either way. Full detail: `docs/decisions.md`
+2026-08-07.
 
-The 190 undecided pairs are still treated as *not merged*, which is the
+One of the 15 first-pass approvals (Bioaltus Pharmaceuticals, `pair_id
+fff35c61ddf622bb`) did not survive the rescoring between passes — the exact pair
+it was recorded against no longer exists in the rebuilt queue, and the same
+underlying question now appears as two different, still-undecided pairs. That
+approval is not among the 26 counted above; the question needs deciding again
+under its new pair_id.
+
+**Applied result: 1,889 → 1,865 manufacturers, collapse ratio 2.70 → 2.73 : 1.**
+
+The 184 undecided pairs are still treated as *not merged*, which is the
 conservative direction: finishing the review can only lower the manufacturer
 count further, never split one apart. `--apply` was run with `--allow-pending` to
 record that state deliberately rather than blocking on a queue nobody is obliged
@@ -247,24 +284,31 @@ and held up.
 
 To resume:
 ```
-python src/resolve/review_cli.py       # picks up at pair 16 of 205
-python src/resolve/spotcheck_cli.py    # skips the 5 already checked
+python src/resolve/manufacturers.py --build     # rescore first — see §8 on why
+python src/resolve/triage_review.py             # bucket the pending pairs
+python src/resolve/review_cli.py                # picks up automatically past decided pairs
+python src/resolve/spotcheck_cli.py             # skips the 5 already checked
 python src/resolve/manufacturers.py --apply
 ```
 
-What the band actually contains, for whoever sits down with it:
+What the band actually contains, for whoever sits down with it — bucketed by
+`triage_review.py` as of the 210-pair queue (§8):
 
-- **26 pairs where the normalized names are identical** and only the address
-  disagrees — mostly one company with two plants (Unicure Noida vs Roorkee), and
-  25 of them carry a `state_differs` signal.
-- **Single-character name differences**: `Navkar Lifesciences` /
-  `Navkar Lifescienses`, `Scott-Edil Pharmacia` / `Scott - Edil Pharmecia`,
-  `Mascot Health Series` / `Mascot Health Services`. These are CDSCO typos in one
-  direction and genuinely distinct firms in the other, and telling them apart is
-  the judgment the band exists for.
-- **True near-misses that must not merge**: `Deep Pharma` and
+- **41 `multi_plant` pairs** — normalized names identical, `state_differs` signal
+  present. Mostly one company with two or three plants: Aristo Pharmaceuticals
+  (Sikkim/H.P./M.P.), Hetero Labs (H.P./Telangana/Puducherry), Alkem, Intas,
+  Sanofi India, and others. 12 of these were decided in the 2026-08-07 session
+  (all approve); 29 remain.
+- **14 `near_typo` pairs** — normalized names within edit distance 2. **Single-
+  character name differences**: `Navkar Lifesciences` / `Navkar Lifescienses`,
+  `Scott-Edil Pharmacia` / `Scott - Edil Pharmecia`, `Mascot Health Series` /
+  `Mascot Health Services`. These are CDSCO typos in one direction and genuinely
+  distinct firms in the other, and telling them apart is the judgment the band
+  exists for. **True near-misses that must not merge**: `Deep Pharma` and
   `Deepin Pharmaceuticals` are different companies in Gujarat with different
   addresses, and score 0.75.
+- **141 `other` pairs** — no name-shape shortcut applies; each needs its own
+  read of both clusters' evidence.
 
 ## 10. Known limits
 

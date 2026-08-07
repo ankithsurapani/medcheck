@@ -25,6 +25,9 @@ import sys
 from datetime import date
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from analyse import review_pairs_pending  # noqa: E402 — reuse, don't re-hardcode
+
 ROOT = Path(__file__).resolve().parents[1]
 DB = ROOT / "data" / "medcheck.db"
 OUT = Path(__file__).resolve().parent / "dataset"
@@ -135,7 +138,7 @@ but which matter more than most licence terms would:
 
 def readme(row_count: int, mfr_count: int, months: tuple[str, str],
            unresolved: int, with_state: int, state_from_pin: int,
-           state_ambiguous_pin: int) -> str:
+           state_ambiguous_pin: int, pending: int) -> str:
     state_named = with_state - state_from_pin
     cols = "\n".join(
         f"| `{name}` | `{src}` | {desc} |" for name, src, desc in COLUMNS)
@@ -186,7 +189,7 @@ Empty means "CDSCO did not publish this", never zero and never "none".
 | Limitation | Effect |
 |---|---|
 | Sampling is not random | Nothing here is a population failure rate. |
-| Manufacturer resolution is **partial** | {mfr_count:,} companies from 5,107 published spellings, but 190 ambiguous pairs were left unmerged pending human review. Some companies still appear under more than one `manufacturer_id`. Concentration measured from this file is a **lower bound**. |
+| Manufacturer resolution is **partial** | {mfr_count:,} companies from 5,107 published spellings, but {pending} ambiguous pairs were left unmerged pending human review. Some companies still appear under more than one `manufacturer_id`. Concentration measured from this file is a **lower bound**. |
 | `alert_section` is unreliable | CDSCO files 13 laboratories under both `central_lab` and `state_lab`, and the field contradicts the laboratory's identity on 857 rows. It is kept verbatim for fidelity. **Use `lab_type` instead** — derived from which laboratory it is, against CDSCO's published list of its own labs. |
 | `state` is {with_state / row_count * 100:.0f}% populated | Derived from free-text addresses, left empty rather than guessed where ambiguous. Do not treat the populated subset as the whole picture. |
 | `state` mixes two sources of different strength | {state_named:,} rows have a state CDSCO named in the address. {state_from_pin:,} have one read back from the address's PIN code, using only prefixes that are uniform across India Post's All India Pincode Directory — a well-founded inference, but an inference. Those rows carry `state_derived_from_pin:<pin>` in `parse_flags`. |
@@ -254,7 +257,8 @@ def main() -> int:
 
     (OUT / "README.md").write_text(
         readme(len(rows), mfr_count, span, unresolved, with_state,
-               state_from_pin, state_ambiguous_pin), encoding="utf-8")
+               state_from_pin, state_ambiguous_pin, review_pairs_pending()),
+        encoding="utf-8")
     (OUT / "LICENSE").write_text(LICENSE, encoding="utf-8")
 
     print(f"wrote {len(rows)} rows to {path.relative_to(ROOT)} "

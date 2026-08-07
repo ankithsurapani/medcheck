@@ -146,13 +146,34 @@ def q2_categories(conn) -> dict:
     }
 
 
+def review_pairs_pending() -> int | None:
+    """Pull the pending count from the merge log's last `apply` run rather than
+    hand-typing it — `manufacturers.py --apply` already computes and logs this
+    exact number every time it runs. A stale hardcoded figure here silently drifts
+    the moment someone resumes the review; reading the log can't drift, since it
+    IS what the review actually did last.
+    """
+    log = ROOT / "data" / "resolve" / "manufacturer_merge_log.jsonl"
+    if not log.exists():
+        return None
+    last_apply = None
+    for line in log.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if not line:
+            continue
+        entry = json.loads(line)
+        if entry.get("kind") == "apply":
+            last_apply = entry
+    return last_apply["review_pending"] if last_apply else None
+
+
 def q3_manufacturers(conn) -> dict:
     """Concentration of flags across resolved manufacturers.
 
     A lower bound on real concentration, not a measurement of it: Phase 2a's review
-    band is only partly decided, so some of these 1,856 entities are the same
-    company still sitting on separate rows. Finishing the review can only merge
-    rows, which can only move flags onto fewer companies — never more.
+    band is only partly decided, so some of these entities are the same company
+    still sitting on separate rows. Finishing the review can only merge rows,
+    which can only move flags onto fewer companies — never more.
     """
     rows = conn.execute(SQL["q3_manufacturers"]).fetchall()
     flags = [r["total_flags"] for r in rows]
@@ -172,7 +193,7 @@ def q3_manufacturers(conn) -> dict:
         "flags_attributed": total,
         "records_without_manufacturer": unresolved,
         "resolution_is_partial": True,
-        "review_pairs_pending": 190,
+        "review_pairs_pending": review_pairs_pending(),
         "top": [dict(rank=i + 1, name=r["canonical_name"], state=r["state"],
                      flags=r["total_flags"], spellings=r["aliases"])
                 for i, r in enumerate(rows[:20])],

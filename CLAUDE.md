@@ -31,14 +31,14 @@ Searchable public database of medicines CDSCO flagged as Not of Standard Quality
 
 **Phase 3a (search site) — complete.** Static Next.js 15 + Tailwind v4 app in `web/`, built against a static JSON export. No API, no server, no tracking.
 
-**Phase 3b (partial: re-point `web/` at resolved entities) — complete.** **8,017 static pages** build clean, down from 11,268 (6,155 record pages + **1,856 manufacturer pages** + 6 fixed).
+**Phase 3b (partial: re-point `web/` at resolved entities) — complete.** **8,026 static pages** build clean locally (6,155 record pages + **1,865 manufacturer pages** + 6 fixed) — count moves with manufacturer resolution; **not yet redeployed** past the Ticket 1–3 production push (see the review-session addendum below).
 
-- `scripts/export_static.py` groups by `manufacturer_id` / the `manufacturers` table, not `manufacturer_raw`. Client index **297 KB → 255 KB brotli** (5,107 per-spelling slugs became 1,856 canonical ones)
+- `scripts/export_static.py` groups by `manufacturer_id` / the `manufacturers` table, not `manufacturer_raw`. Client index **297 KB → 255 KB brotli** (5,107 per-spelling slugs became canonical ones)
 - Manufacturer slug scheme: `<canonical-name-slug>-<cluster-hash>` (see the post-launch hardening section below — it was `-m<manufacturers.id>` until 2026-08-07)
 - Every manufacturer page lists **all** raw spellings that collapsed into it, in a `<details>` (open at ≤5, collapsed above — Jackson has 67)
 - The 78 placeholder records get **no manufacturer page**; the record page renders `NotACompanyNotice` where the link would be
 - Manufacturer search matches raw spelling **or** canonical name, and every spelling routes to one page
-- Verified after rebuild: **0 dead links** across 6,155 record + 1,856 manufacturer pages; exactly 78 record pages have no manufacturer link. Zee 48 spellings/66 batches, Jackson 67/88, Unicure 62/77 — all single pages, all aliases rendered
+- Verified after rebuild: **0 dead links** across 6,155 record + manufacturer pages; exactly 78 record pages have no manufacturer link. Zee 48 spellings/66 batches, Jackson 67/88, Unicure 62/77 — all single pages, all aliases rendered
 - `npm run test:search` — **29 assertions** (was 17), all passing
 - Search: MiniSearch fuzzy for drug names, exact for batch, substring for manufacturer
 - `web/lib/{copy,failure-categories}.ts` hold every user-facing string — all 21 categories have plain-language explanations
@@ -49,13 +49,14 @@ Design system persisted at `design-system/medcheck/MASTER.md` (Swiss Modernism 2
 **Phase 2a (manufacturer entity resolution) — complete.** Human review actually happened (partial, and that's a legitimate stopping point — see below), then applied.
 
 - `src/resolve/manufacturers.py` — normalizer, 3-key blocking, `rapidfuzz` scoring, three tiers, `--build` / `--apply` / `--cohesion`
-- `src/resolve/review_cli.py` — the 0.75–0.92 band, cluster-vs-cluster, **15 of 205 pairs decided (all approve), 190 left pending**
+- `src/resolve/review_cli.py` — the 0.75–0.92 band, cluster-vs-cluster, **26 of 210 pairs decided (all approve), 184 left pending** (see the 2026-08-07 review-session addendum below — the queue grew from 205 to 210 when Ticket 2's PIN-derived states fed the scorer)
+- `src/resolve/triage_review.py` — read-only reading-order tool, buckets pending pairs into `multi_plant` / `near_typo` / `other`
 - `src/resolve/spotcheck_cli.py` — **5 auto-merge clusters spot-checked, all verdict `correct`** (weakest-cohesion clusters sampled first)
-- `data/resolve/manufacturer_merge_log.jsonl` — append-only audit trail: 3,229 auto-merge edges, 15 review decisions, 5 spot-checks, 2 apply runs
+- `data/resolve/manufacturer_merge_log.jsonl` — append-only audit trail: 3,258 auto-merge edges, 27 review decisions logged (26 apply against the current queue — one, Bioaltus Pharmaceuticals, no longer matches its original pair after rescoring and needs a fresh decision), 5 spot-checks, 8 apply runs, 3 build summaries
 - `docs/entity_resolution.md` — thresholds, blocking, collapse ratio, known limits
 - `tests/test_resolve_manufacturers.py` — 45 checks, all passing
 
-**Final applied state: manufacturers 1,871 → 1,856** (the 15 approvals), **collapse ratio 2.75 : 1**. `--apply` refuses to run with undecided review pairs unless given `--allow-pending`; that flag was used deliberately — the 190 still-pending pairs are treated as **not merged** (conservative, can only under-merge). 6,077 of 6,155 records carry a `manufacturer_id`; the 78 unlinked are the 7 placeholder strings (`manufacturer_unknown_placeholder`), which deliberately stay `NULL` — never resolved into a company entity.
+**Applied state: manufacturers 1,889 → 1,865** (26 approvals against the rebuilt queue), **collapse ratio 2.73 : 1**. `--apply` refuses to run with undecided review pairs unless given `--allow-pending`; that flag was used deliberately — the 184 still-pending pairs are treated as **not merged** (conservative, can only under-merge). 6,077 of 6,155 records carry a `manufacturer_id`; the 78 unlinked are the 7 placeholder strings (`manufacturer_unknown_placeholder`), which deliberately stay `NULL` — never resolved into a company entity.
 
 **Phase 4 (the analysis) — complete.** All seven questions computed, written up, dataset published under CC0.
 
@@ -68,7 +69,7 @@ Design system persisted at `design-system/medcheck/MASTER.md` (Swiss Modernism 2
 **Headline numbers** (all shares are of *flagged batches*, never a failure rate — CDSCO doesn't sample randomly and publishes no denominator):
 - **6,155 batches, 90 months, 4.78× growth 2019 → 2025** (last complete year). Counts, not rates.
 - **64.1% failed assay or dissolution** (potency); only **12.0%** are contamination-type. The published quality problem is medicines that may not work, not medicines that are dangerous.
-- **13.5% of companies hold 54.5% of flags** — but **52.9% appear exactly once** and the median company has 1. Long tail with a heavy head, not a few bad actors.
+- **13.4% of companies hold 54.4% of flags** — but **53.1% appear exactly once** and the median company has 1. Long tail with a heavy head, not a few bad actors. (Lower bound: 184 review-band pairs are still undecided — see Phase 2a.)
 - **82.9% state coverage** (was 58.1% before the PIN fallback); Himachal Pradesh is 33.6% of records *with* a state and **27.9% of all** records.
 - **19.4% name an anti-infective** by INN stem. Over-representation is **not answerable** — no denominator.
 
@@ -140,9 +141,19 @@ Live at **https://medcheck-india.vercel.app/** (was `web-navy-three-91.vercel.ap
 - **Verified against the live site**, not the dashboard: `/`, a record page, a manufacturer page and the search index asset all 200; the search index has 6,155 rows and 1,856 canonical slugs; the PIN-provenance note renders; and an **old positional slug now correctly 404s** — proof the new build is actually serving, not a cached old one
 - `README.md` and `CLAUDE.md` updated to the new URL
 
+**Manufacturer review, resumed (2026-08-07) — partial, stopped deliberately, not yet redeployed.**
+
+- Pre-flight (`manufacturers.py --build`) found real drift from Ticket 2: review queue **205 → 210 pairs**, because more entities now carry a PIN-derived state and the scorer's `state_differs:` penalty reaches pairs it couldn't evaluate before. 14 of the first pass's 15 approvals still matched their exact pair; 1 (Bioaltus Pharmaceuticals) didn't and now needs a fresh decision under a new pair_id. Full detail: `docs/decisions.md`.
+- `src/resolve/triage_review.py` added — buckets pending pairs into `multi_plant` (41) / `near_typo` (14) / `other` (141), read-only, doesn't touch `review_cli.py` or reorder `candidates.json`.
+- Live review session, one pair at a time, evidence-first: **12 of the 41 `multi_plant` pairs decided, all approve** — Apex Formulations, Aristo Pharmaceuticals (3 plants), Alkem Laboratories, Hetero Labs (3 plants), Intas Pharmaceuticals, Linux Life Sciences, Sanofi India. Bal Pharma skipped by the reviewer's own choice.
+- **Asked to decide the remaining ~183 unattended — declined.** That's the one part of this ticket an executing AI session is not authorized to do (`plan.md` §1: never auto-merge above the review band without a human look). Stopped there rather than guess; same footing as the original 15/205 pass.
+- Applied (`--apply --allow-pending`) and fully re-propagated so the 12 real decisions aren't just sitting in the log unused: `manufacturers` **1,889 → 1,865** (collapse ratio 2.73:1), `export_static.py`, `web/` rebuild (8,026 pages), `npm run test:search` 29/29, all 5 Python test suites green, `analyse.py --json`, CC0 dataset re-exported.
+- **Found and fixed a real bug while re-propagating:** `analyse.py` and `export_dataset.py` both had **`review_pairs_pending` hardcoded as the literal `190`**, not computed — exactly the "no number is hand-typed" rule this project holds elsewhere, violated in two places. Both now read the true pending count from the merge log's last `apply` entry instead. Caught because the number visibly disagreed with what `--apply` had just printed, not by inspection.
+- **Not yet deployed.** `medcheck-india.vercel.app` still serves the Ticket 1–3 build (1,856 manufacturers). Local rebuild is verified but a production push needs the same explicit go-ahead every other deploy in this project has required.
+
 Open / needs a planner decision:
 - **A real custom domain is still not set up.** `medcheck-india.vercel.app` is cosmetic progress, not a domain MedCheck owns. Needs DNS and is its own ticket.
-- ~~190 review-band pairs undecided *and* slugs positional~~ — the slug half is **fixed** (above); resuming the 190-pair review is now safe and is still its own ticket.
+- ~~190 review-band pairs undecided *and* slugs positional~~ — the slug half is **fixed** (above); the review **started** 2026-08-07 (26 of 210 decided, see the addendum below) and stopped deliberately mid-`multi_plant`-bucket — **184 pairs still pending**, still its own ticket to finish. The AI executing session is not authorized to decide the remainder unattended (`plan.md` §1) — it needs the user, live, same as this pass.
 - **`manufacturers.state` carries no provenance.** It is a majority vote across a company's records, some of which are now PIN-derived, and the manufacturer page shows it uncaveated. It was uncaveated before this ticket too, so nothing regressed — but it is the one place a PIN-derived state renders without saying so.
 - **827 records still have no state and no PIN.** PIN lookup cannot help them; they need real address parsing (city/district → state), which is Phase 2 work.
 - ~~The 3 remaining build-tooling vulnerabilities~~ — **fixed**, `npm audit` is at 0 (Ticket 3 above).
@@ -239,3 +250,6 @@ way", read on demand rather than loaded into every session. Append new ones ther
 - **Renaming a Vercel project does not rename its URL.** The auto-generated production alias (`web-navy-three-91.vercel.app`) is a *domain attached to the project*, not a view of the project's name, so it survives the rename untouched — `medcheck-india.vercel.app` still 404'd afterwards. Getting the new URL took three steps, not one: PATCH the project name, POST the new domain, then `vercel alias set` it to the production deployment.
 - **`vercel project` has no `rename` subcommand** (CLI 48.8.2 — only `add`, `inspect`, `list`, `remove`). The REST API does it fine with the token the CLI already stores in `~/Library/Application Support/com.vercel.cli/auth.json`, so a rename does not actually need a dashboard visit.
 - **Verify a deploy by checking something that should have *stopped* working.** All four launch checks return 200 against a stale cached build just as happily as against a new one. The proof the new build was live was `/manufacturer/zee-laboratories-ltd-m1834/` returning 404 — an old positional slug that only the pre-Ticket-1 export could serve.
+- **Rebuilding the review queue changes it, not just re-counts it.** Ticket 2's PIN-derived states fed straight into `manufacturers.py`'s own scorer (the `state_differs:` penalty), so re-running `--build` after an unrelated ticket moved the review band from 205 to 210 pairs and orphaned one already-approved decision (its exact pair no longer existed under the new scoring). A candidate-generation pipeline that reads from live data has no "just recount" mode — every rebuild is a fresh judgment, and a pre-flight diff against the merge log is what caught it here.
+- **The "no number is hand-typed" rule had already been broken, twice, in the exact two files that say it out loud.** `analyse.py`'s own docstring claims nothing is hand-typed; `review_pairs_pending: 190` was a literal three lines below it, and `export_dataset.py` had the same literal independently. Both went stale the moment the review queue moved to 210/184. Caught only because a freshly `--apply`'d number (184) didn't match what the script printed (190) — a principle stated in a docstring doesn't enforce itself, and nothing was testing that these two numbers agree.
+- **A live, evidence-first human review moves faster grouped by company than one pair at a time when the judgment is genuinely identical** (Linux Life Sciences' three plants, Sanofi India's three plants) — but grouping is an efficiency choice for pairs that are the *same* question, never a way to cover ground the reviewer hasn't actually looked at. The one time progress-pressure showed up (an explicit ask to finish the remaining ~183 unattended), the right answer was to decline, not to speed up by guessing — that instruction conflicted with `plan.md` §1 directly, and the ticket that authorized this session said so in advance.

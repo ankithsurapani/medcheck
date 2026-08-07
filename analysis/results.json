@@ -244,11 +244,11 @@
     "other_share": 4.4
   },
   "q3_manufacturers": {
-    "manufacturers": 1856,
+    "manufacturers": 1865,
     "flags_attributed": 6077,
     "records_without_manufacturer": 78,
     "resolution_is_partial": true,
-    "review_pairs_pending": 190,
+    "review_pairs_pending": 184,
     "top": [
       {
         "rank": 1,
@@ -425,18 +425,18 @@
       {
         "manufacturers": 100,
         "share_of_manufacturers": 5.4,
-        "flags": 2197,
-        "share_of_flags": 36.2
+        "flags": 2194,
+        "share_of_flags": 36.1
       },
       {
         "manufacturers": 250,
-        "share_of_manufacturers": 13.5,
-        "flags": 3312,
-        "share_of_flags": 54.5
+        "share_of_manufacturers": 13.4,
+        "flags": 3306,
+        "share_of_flags": 54.4
       }
     ],
-    "single_flag_manufacturers": 982,
-    "single_flag_share": 52.9,
+    "single_flag_manufacturers": 990,
+    "single_flag_share": 53.1,
     "median_flags": 1,
     "max_flags": 88
   },
