@@ -31,7 +31,7 @@ Searchable public database of medicines CDSCO flagged as Not of Standard Quality
 
 **Phase 3a (search site) — complete.** Static Next.js 15 + Tailwind v4 app in `web/`, built against a static JSON export. No API, no server, no tracking.
 
-**Phase 3b (partial: re-point `web/` at resolved entities) — complete.** **7,952 static pages** build clean locally (6,155 record pages + **1,791 manufacturer pages** + 6 fixed) — count moves with manufacturer resolution; **not yet redeployed** past the 2026-08-07 `near_typo`-bucket production push (see the review-session addenda below).
+**Phase 3b (partial: re-point `web/` at resolved entities) — complete.** **7,952 static pages** build clean (6,155 record pages + **1,791 manufacturer pages** + 6 fixed) — count moves with manufacturer resolution; live on the site as of the 2026-08-08 `other`-bucket deploy (see the review-session addenda below).
 
 - `scripts/export_static.py` groups by `manufacturer_id` / the `manufacturers` table, not `manufacturer_raw`. Client index **297 KB → 255 KB brotli** (5,107 per-spelling slugs became canonical ones)
 - Manufacturer slug scheme: `<canonical-name-slug>-<cluster-hash>` (see the post-launch hardening section below — it was `-m<manufacturers.id>` until 2026-08-07)
@@ -164,7 +164,7 @@ Live at **https://medcheck-india.vercel.app/** (was `web-navy-three-91.vercel.ap
 - **Vivek Pharmachem (India) Ltd entered the top-8 manufacturer table** (rank 6, 45 flags) — a Jaipur plant and a Jammu plant, filed under two different legal-suffix spellings ("Vivek Pharmaceuticals Pvt. Ltd." / "Vivek Pharmachem (India) Ltd."), confirmed as one company and merged. This is the first visible change to that table since Phase 4 shipped.
 - **Found a likely data-quality error outside this review's authority to fix**: the auto-merged (>0.92, pre-review) "Pulse Pharmaceuticals" cluster (Roorkee, Uttarakhand) contains a spanning-edge member reading "...Sua Asil, Raiwind Road Lhore" — Raiwind Road is in Lahore, **Pakistan**. Surfaced incidentally while reading evidence for a neighboring review-band pair; logged in `docs/entity_resolution.md` §10 as a follow-up, not fixed here since no single review-band decision can undo an auto-tier merge.
 - Applied and re-propagated across four checkpoints (stopping and restarting the pipeline each time the user paused): `manufacturers` **1,856 → 1,791** over the session (1,817 → 1,808 → 1,803 → 1,797 → 1,791 across the checkpoints), **120 of 210 pairs now decided total** (102 approved, 18 rejected; collapse ratio 2.85:1), `export_static.py`, `web/` rebuild (7,952 pages), `npm run test:search` 29/29 at every checkpoint, all 5 Python suites green, `analyse.py --json`, CC0 dataset re-exported.
-- **Not yet deployed.** Local rebuild verified; production push needs the same explicit go-ahead every deploy in this project has required.
+- **Deployed 2026-08-08**, on explicit go-ahead: `vercel --archive=tgz --prod` (64.1 MB archive, ~5 min build). Verified live: four launch checks 200, old positional slug 404s, live `meta.json` reports `manufacturerCount: 1791`.
 - **61 pairs remain in `other`**, plus 29 still in `multi_plant` — **90 total pending**, same conservative "not merged" treatment as always.
 
 Open / needs a planner decision:
