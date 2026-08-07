@@ -118,7 +118,7 @@ Assigning a category to those would invent a finding the regulator did not repor
 
 `analyse.py::q3_manufacturers`
 
-After entity resolution, **1,865 companies** account for 6,077 flagged batches
+After entity resolution, **1,856 companies** account for 6,077 flagged batches
 (78 records name no company — see §7).
 
 | Top N companies | Share of companies | Flagged batches | Share of flags |
@@ -126,14 +126,14 @@ After entity resolution, **1,865 companies** account for 6,077 flagged batches
 | 1 | 0.1% | 88 | 1.4% |
 | 5 | 0.3% | 344 | 5.7% |
 | 10 | 0.5% | 550 | 9.1% |
-| 25 | 1.3% | 1,017 | 16.7% |
-| 50 | 2.7% | 1,506 | 24.8% |
-| 100 | 5.4% | 2,194 | 36.1% |
-| 250 | 13.4% | 3,306 | 54.4% |
+| 25 | 1.3% | 1,024 | 16.9% |
+| 50 | 2.7% | 1,520 | 25.0% |
+| 100 | 5.4% | 2,207 | 36.3% |
+| 250 | 13.5% | 3,313 | 54.5% |
 
-**Flags are concentrated, but less than the headline shape suggests.** 13.4% of
-companies account for 54.4% of flagged batches. At the same time **990 companies
-(53.1%) appear exactly once**, and the median company has a single flagged batch.
+**Flags are concentrated, but less than the headline shape suggests.** 13.5% of
+companies account for 54.5% of flagged batches. At the same time **979 companies
+(52.7%) appear exactly once**, and the median company has a single flagged batch.
 This is not a picture of a few bad actors and a clean industry; it is a long tail
 with a heavy head.
 
@@ -153,7 +153,7 @@ The most-flagged companies:
 Three things have to be said about this table, and none of them are optional.
 
 **It is a lower bound on concentration.** Manufacturer resolution is *partial*:
-5,107 published spellings were collapsed onto 1,865 companies, but 184 ambiguous
+5,107 published spellings were collapsed onto 1,856 companies, but 170 ambiguous
 pairs were left unmerged pending human review (see
 [`../docs/entity_resolution.md`](../docs/entity_resolution.md) §9). Every one of
 those, if merged, moves flags onto *fewer* companies. Finishing the review can only
@@ -451,11 +451,11 @@ own typos ("Sterillity", "Related Susbtances") are absorbed, since the intended 
 is not in doubt.
 
 **Entity resolution.** 5,107 published manufacturer spellings were collapsed onto
-1,865 companies (`src/resolve/manufacturers.py`) using normalized-name similarity
+1,856 companies (`src/resolve/manufacturers.py`) using normalized-name similarity
 with address, PIN code and state as secondary signals. Pairs above 0.92 similarity
 were merged automatically and sampled for human spot-checking; pairs between 0.75
-and 0.92 went to a human review queue. **That review is partial** — 26 of 210 pairs
-decided, 184 outstanding and treated as *not merged*. Full method and audit trail:
+and 0.92 went to a human review queue. **That review is partial** — 40 of 210 pairs
+decided, 170 outstanding and treated as *not merged*. Full method and audit trail:
 [`../docs/entity_resolution.md`](../docs/entity_resolution.md).
 
 **Drug classes.** WHO INN stem matching only, described in §6 above. No ATC
@@ -470,7 +470,7 @@ Collected in one place. Each is load-bearing for at least one finding above.
 | # | Limitation | What it invalidates |
 |---|---|---|
 | 1 | **CDSCO does not sample at random.** Samples are drawn on suspicion, complaint and risk-targeting; only failures are published; no denominator exists anywhere in the data. | Every rate-style claim. No percentage in this document is a failure rate for medicines on the market. |
-| 2 | **Manufacturer resolution is partial** — 184 review-band pairs undecided, so one company can still hold more than one id. | §3's concentration figures are a **lower bound**. |
+| 2 | **Manufacturer resolution is partial** — 170 review-band pairs undecided, so one company can still hold more than one id. | §3's concentration figures are a **lower bound**. |
 | 3 | **`alert_section` is unreliable** — CDSCO files 13 laboratories under both labels, contradicting the laboratory's identity on 857 records. It is kept verbatim and **`lab_type` is derived instead**, from CDSCO's own published list of its laboratories. | Nothing, now — but any analysis using `alert_section` rather than `lab_type` inherits the error. §4. |
 | 3b | **`lab_type` is derived, not published.** 23 records (0.4%) could not be classified and are `unknown`; CDSCO publishes no machine-readable list of which laboratories are its own, so the registry in `src/resolve/labs.py` is assembled from its website and a government press release and would need updating if CDSCO opens new laboratories. | The precision of §4's split, at the margin. |
 | 4 | **State is 82.9% populated**, and missing non-randomly (messiest addresses). | §5's shares are of the 82.9%, not of the corpus. Both denominators are given. |

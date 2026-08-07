@@ -191,15 +191,17 @@ pair (Bioaltus Pharmaceuticals) whose approval didn't survive the rescoring inta
 | clusters after auto-merge | **1,889** |
 
 **Collapse ratio: 5,100 → 1,889 canonical manufacturers (2.70 : 1)** before the
-review band is applied. With 26 of the 210 review-band pairs now decided (§9), the
-applied figure is **1,865 (2.73 : 1)** — the numbers the site is built against.
-Note this is a *higher* manufacturer count than the previous 1,856, even though
-more pairs are now approved (26 vs 15) — the rescored auto tier alone produced 18
-more pre-review clusters (1,871 → 1,889) than the 2026-08-06 build did, and the
-26 approvals reduce that new baseline by less than the gap. Manufacturer count
-moving up between builds is not regression; it's the same "lower bound, not a
-measurement" property §9 and `FINDINGS.md` §3 already describe, applied to a
-rebuild instead of to unfinished review.
+review band is applied. Two review sessions ran against this same rebuilt queue
+the same day: the first decided 26 of 210 (all approve, applied figure 1,865); a
+second session, starting on the `near_typo` bucket, decided 14 more — **9 approve,
+5 reject** (the first rejections this review has recorded — including a 3-pair
+"Centaur Pharmaceuticals" vs "Century Pharmaceuticals" group the reviewer
+identified as a name-similarity coincidence, not a real relationship). **Current
+applied figure: 1,856 (2.73 : 1)**, with **40 of 210 pairs decided** (35 approved,
+5 rejected) — the numbers the site is built against. That this lands back at the
+same manufacturer count as the pre-rebuild 1,856 is coincidence, not a sign
+nothing changed — both the underlying entity set and the specific decisions are
+different (§9).
 
 Largest clusters:
 
@@ -241,9 +243,9 @@ The per-plant detail is not lost — it is all in `known_aliases`.
 
 | | |
 |---|---|
-| review-band pairs decided | **26 of 210** — 26 approved, 0 rejected |
-| score range of the decided pairs | 0.860 – 0.919 |
-| review-band pairs still undecided | **184**, treated as *rejected* |
+| review-band pairs decided | **40 of 210** — 35 approved, 5 rejected |
+| score range of the decided pairs | 0.759 – 0.919 |
+| review-band pairs still undecided | **170**, treated as *rejected* |
 | auto-tier clusters spot-checked | **5**, all verdict `correct` |
 | spot-check sample | weakest-cohesion first: internal name similarity 0.88–0.889, cluster sizes 4–38 |
 
@@ -265,12 +267,35 @@ One of the 15 first-pass approvals (Bioaltus Pharmaceuticals, `pair_id
 fff35c61ddf622bb`) did not survive the rescoring between passes — the exact pair
 it was recorded against no longer exists in the rebuilt queue, and the same
 underlying question now appears as two different, still-undecided pairs. That
-approval is not among the 26 counted above; the question needs deciding again
+approval is not among the decided count above; the question needs deciding again
 under its new pair_id.
 
-**Applied result: 1,889 → 1,865 manufacturers, collapse ratio 2.70 → 2.73 : 1.**
+A third pass, same day, finished the `near_typo` bucket: **14 of 14 decided — 9
+approved, 5 rejected.** This is where rejections start appearing, and each is a
+real finding, not noise:
 
-The 184 undecided pairs are still treated as *not merged*, which is the
+- **Centaur Pharmaceuticals vs Century Pharmaceuticals** — three different
+  Centaur plants (Haryana, two in Goa) each scored 0.7986 against the same lone
+  Century Pharmaceuticals (Halol, Gujarat) entry. Same score, three times, against
+  one name — the reviewer read this as a name-similarity coincidence ("Centaur"
+  and "Century" share length and several letters) rather than three independent
+  pieces of evidence for one relationship, and rejected all three.
+- **Karnal Pharmaceuticals (Selaqui, Uttarakhand) vs a second Karnani
+  Pharmaceuticals entity in Rajasthan**, carrying an Ayurvedic manufacturing
+  licence (`RJ 529-AYU`) rather than an allopathic one. Approving it would have
+  chain-merged the already-approved Selaqui cluster (a different Karnal/Karnani
+  pair, same physical address, approved earlier the same session) into an
+  unrelated Rajasthan entity through transitivity — flagged and rejected before
+  that chain could form.
+- **Regain Laboratories (Hisar) vs Regal Laboratories (Goindwal Sahib, Punjab)**
+  — different names, different states, `address_unlike:0.11`. The same shape as
+  the already-documented Deep Pharma / Deepin Pharmaceuticals near-miss.
+
+**Applied result: 1,889 → 1,856 manufacturers, collapse ratio 2.70 → 2.73 : 1.**
+Landing back at the pre-rebuild count (1,856) is coincidence — the entity set
+underneath is not the same one the 2026-08-06 build produced.
+
+The 170 undecided pairs are still treated as *not merged*, which is the
 conservative direction: finishing the review can only lower the manufacturer
 count further, never split one apart. `--apply` was run with `--allow-pending` to
 record that state deliberately rather than blocking on a queue nobody is obliged
@@ -298,17 +323,18 @@ What the band actually contains, for whoever sits down with it — bucketed by
   present. Mostly one company with two or three plants: Aristo Pharmaceuticals
   (Sikkim/H.P./M.P.), Hetero Labs (H.P./Telangana/Puducherry), Alkem, Intas,
   Sanofi India, and others. 12 of these were decided in the 2026-08-07 session
-  (all approve); 29 remain.
-- **14 `near_typo` pairs** — normalized names within edit distance 2. **Single-
-  character name differences**: `Navkar Lifesciences` / `Navkar Lifescienses`,
-  `Scott-Edil Pharmacia` / `Scott - Edil Pharmecia`, `Mascot Health Series` /
-  `Mascot Health Services`. These are CDSCO typos in one direction and genuinely
-  distinct firms in the other, and telling them apart is the judgment the band
-  exists for. **True near-misses that must not merge**: `Deep Pharma` and
-  `Deepin Pharmaceuticals` are different companies in Gujarat with different
-  addresses, and score 0.75.
+  (all approve); **29 remain**.
+- **14 `near_typo` pairs** — normalized names within edit distance 2. **Fully
+  decided (2026-08-07): 9 approved, 5 rejected.** The rejects are the sharpest
+  examples yet of the "must not merge" case §9 warns about: `Centaur
+  Pharmaceuticals` / `Century Pharmaceuticals` (three plants, one coincidentally
+  similar name), `Karnal Pharmaceuticals` / a second `Karnani Pharmaceuticals`
+  entity carrying an Ayurvedic licence, and `Regain Laboratories` / `Regal
+  Laboratories`. Historical examples from before this bucket was decided:
+  `Navkar Lifesciences` / `Navkar Lifescienses` (a CDSCO typo, approved),
+  `Deep Pharma` / `Deepin Pharmaceuticals` (different companies, score 0.75).
 - **141 `other` pairs** — no name-shape shortcut applies; each needs its own
-  read of both clusters' evidence.
+  read of both clusters' evidence. **None decided yet.**
 
 ## 10. Known limits
 
