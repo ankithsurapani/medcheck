@@ -31,7 +31,7 @@ Searchable public database of medicines CDSCO flagged as Not of Standard Quality
 
 **Phase 3a (search site) — complete.** Static Next.js 15 + Tailwind v4 app in `web/`, built against a static JSON export. No API, no server, no tracking.
 
-**Phase 3b (partial: re-point `web/` at resolved entities) — complete.** **8,017 static pages** build clean locally (6,155 record pages + **1,856 manufacturer pages** + 6 fixed) — count moves with manufacturer resolution; **not yet redeployed** past the 2026-08-07 `multi_plant`-bucket production push (see the review-session addenda below).
+**Phase 3b (partial: re-point `web/` at resolved entities) — complete.** **8,017 static pages** build clean (6,155 record pages + **1,856 manufacturer pages** + 6 fixed) — count moves with manufacturer resolution; live on the site as of the 2026-08-07 `near_typo`-bucket deploy (see the review-session addenda below).
 
 - `scripts/export_static.py` groups by `manufacturer_id` / the `manufacturers` table, not `manufacturer_raw`. Client index **297 KB → 255 KB brotli** (5,107 per-spelling slugs became canonical ones)
 - Manufacturer slug scheme: `<canonical-name-slug>-<cluster-hash>` (see the post-launch hardening section below — it was `-m<manufacturers.id>` until 2026-08-07)
@@ -156,7 +156,7 @@ Live at **https://medcheck-india.vercel.app/** (was `web-navy-three-91.vercel.ap
 - Live review session, same evidence-first pattern: **all 14 `near_typo` pairs decided — 9 approved, 5 rejected.** First rejections this review has recorded, each a real finding: `Centaur Pharmaceuticals` vs `Century Pharmaceuticals` (three plants of Centaur each scored identically against one Century entry — read as a name-similarity coincidence, not evidence, and rejected as a group); `Karnal Pharmaceuticals` vs a second `Karnani Pharmaceuticals` entity carrying an Ayurvedic manufacturing licence (`RJ 529-AYU`) — approving would have chain-merged an already-approved cluster into an unrelated entity via transitivity; `Regain Laboratories` vs `Regal Laboratories` (different names, different states, no corroborating signal). Full detail: `docs/entity_resolution.md` §9, `docs/decisions.md`.
 - Applied and re-propagated the same way as the first session: `manufacturers` **1,889 → 1,856** (40 of 210 pairs now decided: 35 approved, 5 rejected; collapse ratio 2.73:1), `export_static.py`, `web/` rebuild (8,017 pages — the count moves with the manufacturer total), `npm run test:search` 29/29, all 5 Python suites green, `analyse.py --json`, CC0 dataset re-exported.
 - Landing back at exactly **1,856** manufacturers — the same number as before the Ticket 2 rebuild — is coincidence, not a sign nothing moved: both the underlying entity set and the specific approve/reject decisions are different from the pre-rebuild state.
-- **Not yet deployed.** Local rebuild verified (tests, build, search assertions); a production push needs the same explicit go-ahead every deploy in this project has required.
+- **Deployed 2026-08-07**, on explicit go-ahead: `vercel --archive=tgz --prod` (64.3 MB archive, ~5 min build). Verified against the live site: `/`, a record page, a manufacturer page and the search index asset all 200; old positional slug 404s; live `meta.json` reports `manufacturerCount: 1856`.
 
 Open / needs a planner decision:
 - **A real custom domain is still not set up.** `medcheck-india.vercel.app` is cosmetic progress, not a domain MedCheck owns. Needs DNS and is its own ticket.
