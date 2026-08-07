@@ -6,12 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
     "test:search": "tsc lib/search.ts --outDir .test-build --module esnext --target es2022 --moduleResolution bundler --skipLibCheck && node tests/search.test.mjs"
   },
   "dependencies": {
     "minisearch": "7.1.2",
-    "next": "^15.5.22",
+    "next": "^16.3.0",
     "react": "19.1.1",
     "react-dom": "19.1.1"
   },
@@ -20,7 +19,7 @@
     "@types/node": "22.18.1",
     "@types/react": "19.1.13",
     "@types/react-dom": "19.1.9",
-    "postcss": "8.5.6",
+    "postcss": "^8.5.26",
     "tailwindcss": "4.1.13",
     "typescript": "5.9.2"
   }

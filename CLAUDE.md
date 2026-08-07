@@ -115,11 +115,25 @@ Manufacturer URLs no longer move when an unrelated merge decision is made.
 - `analysis/FINDINGS.md` §5 rewritten with the two-source derivation; limitations table gained rows 4b and 4c. `docs/methodology.md` §5a. `web/app/about/page.tsx` updated
 - **Ticket 1 proved itself here:** a full normalize + re-apply + re-export moved **zero** manufacturer URLs. Under the positional scheme this pipeline run would have been a mass rename
 
+**Post-launch hardening — Ticket 3 (Next.js 16 upgrade) — complete, NOT deployed.**
+
+**`npm audit`: 3 high → 0.** Built and verified locally; the production deploy is deliberately still pending (see below).
+
+- `next` **15.5.22 → 16.3.0** (current stable; 16.3.1 is canary-only). Next 16 dropped its `sharp` dependency, so that advisory is gone rather than mitigated
+- `postcss` **8.5.6 → ^8.5.26**. It is a *direct* devDependency pinned exactly — the Next bump alone did not clear it. This is the other half of the finding, not scope creep
+- `npm run lint` **deleted**: Next 16 removes `next lint`, and this project has no ESLint config and no `eslint` dependency, so the script never ran anything. Migrating it would mean adding a linter under cover of a security ticket
+- **No codemods run** — each 16.x codemod was checked and none applies (no webpack/turbopack config, no `middleware`, no `unstable_` imports, no `experimental_ppr`, `params` already `Promise`-typed)
+- **Turbopack is now the default builder.** Accepted, not opted out of. Re-verified the Tailwind v4 `prefers-color-scheme` rule is present in the built CSS — the one bundler bug this project has been bitten by before
+- `tsconfig.json` was rewritten *by Next 16's build* (`jsx: preserve` → `react-jsx`, `.next/dev/types` added). Left as written
+- **Build identical:** 8,016 pages, 0 missing manufacturer or record pages, 78 with no manufacturer link. `test:search` 29/29. (`find out -name '*.html'` reads 8,017 now — Next 16 emits `404/index.html` alongside `404.html`)
+- **Smoke-checked against the local static export**, same four checks as the launch: `/`, a record page, a manufacturer page, the search index asset — all 200, index has 6,155 rows and 1,856 canonical slugs, and the PIN-provenance note renders
+
 Open / needs a planner decision:
+- **Next 16 is committed but NOT live.** The ticket requires explicit confirmation before `vercel --prod` pushes it to the public site. The live site is still serving the Next 15.5.22 build, which also means it still has the pre-Ticket-1 slugs and the 58.1% state coverage. **One deploy ships Tickets 1, 2 and 3 together.**
 - ~~190 review-band pairs undecided *and* slugs positional~~ — the slug half is **fixed** (above); resuming the 190-pair review is now safe and is still its own ticket.
 - **`manufacturers.state` carries no provenance.** It is a majority vote across a company's records, some of which are now PIN-derived, and the manufacturer page shows it uncaveated. It was uncaveated before this ticket too, so nothing regressed — but it is the one place a PIN-derived state renders without saying so.
 - **827 records still have no state and no PIN.** PIN lookup cannot help them; they need real address parsing (city/district → state), which is Phase 2 work.
-- **The 3 remaining build-tooling vulnerabilities** (`postcss`/`sharp`) need a Next.js 16 major-version upgrade to clear — real work, not urgent (build-time only, no untrusted input processed), but shouldn't sit forever on a public repo.
+- ~~The 3 remaining build-tooling vulnerabilities~~ — **fixed**, `npm audit` is at 0 (Ticket 3 above).
 - **Vercel project is named `web`** (generic) — the URL slug `web-navy-three-91` doesn't say "MedCheck." A custom domain or project rename is cosmetic, not urgent.
 - ~~`alert_section` unreliability~~ — **fixed**, see the lab-labelling section above.
 - **Search index is 255 KB brotli** (down from 297 KB). Lazy-loaded on idle/focus so the page is usable first, but still the biggest cost on a slow connection. A later Phase 3b option: server-side search, or a two-tier prefix index.
@@ -131,7 +145,7 @@ Open / needs a planner decision:
 
 ## Decisions log
 
-Moved to [`docs/decisions.md`](docs/decisions.md) — 73 entries of "why is it this
+Moved to [`docs/decisions.md`](docs/decisions.md) — 79 entries of "why is it this
 way", read on demand rather than loaded into every session. Append new ones there.
 
 ## Key learnings / gotchas
@@ -206,3 +220,7 @@ way", read on demand rather than loaded into every session. Append new ones ther
 - **An authoritative source can be authoritative and still be out of date.** The directory files 194xxx (Leh, Kargil) under Jammu & Kashmir because it predates the 2019 reorganisation that made Ladakh a UT. A generator can measure purity but cannot notice that its input is older than a border — that entry has to be hand-maintained, and is the only hand-maintained thing in the generated module.
 - **`?` in an address does not break PIN extraction, but a leading plot number would.** The portal's mangled punctuation gives "Amritsar ? 143001", which a trailing-six-digit regex handles fine. The real trap is "Plot No. 611612, ... Ahmedabad-382445" — taking the *first* six-digit run reads that address as Uttar Pradesh. Last match wins, and the negative lookarounds keep it out of longer digit runs.
 - **A flag in the database is tracking, not showing.** §1.4 says uncertainty is *shown*. `state_derived_from_pin` was in `parse_flags` and in the exported record and the page still rendered a bare "Uttarakhand", identical to a state CDSCO wrote down. Getting it visible needed a UI change too — a `note` prop on the field component, since the existing `hint` only rendered when a field was *missing*.
+- **A major-version bump does not clear an advisory in a package you pin yourself.** Next 16 removed the `sharp` dependency and the `next` finding, but `postcss` was a *direct* devDependency pinned at an exact `8.5.6`, so `npm audit` still reported it. `npm audit fix --force` had been advertising "will install next@16.3.0" for both findings, which read as one fix for both; it was two.
+- **Next 16's `next build` rewrites `tsconfig.json` in place.** It sets `jsx: "react-jsx"`, adds `.next/dev/types/**/*.ts` to `include`, and reformats every array onto multiple lines. Not a prompt, not a codemod — a side effect of building. Anything that diffs a clean tree after a build will see it.
+- **The static export gained a page without changing.** `find out -name '*.html'` went 8,016 → 8,017 on Next 16 because it now writes `404/index.html` *and* `404.html` under `trailingSlash: true`. The route set is identical; a page-count regression check has to know that or it reads as a phantom extra page.
+- **Turbopack kept the Tailwind v4 dark-mode rule that Tailwind itself once dropped.** Worth checking explicitly rather than assuming: the earlier `@theme`-inside-`@media` bug shipped a permanently-dark site and was only ever caught by grepping the built CSS, so a whole new bundler is exactly when to grep it again. `prefers-color-scheme` is present.
