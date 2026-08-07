@@ -2,7 +2,7 @@
 
 Searchable public database of medicines CDSCO flagged as Not of Standard Quality (NSQ) or spurious. Full spec: `plan.md`. Current task: `implementation.md`.
 
-> **Builder:** update *Current Status*, *Decisions Log*, and *Key Learnings* below whenever you make a decision or hit something worth remembering. One line per entry. Don't touch `plan.md`.
+> **Builder:** update *Current Status* and *Key Learnings* below, and append decisions to [`docs/decisions.md`](docs/decisions.md), whenever you make a decision or hit something worth remembering. One line per entry. Don't touch `plan.md`.
 
 ---
 
@@ -72,6 +72,16 @@ Design system persisted at `design-system/medcheck/MASTER.md` (Swiss Modernism 2
 - **58.1% state coverage**; Himachal Pradesh is 35.2% of records *with* a state but only **20.4% of all** records.
 - **19.4% name an anti-infective** by INN stem. Over-representation is **not answerable** — no denominator.
 
+**Lab labelling fix — complete.** `alert_section` was unusable: CDSCO files 13 of 239 laboratories under *both* `central_lab` and `state_lab`. `lab_type` is now derived from the laboratory's identity instead.
+
+- `src/resolve/labs.py` — registry of CDSCO's own laboratories, each entry citing a source; `python src/resolve/labs.py` prints the full classification + every disagreement
+- `src/db.py` gained `lab_type` + `lab_name_canonical` and a `migrate()` step (CREATE TABLE IF NOT EXISTS won't alter an existing table)
+- `tests/test_labs.py` — 90 checks, all passing
+- **Corrected split: 3,860 central (62.7%) / 2,272 state (36.9%) / 23 unknown (0.4%)** — CDSCO's published field said 49.2% / 50.0%, understating central-lab testing by **831 records**
+- **857 records** carry an `alert_section_disputed` flag; `alert_section` itself is untouched (§1.1)
+- Phase 4 q4 now does the real comparison: central labs report **9.4% particulate matter vs 0.7%** for state labs, plus more related-substances and clarity failures — the instrument-heavy injectable tests. State labs skew to description/labelling (19.7% vs 15.0%) and `other` (7.0% vs 2.7%). Capability difference, not diligence.
+- Propagated end to end: normalize → resolve → export_static → 8,017-page rebuild → analysis → CC0 dataset (2 new columns)
+
 **MedCheck is live.** GitHub: https://github.com/ankithsurapani/medcheck (public). Site: https://web-navy-three-91.vercel.app/ (Vercel, static export, free tier).
 
 - Repo was previously local-only, no remote. Created public via `gh repo create`, pushed all history — clean secrets scan first (no `.env`/keys tracked).
@@ -84,7 +94,7 @@ Open / needs a planner decision:
 - **190 review-band pairs are still undecided, and manufacturer slugs are positional** — finishing the review will now change **live, public** manufacturer URLs (previously "fine, nothing is public yet"; that's no longer true). Worth a content-derived slug before doing much more review, or accepting occasional link churn.
 - **The 3 remaining build-tooling vulnerabilities** (`postcss`/`sharp`) need a Next.js 16 major-version upgrade to clear — real work, not urgent (build-time only, no untrusted input processed), but shouldn't sit forever on a public repo.
 - **Vercel project is named `web`** (generic) — the URL slug `web-navy-three-91` doesn't say "MedCheck." A custom domain or project rename is cosmetic, not urgent.
-- **`alert_section` is worse than previously recorded.** Not 27/184 in one month — **13 of 239 labs are filed under BOTH `central_lab` and `state_lab`, across 3,537 records (57.5%)**, with **≥459 records provably mislabelled**. RDTL Guwahati: 571 of 773 records filed as *state* lab despite being a central facility. Phase 4 reports the unreliability instead of the central-vs-state comparison, which is not currently supportable. Fixing it needs an external list of which labs are central — a possible future ticket.
+- ~~`alert_section` unreliability~~ — **fixed**, see the lab-labelling section above.
 - **Search index is 255 KB brotli** (down from 297 KB). Lazy-loaded on idle/focus so the page is usable first, but still the biggest cost on a slow connection. A later Phase 3b option: server-side search, or a two-tier prefix index.
 - Rest of Phase 3b (Hindi/i18n, live FastAPI) still deferred.
 - **`alert_section` is unreliable.** The portal and the PDFs disagree on central-vs-state for 27 of 184 Jun-2025 records. Phase 4's "central vs state lab detection patterns" analysis needs this caveat.
@@ -92,93 +102,10 @@ Open / needs a planner decision:
 - Phase 1b (pre-2019 PDF backfill) not started, per ticket boundary.
 - Phase 2b (drug-name resolution) deferred — nothing depends on it yet.
 
-## Tech stack
-
-| Layer | Choice |
-|---|---|
-| Language | Python 3.11+ |
-| PDF parsing | `pdfplumber` primary, `camelot` fallback |
-| OCR | `pytesseract` + `pdf2image` |
-| Fuzzy matching | `rapidfuzz` |
-| Database | SQLite → Postgres later |
-| Backend | FastAPI |
-| Frontend | Next.js + Tailwind |
-| Hosting | Vercel (frontend) + Railway/Fly.io (API) |
-| Scraping schedule | GitHub Actions cron |
-
-## Repo structure
-
-```
-medcheck/
-├── data/{pdfs,raw,gold,medcheck.db}
-├── src/{fetch.py, ingest/cdsco_json.py, normalize.py, parse/{base,router,layout_a,layout_b,ocr}.py (Phase 1b, deferred), resolve/{manufacturers.py, review_cli.py, spotcheck_cli.py, drugs.py (Phase 2b, deferred)}, validate.py, db.py}
-├── api/          # FastAPI
-├── web/          # Next.js
-├── analysis/{analyse.py, drug_classes.py, export_dataset.py, FINDINGS.md, results.json, dataset/{medcheck_nsq_records.csv, README.md, LICENSE}}
-├── docs/{pdf_inventory.md, parser_accuracy.md, methodology.md, entity_resolution.md}
-└── README.md
-```
-
 ## Decisions log
 
-<!-- Format: YYYY-MM-DD — decision, one line. Newest last. -->
-- 2026-08-06 — API fallback is a static pre-built JSON search index shipped with the frontend, not a second live API deployment (SQLite needs persistent filesystem, Vercel serverless doesn't give it).
-- 2026-08-06 — UI (Phase 3) will be built by the same Opus builder terminal — no separate UI workflow/tool.
-- 2026-08-06 — `fetch.py` scrapes both `/Notifications/Alerts/` and `/Notifications/Archive/`; alerts are matched on title regex (`nsq|not of standard|not standard quality|spurious`) because CDSCO titles are too inconsistent for anything narrower.
-- 2026-08-06 — Cached PDF filenames are `<release-date>_<title-slug>_<6-char sha1 of source url>.pdf`. The fingerprint is deliberate: CDSCO publishes same-day alerts whose titles agree for the first 80 chars, and without it distinct source documents silently overwrite each other.
-- 2026-08-06 — Downloaded all 50 discoverable alerts rather than the 8–10 the ticket asked for. The recent 10 are all 2025, which would have made "inspect PDFs from different eras" impossible; the full set is ~15 MB and the fetch is idempotent.
-- 2026-08-06 — Phase 0 structural profiling lives in `data/raw/profile_pdfs.py` (throwaway), not `src/parse/`, to respect the ticket boundary. It measures shape only — no normalization.
-- 2026-08-06 — **Phase 1 pivots to JSON-first**, given the discovery that CDSCO's portal covers Jan-2019→present more completely than the PDF corpus does. Phase 1a (JSON ingestion, `src/ingest/`) is now the primary path and comes first; Phase 1b (PDF layout parsers) is deferred and scoped down to pre-2019 backfill only. See `plan.md` §4 Phase 1.
-- 2026-08-06 — **id scheme:** `NSQ_<alert_month>_<12 hex of sha256>` over `alert_month|batch|drug|manufacturer|testing_lab|failure_reason`. Manufacturer is in the key because §5.4 batch numbers aren't unique; lab and reason are in it because CDSCO legitimately lists one batch twice when two labs tested it. Spurious uses `SPU_<num_id>` when the portal gives one, else the same hash. Collisions are detected and disambiguated with a flag, never resolved by silent overwrite. Full rationale in `docs/methodology.md` §2.
-- 2026-08-06 — Unmapped failure reasons go to `["other"]` + a flag rather than being forced into the nearest §3.3 bucket.
-- 2026-08-06 — **§3.3 extended with 5 buckets** on the user's instruction: `ph`, `water_content`, `uniformity_of_weight`, `bacterial_endotoxins`, `uniformity_of_dispersion`. `other` 657 → 363 records. This edited `plan.md`, which the builder note above otherwise forbids — done because §3.3 *is* the canonical vocabulary and the user asked for it directly.
-- 2026-08-06 — `bacterial_endotoxins` kept separate from `microbial_contamination`: endotoxins persist after the organisms that produced them are gone, so a batch can fail endotoxins while passing sterility. Merging them would misreport the regulator.
-- 2026-08-06 — `water_content` deliberately excludes "Water-soluble substances" (a solubility/impurity test), and "Loss on Drying" got its own bucket rather than being folded in — LOD measures all volatiles, water determination measures water.
-- 2026-08-06 — **§3.3 extended a second time** with `loss_on_drying`, `density`, `extractable_volume`, `clarity_of_solution`, `dimensions`. `density` deliberately merges specific gravity / relative density / weight per ml — three monograph names for one mass-per-unit-volume measurement. `clarity_of_solution` kept separate from `description_labelling` because CDSCO lists them as distinct tests and frequently cites both on one record.
-- 2026-08-06 — CDSCO's own typos are absorbed into existing buckets rather than left in `other` (`Sterillity`, `Related Susbtances`, `TEST FOR DISSOLUTI ON`) — the intended test isn't in doubt. But reasons that name **no test at all** (`Not applicable`, `NSQ`, `Does not conform to I.P.`, `Not of Standard Quality`, ~20 records) stay in `other` permanently; assigning a category would invent a finding (§1.4). Asserted in the test suite.
-- 2026-08-06 — Stopped extending the vocabulary at 21 buckets. What remains in `other` is a long tail where no group exceeds 3 records; adding buckets at that frequency would over-fit the current corpus.
-- 2026-08-06 — `state` is derived only from an explicit state field, an exact state-name match, or one of seven unambiguous abbreviations (`U.P.`, `H.P.`, `M.P.`, `T.N.`, `W.B.`, `J&K`, `New Delhi`). `A.P.` and `U.K.` are excluded as ambiguous. Two different states named → null + `state_ambiguous` flag.
-- 2026-08-06 — `label_claim_disputed` is null (not 0) for all NSQ records: the NSQ endpoint has no dispute field, so null means "not published", not "not disputed". Only the spurious endpoint carries `str_firm_reply`/`str_nsq_remarks`, and both are appended verbatim to `failure_reason_raw` so the published wording travels with the boolean (§1.1).
-- 2026-08-06 — Cross-validation is a throwaway script in `data/raw/crossvalidate.py`, not `src/`, matching the Phase 0 precedent for discovery-only tooling.
-- 2026-08-06 — `nsq_records` schema changed: `source_pdf_url` → `source_url` + new `source_type` ("pdf"|"portal_json"), since records can now come from a JSON portal query, not just a PDF. `failure_category` changed from a single value to a JSON array, since `NSQ Result` is multi-valued at the source. Non-negotiable §1.1 wording updated to match ("link to its source" instead of "link to the source PDF").
-- 2026-08-06 — **Jumping to Phase 3 (UI) ahead of Phase 2** on user instruction. Split into 3a (now: static-data MVP) / 3b (deferred: Hindi, live API, resolved-entity manufacturer pages) — same a/b pattern as Phase 1. See `plan.md` §4 Phase 3.
-- 2026-08-06 — Phase 3a serves the UI from a static JSON export of `medcheck.db`, not a live FastAPI. This is the same artifact already planned as the API fallback (§2) — building it now does double duty and avoids standing up Railway/Fly.io hosting before there's demand.
-- 2026-08-06 — Manufacturer search/pages in 3a match on exact `manufacturer_raw` text, not a resolved entity — near-duplicate company names will show as separate results until Phase 2 runs. The UI must say this, not hide it (§1.1 mirror-not-accuser: don't imply a merge that hasn't happened).
-
-- 2026-08-06 — **Phase 3a search library: MiniSearch**, not Fuse.js. Fuse scores every record on every keystroke over 6,155 records; MiniSearch builds an inverted index once and answers from it, and it ships a smaller bundle. Fuzzy 0.2 + prefix matching handles the typo tolerance the ticket asked for.
-- 2026-08-06 — **Batch search is exact and deliberately never fuzzy.** plan.md §5.4: batch numbers are not unique across manufacturers and are often short ("2451"). A fuzzy batch match would show a different company's batch as if it were the user's — the exact confusion the site exists to remove. Asserted in `web/tests/search.test.mjs` (`SIF2736B` must return 0).
-- 2026-08-06 — Client index is **columnar** (parallel arrays + deduped manufacturer table), not an array of objects: 377 KB → 277 KB gzipped. Manufacturer strings are *not* truncated — truncating saved only ~11 KB and would break substring matching on the full `manufacturer_raw` the ticket specifies.
-- 2026-08-06 — Index is **lazy-loaded** on browser idle or first input focus, not on mount, so a phone renders the page without paying for 297 KB first. Explicit "Preparing search…" state rather than a dead input.
-- 2026-08-06 — Manufacturer page slugs are `<60-char slug>-<8 hex of sha1 of the FULL raw string>`. The hash is not decoration: two manufacturers differing only past the 60-char cutoff must not collapse onto one page. Merging distinct companies is Phase 2's decision with a human in the loop, never a side effect of slug truncation (§5.3).
-- 2026-08-06 — **No red in the palette.** plan.md §1.1 — MedCheck mirrors a regulator, it does not accuse. Flags are amber; the only strong colour is reserved for `label_claim_disputed`, and the heaviest element on any result page is the §1.2 notice telling people *not* to stop their medicine.
-- 2026-08-06 — Deviated from the ui-ux-pro-max generic recommendation ("Exaggerated Minimalism", `font-weight: 900`, `clamp(3rem, 10vw, 12rem)`). Oversized statement typography reads as alarming on flagged-medicine data. Used the skill's "Patent / IP Database" analog instead — Swiss Modernism 2.0 + formal neutral palette + status chips — which is what a public-records lookup should feel like.
-- 2026-08-06 — Typography is Figtree + Noto Sans (the skill's healthcare pairing). Noto Sans also has full Devanagari coverage, so Phase 3b's Hindi translation won't force a type change.
-- 2026-08-06 — `output: 'export'` (fully static). No server means no server-side log of what anyone searched — §1.5 enforced by architecture, not by policy.
-- 2026-08-06 — **Phase 2 splits into 2a (manufacturers, now) / 2b (drug names, deferred)** — same a/b pattern as Phase 1 and 3. Manufacturer resolution is what's actually blocking things (5,107 unmerged pages); drug names aren't blocking anything yet. See `plan.md` §4 Phase 2.
-- 2026-08-06 — Phase 2a's human review queue is a CLI/offline step, not a web UI — Phase 3a's architecture is fully static with no backend to host one.
-- 2026-08-06 — Phase 2a is scoped data-only: produces `manufacturers` + `manufacturer_id` backfill, but does not touch `web/` to collapse the 5,107 pages. That regeneration is the next ticket, kept separate on purpose.
-- 2026-08-06 — **Phase 2a scoring: the name carries the score, the address only adjusts it** — `token_sort_ratio(names)` minus 0.09 (states differ) / 0.05 (PINs differ) / 0.04 (address similarity < 0.40), plus 0.03 (PIN shared). An earlier draft weighted address at 28% and pushed **353** cluster pairs to review, most of them one company's two plants (Unicure has a Noida plant and a Roorkee plant). A reviewer asked that question 353 times stops reading it — queue length is what causes rubber-stamping. Address-as-adjustment asks it once and cuts the queue to 205.
-- 2026-08-06 — `token_sort_ratio`, not `token_set_ratio`: the set variant scores "Sun Pharma" against "Sun Pharma Laboratories" as a perfect match, which is a merge nobody authorized.
-- 2026-08-06 — **Industry words are folded, not stripped**, deviating from the ticket's "strip `Pharmaceuticals`/`Pharma`". Stripping reduces "Zee Laboratories" to `zee` — four characters, high-scoring against unrelated firms. Folding to `zee lab` matches all 48 Zee spellings and nothing else. Generic tokens *are* dropped, but only for the blocking key, where a block named `pharma` would hold a third of the corpus.
-- 2026-08-06 — **Blocking is first-token + 4-char-prefix + sorted-tokens, and state is a score signal rather than a block**, deviating from the ticket's "first token + state". State is derivable for only 58% of records and CDSCO gets it wrong outright on at least one (a Paonta Sahib, H.P. address labelled Punjab); blocking on it would have refused to consider that record at all. 38,095 candidate pairs out of a possible 13.0M.
-- 2026-08-06 — **The review queue is cluster-vs-cluster, not string-vs-string.** Auto merges are applied first, so 1,183 of the 2,716 band pairs turn out to already be connected by a stronger path, and the remaining 1,533 collapse into 205 distinct company-pair questions.
-- 2026-08-06 — **`--apply` treats an undecided review pair as rejected** and refuses to run without `--allow-pending`. Running the pipeline before the human review can therefore only under-merge, never over-merge.
-- 2026-08-06 — The merge log records the **3,229 spanning edges**, not all 21,219 auto pairs. A redundant edge inside an already-joined cluster changes no outcome, and the spanning set alone reconstructs or undoes the clustering exactly. `data/resolve/candidates.json` (7.9 MB, the full scored list) is gitignored — derived, and regenerable from the DB.
-- 2026-08-06 — Placeholders keep `manufacturer_id` **NULL**, deliberately breaking the ticket's "nothing ends up without an id". 78 records across 7 non-company strings; giving a counterfeit's unknown maker a company entity with 51 flagged batches is the §1.1 misattribution the rule exists to prevent.
-- 2026-08-06 — Human review stopped at **15 of 205** pairs by user choice, applied with `--allow-pending` (190 pending → treated as not-merged). This is accepted as a legitimate stopping point, not a shortcut: the asymmetry the rule protects against (false merge = reputational harm) doesn't apply to "haven't decided yet" — only to auto-approving without looking. Review can resume anytime; `--apply --allow-pending` is safe to re-run after.
-- 2026-08-06 — Web regeneration against resolved entities is its own ticket, not folded into Phase 2a — keeps entity resolution as pure data engineering, frontend work separate. Scoped as partial Phase 3b (entity re-pointing only; Hindi and live API remain deferred).
-- 2026-08-06 — Phase 4 goes next, ahead of the rest of Phase 3b (Hindi, live API) and Phase 2b (drug names) — it's plan.md's own "the part that makes the project matter," and everything it needs (categorized records, resolved manufacturers) is now in place.
-- 2026-08-06 — "Trend over time" is scoped to flag-count trend only, never a rate — there's no testing-volume denominator in the data, so a rate claim would itself violate the sampling-bias non-negotiable. plan.md §4 Phase 4 updated to say so explicitly.
-- 2026-08-06 — Therapeutic-category / antibiotic-overrepresentation question is conditional: answer only with a defensible derivation, document the gap otherwise. The schema has no therapeutic classification field and inventing one would violate §1.4.
-- 2026-08-06 — **Manufacturer slug is `<canonical-name-slug>-m<manufacturers.id>`**, replacing Phase 3a's `<slug>-<sha1 of the full raw string>`. The hash existed to stop two spellings colliding onto one page before a human had decided they were the same company; Phase 2a made that decision, so the id carries it. Cost: the id is positional (`--apply` renumbers 1..N by canonical name), so finishing the 190 pending pairs will change most manufacturer URLs. Accepted — nothing is public, and a content hash would lose the direct URL → `manufacturers` row traceability.
-- 2026-08-06 — **The Phase 3a "this page matches one exact spelling" disclaimer is replaced, not deleted.** New copy says the merge happened *and* that it is unfinished: pairs nobody was confident about were left apart, so one company may still have several pages. Wording commits to the direction of error out loud — "we would rather show you two pages for one company than put one company's failures on another company's page."
-- 2026-08-06 — **Placeholder records get no manufacturer page at all**, where Phase 3a gave them one carrying a "this is not a company" notice. The notice moved onto the record page, replacing the link. A page would imply an entity; there isn't one.
-- 2026-08-06 — Manufacturer **search** matches the raw spelling **or** the canonical name (and MiniSearch indexes both), so a query typed as the merged company name reaches batches published under spellings that don't literally contain it. Displayed text stays the raw spelling — §1.1, the site mirrors what CDSCO published and never substitutes its own merged name for it.
-- 2026-08-06 — **Dataset licence is CC0 1.0**, not CC-BY or ODbL. Attribution and share-alike both add a step a journalist or researcher has to clear with a lawyer, and the underlying facts are CDSCO's public record anyway — MedCheck only owns the compilation. `LICENSE` carries two *requests* (cite CDSCO, carry README.md) explicitly marked as not being licence conditions, because CC0 cannot impose conditions and pretending otherwise would be misleading.
-- 2026-08-06 — **The 2.8 MB dataset CSV is committed**, breaking the repo's "derived data is gitignored" convention (`medcheck.db`, `records.json`, `candidates.json` are all ignored). A published dataset that only exists after you run the pipeline is not published. The README and LICENSE regenerate alongside it from `export_dataset.py`, so the warning always ships with the data.
-- 2026-08-06 — **The therapeutic-category question was answered narrowly and the over-representation question was refused.** WHO INN stems (2018 stem book, publicly citable) give a defensible name-level grouping — 19.4% of flagged batches name an anti-infective. Over-representation needs a denominator (what share of *tested* or *marketed* medicines are anti-infectives); CDSCO publishes neither, so `analysis/FINDINGS.md` §6 documents it as unanswerable rather than estimating. Refusing is the deliverable there, per §1.4.
-- 2026-08-06 — **No ATC classification.** The WHO ATC index is copyrighted and not redistributable, most flagged entries are branded or multi-ingredient products with no single ATC code, and a name match can't distinguish indication from chemistry. INN stems make a claim about the *name*, which is checkable; ATC would have made a clinical claim that isn't.
-- 2026-08-06 — Phase 4 reports **`alert_section`'s unreliability instead of the central-vs-state comparison** the ticket asked for. With 13 labs filed under both labels across 57.5% of records, any such comparison would mostly measure CDSCO's filing inconsistency. Documented as a finding, not skipped.
+Moved to [`docs/decisions.md`](docs/decisions.md) — 62 entries of "why is it this
+way", read on demand rather than loaded into every session. Append new ones there.
 
 ## Key learnings / gotchas
 
@@ -239,3 +166,7 @@ medcheck/
 - **August 2025 is a local trough (97/month) between a 131/month year and a 173/month year.** That is the shape of a publishing handover, not of drug quality. Any before/after comparison spanning the portal migration is measuring CDSCO's workflow.
 - **A bare `azole` drug-name stem captures 367 proton-pump-inhibitor records** (pantoprazole, rabeprazole, omeprazole, esomeprazole) and would have turned them into "antibiotics" — the most dangerous available false positive, because the resulting finding looks entirely plausible. Bare `sulfa`/`sulpha` similarly captures every sulphate salt. Both are pinned open by negative cases in `tests/test_drug_classes.py`.
 - **WHO's `-mycin` stem marks the source organism (Streptomyces), not the activity**, so it also catches dactinomycin (a cytotoxic antineoplastic) and natamycin (an antifungal). Stems encode chemistry or origin; mapping them to therapeutic effect needs named exceptions and an admission that the mapping is imperfect.
+- **The same laboratory is filed under both `central_lab` and `state_lab`, and the split drifts by year rather than switching.** RDTL Guwahati is mostly "State lab" 2019–2023 and mostly "CDSCO lab" 2024–2025. A clean switch would have meant a convention change with a splittable date; the drift means it is data entry, and no date-based rule could have fixed it.
+- **Correcting `alert_section` moved the central/state split from 49.2/50.0 to 62.7/36.9.** The published field understated CDSCO's own laboratories by 831 records — a near-even-looking split that was actually 5:3. Any "central vs state" analysis built on the published field was measuring CDSCO's filing habits.
+- **Central and state labs find different *kinds* of defect, and it tracks equipment.** Central labs report particulate matter at 9.4% vs 0.7%, related substances 4.5% vs 0.6%, clarity of solution 2.4% vs 0.0% — particulate counting and chromatography. State labs report description/labelling more (19.7% vs 15.0%) and `other` more (7.0% vs 2.7%). Where a defect gets caught depends on who has the instrument.
+- **Re-running `src/normalize.py` wipes `manufacturer_id`** — `_base_record` sets it to None, so Phase 2a's resolution has to be re-applied (`--apply --allow-pending`) after any normalize run. Idempotent and safe, but silent if forgotten: the site would rebuild with 6,155 unlinked records.
