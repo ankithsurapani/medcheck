@@ -34,7 +34,7 @@ Searchable public database of medicines CDSCO flagged as Not of Standard Quality
 **Phase 3b (partial: re-point `web/` at resolved entities) — complete.** **8,017 static pages** build clean, down from 11,268 (6,155 record pages + **1,856 manufacturer pages** + 6 fixed).
 
 - `scripts/export_static.py` groups by `manufacturer_id` / the `manufacturers` table, not `manufacturer_raw`. Client index **297 KB → 255 KB brotli** (5,107 per-spelling slugs became 1,856 canonical ones)
-- Manufacturer slug scheme: `<canonical-name-slug>-m<manufacturers.id>` — Phase 3a's per-raw-string hash slug is gone
+- Manufacturer slug scheme: `<canonical-name-slug>-<cluster-hash>` (see the post-launch hardening section below — it was `-m<manufacturers.id>` until 2026-08-07)
 - Every manufacturer page lists **all** raw spellings that collapsed into it, in a `<details>` (open at ≤5, collapsed above — Jackson has 67)
 - The 78 placeholder records get **no manufacturer page**; the record page renders `NotACompanyNotice` where the link would be
 - Manufacturer search matches raw spelling **or** canonical name, and every spelling routes to one page
@@ -90,8 +90,20 @@ Design system persisted at `design-system/medcheck/MASTER.md` (Swiss Modernism 2
 - The per-deployment Vercel URL (e.g. `web-powrksadx-...`) redirects to Vercel SSO — that's normal per-deploy protection, not a public-access problem. The **stable production alias** (`web-navy-three-91.vercel.app`) is the real public URL and was verified 200 OK on `/`, a record page, a manufacturer page, and the search index asset.
 - README.md updated — was stuck describing "Phase 1a complete," now points at the live site, dataset, and findings.
 
+**Post-launch hardening — Ticket 1 (content-derived manufacturer slugs) — complete.**
+
+Manufacturer URLs no longer move when an unrelated merge decision is made.
+
+- `scripts/export_static.py`: slug is now `<canonical-name-slug>-<sha1(sorted known_aliases)[:8]>`, was `<canonical-name-slug>-m<manufacturers.id>`. `cluster_hash()` + `manufacturer_slug(canonical_name, members)`. Change is fully contained in that file — web code treats slugs as opaque lookup keys, and `manufacturers.id` (the SQL join key) is untouched and still positional
+- **The bug, measured:** approving one pending review pair (two Hetero Labs Limited clusters) changed **1,207 of 1,856** public URLs under the positional scheme. Under the hash: **2 removed, 1 added, 1,854 byte-identical**
+- Uniqueness is asserted over the full export, not hoped for — `SLUG_HASH_LEN = 8`, export exits non-zero on a collision
+- Determinism verified: two consecutive `--apply --allow-pending` + re-export cycles with no decisions changed produce identical slugs for all 1,856
+- Stability check ran on scratch copies of the DB *and* the merge log, so no review decision was actually recorded — the 190 pairs are still 190 pending
+- Rebuild clean: 8,016 HTML pages, 0 missing manufacturer or record pages, 78 records with no manufacturer link (unchanged). `npm run test:search` 29/29
+- `docs/entity_resolution.md` has the scheme and why it replaced the positional one
+
 Open / needs a planner decision:
-- **190 review-band pairs are still undecided, and manufacturer slugs are positional** — finishing the review will now change **live, public** manufacturer URLs (previously "fine, nothing is public yet"; that's no longer true). Worth a content-derived slug before doing much more review, or accepting occasional link churn.
+- ~~190 review-band pairs undecided *and* slugs positional~~ — the slug half is **fixed** (above); resuming the 190-pair review is now safe and is still its own ticket.
 - **The 3 remaining build-tooling vulnerabilities** (`postcss`/`sharp`) need a Next.js 16 major-version upgrade to clear — real work, not urgent (build-time only, no untrusted input processed), but shouldn't sit forever on a public repo.
 - **Vercel project is named `web`** (generic) — the URL slug `web-navy-three-91` doesn't say "MedCheck." A custom domain or project rename is cosmetic, not urgent.
 - ~~`alert_section` unreliability~~ — **fixed**, see the lab-labelling section above.
@@ -104,7 +116,7 @@ Open / needs a planner decision:
 
 ## Decisions log
 
-Moved to [`docs/decisions.md`](docs/decisions.md) — 62 entries of "why is it this
+Moved to [`docs/decisions.md`](docs/decisions.md) — 66 entries of "why is it this
 way", read on demand rather than loaded into every session. Append new ones there.
 
 ## Key learnings / gotchas
@@ -170,3 +182,6 @@ way", read on demand rather than loaded into every session. Append new ones ther
 - **Correcting `alert_section` moved the central/state split from 49.2/50.0 to 62.7/36.9.** The published field understated CDSCO's own laboratories by 831 records — a near-even-looking split that was actually 5:3. Any "central vs state" analysis built on the published field was measuring CDSCO's filing habits.
 - **Central and state labs find different *kinds* of defect, and it tracks equipment.** Central labs report particulate matter at 9.4% vs 0.7%, related substances 4.5% vs 0.6%, clarity of solution 2.4% vs 0.0% — particulate counting and chromatography. State labs report description/labelling more (19.7% vs 15.0%) and `other` more (7.0% vs 2.7%). Where a defect gets caught depends on who has the instrument.
 - **Re-running `src/normalize.py` wipes `manufacturer_id`** — `_base_record` sets it to None, so Phase 2a's resolution has to be re-applied (`--apply --allow-pending`) after any normalize run. Idempotent and safe, but silent if forgotten: the site would rebuild with 6,155 unlinked records.
+- **A positional id in a public URL is a link-rot generator, and the blast radius is much bigger than it looks.** `manufacturers.id` renumbers `1..N` in canonical-name order, so approving *one* merge near the top of the alphabet shifted **1,207 of 1,856** manufacturer URLs — not the two rows involved. The scheme looked fine for a year of local work and was only wrong once something outside the repo could hold a link.
+- **The right hash input was already being computed.** `apply()` builds `sorted(members)` and serialises it to `known_aliases` before writing the row; the slug fix reads that back. Cluster membership is the only property invariant under re-sorting — canonical name isn't (ties break on record counts), address isn't (`primary` is picked by record count), and the id is the thing being replaced.
+- **"Only the touched cluster changes" has to be tested by actually simulating a merge**, not by reasoning about the hash. Doing it needs a scratch copy of the merge log as well as the DB — `MERGE_LOG` is module-level in `src/resolve/manufacturers.py`, and `log_append` is append-only by design, so a check that forgot to redirect it would have permanently recorded a review decision nobody made.

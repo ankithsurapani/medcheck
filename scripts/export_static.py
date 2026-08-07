@@ -26,6 +26,7 @@ database itself regenerates from data/raw/portal/.
 
 from __future__ import annotations
 
+import hashlib
 import json
 import re
 import sqlite3
@@ -45,21 +46,41 @@ def slugify(value: str, maxlen: int = 60) -> str:
     return s[:maxlen].strip("-") or "unknown"
 
 
-def manufacturer_slug(mfr_id: int, canonical_name: str) -> str:
-    """Per-resolved-entity slug: readable name plus the `manufacturers.id`.
+SLUG_HASH_LEN = 8
 
-    Phase 3a hashed the full raw string, because two spellings that differed only
-    past the 60-char cutoff had to stay on separate pages — merging companies was
-    Phase 2's decision to make, not a side effect of slug truncation. Phase 2a has
-    now made that decision with a human in the loop, so the id carries it and the
-    hash is no longer doing any work.
 
-    The id is positional: `--apply` renumbers 1..N in canonical-name order, so
-    re-running resolution after more of the review band is decided will shift
-    slugs. Nothing is public yet, and the alternative — a content hash — would cost
-    the direct traceability from a URL back to a row in `manufacturers`.
+def cluster_hash(members: list[str], length: int = SLUG_HASH_LEN) -> str:
+    """Stable id for a manufacturer cluster: sha1 of its sorted raw-string
+    membership, joined by newlines.
+
+    Changes only when *this* cluster's own merge decision changes — not when any
+    other cluster gains or loses a member, which is what shifted ids under the
+    old positional scheme.
     """
-    return f"{slugify(canonical_name, 60)}-m{mfr_id}"
+    joined = "\n".join(sorted(members))
+    return hashlib.sha1(joined.encode("utf-8")).hexdigest()[:length]
+
+
+def manufacturer_slug(canonical_name: str, members: list[str]) -> str:
+    """Per-resolved-entity slug: readable name plus a hash of the cluster's own
+    membership.
+
+    Phase 3b originally used `manufacturers.id`, which is positional — `apply()`
+    renumbers 1..N in canonical-name order on every run, so approving a single
+    review-band pair shifted the id, and therefore the public URL, of every
+    manufacturer sorting after it. That was acceptable while nothing was public.
+    It is not acceptable now: the site is live, and silently renumbering URLs is
+    link rot with no redirect behind it.
+
+    What is invariant under re-sorting is the cluster's membership — the sorted
+    list of `manufacturer_raw` spellings that collapsed into this entity, which
+    `apply()` already serialises to `known_aliases`. Hashing that gives a slug
+    that moves if and only if this company's merge decision actually changed.
+
+    Traceability from a URL back to a row is not lost, just indirect: the hash is
+    reproducible from `manufacturers.known_aliases` with this function.
+    """
+    return f"{slugify(canonical_name, 60)}-{cluster_hash(members)}"
 
 
 def main() -> int:
@@ -90,15 +111,18 @@ def main() -> int:
     # One entry per resolved company, keyed by manufacturers.id.
     manufacturers: dict[int, dict] = {}
     for m in mfr_rows:
-        slug = manufacturer_slug(m["id"], m["canonical_name"] or "")
+        # Every raw spelling that collapsed into this company. Shown on the page —
+        # plan.md §1.1, a merge must not quietly delete published text, and the
+        # alias list is the only place a reader can check the merge — and also the
+        # input to the slug, since it is the one thing re-running `--apply` does
+        # not reshuffle.
+        aliases = json.loads(m["known_aliases"] or "[]")
+        slug = manufacturer_slug(m["canonical_name"] or "", aliases)
         manufacturers[m["id"]] = {
             "id": m["id"],
             "slug": slug,
             "name": m["canonical_name"],
-            # Every raw spelling that collapsed into this company, shown on the
-            # page. plan.md §1.1 — a merge must not quietly delete published text,
-            # and the alias list is the only place a reader can check the merge.
-            "aliases": json.loads(m["known_aliases"] or "[]"),
+            "aliases": aliases,
             "addressRaw": m["address_raw"],
             "state": m["state"],
             "firstSeenMonth": m["first_seen_month"],
@@ -107,6 +131,22 @@ def main() -> int:
         }
     slug_by_mid = {mid: m["slug"] for mid, m in manufacturers.items()}
     name_by_mid = {mid: m["name"] for mid, m in manufacturers.items()}
+
+    # A slug collision would silently merge two companies into one public page —
+    # exactly the reputational harm plan.md §4 Phase 2 forbids, arriving through
+    # the URL layer instead of the resolver. 8 hex chars is 32 bits, so across
+    # ~1,900 clusters a collision is ~4e-4 likely: negligible, but checked rather
+    # than assumed. If this ever fires, raise SLUG_HASH_LEN — never special-case
+    # the colliding pair.
+    by_slug: dict[str, list[str]] = {}
+    for m in manufacturers.values():
+        by_slug.setdefault(m["slug"], []).append(m["name"] or "")
+    collisions = {s: names for s, names in by_slug.items() if len(names) > 1}
+    if collisions:
+        print(f"error: {len(collisions)} slug collisions at SLUG_HASH_LEN="
+              f"{SLUG_HASH_LEN} — raise it. e.g. {list(collisions.items())[:2]}",
+              file=sys.stderr)
+        return 1
 
     records = []
     # Columnar index: parallel arrays rather than an array of objects, so the

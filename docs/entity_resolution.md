@@ -284,6 +284,58 @@ What the band actually contains, for whoever sits down with it:
   or adding a rejection and re-running `--apply`.
 - **`web/` now builds against these entities** (the follow-up ticket, done):
   1,856 manufacturer pages instead of 5,107, each listing the raw spellings that
-  collapsed into it. Slugs are `<canonical-name>-m<manufacturers.id>`, and the id
-  is positional — re-running `--apply` after more of the review band is decided
-  renumbers it and changes those URLs.
+  collapsed into it.
+
+## Public slugs are content-derived, not positional
+
+A manufacturer page's URL is
+
+```
+/manufacturer/<canonical-name-slug>-<cluster_hash>
+    e.g.  /manufacturer/zee-laboratories-ltd-b7c4f77e
+```
+
+where `cluster_hash` is the first 8 hex characters of
+`sha1("\n".join(sorted(known_aliases)))` — see `cluster_hash()` in
+`scripts/export_static.py`. It is reproducible from `manufacturers.known_aliases`
+alone; nothing in the web app parses it, slugs are opaque lookup keys built at
+export time.
+
+**Why not the row id.** The first version of this was
+`<canonical-name-slug>-m<manufacturers.id>`. `apply()` renumbers ids `1..N` in
+`(canonical_name.lower(), address_raw)` order on *every* run, so approving a
+single review-band pair shifted the id — and therefore the public URL — of every
+manufacturer sorting after it. Measured on the current corpus: approving one
+pending pair (two Hetero Labs Limited clusters, pair `1eae55cb55ad64cc`) changed
+**1,207 of 1,856** URLs under the positional scheme. That was tolerable while the
+site was unpublished. It stopped being tolerable when it went live, since it is
+link rot with no redirect behind it — and the 190 still-pending review decisions
+are exactly the thing that would trigger it.
+
+Cluster membership is the one property that survives re-sorting: it changes only
+when *this* company's merge decision changes, never when some other cluster gains
+or loses a member. The same simulated approval under the hash scheme changes
+**2 slugs** (the two merged clusters disappear) and adds **1** (their union);
+the other 1,854 are byte-identical.
+
+**Verified**, not assumed:
+
+- **Uniqueness.** `export_static.py` asserts no two clusters share a slug and
+  exits non-zero if they do. 8 hex chars is 32 bits, so across ~1,900 clusters a
+  collision is ~4e-4 likely — negligible, but a collision would silently merge
+  two companies onto one public page, which is the reputational harm §4 Phase 2
+  exists to prevent. If it ever fires, raise `SLUG_HASH_LEN`; never special-case
+  the colliding pair.
+- **Determinism.** Two consecutive `--apply --allow-pending` + re-export cycles
+  with no decisions changed in between produce byte-identical slugs for all
+  1,856 — the hash is not dict-order dependent.
+- **Stability.** The simulated approval above, run on scratch copies of the DB
+  and merge log so no decision was actually recorded.
+
+`manufacturers.id` is deliberately unchanged: it stays positional, because it is
+a SQL join key (`nsq_records.manufacturer_id`) and nothing outside the database
+treats it as a stable public identifier any more.
+
+The old positional slugs are **not** redirected. The site went live 2026-08-06,
+nothing has had time to accumulate backlinks, and taking the one-time break now —
+before resuming the 190-pair review — is the entire point of doing this first.
