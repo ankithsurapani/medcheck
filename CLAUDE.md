@@ -31,7 +31,7 @@ Searchable public database of medicines CDSCO flagged as Not of Standard Quality
 
 **Phase 3a (search site) — complete.** Static Next.js 15 + Tailwind v4 app in `web/`, built against a static JSON export. No API, no server, no tracking.
 
-**Phase 3b (partial: re-point `web/` at resolved entities) — complete.** **7,888 static pages** build clean (6,155 record pages + **1,727 manufacturer pages** + 6 fixed) — count moves with manufacturer resolution; **not yet redeployed** past the 2026-08-08 `other`-bucket-partial push (see the review-session addenda below — the manufacturer review is now complete).
+**Phase 3b (partial: re-point `web/` at resolved entities) — complete.** **7,888 static pages** build clean (6,155 record pages + **1,727 manufacturer pages** + 6 fixed) — live on the site as of the 2026-08-09 deploy, completing the manufacturer review (see the review-session addenda below).
 
 - `scripts/export_static.py` groups by `manufacturer_id` / the `manufacturers` table, not `manufacturer_raw`. Client index **297 KB → 255 KB brotli** (5,107 per-spelling slugs became canonical ones)
 - Manufacturer slug scheme: `<canonical-name-slug>-<cluster-hash>` (see the post-launch hardening section below — it was `-m<manufacturers.id>` until 2026-08-07)
@@ -174,7 +174,7 @@ Live at **https://medcheck-india.vercel.app/** (was `web-navy-three-91.vercel.ap
 - **A recurring shape in the last ~90 pairs**: large multi-state manufacturers (Sanofi India, Lupin, Centaur, Sun Pharma, Stadmed, Tosc International, Vivek Pharmachem, the real Micro Labs) each had 2-4 of their own plants surface as separate review-band pairs. Every one was approved consistently with its siblings — expected for companies with several plants sitting just under the auto-merge threshold, not several coincidentally-named firms.
 - Applied and re-propagated across the full stretch: `manufacturers` **1,791 → 1,727** (1,786 → 1,777 → 1,772 → 1,767 → 1,760 → 1,748 at the `other`-bucket-complete checkpoint → 1,727 final; collapse ratio 2.95:1), `export_static.py`, `web/` rebuild (7,888 pages), `npm run test:search` 29/29 at every checkpoint, all 5 Python suites green, `analyse.py --json`, CC0 dataset re-exported.
 - **The median manufacturer flag count moved from 1 to 2** — the first time in this project's history. Companies appearing exactly once dropped under half (49.6%). `FINDINGS.md` §3 rewritten accordingly.
-- **Not yet deployed.** Local rebuild verified; production push needs the same explicit go-ahead every deploy in this project has required.
+- **Deployed 2026-08-09**, on explicit go-ahead: `vercel --archive=tgz --prod` (63.8 MB archive, ~5 min build). Verified live: four launch checks 200, old positional slug 404s, live `meta.json` reports `manufacturerCount: 1727`.
 
 Open / needs a planner decision:
 - **A real custom domain is still not set up.** `medcheck-india.vercel.app` is cosmetic progress, not a domain MedCheck owns. Needs DNS and is its own ticket.
