@@ -191,22 +191,18 @@ pair (Bioaltus Pharmaceuticals) whose approval didn't survive the rescoring inta
 | clusters after auto-merge | **1,889** |
 
 **Collapse ratio: 5,100 → 1,889 canonical manufacturers (2.70 : 1)** before the
-review band is applied. Four review sessions have now run against this rebuilt
-queue: 2026-08-07's first pass decided 26 of 210 (all approve, applied figure
-1,865); a second the same day finished `near_typo` (14 more, 9 approve/5 reject —
-the first rejections, including a 3-pair "Centaur Pharmaceuticals" vs "Century
-Pharmaceuticals" group read as a name-similarity coincidence); a third and fourth
-on 2026-08-08 worked through the `other` bucket in four applied checkpoints,
-adding 80 more decisions (67 approve, 13 reject). **Current applied figure: 1,791
-(2.85 : 1)**, with **120 of 210 pairs decided** (102 approved, 18 rejected) — the
-numbers the site is built against. Full session-by-session detail, including the
-complete sequence of applied figures, is in §9.
+review band is applied. **The review is now complete: 209 of 210 pairs decided
+(175 approved, 34 rejected), 1 left undecided because it carries no company name
+on either side to judge by.** Six review sessions ran against this rebuilt queue
+across 2026-08-07 to 2026-08-09 — full session-by-session detail, including the
+complete sequence of applied figures, is in §9. **Final applied figure: 1,727
+manufacturers (2.95 : 1)** — the numbers the site is built against.
 
 Largest clusters:
 
 | canonical name | spellings | flagged batches |
 |---|---|---|
-| Jackson Laboratories Pvt. Ltd | 67 | 88 |
+| Jackson Laboratories Pvt. Ltd | 68 | 89 |
 | Unicure India Ltd | 62 | 77 |
 | Zee Laboratories Ltd | 48 | 66 |
 | Martin & Brown Bio-Sciences Pvt. Ltd | 40 | 62 |
@@ -238,13 +234,17 @@ The per-plant detail is not lost — it is all in `known_aliases`.
 
 ## 9. Human review — status
 
-**Partly done, and that is a legitimate resting state.**
+**Complete.** Every pair in the 0.75–0.92 band that could be judged on its
+evidence has been. What follows is the full session history, oldest first, kept
+rather than compressed because the false-match patterns it documents (Centaur/
+Century, the Baddi "Medi-" cluster, the transitivity chain risk) are exactly
+what a future re-review needs to recognize fast.
 
 | | |
 |---|---|
-| review-band pairs decided | **120 of 210** — 102 approved, 18 rejected |
-| score range of the decided pairs | 0.759 – 0.919 |
-| review-band pairs still undecided | **90**, treated as *rejected* |
+| review-band pairs decided | **209 of 210** — 175 approved, 34 rejected |
+| score range of the decided pairs | 0.750 – 0.919 |
+| review-band pairs left undecided | **1** — no company name on either side; not deferred, undecidable |
 | auto-tier clusters spot-checked | **5**, all verdict `correct` |
 | spot-check sample | weakest-cohesion first: internal name similarity 0.88–0.889, cluster sizes 4–38 |
 
@@ -320,21 +320,54 @@ number settles most of them either way. A few are worth recording:
   (>0.92) tier before any review pass, so no single review-band decision made
   or could have made it; it needs its own look, not a fix folded into this one.
 
-**Applied result: 1,889 → 1,791 manufacturers, collapse ratio 2.70 → 2.85 : 1.**
+A fifth pass (2026-08-09) finished the `other` bucket outright — **all remaining
+61 pairs decided, 41 approved / 20 rejected** — closing every pair that had no
+name-shape shortcut to lean on. A sixth pass, same session, then cleared the
+entire `multi_plant` bucket: **28 of the 29 remaining decided (27 approved, 1
+rejected), 1 left genuinely undecidable.** Three things from this final stretch
+are worth recording:
+
+- **The orphaned Bioaltus pair finally closed the loop it opened.** The
+  original 2026-08-06 approval (Baddi, H.P. vs Rangpo, Sikkim) that the
+  2026-08-07 rescoring silently invalidated (§8) resurfaced here as two new
+  pairs under new pair_ids, and both were re-approved with the same reasoning
+  as the original — Baddi↔Sikkim directly, and Baddi↔a third, typo'd-PIN
+  Sikkim variant. The second Rajasthan "Karnani Pharmaceuticals (P) Ltd."
+  entity carrying an Ayurvedic licence (`RJ 529-AYU`) — flagged and rejected
+  once already at the `near_typo` stage — resurfaced twice more from different
+  angles in `multi_plant` and was rejected again both times, for the same
+  transitivity reason.
+- **One pair was genuinely undecidable, not merely hard.** Neither side named
+  a manufacturer at all — two bare addresses (`Plot No. 20, Ext. HPSIDC Ind
+  Area, Baddi` vs `Plot No.11, Pharmacity-Selaqui, Dehradun`) scored against
+  each other on nothing but coincidence. Left pending rather than guessed at —
+  this is the 1 pair that keeps the review from reading as 210/210.
+- **A striking number of the last ~90 pairs were the *same* company reaching
+  the review band from multiple angles** — Sanofi India, Lupin, Centaur, Sun
+  Pharma, Stadmed, Tosc International, Vivek Pharmachem, and Micro Labs
+  (the real one, not "Microwin") all had 2–4 of their own plants surface as
+  separate pairs, each approved consistently with the others. This is the
+  expected shape for large multi-state manufacturers sitting just under the
+  auto-merge threshold — one real company, several pairwise questions, not
+  several real companies coincidentally sharing a name.
+
+**Applied result: 1,889 → 1,727 manufacturers, collapse ratio 2.70 → 2.95 : 1.**
 The full sequence of applied figures, in order: 1,856 (pre-rebuild) → 1,889
 (rebuild baseline, before any review-band decision) → 1,865 (26 decided) →
-1,856 (40 decided) → 1,817 → 1,808 → 1,803 → 1,797 → 1,791 (120 decided). Only
-the rebuild step moves the count up — every decision applied against the fixed
-210-pair queue after that moves it down or leaves it unchanged, never up, which
-is exactly what "undecided is treated as not-merged" guarantees.
+1,856 (40 decided) → 1,817 → 1,808 → 1,803 → 1,797 → 1,791 (120 decided) →
+1,786 → 1,777 → 1,772 → 1,767 → 1,760 → 1,748 (181 decided, `other` complete) →
+1,727 (209 decided, review complete). Only the rebuild step moves the count up
+— every decision applied against the fixed 210-pair queue after that moves it
+down or leaves it unchanged, never up, which is exactly what "undecided is
+treated as not-merged" guarantees.
 
-The 90 still-undecided pairs are treated as *not merged*, same as the 18
+The 1 still-undecided pair is treated as *not merged*, same as the 34
 explicitly rejected — rejection is a recorded decision, not a pending state,
-and neither counts toward a future merge unless someone reopens it. This is the
-conservative direction: finishing the review can only lower the manufacturer
-count further, never split one apart. `--apply` was run with `--allow-pending` to
-record that state deliberately rather than blocking on a queue nobody is obliged
-to finish in one sitting.
+and neither counts toward a future merge unless someone reopens it. `--apply`
+still runs with `--allow-pending` because that single genuinely-undecidable
+pair means the queue will never report zero pending, by design — the flag is
+not standing in for unfinished work anymore, it's acknowledging a pair that
+has no evidence to decide on.
 
 No wrong merge was found in the auto tier. Five clusters is a small sample and
 the write-up does not claim an error *rate* from it — what it supports is that
@@ -342,7 +375,8 @@ the five riskiest clusters by the transitivity metric, including the 38-spelling
 `Mascot Health Series` / `Mascot Health Services` group, were checked by a person
 and held up.
 
-To resume:
+If the review is ever reopened — a corpus update, a threshold change, or the 1
+undecidable pair getting real address data some future month — resume with:
 ```
 python src/resolve/manufacturers.py --build     # rescore first — see §8 on why
 python src/resolve/triage_review.py             # bucket the pending pairs
@@ -351,28 +385,27 @@ python src/resolve/spotcheck_cli.py             # skips the 5 already checked
 python src/resolve/manufacturers.py --apply
 ```
 
-What the band actually contains, for whoever sits down with it — bucketed by
-`triage_review.py` as of the 210-pair queue (§8):
+What the band contained, bucketed by `triage_review.py` — kept as a record of
+the full 210-pair queue, not a to-do list:
 
-- **41 `multi_plant` pairs** — normalized names identical, `state_differs` signal
-  present. Mostly one company with two or three plants: Aristo Pharmaceuticals
+- **41 `multi_plant` pairs — complete: 39 approved, 1 rejected, 1 undecidable.**
+  Mostly one company with two or three plants: Aristo Pharmaceuticals
   (Sikkim/H.P./M.P.), Hetero Labs (H.P./Telangana/Puducherry), Alkem, Intas,
-  Sanofi India, and others. 12 of these were decided in the 2026-08-07 session
-  (all approve); **29 remain**.
-- **14 `near_typo` pairs** — normalized names within edit distance 2. **Fully
-  decided (2026-08-07): 9 approved, 5 rejected.** The rejects are the sharpest
-  examples yet of the "must not merge" case §9 warns about: `Centaur
-  Pharmaceuticals` / `Century Pharmaceuticals` (three plants, one coincidentally
-  similar name), `Karnal Pharmaceuticals` / a second `Karnani Pharmaceuticals`
-  entity carrying an Ayurvedic licence, and `Regain Laboratories` / `Regal
+  Sanofi India, Lupin, Centaur, Sun Pharma, and others.
+- **14 `near_typo` pairs — complete: 9 approved, 5 rejected.** The rejects are
+  the sharpest examples yet of the "must not merge" case §9 warns about:
+  `Centaur Pharmaceuticals` / `Century Pharmaceuticals` (three plants, one
+  coincidentally similar name), `Karnal Pharmaceuticals` / a second `Karnani
+  Pharmaceuticals` entity carrying an Ayurvedic licence, and `Regain
+  Laboratories` / `Regal
   Laboratories`. Historical examples from before this bucket was decided:
   `Navkar Lifesciences` / `Navkar Lifescienses` (a CDSCO typo, approved),
   `Deep Pharma` / `Deepin Pharmaceuticals` (different companies, score 0.75).
-- **141 `other` pairs** — no name-shape shortcut applies; each needs its own
-  read of both clusters' evidence. **80 decided (2026-08-08): 67 approved, 13
-  rejected; 61 remain.** This bucket produced most of the review's rejections so
-  far — see §9's fourth-pass writeup for the Centaur/Century-shaped false
-  matches and the Baddi same-town-different-plot pattern found here.
+- **141 `other` pairs — complete: 108 approved, 33 rejected.** No name-shape
+  shortcut applied to any of these; every one was read on its own address
+  evidence. This bucket produced most of the review's rejections — see §9's
+  fourth- and fifth-pass writeups for the Centaur/Century-shaped false matches
+  and the Baddi same-town-different-plot pattern found here.
 
 ## 10. Known limits
 
@@ -391,7 +424,7 @@ What the band actually contains, for whoever sits down with it — bucketed by
   is a logged finding, not an un-merge; acting on it means adjusting a threshold
   or adding a rejection and re-running `--apply`.
 - **`web/` now builds against these entities** (the follow-up ticket, done):
-  1,791 manufacturer pages instead of 5,107, each listing the raw spellings that
+  1,727 manufacturer pages instead of 5,107, each listing the raw spellings that
   collapsed into it.
 - **A likely auto-tier data-quality error, found 2026-08-08, not yet fixed.**
   The cluster canonicalized as a Roorkee, Uttarakhand "Pulse Pharmaceuticals"

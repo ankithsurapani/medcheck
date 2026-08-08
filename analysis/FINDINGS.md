@@ -118,30 +118,32 @@ Assigning a category to those would invent a finding the regulator did not repor
 
 `analyse.py::q3_manufacturers`
 
-After entity resolution, **1,791 companies** account for 6,077 flagged batches
+After entity resolution, **1,727 companies** account for 6,077 flagged batches
 (78 records name no company — see §7).
 
 | Top N companies | Share of companies | Flagged batches | Share of flags |
 |---|---|---|---|
-| 1 | 0.1% | 88 | 1.4% |
-| 5 | 0.3% | 344 | 5.7% |
-| 10 | 0.6% | 555 | 9.1% |
-| 25 | 1.4% | 1,032 | 17.0% |
-| 50 | 2.8% | 1,537 | 25.3% |
-| 100 | 5.6% | 2,233 | 36.7% |
-| 250 | 14.0% | 3,372 | 55.5% |
+| 1 | 0.1% | 89 | 1.5% |
+| 5 | 0.3% | 345 | 5.7% |
+| 10 | 0.6% | 556 | 9.1% |
+| 25 | 1.4% | 1,040 | 17.1% |
+| 50 | 2.9% | 1,554 | 25.6% |
+| 100 | 5.8% | 2,256 | 37.1% |
+| 250 | 14.5% | 3,415 | 56.2% |
 
-**Flags are concentrated, but less than the headline shape suggests.** 14.0% of
-companies account for 55.5% of flagged batches. At the same time **922 companies
-(51.5%) appear exactly once**, and the median company has a single flagged batch.
-This is not a picture of a few bad actors and a clean industry; it is a long tail
-with a heavy head.
+**Flags are concentrated, but less than the headline shape suggests.** 14.5% of
+companies account for 56.2% of flagged batches. At the same time **857 companies
+(49.6%) appear exactly once** — and for the first time since Phase 2a started,
+that's under half. **The median company now has 2 flagged batches, not 1** — the
+single clearest number this review moved. This is not a picture of a few bad
+actors and a clean industry; it is a long tail with a heavy head, and the head is
+now visibly heavier than the first partial resolution showed.
 
 The most-flagged companies:
 
 | Flags | Company | Published spellings |
 |---|---|---|
-| 88 | Jackson Laboratories Pvt. Ltd | 67 |
+| 89 | Jackson Laboratories Pvt. Ltd | 68 |
 | 77 | Unicure India Ltd | 62 |
 | 66 | Zee Laboratories Ltd | 48 |
 | 62 | Martin & Brown Bio-Sciences Pvt. Ltd | 40 |
@@ -149,21 +151,26 @@ The most-flagged companies:
 | 45 | Vivek Pharmachem (India) Ltd | 38 |
 | 44 | Karnataka Antibiotics & Pharmaceuticals Ltd | 36 |
 | 43 | Mascot Health Series Pvt. Ltd | 38 |
+| 42 | Gidsha Pharmaceuticals | 9 |
+| 37 | Hindustan Antibiotics Ltd | 34 |
 
-Vivek Pharmachem entering the top 8 (displacing Gidsha Pharmaceuticals, still at
-42 flags) is this review session's clearest visible effect: three previously
-separate spellings — a Jaipur, Rajasthan plant and a Jammu plant filed under
-"Vivek Pharmaceuticals Pvt. Ltd." and "Vivek Pharmachem (India) Ltd." — were
-confirmed as one company and merged.
+Hindustan Antibiotics Ltd — a Government of India Enterprise with plants in
+Pune, Faridabad, Nagpur, H.P. and Uttarakhand, previously scattered across
+several dozen unmerged spellings — entering the top 10 is this final review
+pass's clearest visible effect, alongside Vivek Pharmachem's entry a session
+earlier (three plants: Jaipur, Rajasthan and Jammu).
 
-Three things have to be said about this table, and none of them are optional.
+Two things have to be said about this table, and neither is optional.
 
-**It is a lower bound on concentration.** Manufacturer resolution is *partial*:
-5,107 published spellings were collapsed onto 1,791 companies, but 90 ambiguous
-pairs were left unmerged pending human review (see
-[`../docs/entity_resolution.md`](../docs/entity_resolution.md) §9). Every one of
-those, if merged, moves flags onto *fewer* companies. Finishing the review can only
-make concentration look higher, never lower.
+**Manufacturer resolution is now essentially complete, not partial.** The
+0.75–0.92 human review band that stood at 190 undecided pairs when Phase 4
+shipped is down to **1** — a single pair with no company name on either side,
+left undecided because there was no name evidence to judge it by (see
+[`../docs/entity_resolution.md`](../docs/entity_resolution.md) §9). 209 of 210
+pairs got an explicit human decision: 175 approved, 34 rejected. The auto tier
+(>0.92) was spot-checked, not exhaustively reviewed, so a residual error rate
+there can't be ruled out — but the deliberate-ambiguity gap this table used to
+carry is gone.
 
 **Appearing often may mean being tested often.** CDSCO targets its sampling. A
 company already under scrutiny gets sampled more, which produces more flags, which
@@ -457,11 +464,12 @@ own typos ("Sterillity", "Related Susbtances") are absorbed, since the intended 
 is not in doubt.
 
 **Entity resolution.** 5,107 published manufacturer spellings were collapsed onto
-1,791 companies (`src/resolve/manufacturers.py`) using normalized-name similarity
+1,727 companies (`src/resolve/manufacturers.py`) using normalized-name similarity
 with address, PIN code and state as secondary signals. Pairs above 0.92 similarity
 were merged automatically and sampled for human spot-checking; pairs between 0.75
-and 0.92 went to a human review queue. **That review is partial** — 120 of 210 pairs
-decided, 90 outstanding and treated as *not merged*. Full method and audit trail:
+and 0.92 went to a human review queue. **That review is complete** — 209 of 210
+pairs decided (175 approved, 34 rejected), 1 left undecided because neither side
+named a company at all. Full method and audit trail:
 [`../docs/entity_resolution.md`](../docs/entity_resolution.md).
 
 **Drug classes.** WHO INN stem matching only, described in §6 above. No ATC
@@ -476,7 +484,7 @@ Collected in one place. Each is load-bearing for at least one finding above.
 | # | Limitation | What it invalidates |
 |---|---|---|
 | 1 | **CDSCO does not sample at random.** Samples are drawn on suspicion, complaint and risk-targeting; only failures are published; no denominator exists anywhere in the data. | Every rate-style claim. No percentage in this document is a failure rate for medicines on the market. |
-| 2 | **Manufacturer resolution is partial** — 90 review-band pairs undecided, so one company can still hold more than one id. | §3's concentration figures are a **lower bound**. |
+| 2 | **Manufacturer resolution is essentially complete** — 209 of 210 review-band pairs decided; the 1 remaining is undecidable (no company name on either side), not deferred. The >0.92 auto tier was spot-checked (5 clusters, all correct) but not exhaustively reviewed. | §3's concentration figures are close to final, not a hard lower bound — a residual auto-tier error rate can't be fully ruled out, but the deliberate review gap is closed. |
 | 3 | **`alert_section` is unreliable** — CDSCO files 13 laboratories under both labels, contradicting the laboratory's identity on 857 records. It is kept verbatim and **`lab_type` is derived instead**, from CDSCO's own published list of its laboratories. | Nothing, now — but any analysis using `alert_section` rather than `lab_type` inherits the error. §4. |
 | 3b | **`lab_type` is derived, not published.** 23 records (0.4%) could not be classified and are `unknown`; CDSCO publishes no machine-readable list of which laboratories are its own, so the registry in `src/resolve/labs.py` is assembled from its website and a government press release and would need updating if CDSCO opens new laboratories. | The precision of §4's split, at the margin. |
 | 4 | **State is 82.9% populated**, and missing non-randomly (messiest addresses). | §5's shares are of the 82.9%, not of the corpus. Both denominators are given. |
